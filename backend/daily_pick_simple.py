@@ -33,6 +33,13 @@ def main():
         ]
         upcoming_matches = upcoming_matches[:10]
         
+        # Check if there are any upcoming matches
+        if not upcoming_matches:
+            logger.info("No upcoming matches found. Skipping daily pick generation.")
+            return
+        
+        logger.info(f"Found {len(upcoming_matches)} upcoming matches. Generating predictions...")
+        
         all_predictions = []
         for match in upcoming_matches:
             try:
@@ -62,28 +69,12 @@ def main():
                 continue
 
         if not all_predictions:
-            logger.warning("No predictions generated. Creating mock prediction for testing.")
-            # Create a mock prediction for testing
-            best_pick = {
-                'id': f"mock_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
-                'match_id': 'mock_match_001',
-                'home_team': 'Real Madrid',
-                'away_team': 'Barcelona',
-                'match_time': '2025-07-12 20:00',
-                'prediction_type': 'match_winner',
-                'prediction': 'Home Win',
-                'confidence': 0.85,
-                'odds': 2.10,
-                'reasoning': 'Real Madrid has been in excellent form at home',
-                'tipster': 'AI Predictor',
-                'created_at': datetime.now().isoformat(),
-                'expires_at': (datetime.now() + timedelta(days=1)).isoformat()
-            }
-        else:
-            # Select the best pick (highest confidence)
-            best_pick = max(all_predictions, key=lambda x: x['confidence'])
+            logger.info("No predictions generated for upcoming matches. Skipping daily pick.")
+            return
         
-        logger.info(f"Best pick: {best_pick}")
+        # Select the best pick (highest confidence)
+        best_pick = max(all_predictions, key=lambda x: x['confidence'])
+        logger.info(f"Best pick selected: {best_pick['home_team']} vs {best_pick['away_team']}")
 
         # Store the pick in the database
         try:

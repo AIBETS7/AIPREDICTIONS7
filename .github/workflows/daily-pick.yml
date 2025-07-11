@@ -1,8 +1,9 @@
-name: Daily Football Pick
+name: Daily Football Pick (Match Days Only)
 
 on:
   schedule:
-    - cron: '0 8 * * *' # Every day at 08:00 UTC
+    - cron: '0 8 * * *'  # Every day at 08:00 UTC (morning)
+    - cron: '0 18 * * *' # Every day at 18:00 UTC (evening)
   workflow_dispatch:
 
 jobs:
