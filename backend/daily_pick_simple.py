@@ -1,7 +1,8 @@
 import os
 from datetime import datetime, timedelta
 from loguru import logger
-from config.settings import LOGGING_CONFIG, DATABASE_URL
+from config.settings import LOGGING_CONFIG
+from config.database import DATABASE_URL
 from data_collector import DataCollector
 from ai_predictor import AIPredictor
 from sqlalchemy import create_engine, Table, Column, String, Float, DateTime, MetaData
@@ -86,6 +87,7 @@ def main():
 
         # Store the pick in the database
         try:
+            # Use database URL from config file
             engine = create_engine(DATABASE_URL)
             metadata = MetaData()
             picks_table = Table(

@@ -23,7 +23,5 @@ jobs:
           pip install -r backend/requirements.txt
 
       - name: Run daily pick script
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           python backend/daily_pick_simple.py 
