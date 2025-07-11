@@ -1,0 +1,40 @@
+2025-07-10 22:37:22 | INFO | __main__:<module>:299 - Starting AI Football Predictions Backend
+2025-07-10 22:37:22 | INFO | __main__:<module>:303 - Initializing data collection...
+2025-07-10 22:37:22 | INFO | data_collector:collect_all_data:33 - Starting data collection from all sources
+2025-07-10 22:37:22 | INFO | data_collector:collect_all_data:44 - Collecting data from flashscore
+2025-07-10 22:37:23 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:37:29 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:37:34 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:37:34 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x128db9f70 state=finished raised HTTPError>]
+2025-07-10 22:37:34 | INFO | data_collector:collect_all_data:44 - Collecting data from sofascore
+2025-07-10 22:37:36 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:37:42 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:37:48 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:37:48 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x128de8850 state=finished raised HTTPError>]
+2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from betsapi
+2025-07-10 22:37:48 | ERROR | scrapers.betsapi_scraper:scrape_matches:72 - Error scraping matches from BetsAPI: name 'SCRAPING_CONFIG' is not defined
+2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from whoscored
+2025-07-10 22:37:48 | ERROR | data_collector:_collect_from_source:65 - No scraper found for whoscored
+2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from transfermarkt
+2025-07-10 22:37:48 | ERROR | data_collector:_collect_from_source:65 - No scraper found for transfermarkt
+2025-07-10 22:37:48 | ERROR | __main__:<module>:308 - Error in initial data collection: [Errno 2] No such file or directory: 'backend/data/raw/data_20250710_223748.json'
+2025-07-10 22:37:53 | INFO | __main__:<module>:299 - Starting AI Football Predictions Backend
+2025-07-10 22:37:53 | INFO | __main__:<module>:303 - Initializing data collection...
+2025-07-10 22:37:53 | INFO | data_collector:collect_all_data:33 - Starting data collection from all sources
+2025-07-10 22:37:53 | INFO | data_collector:collect_all_data:44 - Collecting data from flashscore
+2025-07-10 22:37:55 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:38:00 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:38:05 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-10 22:38:05 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x11bb2e910 state=finished raised HTTPError>]
+2025-07-10 22:38:05 | INFO | data_collector:collect_all_data:44 - Collecting data from sofascore
+2025-07-10 22:38:06 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:38:11 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:38:17 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-10 22:38:17 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x11bb5d820 state=finished raised HTTPError>]
+2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from betsapi
+2025-07-10 22:38:17 | ERROR | scrapers.betsapi_scraper:scrape_matches:72 - Error scraping matches from BetsAPI: name 'SCRAPING_CONFIG' is not defined
+2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from whoscored
+2025-07-10 22:38:17 | ERROR | data_collector:_collect_from_source:65 - No scraper found for whoscored
+2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from transfermarkt
+2025-07-10 22:38:17 | ERROR | data_collector:_collect_from_source:65 - No scraper found for transfermarkt
+2025-07-10 22:38:17 | ERROR | __main__:<module>:308 - Error in initial data collection: [Errno 2] No such file or directory: 'backend/data/raw/data_20250710_223817.json'
