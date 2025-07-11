@@ -5,7 +5,7 @@ from typing import Dict, List, Any, Optional
 from loguru import logger
 from .base_scraper import BaseScraper
 from models.data_models import Match, Team, MatchStatus, OddsData, Statistics
-from config.settings import BETSAPI_KEY
+from config.settings import BETSAPI_KEY, SCRAPING_CONFIG
 
 class BetsAPIScraper(BaseScraper):
     """Scraper for BetsAPI (uses their official API)"""

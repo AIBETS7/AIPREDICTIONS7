@@ -13,7 +13,7 @@ for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR]:
     os.makedirs(directory, exist_ok=True)
 
 # Database configuration
-DATABASE_URL = "sqlite:///football_predictions.db"
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///football_predictions.db")
 
 # API Keys and credentials (you'll need to get these)
 BETSAPI_KEY = os.getenv('BETSAPI_KEY', 'your_betsapi_key_here')
