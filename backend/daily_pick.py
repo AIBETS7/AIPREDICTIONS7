@@ -84,8 +84,8 @@ def main():
     logger.info("Best pick stored in the database.")
 
     # Send the pick to Telegram
-    bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID')
+    bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '7582466483:AAHshXjaU0vu2nZsYd8wSY5pR1XJ6EHmZOQ')
+    chat_id = os.getenv('TELEGRAM_CHAT_ID', '2070545442')
     if bot_token and chat_id:
         message = (
             f"\U0001F3C6 Daily Football Pick!\n"
