@@ -2,7 +2,7 @@
 # Update this with your Neon connection string
 
 # Option 1: Neon PostgreSQL (recommended for production)
-NEON_DATABASE_URL = "postgresql://your_username:your_password@your_host:port/your_database"
+NEON_DATABASE_URL = "postgresql://neondb_owner:npg_spn2fZ3JymEa@ep-orange-thunder-aelhw2kh-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 
 # Option 2: SQLite (for local testing)
 SQLITE_DATABASE_URL = "sqlite:///football_predictions.db"
