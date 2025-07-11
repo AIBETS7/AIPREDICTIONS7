@@ -24,6 +24,9 @@
                     <a href="#ai-stats" class="nav-link">AI Statistics</a>
                 </li>
                 <li class="nav-item">
+                    <a href="#daily-picks" class="nav-link">Daily Picks</a>
+                </li>
+                <li class="nav-item">
                     <a href="#tipsters" class="nav-link">Tipsters</a>
                 </li>
                 <li class="nav-item">
@@ -145,6 +148,39 @@
                 <div class="predictions-grid" id="predictionsGrid">
                     <!-- Predictions will be loaded dynamically -->
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Picks Section -->
+    <section id="daily-picks" class="daily-picks">
+        <div class="container">
+            <h2>Today's AI Picks</h2>
+            <p class="section-subtitle">Latest predictions from our automated AI system</p>
+            
+            <div class="picks-header">
+                <div class="picks-info">
+                    <span class="update-time">Last updated: <span id="picksUpdateTime">Loading...</span></span>
+                    <span class="picks-count">Showing <span id="picksCount">0</span> picks</span>
+                </div>
+                <button class="refresh-btn" onclick="loadDailyPicks()">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh
+                </button>
+            </div>
+            
+            <div class="picks-container" id="dailyPicksContainer">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading today's picks...</p>
+                </div>
+            </div>
+            
+            <div class="picks-footer">
+                <p class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    Predictions are generated automatically by our AI system. Past performance does not guarantee future results.
+                </p>
             </div>
         </div>
     </section>
