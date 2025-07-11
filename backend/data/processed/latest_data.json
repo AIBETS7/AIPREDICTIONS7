@@ -1,8 +1,139 @@
 {
-  "matches": [],
-  "teams": {},
+  "matches": [
+    {
+      "id": "weuro_001",
+      "home_team": "Spain Women",
+      "away_team": "Denmark Women",
+      "time": "2025-07-12 15:00",
+      "status": "scheduled",
+      "competition": "UEFA Women's Euro 2025 Qualifiers",
+      "competition_type": "womens_euro",
+      "home_score": null,
+      "away_score": null,
+      "venue": "Estadio de La Cartuja",
+      "referee": "TBD"
+    },
+    {
+      "id": "weuro_002",
+      "home_team": "England Women",
+      "away_team": "France Women",
+      "time": "2025-07-12 17:30",
+      "status": "scheduled",
+      "competition": "UEFA Women's Euro 2025 Qualifiers",
+      "competition_type": "womens_euro",
+      "home_score": null,
+      "away_score": null,
+      "venue": "Wembley Stadium",
+      "referee": "TBD"
+    },
+    {
+      "id": "weuro_003",
+      "home_team": "Germany Women",
+      "away_team": "Netherlands Women",
+      "time": "2025-07-12 20:00",
+      "status": "scheduled",
+      "competition": "UEFA Women's Euro 2025 Qualifiers",
+      "competition_type": "womens_euro",
+      "home_score": null,
+      "away_score": null,
+      "venue": "Olympiastadion Berlin",
+      "referee": "TBD"
+    }
+  ],
+  "teams": {
+    "Spain Women": {
+      "form": [
+        "W",
+        "W",
+        "D",
+        "W",
+        "W"
+      ],
+      "goals_scored_avg": 2.8,
+      "goals_conceded_avg": 0.6,
+      "shots_avg": 15.2,
+      "possession_avg": 65.0,
+      "injuries": [],
+      "suspensions": []
+    },
+    "Denmark Women": {
+      "form": [
+        "L",
+        "W",
+        "D",
+        "L",
+        "W"
+      ],
+      "goals_scored_avg": 1.4,
+      "goals_conceded_avg": 1.2,
+      "shots_avg": 12.8,
+      "possession_avg": 52.0,
+      "injuries": [],
+      "suspensions": []
+    },
+    "England Women": {
+      "form": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ],
+      "goals_scored_avg": 3.2,
+      "goals_conceded_avg": 0.8,
+      "shots_avg": 18.5,
+      "possession_avg": 68.0,
+      "injuries": [],
+      "suspensions": []
+    },
+    "France Women": {
+      "form": [
+        "W",
+        "L",
+        "W",
+        "W",
+        "D"
+      ],
+      "goals_scored_avg": 2.6,
+      "goals_conceded_avg": 1.0,
+      "shots_avg": 16.3,
+      "possession_avg": 62.0,
+      "injuries": [],
+      "suspensions": []
+    },
+    "Germany Women": {
+      "form": [
+        "W",
+        "W",
+        "L",
+        "W",
+        "W"
+      ],
+      "goals_scored_avg": 2.9,
+      "goals_conceded_avg": 0.9,
+      "shots_avg": 17.1,
+      "possession_avg": 64.0,
+      "injuries": [],
+      "suspensions": []
+    },
+    "Netherlands Women": {
+      "form": [
+        "D",
+        "W",
+        "W",
+        "L",
+        "W"
+      ],
+      "goals_scored_avg": 2.1,
+      "goals_conceded_avg": 1.3,
+      "shots_avg": 14.7,
+      "possession_avg": 58.0,
+      "injuries": [],
+      "suspensions": []
+    }
+  },
   "h2h_records": {},
   "odds": {},
   "statistics": {},
-  "last_updated": "2025-07-11T17:41:52.053137"
+  "last_updated": "2025-07-11T18:01:42.104720"
 }

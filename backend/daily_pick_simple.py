@@ -54,6 +54,7 @@ def main():
                         'home_team': match.get('home_team'),
                         'away_team': match.get('away_team'),
                         'match_time': match.get('time'),
+                        'competition': match.get('competition', 'Unknown'),
                         'prediction_type': pred.prediction_type.value,
                         'prediction': pred.prediction,
                         'confidence': pred.confidence,
@@ -74,7 +75,7 @@ def main():
         
         # Select the best pick (highest confidence)
         best_pick = max(all_predictions, key=lambda x: x['confidence'])
-        logger.info(f"Best pick selected: {best_pick['home_team']} vs {best_pick['away_team']}")
+        logger.info(f"Best pick selected: {best_pick['home_team']} vs {best_pick['away_team']} ({best_pick.get('competition', 'Unknown')})")
 
         # Store the pick in the database
         try:
@@ -88,6 +89,7 @@ def main():
                 Column('home_team', String),
                 Column('away_team', String),
                 Column('match_time', String),
+                Column('competition', String),
                 Column('prediction_type', String),
                 Column('prediction', String),
                 Column('confidence', Float),
@@ -98,6 +100,10 @@ def main():
                 Column('expires_at', String)
             )
             metadata.create_all(engine)
+            
+            # Add competition to best_pick if not present
+            if 'competition' not in best_pick:
+                best_pick['competition'] = 'Unknown'
             
             with engine.connect() as conn:
                 # Upsert by id (PostgreSQL syntax)
@@ -126,8 +132,18 @@ def main():
             bot_token = '7582466483:AAHshXjaU0vu2nZsYd8wSY5pR1XJ6EHmZOQ'
             chat_id = '2070545442'
             
+            # Get competition emoji
+            competition = best_pick.get('competition', 'Unknown')
+            if 'Women' in competition:
+                competition_emoji = "⚽👩‍🦰"
+            elif 'La Liga' in competition:
+                competition_emoji = "⚽🇪🇸"
+            else:
+                competition_emoji = "⚽"
+            
             message = (
                 f"\U0001F3C6 Daily Football Pick!\n"
+                f"{competition_emoji} {competition}\n"
                 f"Match: {best_pick['home_team']} vs {best_pick['away_team']}\n"
                 f"Time: {best_pick['match_time']}\n"
                 f"Prediction: {best_pick['prediction_type']} - {best_pick['prediction']}\n"

@@ -48,14 +48,43 @@ def check_schedule():
             print("   → Automation will skip today")
         else:
             print(f"✅ Found {len(upcoming_matches)} upcoming matches:")
-            for i, match in enumerate(upcoming_matches[:5], 1):
-                home = match.get('home_team', 'Unknown')
-                away = match.get('away_team', 'Unknown')
-                time = match.get('time', 'TBD')
-                print(f"   {i}. {home} vs {away} - {time}")
             
-            if len(upcoming_matches) > 5:
-                print(f"   ... and {len(upcoming_matches) - 5} more matches")
+            # Group matches by competition
+            la_liga_matches = [m for m in upcoming_matches if m.get('competition') == 'La Liga']
+            womens_euro_matches = [m for m in upcoming_matches if 'Women' in m.get('competition', '')]
+            other_matches = [m for m in upcoming_matches if m.get('competition') not in ['La Liga'] and 'Women' not in m.get('competition', '')]
+            
+            if la_liga_matches:
+                print(f"\n   🇪🇸 La Liga ({len(la_liga_matches)} matches):")
+                for i, match in enumerate(la_liga_matches[:3], 1):
+                    home = match.get('home_team', 'Unknown')
+                    away = match.get('away_team', 'Unknown')
+                    time = match.get('time', 'TBD')
+                    print(f"      {i}. {home} vs {away} - {time}")
+                if len(la_liga_matches) > 3:
+                    print(f"      ... and {len(la_liga_matches) - 3} more La Liga matches")
+            
+            if womens_euro_matches:
+                print(f"\n   ⚽👩‍🦰 Women's Euro ({len(womens_euro_matches)} matches):")
+                for i, match in enumerate(womens_euro_matches[:3], 1):
+                    home = match.get('home_team', 'Unknown')
+                    away = match.get('away_team', 'Unknown')
+                    time = match.get('time', 'TBD')
+                    print(f"      {i}. {home} vs {away} - {time}")
+                if len(womens_euro_matches) > 3:
+                    print(f"      ... and {len(womens_euro_matches) - 3} more Women's Euro matches")
+            
+            if other_matches:
+                print(f"\n   ⚽ Other ({len(other_matches)} matches):")
+                for i, match in enumerate(other_matches[:3], 1):
+                    home = match.get('home_team', 'Unknown')
+                    away = match.get('away_team', 'Unknown')
+                    time = match.get('time', 'TBD')
+                    competition = match.get('competition', 'Unknown')
+                    print(f"      {i}. {home} vs {away} ({competition}) - {time}")
+                if len(other_matches) > 3:
+                    print(f"      ... and {len(other_matches) - 3} more matches")
+            
             print("   → Automation will generate picks today")
     
     except Exception as e:

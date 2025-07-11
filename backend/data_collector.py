@@ -4,7 +4,7 @@ import time
 from datetime import datetime, timedelta
 from typing import Dict, List, Any
 from loguru import logger
-from config.settings import DATA_SOURCES, LA_LIGA_CONFIG
+from config.settings import DATA_SOURCES, LA_LIGA_CONFIG, WOMENS_EURO_CONFIG, COMPETITIONS_CONFIG
 from scrapers.flashscore_scraper import FlashScoreScraper
 from scrapers.sofascore_scraper import SofaScoreScraper
 from scrapers.betsapi_scraper import BetsAPIScraper
@@ -65,13 +65,36 @@ class DataCollector:
             logger.error(f"No scraper found for {source_name}")
             return
         
-        # Collect matches
-        matches = scraper.scrape_matches(LA_LIGA_CONFIG['league_id'], date_from, date_to)
-        self.collected_data['matches'].extend(matches)
+        # Collect matches for all competitions
+        all_matches = []
+        
+        # Collect La Liga matches
+        try:
+            la_liga_matches = scraper.scrape_matches(LA_LIGA_CONFIG['league_id'], date_from, date_to)
+            for match in la_liga_matches:
+                match['competition'] = 'La Liga'
+                match['competition_type'] = 'la_liga'
+            all_matches.extend(la_liga_matches)
+            logger.info(f"Collected {len(la_liga_matches)} La Liga matches from {source_name}")
+        except Exception as e:
+            logger.error(f"Error collecting La Liga matches from {source_name}: {e}")
+        
+        # Collect Women's Euro matches
+        try:
+            womens_euro_matches = scraper.scrape_matches(WOMENS_EURO_CONFIG['league_id'], date_from, date_to)
+            for match in womens_euro_matches:
+                match['competition'] = WOMENS_EURO_CONFIG['competition']
+                match['competition_type'] = 'womens_euro'
+            all_matches.extend(womens_euro_matches)
+            logger.info(f"Collected {len(womens_euro_matches)} Women's Euro matches from {source_name}")
+        except Exception as e:
+            logger.error(f"Error collecting Women's Euro matches from {source_name}: {e}")
+        
+        self.collected_data['matches'].extend(all_matches)
         
         # Collect team data for teams in matches
         teams_to_collect = set()
-        for match in matches:
+        for match in all_matches:
             teams_to_collect.add(match.get('home_team', ''))
             teams_to_collect.add(match.get('away_team', ''))
         
@@ -85,7 +108,7 @@ class DataCollector:
                     logger.error(f"Error collecting team stats for {team_name}: {e}")
         
         # Collect H2H data for upcoming matches
-        upcoming_matches = [m for m in matches if m.get('status') == 'scheduled']
+        upcoming_matches = [m for m in all_matches if m.get('status') == 'scheduled']
         for match in upcoming_matches[:10]:  # Limit to first 10 to avoid too many requests
             home_team = match.get('home_team', '')
             away_team = match.get('away_team', '')

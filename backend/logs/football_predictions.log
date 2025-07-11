@@ -81,3 +81,38 @@ LINE 1: INSERT OR REPLACE INTO daily_picks (id, match_id, home_team,...
 2025-07-11 17:58:51 | INFO | __main__:main:20 - Starting daily pick generation...
 2025-07-11 17:58:51 | INFO | __main__:main:26 - Collected data: 0 matches
 2025-07-11 17:58:51 | INFO | __main__:main:38 - No upcoming matches found. Skipping daily pick generation.
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: Spain Women vs Denmark Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: England Women vs France Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: Germany Women vs Netherlands Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Spain Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Denmark Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: England Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: France Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Germany Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Netherlands Women
+2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:159 - Added 3 Women's Euro matches for Saturday
+2025-07-11 18:02:17 | INFO | __main__:main:20 - Starting daily pick generation...
+2025-07-11 18:02:17 | INFO | __main__:main:26 - Collected data: 3 matches
+2025-07-11 18:02:17 | INFO | __main__:main:41 - Found 3 upcoming matches. Generating predictions...
+2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:17 | INFO | __main__:main:78 - Best pick selected: Spain Women vs Denmark Women (UEFA Women's Euro 2025 Qualifiers)
+2025-07-11 18:02:20 | ERROR | __main__:main:121 - Error storing pick in database: (psycopg2.errors.UndefinedColumn) column "competition" of relation "daily_picks" does not exist
+LINE 1: ... (id, match_id, home_team, away_team, match_time, competitio...
+                                                             ^
+
+[SQL: INSERT INTO daily_picks (id, match_id, home_team, away_team, match_time, competition, prediction_type, prediction, confidence, odds, reasoning, tipster, created_at, expires_at) VALUES (%(id)s, %(match_id)s, %(home_team)s, %(away_team)s, %(match_time)s, %(competition)s, %(prediction_type)s, %(prediction)s, %(confidence)s, %(odds)s, %(reasoning)s, %(tipster)s, %(created_at)s, %(expires_at)s) ON CONFLICT (id) DO UPDATE SET id = %(param_1)s, match_id = %(param_2)s, home_team = %(param_3)s, away_team = %(param_4)s, match_time = %(param_5)s, competition = %(param_6)s, prediction_type = %(param_7)s, prediction = %(param_8)s, confidence = %(param_9)s, odds = %(param_10)s, reasoning = %(param_11)s, tipster = %(param_12)s, created_at = %(param_13)s, expires_at = %(param_14)s]
+[parameters: {'id': 'weuro_001_both_teams_score', 'match_id': 'weuro_001', 'home_team': 'Spain Women', 'away_team': 'Denmark Women', 'match_time': '2025-07-12 15:00', 'competition': "UEFA Women's Euro 2025 Qualifiers", 'prediction_type': 'both_teams_score', 'prediction': 'Both Teams Score', 'confidence': 0.75, 'odds': 1.75, 'reasoning': 'High scoring teams with good form', 'tipster': 'AI Predictions Pro', 'created_at': '2025-07-11T18:02:17.522513', 'expires_at': '2025-07-11T20:02:17.522515', 'param_1': 'weuro_001_both_teams_score', 'param_2': 'weuro_001', 'param_3': 'Spain Women', 'param_4': 'Denmark Women', 'param_5': '2025-07-12 15:00', 'param_6': "UEFA Women's Euro 2025 Qualifiers", 'param_7': 'both_teams_score', 'param_8': 'Both Teams Score', 'param_9': 0.75, 'param_10': 1.75, 'param_11': 'High scoring teams with good form', 'param_12': 'AI Predictions Pro', 'param_13': '2025-07-11T18:02:17.522513', 'param_14': '2025-07-11T20:02:17.522515'}]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+2025-07-11 18:02:20 | INFO | __main__:main:127 - Pick backed up to backend/data/daily_picks_backup_20250711.json
+2025-07-11 18:02:20 | INFO | __main__:main:161 - Best pick sent to Telegram successfully.
+2025-07-11 18:02:47 | INFO | __main__:main:20 - Starting daily pick generation...
+2025-07-11 18:02:47 | INFO | __main__:main:26 - Collected data: 3 matches
+2025-07-11 18:02:47 | INFO | __main__:main:41 - Found 3 upcoming matches. Generating predictions...
+2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-11 18:02:47 | INFO | __main__:main:78 - Best pick selected: Spain Women vs Denmark Women (UEFA Women's Euro 2025 Qualifiers)
+2025-07-11 18:02:50 | INFO | __main__:main:118 - Best pick stored in the database successfully.
+2025-07-11 18:02:50 | INFO | __main__:main:161 - Best pick sent to Telegram successfully.

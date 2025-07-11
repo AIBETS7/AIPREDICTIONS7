@@ -91,6 +91,25 @@ LA_LIGA_CONFIG = {
     ]
 }
 
+# Women's Euro configuration
+WOMENS_EURO_CONFIG = {
+    'league_id': 'WEURO',  # Women's Euro qualifiers
+    'season': '2024/2025',
+    'competition': 'UEFA Women\'s Euro 2025 Qualifiers',
+    'match_types': ['home', 'away', 'h2h'],
+    'statistics': [
+        'goals_scored', 'goals_conceded', 'shots', 'shots_on_target',
+        'possession', 'corners', 'fouls', 'yellow_cards', 'red_cards',
+        'form', 'injuries', 'suspensions'
+    ]
+}
+
+# Combined competitions configuration
+COMPETITIONS_CONFIG = {
+    'la_liga': LA_LIGA_CONFIG,
+    'womens_euro': WOMENS_EURO_CONFIG
+}
+
 # AI Model configuration
 AI_CONFIG = {
     'model_type': 'ensemble',  # ensemble, neural_network, random_forest
