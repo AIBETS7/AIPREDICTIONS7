@@ -131,9 +131,12 @@ async function loadDailyPicks() {
     `;
     
     try {
-        // For now, we'll use a simple API endpoint
-        // In production, this would be your actual backend URL
-        const response = await fetch('http://localhost:8000/api/daily-picks');
+        // Use production API URL or fallback to localhost for development
+        const apiUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:8000/api/daily-picks'
+            : 'https://football-predictions-api.onrender.com/api/daily-picks';
+        
+        const response = await fetch(apiUrl);
         
         if (!response.ok) {
             throw new Error('Failed to load picks');

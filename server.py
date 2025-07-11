@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, send_from_directory
+from flask_cors import CORS
 import os
 import psycopg2
 from datetime import datetime, timedelta
@@ -10,6 +11,7 @@ sys.path.append('backend')
 from config.database import DATABASE_URL
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 def get_db_connection():
     """Create a database connection using the DATABASE_URL from config.database"""
@@ -45,11 +47,7 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('.', path)
+    return jsonify({"message": "Football Predictions API", "status": "running"})
 
 @app.route('/api/daily-picks')
 def get_daily_picks():
@@ -105,4 +103,5 @@ def health_check():
     return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8000) 
+    port = int(os.environ.get('PORT', 8000))
+    app.run(debug=False, host='0.0.0.0', port=port) 
