@@ -1,22 +1,23 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify
 from flask_cors import CORS
 import os
 import psycopg2
 from datetime import datetime, timedelta
 import json
-import sys
-
-# Add backend directory to path to import settings
-sys.path.append('backend')
-from config.database import DATABASE_URL
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 def get_db_connection():
-    """Create a database connection using the DATABASE_URL from config.database"""
+    """Create a database connection using the DATABASE_URL environment variable"""
     import psycopg2
     try:
+        # Get DATABASE_URL from environment variable
+        DATABASE_URL = os.getenv('DATABASE_URL')
+        if not DATABASE_URL:
+            print("DATABASE_URL environment variable not set")
+            return None
+            
         if DATABASE_URL.startswith('postgresql://'):
             url = DATABASE_URL.replace('postgresql://', '')
             if '@' in url:
