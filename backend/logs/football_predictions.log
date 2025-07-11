@@ -59,3 +59,22 @@
 2025-07-11 17:41:52 | INFO | data_collector:_save_data:161 - Data saved to backend/data/raw/data_20250711_174152.json and backend/data/processed/latest_data.json
 2025-07-11 17:41:52 | INFO | data_collector:collect_all_data:58 - Data collection completed
 2025-07-11 17:41:52 | WARNING | __main__:main:55 - No predictions generated.
+2025-07-11 17:54:40 | INFO | __main__:main:20 - Starting daily pick generation...
+2025-07-11 17:54:40 | INFO | __main__:main:26 - Collected data: 0 matches
+2025-07-11 17:54:40 | WARNING | __main__:main:65 - No predictions generated. Creating mock prediction for testing.
+2025-07-11 17:54:40 | INFO | __main__:main:86 - Best pick: {'id': 'mock_20250711_175440', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:54:40.152666', 'expires_at': '2025-07-12T17:54:40.152674'}
+2025-07-11 17:54:53 | ERROR | __main__:main:118 - Error storing pick in database: (psycopg2.errors.SyntaxError) syntax error at or near "OR"
+LINE 1: INSERT OR REPLACE INTO daily_picks (id, match_id, home_team,...
+               ^
+
+[SQL: INSERT OR REPLACE INTO daily_picks (id, match_id, home_team, away_team, match_time, prediction_type, prediction, confidence, odds, reasoning, tipster, created_at, expires_at) VALUES (%(id)s, %(match_id)s, %(home_team)s, %(away_team)s, %(match_time)s, %(prediction_type)s, %(prediction)s, %(confidence)s, %(odds)s, %(reasoning)s, %(tipster)s, %(created_at)s, %(expires_at)s)]
+[parameters: {'id': 'mock_20250711_175440', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:54:40.152666', 'expires_at': '2025-07-12T17:54:40.152674'}]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+2025-07-11 17:54:53 | INFO | __main__:main:124 - Pick backed up to backend/data/daily_picks_backup_20250711.json
+2025-07-11 17:54:53 | INFO | __main__:main:148 - Best pick sent to Telegram successfully.
+2025-07-11 17:55:09 | INFO | __main__:main:20 - Starting daily pick generation...
+2025-07-11 17:55:09 | INFO | __main__:main:26 - Collected data: 0 matches
+2025-07-11 17:55:09 | WARNING | __main__:main:65 - No predictions generated. Creating mock prediction for testing.
+2025-07-11 17:55:09 | INFO | __main__:main:86 - Best pick: {'id': 'mock_20250711_175509', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:55:09.883927', 'expires_at': '2025-07-12T17:55:09.883935'}
+2025-07-11 17:55:12 | INFO | __main__:main:121 - Best pick stored in the database successfully.
+2025-07-11 17:55:12 | INFO | __main__:main:154 - Best pick sent to Telegram successfully.

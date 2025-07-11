@@ -109,8 +109,14 @@ def main():
             metadata.create_all(engine)
             
             with engine.connect() as conn:
-                # Upsert by id
-                conn.execute(picks_table.insert().prefix_with('OR REPLACE'), best_pick)
+                # Upsert by id (PostgreSQL syntax)
+                from sqlalchemy.dialects.postgresql import insert
+                stmt = insert(picks_table).values(best_pick)
+                stmt = stmt.on_conflict_do_update(
+                    index_elements=['id'],
+                    set_=best_pick
+                )
+                conn.execute(stmt)
             
             logger.info("Best pick stored in the database successfully.")
             
