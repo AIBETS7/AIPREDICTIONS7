@@ -64,8 +64,8 @@
                 </li>
                 <li class="nav-item">
                     <div class="language-switcher">
-                        <button class="language-btn active" onclick="changeLanguage('es')">ES</button>
-                        <button class="language-btn" onclick="changeLanguage('en')">EN</button>
+                        <button class="language-btn active" onclick="changeLanguage('es')" data-lang="es">ES</button>
+                        <button class="language-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
                     </div>
                 </li>
             </ul>
@@ -401,6 +401,14 @@
     <script>
         // Language management
         let currentLanguage = 'es';
+        
+        // Test function to verify language switching
+        function testLanguageSwitch() {
+            console.log('Testing language switch...');
+            console.log('Current language:', currentLanguage);
+            console.log('Number of translatable elements:', document.querySelectorAll('[data-es][data-en]').length);
+            console.log('Language buttons found:', document.querySelectorAll('.language-btn').length);
+        }
 
         function changeLanguage(lang) {
             currentLanguage = lang;
@@ -410,21 +418,27 @@
             document.querySelectorAll('.language-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            // Find the clicked button and make it active
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                if (btn.textContent === (lang === 'es' ? 'ES' : 'EN')) {
-                    btn.classList.add('active');
-                }
-            });
+            
+            // Find the correct button and make it active
+            const targetButton = document.querySelector(`.language-btn[onclick*="${lang}"]`);
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
             
             // Update all translatable elements
             document.querySelectorAll('[data-es][data-en]').forEach(element => {
-                element.textContent = element.getAttribute(`data-${lang}`);
+                const newText = element.getAttribute(`data-${lang}`);
+                if (newText) {
+                    element.textContent = newText;
+                }
             });
             
             // Update placeholders
             document.querySelectorAll('input[data-es], textarea[data-es]').forEach(element => {
-                element.placeholder = element.getAttribute(`data-${lang}`);
+                const newPlaceholder = element.getAttribute(`data-${lang}`);
+                if (newPlaceholder) {
+                    element.placeholder = newPlaceholder;
+                }
             });
             
             // Update HTML lang attribute
@@ -436,6 +450,9 @@
             } else {
                 document.title = 'AI Predictions 7 - Professional Football Predictions';
             }
+            
+            // Reload daily picks with new language
+            loadDailyPicks();
             
             console.log('Language changed successfully to:', lang);
         }
@@ -512,6 +529,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🎯 SPANISH VERSION LOADED - AI Predictions 7');
             console.log('Page loaded, initializing with Spanish language');
+            
+            // Test language switching setup
+            testLanguageSwitch();
             
             // Ensure Spanish is set as default
             changeLanguage('es');
