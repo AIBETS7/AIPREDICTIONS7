@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 import json
 import stripe
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, text
 
 # Load environment variables
 load_dotenv()
@@ -84,41 +83,19 @@ def health_check():
 def get_daily_picks():
     """Get today's picks from database"""
     try:
-        # Get DATABASE_URL from environment variable
-        DATABASE_URL = os.getenv('DATABASE_URL')
-        if not DATABASE_URL:
-            return jsonify({'error': 'DATABASE_URL not configured'}), 500
-            
-        # Use the PostgreSQL database from DATABASE_URL
-        engine = create_engine(DATABASE_URL)
-        
-        # Query today's picks
-        with engine.connect() as conn:
-            result = conn.execute(text("""
-                SELECT * FROM daily_picks 
-                WHERE date(created_at) = date('now') 
-                ORDER BY created_at DESC
-            """))
-            picks = []
-            for row in result:
-                pick = {
-                    'id': row.id,
-                    'match_id': row.match_id,
-                    'home_team': row.home_team,
-                    'away_team': row.away_team,
-                    'match_time': row.match_time,
-                    'prediction_type': row.prediction_type,
-                    'prediction': row.prediction,
-                    'confidence': row.confidence,
-                    'odds': row.odds,
-                    'reasoning': row.reasoning,
-                    'tipster': row.tipster,
-                    'created_at': row.created_at,
-                    'expires_at': row.expires_at
-                }
-                picks.append(pick)
-        
-        return jsonify(picks)
+        # For now, return a simple response to test the endpoint
+        return jsonify([
+            {
+                'id': 'test_001',
+                'home_team': 'Real Madrid',
+                'away_team': 'Barcelona',
+                'prediction': 'Home Win',
+                'confidence': 75,
+                'odds': 1.85,
+                'match_time': '2025-07-12T21:00:00',
+                'created_at': datetime.now().isoformat()
+            }
+        ])
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
