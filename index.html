@@ -7,6 +7,98 @@
     <link rel="stylesheet" href="public/css/styles.css?v=2">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Stripe Payment Form Styles */
+        .card-element {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            background: white;
+            margin-bottom: 10px;
+        }
+        
+        .card-errors {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #1a237e;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        
+        .payment-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .payment-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .payment-info i {
+            margin-right: 8px;
+            color: #1a237e;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .form-group input[type="email"]:focus {
+            outline: none;
+            border-color: #1a237e;
+            box-shadow: 0 0 0 2px rgba(26, 35, 126, 0.1);
+        }
+    </style>
 
 </head>
 <body>
@@ -354,25 +446,57 @@
     <div id="subscriptionModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeSubscriptionModal()">&times;</span>
-            <h2 data-es="Suscríbete a AI Predictions 7" data-en="Subscribe to AI Predictions 7">Suscríbete a AI Predictions 7</h2>
-            <p data-es="¡Obtén acceso a nuestras predicciones premium y empieza a ganar hoy!" data-en="Get access to our premium predictions and start winning today!">¡Obtén acceso a nuestras predicciones premium y empieza a ganar hoy!</p>
+            <h2>Suscríbete a AI Predictions 7</h2>
+            <p>¡Obtén acceso a nuestras predicciones premium y empieza a ganar hoy!</p>
+            
             <div class="pricing">
                 <div class="price-card">
-                    <h3 data-es="Plan Mensual" data-en="Monthly Plan">Plan Mensual</h3>
-                    <div class="price">€15<span data-es="/mes" data-en="/month">/mes</span></div>
+                    <h3>Plan Mensual</h3>
+                    <div class="price">€15<span>/mes</span></div>
                     <ul>
-                        <li data-es="Predicciones diarias de IA" data-en="Daily AI predictions">Predicciones diarias de IA</li>
-                        <li data-es="Actualizaciones en tiempo real" data-en="Real-time updates">Actualizaciones en tiempo real</li>
-                        <li data-es="Seguimiento de rendimiento" data-en="Performance tracking">Seguimiento de rendimiento</li>
-                        <li data-es="Soporte 24/7" data-en="24/7 support">Soporte 24/7</li>
+                        <li>Predicciones diarias de IA</li>
+                        <li>Actualizaciones en tiempo real</li>
+                        <li>Seguimiento de rendimiento</li>
+                        <li>Soporte 24/7</li>
                     </ul>
-                    <button class="subscribe-btn" data-es="Suscribirse Ahora" data-en="Subscribe Now">Suscribirse Ahora</button>
+                    
+                    <!-- Stripe Payment Form -->
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" placeholder="tu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-element">Información de la Tarjeta:</label>
+                            <div id="card-element" class="card-element"></div>
+                            <div id="card-errors" class="card-errors" role="alert"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" required>
+                                <span>Acepto los <a href="#" target="_blank">Términos de Servicio</a> y <a href="#" target="_blank">Política de Privacidad</a></span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" id="submit-button" class="subscribe-btn">
+                            <span id="button-text">Pagar €15/mes</span>
+                            <div id="spinner" class="spinner hidden"></div>
+                        </button>
+                    </form>
+                    
+                    <div class="payment-info">
+                        <p><i class="fas fa-lock"></i> Pago seguro con Stripe</p>
+                        <p><i class="fas fa-credit-card"></i> Aceptamos Visa, Mastercard, American Express</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="public/js/main.js?v=2"></script>
+    <script src="public/js/stripe-payment.js"></script>
     <script>
         // Language management
         let currentLanguage = 'es';

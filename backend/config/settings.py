@@ -20,6 +20,10 @@ BETSAPI_KEY = os.getenv('BETSAPI_KEY', 'your_betsapi_key_here')
 FLASHSCORE_API_KEY = os.getenv('FLASHSCORE_API_KEY', 'your_flashscore_key_here')
 SOFASCORE_API_KEY = os.getenv('SOFASCORE_API_KEY', 'your_sofascore_key_here')
 
+# Stripe Configuration
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'your_stripe_secret_key_here')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', 'your_stripe_publishable_key_here')
+
 # Web scraping configuration
 SCRAPING_CONFIG = {
     'user_agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
