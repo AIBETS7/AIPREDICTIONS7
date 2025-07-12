@@ -19,6 +19,7 @@ app = Flask(__name__, static_folder='public')
 CORS(app, origins=[
     'https://astonishing-strudel-9a916f.netlify.app',
     'https://myfootballpredictions.onrender.com',
+    'https://aipredictions7.com',
     'http://localhost:3000',
     'http://localhost:5000'
 ])
