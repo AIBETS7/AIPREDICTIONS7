@@ -1,11 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import psycopg
 from datetime import datetime, timedelta
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='public')
 CORS(app)  # Enable CORS for all routes
 
 def get_db_connection():
@@ -47,7 +47,13 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return jsonify({"message": "Football Predictions API", "status": "running"})
+    """Serve the main predictions page"""
+    return send_from_directory('public', 'predictions.html')
+
+@app.route('/<path:filename>')
+def serve_static(filename):
+    """Serve static files from the public directory"""
+    return send_from_directory('public', filename)
 
 @app.route('/api/daily-picks')
 def get_daily_picks():

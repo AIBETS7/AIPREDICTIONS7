@@ -1,4 +1,4 @@
-name: Daily Football Pick (Match Days Only)
+name: Real Daily Football Pick (Match Days Only)
 
 on:
   schedule:
@@ -23,6 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
 
-      - name: Run daily pick script
+      - name: Run real daily pick script
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          python backend/daily_pick_simple.py 
+          python backend/real_daily_pick.py 
