@@ -6,7 +6,7 @@ Script to add test picks to the database for demonstration
 import sys
 import os
 from datetime import datetime, timedelta
-import psycopg2
+import psycopg
 import uuid
 
 # Add backend directory to path
@@ -37,10 +37,10 @@ def get_db_connection():
                     else:
                         host, port = host_port, '5432'
                     
-                    conn = psycopg2.connect(
+                    conn = psycopg.connect(
                         host=host,
                         port=port,
-                        database=database,
+                        dbname=database,
                         user=user,
                         password=password,
                         sslmode='require'

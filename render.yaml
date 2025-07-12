@@ -3,7 +3,7 @@ services:
     name: football-predictions-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn server:app
+    startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.8.0 
+        value: 3.13.0 

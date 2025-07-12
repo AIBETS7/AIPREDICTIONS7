@@ -43,4 +43,4 @@ tenacity==8.2.3
 
 # Data validation
 pydantic==1.10.12
-psycopg2-binary==2.9.9
+psycopg[binary]==3.1.18
