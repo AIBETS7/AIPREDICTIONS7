@@ -1,0 +1,12 @@
+# Ignore Python backend files
+*.py
+requirements.txt
+Procfile
+render.yaml
+*.db
+backend/
+.github/
+
+# Only deploy static files
+!index.html
+!public/ 

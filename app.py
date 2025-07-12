@@ -65,16 +65,18 @@ def get_daily_picks():
         
         cursor = conn.cursor()
         
-        # Get picks for today using match_time cast to timestamp
+        # Get picks for the last 7 days instead of just today
         today = datetime.now().date()
+        week_ago = today - timedelta(days=7)
         query = """
         SELECT id, home_team, away_team, prediction, confidence, odds, stake, 
                reasoning, match_time, competition, created_at
         FROM daily_picks 
-        WHERE match_time::timestamp::date = %s
-        ORDER BY match_time ASC
+        WHERE match_time::timestamp::date >= %s
+        ORDER BY match_time DESC
+        LIMIT 20
         """
-        cursor.execute(query, (today,))
+        cursor.execute(query, (week_ago,))
         picks = cursor.fetchall()
         
         # Convert to list of dictionaries
