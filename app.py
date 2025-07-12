@@ -81,9 +81,19 @@ def health_check():
 
 @app.route('/api/daily-picks')
 def get_daily_picks():
-    """Get today's picks from database"""
+    """Get today's picks from JSON file created by backend script"""
     try:
-        # For now, return a simple response to test the endpoint
+        # Try to read from the JSON file created by the backend script
+        json_file_path = 'data/processed/latest_data.json'
+        if os.path.exists(json_file_path):
+            with open(json_file_path, 'r') as f:
+                data = json.load(f)
+                if 'current_pick' in data:
+                    return jsonify([data['current_pick']])
+                elif 'recent_picks' in data:
+                    return jsonify(data['recent_picks'])
+        
+        # Fallback: return a simple test response
         return jsonify([
             {
                 'id': 'test_001',
