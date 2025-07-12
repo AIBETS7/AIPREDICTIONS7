@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Predictions 7 - Professional Football Predictions</title>
-    <link rel="stylesheet" href="public/css/styles.css">
+    <title>AI Predictions 7 - Predicciones Profesionales de Fútbol</title>
+    <link rel="stylesheet" href="public/css/styles.css?v=2">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .language-btn {
+            background: none;
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .language-btn.active {
+            background: #1a237e;
+            color: white;
+            border-color: #1a237e;
+        }
+        .language-btn:hover {
+            background: #e3eafc;
+        }
+        .language-btn.active:hover {
+            background: #1a237e;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -18,22 +45,28 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link" data-es="Inicio" data-en="Home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#ai-stats" class="nav-link">AI Statistics</a>
+                    <a href="#ai-stats" class="nav-link" data-es="Estadísticas IA" data-en="AI Statistics">Estadísticas IA</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#daily-picks" class="nav-link">Daily Picks</a>
+                    <a href="#daily-picks" class="nav-link" data-es="Pronósticos Diarios" data-en="Daily Picks">Pronósticos Diarios</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tipsters" class="nav-link">Tipsters</a>
+                    <a href="#tipsters" class="nav-link" data-es="Tipsters" data-en="Tipsters">Tipsters</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#contact" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a>
                 </li>
                 <li class="nav-item">
-                    <button class="subscribe-btn" onclick="openSubscriptionModal()">Subscribe €15/month</button>
+                    <button class="subscribe-btn" onclick="openSubscriptionModal()" data-es="Suscribirse €15/mes" data-en="Subscribe €15/month">Suscribirse €15/mes</button>
+                </li>
+                <li class="nav-item">
+                    <div class="language-switcher">
+                        <button class="language-btn active" onclick="changeLanguage('es')">ES</button>
+                        <button class="language-btn" onclick="changeLanguage('en')">EN</button>
+                    </div>
                 </li>
             </ul>
             <div class="hamburger">
@@ -48,25 +81,24 @@
     <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>AI-Powered Football Predictions</h1>
-                <p>Get the most reliable football predictions using advanced artificial intelligence. 
-                   Expert analysis for every Spanish professional league match.</p>
+                <h1 data-es="Predicciones de Fútbol con IA" data-en="AI-Powered Football Predictions">Predicciones de Fútbol con IA</h1>
+                <p data-es="Obtén las predicciones de fútbol más confiables usando inteligencia artificial avanzada. Análisis experto para cada partido de las ligas profesionales españolas." data-en="Get the most reliable football predictions using advanced artificial intelligence. Expert analysis for every Spanish professional league match.">Obtén las predicciones de fútbol más confiables usando inteligencia artificial avanzada. Análisis experto para cada partido de las ligas profesionales españolas.</p>
                 <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-number">87%</span>
-                        <span class="stat-label">Accuracy Rate</span>
+                        <span class="stat-label" data-es="Tasa de Precisión" data-en="Accuracy Rate">Tasa de Precisión</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">€2.3M</span>
-                        <span class="stat-label">Winnings Generated</span>
+                        <span class="stat-label" data-es="Ganancias Generadas" data-en="Winnings Generated">Ganancias Generadas</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">15K+</span>
-                        <span class="stat-label">Happy Subscribers</span>
+                        <span class="stat-label" data-es="Suscriptores Felices" data-en="Happy Subscribers">Suscriptores Felices</span>
                     </div>
                 </div>
-                <button class="cta-btn" onclick="openSubscriptionModal()">
-                    Start Winning Today - €15/month
+                <button class="cta-btn" onclick="openSubscriptionModal()" data-es="Empieza a Ganar Hoy - €15/mes" data-en="Start Winning Today - €15/month">
+                    Empieza a Ganar Hoy - €15/mes
                 </button>
             </div>
             <div class="hero-image">
@@ -86,22 +118,22 @@
     <!-- AI Statistics Section -->
     <section id="ai-stats" class="ai-stats">
         <div class="container">
-            <h2>AI Statistics & Analysis</h2>
+            <h2 data-es="Estadísticas y Análisis de IA" data-en="AI Statistics & Analysis">Estadísticas y Análisis de IA</h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>Machine Learning Models</h3>
-                    <p>Our AI analyzes 50+ variables including team form, player statistics, historical data, and real-time odds.</p>
+                    <h3 data-es="Modelos de Machine Learning" data-en="Machine Learning Models">Modelos de Machine Learning</h3>
+                    <p data-es="Nuestra IA analiza más de 50 variables incluyendo forma del equipo, estadísticas de jugadores, datos históricos y cuotas en tiempo real." data-en="Our AI analyzes 50+ variables including team form, player statistics, historical data, and real-time odds.">Nuestra IA analiza más de 50 variables incluyendo forma del equipo, estadísticas de jugadores, datos históricos y cuotas en tiempo real.</p>
                     <div class="stat-details">
                         <div class="detail">
-                            <span>Model Accuracy:</span>
+                            <span data-es="Precisión del Modelo:" data-en="Model Accuracy:">Precisión del Modelo:</span>
                             <span class="highlight">87.3%</span>
                         </div>
                         <div class="detail">
-                            <span>Data Points:</span>
-                            <span class="highlight">50+ per match</span>
+                            <span data-es="Puntos de Datos:" data-en="Data Points:">Puntos de Datos:</span>
+                            <span class="highlight" data-es="50+ por partido" data-en="50+ per match">50+ por partido</span>
                         </div>
                     </div>
                 </div>
@@ -110,15 +142,15 @@
                     <div class="stat-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Performance Tracking</h3>
-                    <p>Real-time tracking of prediction accuracy and ROI for every tipster and prediction.</p>
+                    <h3 data-es="Seguimiento de Rendimiento" data-en="Performance Tracking">Seguimiento de Rendimiento</h3>
+                    <p data-es="Seguimiento en tiempo real de la precisión de predicciones y ROI para cada tipster y predicción." data-en="Real-time tracking of prediction accuracy and ROI for every tipster and prediction.">Seguimiento en tiempo real de la precisión de predicciones y ROI para cada tipster y predicción.</p>
                     <div class="stat-details">
                         <div class="detail">
-                            <span>Monthly ROI:</span>
+                            <span data-es="ROI Mensual:" data-en="Monthly ROI:">ROI Mensual:</span>
                             <span class="highlight">+23.7%</span>
                         </div>
                         <div class="detail">
-                            <span>Win Rate:</span>
+                            <span data-es="Tasa de Éxito:" data-en="Win Rate:">Tasa de Éxito:</span>
                             <span class="highlight">78.9%</span>
                         </div>
                     </div>
@@ -128,23 +160,23 @@
                     <div class="stat-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Real-Time Updates</h3>
-                    <p>Predictions updated in real-time as new data becomes available before matches.</p>
+                    <h3 data-es="Actualizaciones en Tiempo Real" data-en="Real-Time Updates">Actualizaciones en Tiempo Real</h3>
+                    <p data-es="Predicciones actualizadas en tiempo real a medida que nuevos datos están disponibles antes de los partidos." data-en="Predictions updated in real-time as new data becomes available before matches.">Predicciones actualizadas en tiempo real a medida que nuevos datos están disponibles antes de los partidos.</p>
                     <div class="stat-details">
                         <div class="detail">
-                            <span>Update Frequency:</span>
-                            <span class="highlight">Every 2 hours</span>
+                            <span data-es="Frecuencia de Actualización:" data-en="Update Frequency:">Frecuencia de Actualización:</span>
+                            <span class="highlight" data-es="Cada 2 horas" data-en="Every 2 hours">Cada 2 horas</span>
                         </div>
                         <div class="detail">
-                            <span>Last Update:</span>
-                            <span class="highlight" id="lastUpdate">2 min ago</span>
+                            <span data-es="Última Actualización:" data-en="Last Update:">Última Actualización:</span>
+                            <span class="highlight" id="lastUpdate" data-es="hace 2 min" data-en="2 min ago">hace 2 min</span>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="prediction-preview">
-                <h3>This Weekend's Top Predictions</h3>
+                <h3 data-es="Mejores Predicciones del Fin de Semana" data-en="This Weekend's Top Predictions">Mejores Predicciones del Fin de Semana</h3>
                 <div class="predictions-grid" id="predictionsGrid">
                     <!-- Predictions will be loaded dynamically -->
                 </div>
@@ -155,31 +187,31 @@
     <!-- Daily Picks Section -->
     <section id="daily-picks" class="daily-picks">
         <div class="container">
-            <h2>Today's AI Picks</h2>
-            <p class="section-subtitle">Latest predictions from our automated AI system</p>
+            <h2 data-es="Pronósticos de IA de Hoy" data-en="Today's AI Picks">Pronósticos de IA de Hoy</h2>
+            <p class="section-subtitle" data-es="Últimas predicciones de nuestro sistema automatizado de IA" data-en="Latest predictions from our automated AI system">Últimas predicciones de nuestro sistema automatizado de IA</p>
             
             <div class="picks-header">
                 <div class="picks-info">
-                    <span class="update-time">Last updated: <span id="picksUpdateTime">Loading...</span></span>
-                    <span class="picks-count">Showing <span id="picksCount">0</span> picks</span>
+                    <span class="update-time" data-es="Última actualización:" data-en="Last updated:">Última actualización: <span id="picksUpdateTime" data-es="Cargando..." data-en="Loading...">Cargando...</span></span>
+                    <span class="picks-count" data-es="Mostrando" data-en="Showing">Mostrando <span id="picksCount">0</span> <span data-es="pronósticos" data-en="picks">pronósticos</span></span>
                 </div>
                 <button class="refresh-btn" onclick="loadDailyPicks()">
                     <i class="fas fa-sync-alt"></i>
-                    Refresh
+                    <span data-es="Actualizar" data-en="Refresh">Actualizar</span>
                 </button>
             </div>
             
             <div class="picks-container" id="dailyPicksContainer">
                 <div class="loading-spinner">
                     <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading today's picks...</p>
+                    <p data-es="Cargando pronósticos de hoy..." data-en="Loading today's picks...">Cargando pronósticos de hoy...</p>
                 </div>
             </div>
             
             <div class="picks-footer">
                 <p class="disclaimer">
                     <i class="fas fa-info-circle"></i>
-                    Predictions are generated automatically by our AI system. Past performance does not guarantee future results.
+                    <span data-es="Las predicciones son generadas automáticamente por nuestro sistema de IA. El rendimiento pasado no garantiza resultados futuros." data-en="Predictions are generated automatically by our AI system. Past performance does not guarantee future results.">Las predicciones son generadas automáticamente por nuestro sistema de IA. El rendimiento pasado no garantiza resultados futuros.</span>
                 </p>
             </div>
         </div>
@@ -188,20 +220,20 @@
     <!-- Tipsters Section -->
     <section id="tipsters" class="tipsters">
         <div class="container">
-            <h2>Our AI-Powered Tipsters</h2>
-            <p class="section-subtitle">Meet the artificial intelligence experts behind our predictions</p>
+            <h2 data-es="Nuestros Tipsters con IA" data-en="Our AI-Powered Tipsters">Nuestros Tipsters con IA</h2>
+            <p class="section-subtitle" data-es="Conoce a los expertos en inteligencia artificial detrás de nuestras predicciones" data-en="Meet the artificial intelligence experts behind our predictions">Conoce a los expertos en inteligencia artificial detrás de nuestras predicciones</p>
             
             <div class="tipsters-grid">
                 <div class="tipster-card">
                     <div class="tipster-avatar">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3>La Liga Master AI</h3>
-                    <p class="tipster-specialty">Specializes in Spanish league patterns and team dynamics</p>
+                    <h3 data-es="Maestro IA de La Liga" data-en="La Liga Master AI">Maestro IA de La Liga</h3>
+                    <p class="tipster-specialty" data-es="Especializado en patrones de la liga española y dinámicas de equipo" data-en="Specializes in Spanish league patterns and team dynamics">Especializado en patrones de la liga española y dinámicas de equipo</p>
                     <div class="tipster-stats">
                         <div class="stat">
                             <span class="stat-value">89.2%</span>
-                            <span class="stat-label">Accuracy</span>
+                            <span class="stat-label" data-es="Precisión" data-en="Accuracy">Precisión</span>
                         </div>
                         <div class="stat">
                             <span class="stat-value">+31.5%</span>
@@ -214,12 +246,12 @@
                     <div class="tipster-avatar">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>Neural Network Pro</h3>
-                    <p class="tipster-specialty">Deep learning specialist for complex betting scenarios</p>
+                    <h3 data-es="Red Neural Pro" data-en="Neural Network Pro">Red Neural Pro</h3>
+                    <p class="tipster-specialty" data-es="Especialista en aprendizaje profundo para escenarios de apuestas complejas" data-en="Deep learning specialist for complex betting scenarios">Especialista en aprendizaje profundo para escenarios de apuestas complejas</p>
                     <div class="tipster-stats">
                         <div class="stat">
                             <span class="stat-value">85.7%</span>
-                            <span class="stat-label">Accuracy</span>
+                            <span class="stat-label" data-es="Precisión" data-en="Accuracy">Precisión</span>
                         </div>
                         <div class="stat">
                             <span class="stat-value">+28.3%</span>
@@ -232,12 +264,12 @@
                     <div class="tipster-avatar">
                         <i class="fas fa-chart-bar"></i>
                     </div>
-                    <h3>Statistical Genius</h3>
-                    <p class="tipster-specialty">Advanced statistical analysis and probability modeling</p>
+                    <h3 data-es="Genio Estadístico" data-en="Statistical Genius">Genio Estadístico</h3>
+                    <p class="tipster-specialty" data-es="Análisis estadístico avanzado y modelado de probabilidades" data-en="Advanced statistical analysis and probability modeling">Análisis estadístico avanzado y modelado de probabilidades</p>
                     <div class="tipster-stats">
                         <div class="stat">
                             <span class="stat-value">87.1%</span>
-                            <span class="stat-label">Accuracy</span>
+                            <span class="stat-label" data-es="Precisión" data-en="Accuracy">Precisión</span>
                         </div>
                         <div class="stat">
                             <span class="stat-value">+25.9%</span>
@@ -252,37 +284,37 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get in Touch</h2>
-            <p class="section-subtitle">Have questions about our predictions? We're here to help!</p>
+            <h2 data-es="Ponte en Contacto" data-en="Get in Touch">Ponte en Contacto</h2>
+            <p class="section-subtitle" data-es="¿Tienes preguntas sobre nuestras predicciones? ¡Estamos aquí para ayudar!" data-en="Have questions about our predictions? We're here to help!">¿Tienes preguntas sobre nuestras predicciones? ¡Estamos aquí para ayudar!</p>
             
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fab fa-telegram"></i>
                         <div>
-                            <h4>Telegram Bot</h4>
+                            <h4 data-es="Bot de Telegram" data-en="Telegram Bot">Bot de Telegram</h4>
                             <p><a href="https://t.me/Recordbet7bot" target="_blank" style="color: #0088cc; text-decoration: none;">@Recordbet7bot</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
-                            <h4>Email</h4>
+                            <h4 data-es="Email" data-en="Email">Email</h4>
                             <p>support@aipredictionspro.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-clock"></i>
                         <div>
-                            <h4>Support Hours</h4>
-                            <p>24/7 AI-powered assistance</p>
+                            <h4 data-es="Horas de Soporte" data-en="Support Hours">Horas de Soporte</h4>
+                            <p data-es="Asistencia con IA 24/7" data-en="24/7 AI-powered assistance">Asistencia con IA 24/7</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-shield-alt"></i>
                         <div>
-                            <h4>Secure & Reliable</h4>
-                            <p>Bank-level security for your data</p>
+                            <h4 data-es="Seguro y Confiable" data-en="Secure & Reliable">Seguro y Confiable</h4>
+                            <p data-es="Seguridad de nivel bancario para tus datos" data-en="Bank-level security for your data">Seguridad de nivel bancario para tus datos</p>
                         </div>
                     </div>
                 </div>
@@ -290,15 +322,15 @@
                 <div class="contact-form">
                     <form>
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" placeholder="Tu Nombre" data-es="Tu Nombre" data-en="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="email" placeholder="Tu Email" data-es="Tu Email" data-en="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                            <textarea placeholder="Tu Mensaje" data-es="Tu Mensaje" data-en="Your Message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
+                        <button type="submit" class="submit-btn" data-es="Enviar Mensaje" data-en="Send Message">Enviar Mensaje</button>
                     </form>
                 </div>
             </div>
@@ -311,7 +343,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>AI Predictions 7</h3>
-                    <p>Leading the future of sports betting with artificial intelligence.</p>
+                    <p data-es="Liderando el futuro de las apuestas deportivas con inteligencia artificial." data-en="Leading the future of sports betting with artificial intelligence.">Liderando el futuro de las apuestas deportivas con inteligencia artificial.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-facebook"></i></a>
@@ -319,26 +351,26 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-es="Enlaces Rápidos" data-en="Quick Links">Enlaces Rápidos</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#ai-stats">AI Statistics</a></li>
-                        <li><a href="#daily-picks">Daily Picks</a></li>
-                        <li><a href="#tipsters">Tipsters</a></li>
+                        <li><a href="#home" data-es="Inicio" data-en="Home">Inicio</a></li>
+                        <li><a href="#ai-stats" data-es="Estadísticas IA" data-en="AI Statistics">Estadísticas IA</a></li>
+                        <li><a href="#daily-picks" data-es="Pronósticos Diarios" data-en="Daily Picks">Pronósticos Diarios</a></li>
+                        <li><a href="#tipsters" data-es="Tipsters" data-en="Tipsters">Tipsters</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Legal</h4>
+                    <h4 data-es="Legal" data-en="Legal">Legal</h4>
                     <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Responsible Gambling</a></li>
-                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#" data-es="Términos de Servicio" data-en="Terms of Service">Términos de Servicio</a></li>
+                        <li><a href="#" data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</a></li>
+                        <li><a href="#" data-es="Juego Responsable" data-en="Responsible Gambling">Juego Responsable</a></li>
+                        <li><a href="#" data-es="Descargo de Responsabilidad" data-en="Disclaimer">Descargo de Responsabilidad</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 AI Predictions 7. All rights reserved.</p>
+                <p>&copy; 2025 AI Predictions 7. <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span></p>
             </div>
         </div>
     </footer>
@@ -347,33 +379,75 @@
     <div id="subscriptionModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeSubscriptionModal()">&times;</span>
-            <h2>Subscribe to AI Predictions 7</h2>
-            <p>Get access to our premium predictions and start winning today!</p>
+            <h2 data-es="Suscríbete a AI Predictions 7" data-en="Subscribe to AI Predictions 7">Suscríbete a AI Predictions 7</h2>
+            <p data-es="¡Obtén acceso a nuestras predicciones premium y empieza a ganar hoy!" data-en="Get access to our premium predictions and start winning today!">¡Obtén acceso a nuestras predicciones premium y empieza a ganar hoy!</p>
             <div class="pricing">
                 <div class="price-card">
-                    <h3>Monthly Plan</h3>
-                    <div class="price">€15<span>/month</span></div>
+                    <h3 data-es="Plan Mensual" data-en="Monthly Plan">Plan Mensual</h3>
+                    <div class="price">€15<span data-es="/mes" data-en="/month">/mes</span></div>
                     <ul>
-                        <li>Daily AI predictions</li>
-                        <li>Real-time updates</li>
-                        <li>Performance tracking</li>
-                        <li>24/7 support</li>
+                        <li data-es="Predicciones diarias de IA" data-en="Daily AI predictions">Predicciones diarias de IA</li>
+                        <li data-es="Actualizaciones en tiempo real" data-en="Real-time updates">Actualizaciones en tiempo real</li>
+                        <li data-es="Seguimiento de rendimiento" data-en="Performance tracking">Seguimiento de rendimiento</li>
+                        <li data-es="Soporte 24/7" data-en="24/7 support">Soporte 24/7</li>
                     </ul>
-                    <button class="subscribe-btn">Subscribe Now</button>
+                    <button class="subscribe-btn" data-es="Suscribirse Ahora" data-en="Subscribe Now">Suscribirse Ahora</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="public/js/main.js"></script>
+    <script src="public/js/main.js?v=2"></script>
     <script>
+        // Language management
+        let currentLanguage = 'es';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            console.log('Changing language to:', lang);
+            
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Find the clicked button and make it active
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                if (btn.textContent === (lang === 'es' ? 'ES' : 'EN')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-es][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('input[data-es], textarea[data-es]').forEach(element => {
+                element.placeholder = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update title
+            if (lang === 'es') {
+                document.title = 'AI Predictions 7 - Predicciones Profesionales de Fútbol';
+            } else {
+                document.title = 'AI Predictions 7 - Professional Football Predictions';
+            }
+            
+            console.log('Language changed successfully to:', lang);
+        }
+
         // Load daily picks from your real API
         function loadDailyPicks() {
             const container = document.getElementById('dailyPicksContainer');
             const updateTime = document.getElementById('picksUpdateTime');
             const picksCount = document.getElementById('picksCount');
             
-            container.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Loading today\'s picks...</p></div>';
+            const loadingText = currentLanguage === 'es' ? 'Cargando pronósticos de hoy...' : 'Loading today\'s picks...';
+            container.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>${loadingText}</p></div>`;
             
             fetch('https://myfootballpredictions.onrender.com/api/daily-picks')
                 .then(response => response.json())
@@ -382,36 +456,44 @@
                     picksCount.textContent = data.length;
                     
                     if (!data || data.length === 0) {
-                        container.innerHTML = '<div class="no-picks"><p>No predictions available at the moment.</p></div>';
+                        const noPicksText = currentLanguage === 'es' ? 'No hay predicciones disponibles en este momento.' : 'No predictions available at the moment.';
+                        container.innerHTML = `<div class="no-picks"><p>${noPicksText}</p></div>`;
                         return;
                     }
                     
                     let html = '<div class="picks-grid">';
                     data.forEach(pick => {
                         const confidence = pick.confidence ? (pick.confidence * 100).toFixed(1) : 'N/A';
+                        const predictionLabel = currentLanguage === 'es' ? 'Predicción:' : 'Prediction:';
+                        const confidenceLabel = currentLanguage === 'es' ? 'Confianza:' : 'Confidence:';
+                        const reasoningLabel = currentLanguage === 'es' ? 'Razonamiento:' : 'Reasoning:';
+                        const unknownText = currentLanguage === 'es' ? 'Desconocida' : 'Unknown';
+                        const aiAnalysisText = currentLanguage === 'es' ? 'Análisis de IA' : 'AI analysis';
+                        const tbdText = currentLanguage === 'es' ? 'Por determinar' : 'TBD';
+                        
                         html += `
                             <div class="pick-card">
                                 <div class="pick-header">
                                     <div class="teams">${pick.home_team} vs ${pick.away_team}</div>
-                                    <div class="competition">${pick.competition || 'Unknown'}</div>
+                                    <div class="competition">${pick.competition || unknownText}</div>
                                 </div>
                                 <div class="pick-details">
                                     <div class="prediction">
-                                        <span class="label">Prediction:</span>
+                                        <span class="label">${predictionLabel}</span>
                                         <span class="value">${pick.prediction}</span>
                                     </div>
                                     <div class="confidence">
-                                        <span class="label">Confidence:</span>
+                                        <span class="label">${confidenceLabel}</span>
                                         <span class="value">${confidence}%</span>
                                     </div>
                                     <div class="reasoning">
-                                        <span class="label">Reasoning:</span>
-                                        <span class="value">${pick.reasoning || 'AI analysis'}</span>
+                                        <span class="label">${reasoningLabel}</span>
+                                        <span class="value">${pick.reasoning || aiAnalysisText}</span>
                                     </div>
                                 </div>
                                 <div class="pick-time">
                                     <i class="fas fa-clock"></i>
-                                    ${pick.match_time ? new Date(pick.match_time).toLocaleString() : 'TBD'}
+                                    ${pick.match_time ? new Date(pick.match_time).toLocaleString() : tbdText}
                                 </div>
                             </div>
                         `;
@@ -420,13 +502,20 @@
                     container.innerHTML = html;
                 })
                 .catch(err => {
-                    container.innerHTML = '<div class="error"><p>Error loading predictions. Please try again.</p></div>';
+                    const errorText = currentLanguage === 'es' ? 'Error al cargar predicciones. Por favor, inténtalo de nuevo.' : 'Error loading predictions. Please try again.';
+                    container.innerHTML = `<div class="error"><p>${errorText}</p></div>`;
                     console.error('Error loading picks:', err);
                 });
         }
 
         // Load predictions on page load
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 SPANISH VERSION LOADED - AI Predictions 7');
+            console.log('Page loaded, initializing with Spanish language');
+            
+            // Ensure Spanish is set as default
+            changeLanguage('es');
+            
             loadDailyPicks();
             
             // Update last update time
@@ -435,7 +524,8 @@
                 if (lastUpdate) {
                     const now = new Date();
                     const minutes = Math.floor((now.getTime() - (now.getTime() - 120000)) / 60000);
-                    lastUpdate.textContent = `${minutes} min ago`;
+                    const timeText = currentLanguage === 'es' ? `hace ${minutes} min` : `${minutes} min ago`;
+                    lastUpdate.textContent = timeText;
                 }
             }, 60000);
         });

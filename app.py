@@ -48,11 +48,15 @@ def get_db_connection():
 @app.route('/')
 def index():
     """Serve the main predictions page"""
-    return send_from_directory('public', 'predictions.html')
+    return send_from_directory('.', 'index.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
     """Serve static files from the public directory"""
+    # Serve index.html from root directory
+    if filename == 'index.html':
+        return send_from_directory('.', filename)
+    # Serve other files from public directory
     return send_from_directory('public', filename)
 
 @app.route('/api/daily-picks')

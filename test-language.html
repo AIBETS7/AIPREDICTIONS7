@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Test - AI Predictions 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .language-btn {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+        .language-btn.active {
+            background: #1a237e;
+            color: white;
+        }
+        .test-content {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Language Switching Test</h1>
+    
+    <div class="language-switcher">
+        <button class="language-btn active" onclick="changeLanguage('es')">Español</button>
+        <button class="language-btn" onclick="changeLanguage('en')">English</button>
+    </div>
+    
+    <div class="test-content">
+        <h2 data-es="Título de Prueba" data-en="Test Title">Título de Prueba</h2>
+        <p data-es="Este es un párrafo de prueba para verificar que el cambio de idioma funciona correctamente." data-en="This is a test paragraph to verify that language switching works correctly.">Este es un párrafo de prueba para verificar que el cambio de idioma funciona correctamente.</p>
+        <ul>
+            <li data-es="Elemento 1" data-en="Item 1">Elemento 1</li>
+            <li data-es="Elemento 2" data-en="Item 2">Elemento 2</li>
+            <li data-es="Elemento 3" data-en="Item 3">Elemento 3</li>
+        </ul>
+    </div>
+    
+    <div class="test-content">
+        <h3 data-es="Información del Idioma" data-en="Language Information">Información del Idioma</h3>
+        <p data-es="Idioma actual:" data-en="Current language:">Idioma actual: <span id="currentLang">Español</span></p>
+        <p data-es="Atributo HTML lang:" data-en="HTML lang attribute:">Atributo HTML lang: <span id="htmlLang">es</span></p>
+    </div>
+
+    <script>
+        let currentLanguage = 'es';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            console.log('Changing language to:', lang);
+            
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-es][data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update display info
+            document.getElementById('currentLang').textContent = lang === 'es' ? 'Español' : 'English';
+            document.getElementById('htmlLang').textContent = lang;
+            
+            // Update title
+            document.title = lang === 'es' ? 'Prueba de Idioma - AI Predictions 7' : 'Language Test - AI Predictions 7';
+            
+            console.log('Language changed successfully to:', lang);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, current language:', currentLanguage);
+            changeLanguage('es'); // Ensure Spanish is set as default
+        });
+    </script>
+</body>
+</html> 
