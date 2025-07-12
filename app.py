@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import json
 import stripe
 from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
 
 # Load environment variables
 load_dotenv()
@@ -74,60 +75,47 @@ def serve_static(filename):
     # Serve other files from public directory
     return send_from_directory('public', filename)
 
-@app.route('/api/daily-picks')
-def get_daily_picks():
-    """API endpoint to get today's picks"""
-    try:
-        conn = get_db_connection()
-        if not conn:
-            return jsonify([])
-        
-        cursor = conn.cursor()
-        
-        # Get picks for the last 7 days instead of just today
-        today = datetime.now().date()
-        week_ago = today - timedelta(days=7)
-        query = """
-        SELECT id, home_team, away_team, prediction, confidence, odds, stake, 
-               reasoning, match_time, competition, created_at
-        FROM daily_picks 
-        WHERE match_time::timestamp::date >= %s
-        ORDER BY match_time DESC
-        LIMIT 20
-        """
-        cursor.execute(query, (week_ago,))
-        picks = cursor.fetchall()
-        
-        # Convert to list of dictionaries
-        picks_list = []
-        for pick in picks:
-            picks_list.append({
-                'id': pick[0],
-                'home_team': pick[1],
-                'away_team': pick[2],
-                'prediction': pick[3],
-                'confidence': pick[4],
-                'odds': pick[5],
-                'stake': pick[6],
-                'reasoning': pick[7],
-                'match_time': pick[8],
-                'competition': pick[9],
-                'created_at': pick[10]
-            })
-        
-        cursor.close()
-        conn.close()
-        
-        return jsonify(picks_list)
-        
-    except Exception as e:
-        print(f"Error fetching daily picks: {e}")
-        return jsonify([])
-
 @app.route('/api/health')
 def health_check():
     """Health check endpoint"""
     return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
+
+@app.route('/api/daily-picks')
+def get_daily_picks():
+    """Get today's picks from database"""
+    try:
+        # Connect to database
+        engine = create_engine('sqlite:///football_predictions.db')
+        
+        # Query today's picks
+        with engine.connect() as conn:
+            result = conn.execute(text("""
+                SELECT * FROM daily_picks 
+                WHERE date(created_at) = date('now') 
+                ORDER BY created_at DESC
+            """))
+            picks = []
+            for row in result:
+                pick = {
+                    'id': row.id,
+                    'match_id': row.match_id,
+                    'home_team': row.home_team,
+                    'away_team': row.away_team,
+                    'match_time': row.match_time,
+                    'prediction_type': row.prediction_type,
+                    'prediction': row.prediction,
+                    'confidence': row.confidence,
+                    'odds': row.odds,
+                    'reasoning': row.reasoning,
+                    'tipster': row.tipster,
+                    'created_at': row.created_at,
+                    'expires_at': row.expires_at
+                }
+                picks.append(pick)
+        
+        return jsonify(picks)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/create-payment-intent', methods=['POST'])
 def create_payment_intent():
@@ -146,8 +134,8 @@ def create_payment_intent():
                 'enabled': True,
             },
             metadata={
-                'subscription_type': 'monthly',
-                'user_email': email
+                'email': email,
+                'subscription_type': 'monthly'
             }
         )
         
@@ -163,9 +151,7 @@ def create_payment_intent():
             'client_secret': intent.client_secret,
             'publishable_key': publishable_key
         })
-    
     except Exception as e:
-        print(f"Error creating payment intent: {e}")
         return jsonify({
             'success': False,
             'error': str(e)
