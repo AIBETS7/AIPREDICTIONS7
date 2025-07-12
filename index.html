@@ -7,62 +7,10 @@
     <link rel="stylesheet" href="public/css/styles.css?v=2">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-            gap: 5px;
-        }
-        .language-btn {
-            background: #f5f5f5;
-            border: 2px solid #1a237e;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            color: #1a237e;
-        }
-        .language-btn.active {
-            background: #1a237e;
-            color: white;
-            border-color: #1a237e;
-            box-shadow: 0 2px 4px rgba(26, 35, 126, 0.3);
-        }
-        .language-btn:hover {
-            background: #e3eafc;
-            transform: translateY(-1px);
-        }
-        .language-btn.active:hover {
-            background: #1a237e;
-            transform: translateY(-1px);
-        }
-        .language-change-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.3s ease;
-        }
-        .language-change-indicator.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+
 </head>
 <body>
-    <!-- Simple Test Button -->
-    <div style="position: fixed; top: 10px; left: 10px; z-index: 10000; background: red; color: white; padding: 10px; border-radius: 5px;">
-        <button type="button" onclick="alert('JavaScript is working!');" style="background: white; color: black; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">TEST JS</button>
-    </div>
+
     
     <!-- Navigation -->
     <nav class="navbar">
@@ -90,12 +38,7 @@
                 <li class="nav-item">
                     <button class="subscribe-btn" onclick="openSubscriptionModal()" data-es="Suscribirse €15/mes" data-en="Subscribe €15/month">Suscribirse €15/mes</button>
                 </li>
-                <li class="nav-item">
-                    <div class="language-switcher">
-                        <button type="button" onclick="switchToSpanish()" style="cursor: pointer; z-index: 1000; background: #1a237e; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">ES</button>
-                        <button type="button" onclick="switchToEnglish()" style="cursor: pointer; z-index: 1000; background: #f5f5f5; color: #1a237e; border: 2px solid #1a237e; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">EN</button>
-                    </div>
-                </li>
+
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -403,17 +346,9 @@
         </div>
     </footer>
 
-    <!-- Language Change Indicator -->
-    <div id="languageIndicator" class="language-change-indicator">
-        <span id="languageMessage">Idioma cambiado</span>
-    </div>
+
     
-    <!-- Test Language Buttons (for debugging) -->
-    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: white; padding: 10px; border: 2px solid #1a237e; border-radius: 8px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold;">Test Language:</p>
-        <button type="button" onclick="switchToSpanish()" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">ES</button>
-        <button type="button" onclick="switchToEnglish()" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">EN</button>
-    </div>
+
 
     <!-- Subscription Modal -->
     <div id="subscriptionModal" class="modal">
@@ -441,71 +376,6 @@
     <script>
         // Language management
         let currentLanguage = 'es';
-        
-        // Simple Spanish switch function
-        function switchToSpanish() {
-            console.log('🔄 Switching to Spanish');
-            alert('Switching to Spanish...');
-            
-            currentLanguage = 'es';
-            
-            // Update all translatable elements
-            let updatedCount = 0;
-            document.querySelectorAll('[data-es][data-en]').forEach(element => {
-                const spanishText = element.getAttribute('data-es');
-                if (spanishText) {
-                    element.textContent = spanishText;
-                    updatedCount++;
-                }
-            });
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = 'es';
-            
-            // Update title
-            document.title = 'AI Predictions 7 - Predicciones Profesionales de Fútbol';
-            
-            // Show success message
-            alert(`✅ Changed to Spanish (${updatedCount} elements updated)`);
-            
-            console.log('✅ Language changed to Spanish:', updatedCount, 'elements updated');
-        }
-        
-        // Simple English switch function
-        function switchToEnglish() {
-            console.log('🔄 Switching to English');
-            alert('Switching to English...');
-            
-            currentLanguage = 'en';
-            
-            // Update all translatable elements
-            let updatedCount = 0;
-            document.querySelectorAll('[data-es][data-en]').forEach(element => {
-                const englishText = element.getAttribute('data-en');
-                if (englishText) {
-                    element.textContent = englishText;
-                    updatedCount++;
-                }
-            });
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = 'en';
-            
-            // Update title
-            document.title = 'AI Predictions 7 - Professional Football Predictions';
-            
-            // Show success message
-            alert(`✅ Changed to English (${updatedCount} elements updated)`);
-            
-            console.log('✅ Language changed to English:', updatedCount, 'elements updated');
-        }
-        
-        // Test function to verify language switching
-        function testLanguageSwitch() {
-            console.log('Testing language switch...');
-            console.log('Current language:', currentLanguage);
-            console.log('Number of translatable elements:', document.querySelectorAll('[data-es][data-en]').length);
-        }
 
         // Load daily picks from your real API
         function loadDailyPicks() {
@@ -513,8 +383,7 @@
             const updateTime = document.getElementById('picksUpdateTime');
             const picksCount = document.getElementById('picksCount');
             
-            const loadingText = currentLanguage === 'es' ? 'Cargando pronósticos de hoy...' : 'Loading today\'s picks...';
-            container.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>${loadingText}</p></div>`;
+            container.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Cargando pronósticos de hoy...</p></div>`;
             
             fetch('https://myfootballpredictions.onrender.com/api/daily-picks')
                 .then(response => response.json())
@@ -523,44 +392,37 @@
                     picksCount.textContent = data.length;
                     
                     if (!data || data.length === 0) {
-                        const noPicksText = currentLanguage === 'es' ? 'No hay predicciones disponibles en este momento.' : 'No predictions available at the moment.';
-                        container.innerHTML = `<div class="no-picks"><p>${noPicksText}</p></div>`;
+                        container.innerHTML = `<div class="no-picks"><p>No hay predicciones disponibles en este momento.</p></div>`;
                         return;
                     }
                     
                     let html = '<div class="picks-grid">';
                     data.forEach(pick => {
                         const confidence = pick.confidence ? (pick.confidence * 100).toFixed(1) : 'N/A';
-                        const predictionLabel = currentLanguage === 'es' ? 'Predicción:' : 'Prediction:';
-                        const confidenceLabel = currentLanguage === 'es' ? 'Confianza:' : 'Confidence:';
-                        const reasoningLabel = currentLanguage === 'es' ? 'Razonamiento:' : 'Reasoning:';
-                        const unknownText = currentLanguage === 'es' ? 'Desconocida' : 'Unknown';
-                        const aiAnalysisText = currentLanguage === 'es' ? 'Análisis de IA' : 'AI analysis';
-                        const tbdText = currentLanguage === 'es' ? 'Por determinar' : 'TBD';
                         
                         html += `
                             <div class="pick-card">
                                 <div class="pick-header">
                                     <div class="teams">${pick.home_team} vs ${pick.away_team}</div>
-                                    <div class="competition">${pick.competition || unknownText}</div>
+                                    <div class="competition">${pick.competition || 'Desconocida'}</div>
                                 </div>
                                 <div class="pick-details">
                                     <div class="prediction">
-                                        <span class="label">${predictionLabel}</span>
+                                        <span class="label">Predicción:</span>
                                         <span class="value">${pick.prediction}</span>
                                     </div>
                                     <div class="confidence">
-                                        <span class="label">${confidenceLabel}</span>
+                                        <span class="label">Confianza:</span>
                                         <span class="value">${confidence}%</span>
                                     </div>
                                     <div class="reasoning">
-                                        <span class="label">${reasoningLabel}</span>
-                                        <span class="value">${pick.reasoning || aiAnalysisText}</span>
+                                        <span class="label">Razonamiento:</span>
+                                        <span class="value">${pick.reasoning || 'Análisis de IA'}</span>
                                     </div>
                                 </div>
                                 <div class="pick-time">
                                     <i class="fas fa-clock"></i>
-                                    ${pick.match_time ? new Date(pick.match_time).toLocaleString() : tbdText}
+                                    ${pick.match_time ? new Date(pick.match_time).toLocaleString() : 'Por determinar'}
                                 </div>
                             </div>
                         `;
@@ -569,40 +431,17 @@
                     container.innerHTML = html;
                 })
                 .catch(err => {
-                    const errorText = currentLanguage === 'es' ? 'Error al cargar predicciones. Por favor, inténtalo de nuevo.' : 'Error loading predictions. Please try again.';
-                    container.innerHTML = `<div class="error"><p>${errorText}</p></div>`;
+                    container.innerHTML = `<div class="error"><p>Error al cargar predicciones. Por favor, inténtalo de nuevo.</p></div>`;
                     console.error('Error loading picks:', err);
                 });
         }
 
         // Load predictions on page load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 SPANISH VERSION LOADED - AI Predictions 7');
-            console.log('Page loaded, initializing with Spanish language');
-            
-            // Test language switching setup
-            testLanguageSwitch();
-            
-            // Test language switching setup
-            testLanguageSwitch();
-            
-            // Ensure Spanish is set as default
-            changeLanguage('es');
+            console.log('🎯 AI Predictions 7 - Spanish Version Loaded');
+            console.log('Page loaded, initializing...');
             
             loadDailyPicks();
-            
-            // Add keyboard shortcuts for testing
-            document.addEventListener('keydown', function(event) {
-                if (event.key === '1') {
-                    console.log('Keyboard shortcut: Switching to Spanish');
-                    switchToSpanish();
-                } else if (event.key === '2') {
-                    console.log('Keyboard shortcut: Switching to English');
-                    switchToEnglish();
-                }
-            });
-            
-            console.log('🔧 Keyboard shortcuts: Press 1 for Spanish, 2 for English');
             
             // Update last update time
             setInterval(() => {
@@ -610,8 +449,7 @@
                 if (lastUpdate) {
                     const now = new Date();
                     const minutes = Math.floor((now.getTime() - (now.getTime() - 120000)) / 60000);
-                    const timeText = currentLanguage === 'es' ? `hace ${minutes} min` : `${minutes} min ago`;
-                    lastUpdate.textContent = timeText;
+                    lastUpdate.textContent = `hace ${minutes} min`;
                 }
             }, 60000);
         });
