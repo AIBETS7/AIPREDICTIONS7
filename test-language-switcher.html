@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher Test - AI Predictions 7</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: #1a237e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .language-btn {
+            padding: 12px 24px;
+            border: 2px solid #1a237e;
+            background: white;
+            color: #1a237e;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .language-btn.active {
+            background: #1a237e;
+            color: white;
+        }
+        .language-btn:hover {
+            background: #e3eafc;
+        }
+        .language-btn.active:hover {
+            background: #1a237e;
+        }
+        .test-section {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            color: #c62828;
+        }
+        .success {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+        }
+        .debug-info {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .test-button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 Language Switcher Test - AI Predictions 7</h1>
+        <p data-es="Prueba completa del sistema de cambio de idioma" data-en="Complete language switching system test">Prueba completa del sistema de cambio de idioma</p>
+    </div>
+    
+    <div class="language-switcher">
+        <button class="language-btn active" onclick="changeLanguage('es')" data-lang="es">🇪🇸 Español</button>
+        <button class="language-btn" onclick="changeLanguage('en')" data-lang="en">🇬🇧 English</button>
+    </div>
+    
+    <div class="test-section">
+        <h2 data-es="Estado del Sistema" data-en="System Status">Estado del Sistema</h2>
+        <div id="status" class="status">
+            <strong data-es="Estado:" data-en="Status:">Estado:</strong> <span data-es="Inicializando..." data-en="Initializing...">Inicializando...</span>
+        </div>
+        <div id="debug" class="debug-info">
+            <strong>Debug Info:</strong><br>
+            <span id="debugContent">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2 data-es="Pruebas de Contenido" data-en="Content Tests">Pruebas de Contenido</h2>
+        
+        <h3 data-es="Navegación" data-en="Navigation">Navegación</h3>
+        <ul>
+            <li><a href="#" data-es="Inicio" data-en="Home">Inicio</a></li>
+            <li><a href="#" data-es="Estadísticas IA" data-en="AI Statistics">Estadísticas IA</a></li>
+            <li><a href="#" data-es="Pronósticos Diarios" data-en="Daily Picks">Pronósticos Diarios</a></li>
+            <li><a href="#" data-es="Contacto" data-en="Contact">Contacto</a></li>
+        </ul>
+        
+        <h3 data-es="Contenido Principal" data-en="Main Content">Contenido Principal</h3>
+        <p data-es="Este es un párrafo de prueba para verificar que el cambio de idioma funciona correctamente en todos los elementos de la página." data-en="This is a test paragraph to verify that language switching works correctly on all page elements.">Este es un párrafo de prueba para verificar que el cambio de idioma funciona correctamente en todos los elementos de la página.</p>
+        
+        <h3 data-es="Formulario de Prueba" data-en="Test Form">Formulario de Prueba</h3>
+        <form>
+            <div>
+                <label data-es="Nombre:" data-en="Name:">Nombre:</label>
+                <input type="text" placeholder="Tu Nombre" data-es="Tu Nombre" data-en="Your Name">
+            </div>
+            <div style="margin-top: 10px;">
+                <label data-es="Mensaje:" data-en="Message:">Mensaje:</label>
+                <textarea placeholder="Tu Mensaje" data-es="Tu Mensaje" data-en="Your Message" rows="3"></textarea>
+            </div>
+            <button type="button" class="test-button" data-es="Enviar Prueba" data-en="Send Test">Enviar Prueba</button>
+        </form>
+    </div>
+    
+    <div class="test-section">
+        <h2 data-es="Pruebas Automáticas" data-en="Automatic Tests">Pruebas Automáticas</h2>
+        <button class="test-button" onclick="runTests()" data-es="Ejecutar Pruebas" data-en="Run Tests">Ejecutar Pruebas</button>
+        <button class="test-button" onclick="testLanguageSwitch()" data-es="Probar Cambio de Idioma" data-en="Test Language Switch">Probar Cambio de Idioma</button>
+        <div id="testResults"></div>
+    </div>
+
+    <script>
+        let currentLanguage = 'es';
+        let testResults = [];
+        
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            const statusSpan = statusDiv.querySelector('span');
+            statusSpan.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+        
+        function updateDebug() {
+            const debugDiv = document.getElementById('debugContent');
+            const translatableElements = document.querySelectorAll('[data-es][data-en]').length;
+            const languageButtons = document.querySelectorAll('.language-btn').length;
+            
+            debugDiv.innerHTML = `
+                Current Language: ${currentLanguage}<br>
+                Translatable Elements: ${translatableElements}<br>
+                Language Buttons: ${languageButtons}<br>
+                HTML Lang Attribute: ${document.documentElement.lang}<br>
+                Page Title: ${document.title}<br>
+                Test Results: ${testResults.length}
+            `;
+        }
+        
+        function changeLanguage(lang) {
+            console.log('🌍 Changing language to:', lang);
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const targetButton = document.querySelector(`.language-btn[data-lang="${lang}"]`);
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+            
+            // Update all translatable elements
+            let updatedCount = 0;
+            document.querySelectorAll('[data-es][data-en]').forEach(element => {
+                const newText = element.getAttribute(`data-${lang}`);
+                if (newText) {
+                    element.textContent = newText;
+                    updatedCount++;
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('input[data-es], textarea[data-es]').forEach(element => {
+                const newPlaceholder = element.getAttribute(`data-${lang}`);
+                if (newPlaceholder) {
+                    element.placeholder = newPlaceholder;
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update title
+            if (lang === 'es') {
+                document.title = 'Prueba de Idioma - AI Predictions 7';
+            } else {
+                document.title = 'Language Test - AI Predictions 7';
+            }
+            
+            updateStatus(`Idioma cambiado a: ${lang === 'es' ? 'Español' : 'English'} (${updatedCount} elementos actualizados)`, 'success');
+            updateDebug();
+            
+            console.log('✅ Language changed successfully to:', lang);
+            testResults.push(`Language changed to ${lang} at ${new Date().toLocaleTimeString()}`);
+        }
+        
+        function testLanguageSwitch() {
+            console.log('🧪 Testing language switch...');
+            const initialLang = currentLanguage;
+            
+            // Test switching to English
+            changeLanguage('en');
+            setTimeout(() => {
+                // Test switching back to Spanish
+                changeLanguage('es');
+                setTimeout(() => {
+                    updateStatus('Prueba de cambio de idioma completada', 'success');
+                }, 1000);
+            }, 1000);
+        }
+        
+        function runTests() {
+            console.log('🧪 Running comprehensive tests...');
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<h3>Test Results:</h3>';
+            
+            const tests = [
+                {
+                    name: 'Translatable Elements Count',
+                    test: () => document.querySelectorAll('[data-es][data-en]').length > 0,
+                    expected: 'More than 0 translatable elements'
+                },
+                {
+                    name: 'Language Buttons Present',
+                    test: () => document.querySelectorAll('.language-btn').length === 2,
+                    expected: 'Exactly 2 language buttons'
+                },
+                {
+                    name: 'Current Language Set',
+                    test: () => currentLanguage === 'es' || currentLanguage === 'en',
+                    expected: 'Language is either es or en'
+                },
+                {
+                    name: 'HTML Lang Attribute',
+                    test: () => document.documentElement.lang === currentLanguage,
+                    expected: 'HTML lang matches current language'
+                }
+            ];
+            
+            tests.forEach(test => {
+                const passed = test.test();
+                const resultClass = passed ? 'success' : 'error';
+                const resultText = passed ? '✅ PASS' : '❌ FAIL';
+                
+                resultsDiv.innerHTML += `
+                    <div class="${resultClass}">
+                        <strong>${test.name}:</strong> ${resultText}<br>
+                        Expected: ${test.expected}
+                    </div>
+                `;
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Language Switcher Test Page Loaded');
+            updateStatus('Página cargada, inicializando en Español', 'success');
+            updateDebug();
+            
+            // Ensure Spanish is set as default
+            changeLanguage('es');
+            
+            // Auto-run tests after 2 seconds
+            setTimeout(() => {
+                runTests();
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 
