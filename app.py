@@ -84,8 +84,13 @@ def health_check():
 def get_daily_picks():
     """Get today's picks from database"""
     try:
-        # Connect to database
-        engine = create_engine('sqlite:///football_predictions.db')
+        # Get DATABASE_URL from environment variable
+        DATABASE_URL = os.getenv('DATABASE_URL')
+        if not DATABASE_URL:
+            return jsonify({'error': 'DATABASE_URL not configured'}), 500
+            
+        # Use the PostgreSQL database from DATABASE_URL
+        engine = create_engine(DATABASE_URL)
         
         # Query today's picks
         with engine.connect() as conn:
