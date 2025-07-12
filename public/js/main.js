@@ -134,7 +134,7 @@ async function loadDailyPicks() {
         // Use production API URL or fallback to localhost for development
         const apiUrl = window.location.hostname === 'localhost' 
             ? 'http://localhost:8000/api/daily-picks'
-            : 'https://football-predictions-api.onrender.com/api/daily-picks';
+            : 'https://myfootballpredictions.onrender.com/api/daily-picks';
         
         const response = await fetch(apiUrl);
         
