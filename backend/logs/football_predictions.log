@@ -1,118 +1,22 @@
-2025-07-10 22:37:22 | INFO | __main__:<module>:299 - Starting AI Football Predictions Backend
-2025-07-10 22:37:22 | INFO | __main__:<module>:303 - Initializing data collection...
-2025-07-10 22:37:22 | INFO | data_collector:collect_all_data:33 - Starting data collection from all sources
-2025-07-10 22:37:22 | INFO | data_collector:collect_all_data:44 - Collecting data from flashscore
-2025-07-10 22:37:23 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:37:29 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:37:34 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:37:34 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x128db9f70 state=finished raised HTTPError>]
-2025-07-10 22:37:34 | INFO | data_collector:collect_all_data:44 - Collecting data from sofascore
-2025-07-10 22:37:36 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:37:42 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:37:48 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:37:48 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x128de8850 state=finished raised HTTPError>]
-2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from betsapi
-2025-07-10 22:37:48 | ERROR | scrapers.betsapi_scraper:scrape_matches:72 - Error scraping matches from BetsAPI: name 'SCRAPING_CONFIG' is not defined
-2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from whoscored
-2025-07-10 22:37:48 | ERROR | data_collector:_collect_from_source:65 - No scraper found for whoscored
-2025-07-10 22:37:48 | INFO | data_collector:collect_all_data:44 - Collecting data from transfermarkt
-2025-07-10 22:37:48 | ERROR | data_collector:_collect_from_source:65 - No scraper found for transfermarkt
-2025-07-10 22:37:48 | ERROR | __main__:<module>:308 - Error in initial data collection: [Errno 2] No such file or directory: 'backend/data/raw/data_20250710_223748.json'
-2025-07-10 22:37:53 | INFO | __main__:<module>:299 - Starting AI Football Predictions Backend
-2025-07-10 22:37:53 | INFO | __main__:<module>:303 - Initializing data collection...
-2025-07-10 22:37:53 | INFO | data_collector:collect_all_data:33 - Starting data collection from all sources
-2025-07-10 22:37:53 | INFO | data_collector:collect_all_data:44 - Collecting data from flashscore
-2025-07-10 22:37:55 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:38:00 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:38:05 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
-2025-07-10 22:38:05 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x11bb2e910 state=finished raised HTTPError>]
-2025-07-10 22:38:05 | INFO | data_collector:collect_all_data:44 - Collecting data from sofascore
-2025-07-10 22:38:06 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:38:11 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:38:17 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
-2025-07-10 22:38:17 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x11bb5d820 state=finished raised HTTPError>]
-2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from betsapi
-2025-07-10 22:38:17 | ERROR | scrapers.betsapi_scraper:scrape_matches:72 - Error scraping matches from BetsAPI: name 'SCRAPING_CONFIG' is not defined
-2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from whoscored
-2025-07-10 22:38:17 | ERROR | data_collector:_collect_from_source:65 - No scraper found for whoscored
-2025-07-10 22:38:17 | INFO | data_collector:collect_all_data:44 - Collecting data from transfermarkt
-2025-07-10 22:38:17 | ERROR | data_collector:_collect_from_source:65 - No scraper found for transfermarkt
-2025-07-10 22:38:17 | ERROR | __main__:<module>:308 - Error in initial data collection: [Errno 2] No such file or directory: 'backend/data/raw/data_20250710_223817.json'
-2025-07-11 17:41:27 | WARNING | data_collector:get_latest_data:169 - No latest data found, collecting new data
-2025-07-11 17:41:27 | INFO | data_collector:collect_all_data:33 - Starting data collection from all sources
-2025-07-11 17:41:27 | INFO | data_collector:collect_all_data:44 - Collecting data from flashscore
-2025-07-11 17:41:29 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/
-2025-07-11 17:41:34 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/
-2025-07-11 17:41:39 | ERROR | scrapers.base_scraper:_make_request:75 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-04/
-2025-07-11 17:41:39 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x11c890bb0 state=finished raised HTTPError>]
-2025-07-11 17:41:39 | INFO | data_collector:collect_all_data:44 - Collecting data from sofascore
-2025-07-11 17:41:41 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04
-2025-07-11 17:41:46 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04
-2025-07-11 17:41:52 | ERROR | scrapers.base_scraper:_make_request:75 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-04
-2025-07-11 17:41:52 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x11c89bcd0 state=finished raised HTTPError>]
-2025-07-11 17:41:52 | INFO | data_collector:collect_all_data:44 - Collecting data from betsapi
-2025-07-11 17:41:52 | ERROR | scrapers.betsapi_scraper:scrape_matches:72 - Error scraping matches from BetsAPI: name 'SCRAPING_CONFIG' is not defined
-2025-07-11 17:41:52 | INFO | data_collector:collect_all_data:44 - Collecting data from whoscored
-2025-07-11 17:41:52 | ERROR | data_collector:_collect_from_source:65 - No scraper found for whoscored
-2025-07-11 17:41:52 | INFO | data_collector:collect_all_data:44 - Collecting data from transfermarkt
-2025-07-11 17:41:52 | ERROR | data_collector:_collect_from_source:65 - No scraper found for transfermarkt
-2025-07-11 17:41:52 | INFO | data_collector:_save_data:161 - Data saved to backend/data/raw/data_20250711_174152.json and backend/data/processed/latest_data.json
-2025-07-11 17:41:52 | INFO | data_collector:collect_all_data:58 - Data collection completed
-2025-07-11 17:41:52 | WARNING | __main__:main:55 - No predictions generated.
-2025-07-11 17:54:40 | INFO | __main__:main:20 - Starting daily pick generation...
-2025-07-11 17:54:40 | INFO | __main__:main:26 - Collected data: 0 matches
-2025-07-11 17:54:40 | WARNING | __main__:main:65 - No predictions generated. Creating mock prediction for testing.
-2025-07-11 17:54:40 | INFO | __main__:main:86 - Best pick: {'id': 'mock_20250711_175440', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:54:40.152666', 'expires_at': '2025-07-12T17:54:40.152674'}
-2025-07-11 17:54:53 | ERROR | __main__:main:118 - Error storing pick in database: (psycopg2.errors.SyntaxError) syntax error at or near "OR"
-LINE 1: INSERT OR REPLACE INTO daily_picks (id, match_id, home_team,...
-               ^
-
-[SQL: INSERT OR REPLACE INTO daily_picks (id, match_id, home_team, away_team, match_time, prediction_type, prediction, confidence, odds, reasoning, tipster, created_at, expires_at) VALUES (%(id)s, %(match_id)s, %(home_team)s, %(away_team)s, %(match_time)s, %(prediction_type)s, %(prediction)s, %(confidence)s, %(odds)s, %(reasoning)s, %(tipster)s, %(created_at)s, %(expires_at)s)]
-[parameters: {'id': 'mock_20250711_175440', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:54:40.152666', 'expires_at': '2025-07-12T17:54:40.152674'}]
-(Background on this error at: https://sqlalche.me/e/14/f405)
-2025-07-11 17:54:53 | INFO | __main__:main:124 - Pick backed up to backend/data/daily_picks_backup_20250711.json
-2025-07-11 17:54:53 | INFO | __main__:main:148 - Best pick sent to Telegram successfully.
-2025-07-11 17:55:09 | INFO | __main__:main:20 - Starting daily pick generation...
-2025-07-11 17:55:09 | INFO | __main__:main:26 - Collected data: 0 matches
-2025-07-11 17:55:09 | WARNING | __main__:main:65 - No predictions generated. Creating mock prediction for testing.
-2025-07-11 17:55:09 | INFO | __main__:main:86 - Best pick: {'id': 'mock_20250711_175509', 'match_id': 'mock_match_001', 'home_team': 'Real Madrid', 'away_team': 'Barcelona', 'match_time': '2025-07-12 20:00', 'prediction_type': 'match_winner', 'prediction': 'Home Win', 'confidence': 0.85, 'odds': 2.1, 'reasoning': 'Real Madrid has been in excellent form at home', 'tipster': 'AI Predictor', 'created_at': '2025-07-11T17:55:09.883927', 'expires_at': '2025-07-12T17:55:09.883935'}
-2025-07-11 17:55:12 | INFO | __main__:main:121 - Best pick stored in the database successfully.
-2025-07-11 17:55:12 | INFO | __main__:main:154 - Best pick sent to Telegram successfully.
-2025-07-11 17:58:51 | INFO | __main__:main:20 - Starting daily pick generation...
-2025-07-11 17:58:51 | INFO | __main__:main:26 - Collected data: 0 matches
-2025-07-11 17:58:51 | INFO | __main__:main:38 - No upcoming matches found. Skipping daily pick generation.
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: Spain Women vs Denmark Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: England Women vs France Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:86 - Added match: Germany Women vs Netherlands Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Spain Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Denmark Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: England Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: France Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Germany Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:150 - Added team data for: Netherlands Women
-2025-07-11 18:01:42 | INFO | __main__:add_womens_euro_matches:159 - Added 3 Women's Euro matches for Saturday
-2025-07-11 18:02:17 | INFO | __main__:main:20 - Starting daily pick generation...
-2025-07-11 18:02:17 | INFO | __main__:main:26 - Collected data: 3 matches
-2025-07-11 18:02:17 | INFO | __main__:main:41 - Found 3 upcoming matches. Generating predictions...
-2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:17 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:17 | INFO | __main__:main:78 - Best pick selected: Spain Women vs Denmark Women (UEFA Women's Euro 2025 Qualifiers)
-2025-07-11 18:02:20 | ERROR | __main__:main:121 - Error storing pick in database: (psycopg2.errors.UndefinedColumn) column "competition" of relation "daily_picks" does not exist
-LINE 1: ... (id, match_id, home_team, away_team, match_time, competitio...
-                                                             ^
-
-[SQL: INSERT INTO daily_picks (id, match_id, home_team, away_team, match_time, competition, prediction_type, prediction, confidence, odds, reasoning, tipster, created_at, expires_at) VALUES (%(id)s, %(match_id)s, %(home_team)s, %(away_team)s, %(match_time)s, %(competition)s, %(prediction_type)s, %(prediction)s, %(confidence)s, %(odds)s, %(reasoning)s, %(tipster)s, %(created_at)s, %(expires_at)s) ON CONFLICT (id) DO UPDATE SET id = %(param_1)s, match_id = %(param_2)s, home_team = %(param_3)s, away_team = %(param_4)s, match_time = %(param_5)s, competition = %(param_6)s, prediction_type = %(param_7)s, prediction = %(param_8)s, confidence = %(param_9)s, odds = %(param_10)s, reasoning = %(param_11)s, tipster = %(param_12)s, created_at = %(param_13)s, expires_at = %(param_14)s]
-[parameters: {'id': 'weuro_001_both_teams_score', 'match_id': 'weuro_001', 'home_team': 'Spain Women', 'away_team': 'Denmark Women', 'match_time': '2025-07-12 15:00', 'competition': "UEFA Women's Euro 2025 Qualifiers", 'prediction_type': 'both_teams_score', 'prediction': 'Both Teams Score', 'confidence': 0.75, 'odds': 1.75, 'reasoning': 'High scoring teams with good form', 'tipster': 'AI Predictions Pro', 'created_at': '2025-07-11T18:02:17.522513', 'expires_at': '2025-07-11T20:02:17.522515', 'param_1': 'weuro_001_both_teams_score', 'param_2': 'weuro_001', 'param_3': 'Spain Women', 'param_4': 'Denmark Women', 'param_5': '2025-07-12 15:00', 'param_6': "UEFA Women's Euro 2025 Qualifiers", 'param_7': 'both_teams_score', 'param_8': 'Both Teams Score', 'param_9': 0.75, 'param_10': 1.75, 'param_11': 'High scoring teams with good form', 'param_12': 'AI Predictions Pro', 'param_13': '2025-07-11T18:02:17.522513', 'param_14': '2025-07-11T20:02:17.522515'}]
-(Background on this error at: https://sqlalche.me/e/14/f405)
-2025-07-11 18:02:20 | INFO | __main__:main:127 - Pick backed up to backend/data/daily_picks_backup_20250711.json
-2025-07-11 18:02:20 | INFO | __main__:main:161 - Best pick sent to Telegram successfully.
-2025-07-11 18:02:47 | INFO | __main__:main:20 - Starting daily pick generation...
-2025-07-11 18:02:47 | INFO | __main__:main:26 - Collected data: 3 matches
-2025-07-11 18:02:47 | INFO | __main__:main:41 - Found 3 upcoming matches. Generating predictions...
-2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:47 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
-2025-07-11 18:02:47 | INFO | __main__:main:78 - Best pick selected: Spain Women vs Denmark Women (UEFA Women's Euro 2025 Qualifiers)
-2025-07-11 18:02:50 | INFO | __main__:main:118 - Best pick stored in the database successfully.
-2025-07-11 18:02:50 | INFO | __main__:main:161 - Best pick sent to Telegram successfully.
+2025-07-12T20:39:33.378393+0200 | INFO | Created test pick: Carlos Alcaraz vs Novak Djokovic
+2025-07-12T20:39:58.472135+0200 | INFO | Created test pick: Carlos Alcaraz vs Novak Djokovic
+2025-07-12T20:39:58.556584+0200 | INFO | Test pick stored in database
+2025-07-12T20:39:58.802283+0200 | INFO | ✅ Test pick sent to Telegram successfully!
+2025-07-12T20:39:58.813981+0200 | INFO | ✅ Test pick saved to website data file
+2025-07-12T20:43:27.098367+0200 | INFO | Test pick created: Real Madrid vs AC Milan
+2025-07-12T20:43:27.313673+0200 | INFO | Pick sent to Telegram successfully
+2025-07-12T20:43:27.324332+0200 | INFO | Test pick saved to website data file
+2025-07-12T20:52:44.431219+0200 | INFO | Test picks created: Germany vs Spain and France vs Netherlands
+2025-07-12T20:52:44.773658+0200 | INFO | PICK 1 sent to Telegram successfully
+2025-07-12T20:52:45.063110+0200 | INFO | PICK 2 sent to Telegram successfully
+2025-07-12T20:52:45.076032+0200 | INFO | Test picks saved to website data file
+2025-07-12T21:00:31.696495+0200 | INFO | Test pick created: Real Madrid vs AC Milan
+2025-07-12T21:00:31.697888+0200 | WARNING | Telegram credentials not found
+2025-07-12T21:04:58.023088+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
+2025-07-12T21:04:58.026101+0200 | WARNING | Telegram credentials not found
+2025-07-12T21:06:21.063127+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
+2025-07-12T21:06:21.068001+0200 | INFO | Pick saved to website JSON file
+2025-07-12T21:06:21.406586+0200 | INFO | Telegram message sent successfully
+2025-07-12T22:10:47.634918+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
+2025-07-12T22:10:47.638633+0200 | INFO | Pick saved to website JSON file
+2025-07-12T22:10:47.841380+0200 | INFO | Telegram message sent successfully

@@ -1,31 +1,41 @@
-name: Real Daily Football Pick (Match Days Only)
+name: Daily Pick Automation
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Every day at 08:00 UTC (morning)
-    - cron: '0 18 * * *' # Every day at 18:00 UTC (evening)
-  workflow_dispatch:
+    # Run every day at 9 PM Spain time (8 PM UTC)
+    - cron: '0 20 * * *'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
-  daily-pick:
+  generate-daily-pick:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
-
-      - name: Run real daily pick script
-        env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          python backend/real_daily_pick.py 
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        
+    - name: Create daily pick
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        cd backend
+        python3 daily_pick_automation.py
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add backend/data/processed/latest_data.json
+        git commit -m "Auto-update daily pick $(date +%Y-%m-%d)" || exit 0
+        git push 
