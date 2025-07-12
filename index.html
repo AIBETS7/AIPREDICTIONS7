@@ -87,8 +87,8 @@
                 </li>
                 <li class="nav-item">
                     <div class="language-switcher">
-                        <button class="language-btn active" onclick="changeLanguage('es')" data-lang="es">ES</button>
-                        <button class="language-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                        <button class="language-btn active" onclick="changeLanguage('es')" data-lang="es" style="cursor: pointer; z-index: 1000;">ES</button>
+                        <button class="language-btn" onclick="changeLanguage('en')" data-lang="en" style="cursor: pointer; z-index: 1000;">EN</button>
                     </div>
                 </li>
             </ul>
@@ -402,6 +402,13 @@
     <div id="languageIndicator" class="language-change-indicator">
         <span id="languageMessage">Idioma cambiado</span>
     </div>
+    
+    <!-- Test Language Buttons (for debugging) -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: white; padding: 10px; border: 2px solid #1a237e; border-radius: 8px;">
+        <p style="margin: 0 0 10px 0; font-weight: bold;">Test Language:</p>
+        <button onclick="changeLanguage('es')" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer;">ES</button>
+        <button onclick="changeLanguage('en')" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer;">EN</button>
+    </div>
 
     <!-- Subscription Modal -->
     <div id="subscriptionModal" class="modal">
@@ -580,6 +587,19 @@
             changeLanguage('es');
             
             loadDailyPicks();
+            
+            // Add keyboard shortcuts for testing
+            document.addEventListener('keydown', function(event) {
+                if (event.key === '1') {
+                    console.log('Keyboard shortcut: Switching to Spanish');
+                    changeLanguage('es');
+                } else if (event.key === '2') {
+                    console.log('Keyboard shortcut: Switching to English');
+                    changeLanguage('en');
+                }
+            });
+            
+                        console.log('🔧 Keyboard shortcuts: Press 1 for Spanish, 2 for English');
             
             // Update last update time
             setInterval(() => {
