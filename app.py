@@ -14,7 +14,6 @@ load_dotenv()
 stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
 if not stripe.api_key:
     print("WARNING: STRIPE_SECRET_KEY not found in environment variables")
-    stripe.api_key = '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'
 
 app = Flask(__name__, static_folder='public')
 CORS(app, origins=[
@@ -154,7 +153,10 @@ def create_payment_intent():
         
         publishable_key = os.getenv('STRIPE_PUBLISHABLE_KEY')
         if not publishable_key:
-            publishable_key = 'pk_live_51Rk2xALgWyziDhelBv3xzSEUN2emqcD5gFS4Oyhxp23EsX9BdzssMxU9qRwsCQ9bDcLBT9aph0CSxcbr7LLdcnOL00IqAHwYhu'
+            return jsonify({
+                'success': False,
+                'error': 'Stripe publishable key not configured'
+            }), 500
             
         return jsonify({
             'success': True,
