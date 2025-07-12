@@ -92,8 +92,8 @@
                 </li>
                 <li class="nav-item">
                     <div class="language-switcher">
-                        <button type="button" onclick="alert('ES clicked'); document.body.style.backgroundColor='red';" style="cursor: pointer; z-index: 1000; background: #1a237e; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">ES</button>
-                        <button type="button" onclick="alert('EN clicked'); document.body.style.backgroundColor='blue';" style="cursor: pointer; z-index: 1000; background: #f5f5f5; color: #1a237e; border: 2px solid #1a237e; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">EN</button>
+                        <button type="button" onclick="switchToSpanish()" style="cursor: pointer; z-index: 1000; background: #1a237e; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">ES</button>
+                        <button type="button" onclick="switchToEnglish()" style="cursor: pointer; z-index: 1000; background: #f5f5f5; color: #1a237e; border: 2px solid #1a237e; padding: 10px 15px; border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 2px; position: relative;">EN</button>
                     </div>
                 </li>
             </ul>
@@ -411,8 +411,8 @@
     <!-- Test Language Buttons (for debugging) -->
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: white; padding: 10px; border: 2px solid #1a237e; border-radius: 8px;">
         <p style="margin: 0 0 10px 0; font-weight: bold;">Test Language:</p>
-        <button type="button" onclick="alert('Test ES clicked'); document.body.style.backgroundColor='green';" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">ES</button>
-        <button type="button" onclick="alert('Test EN clicked'); document.body.style.backgroundColor='yellow';" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">EN</button>
+        <button type="button" onclick="switchToSpanish()" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">ES</button>
+        <button type="button" onclick="switchToEnglish()" style="background: #1a237e; color: white; border: none; padding: 8px 12px; margin: 2px; border-radius: 4px; cursor: pointer; position: relative;">EN</button>
     </div>
 
     <!-- Subscription Modal -->
@@ -442,55 +442,62 @@
         // Language management
         let currentLanguage = 'es';
         
-        // Simple language change function
-        function changeLanguage(lang) {
-            console.log('🔄 Language change requested:', lang);
-            alert(`Language change clicked: ${lang}`); // Debug alert
+        // Simple Spanish switch function
+        function switchToSpanish() {
+            console.log('🔄 Switching to Spanish');
+            alert('Switching to Spanish...');
             
-            currentLanguage = lang;
-            
-            // Update button styles
-            const esBtn = document.getElementById('esBtn');
-            const enBtn = document.getElementById('enBtn');
-            
-            if (lang === 'es') {
-                esBtn.style.background = '#1a237e';
-                esBtn.style.color = 'white';
-                enBtn.style.background = '#f5f5f5';
-                enBtn.style.color = '#1a237e';
-                enBtn.style.border = '2px solid #1a237e';
-            } else {
-                enBtn.style.background = '#1a237e';
-                enBtn.style.color = 'white';
-                esBtn.style.background = '#f5f5f5';
-                esBtn.style.color = '#1a237e';
-                esBtn.style.border = '2px solid #1a237e';
-            }
+            currentLanguage = 'es';
             
             // Update all translatable elements
             let updatedCount = 0;
             document.querySelectorAll('[data-es][data-en]').forEach(element => {
-                const newText = element.getAttribute(`data-${lang}`);
-                if (newText) {
-                    element.textContent = newText;
+                const spanishText = element.getAttribute('data-es');
+                if (spanishText) {
+                    element.textContent = spanishText;
                     updatedCount++;
                 }
             });
             
             // Update HTML lang attribute
-            document.documentElement.lang = lang;
+            document.documentElement.lang = 'es';
             
             // Update title
-            if (lang === 'es') {
-                document.title = 'AI Predictions 7 - Predicciones Profesionales de Fútbol';
-            } else {
-                document.title = 'AI Predictions 7 - Professional Football Predictions';
-            }
+            document.title = 'AI Predictions 7 - Predicciones Profesionales de Fútbol';
             
             // Show success message
-            alert(`✅ Language changed to ${lang === 'es' ? 'Spanish' : 'English'} (${updatedCount} elements updated)`);
+            alert(`✅ Changed to Spanish (${updatedCount} elements updated)`);
             
-            console.log('✅ Language changed successfully to:', lang, `(${updatedCount} elements updated)`);
+            console.log('✅ Language changed to Spanish:', updatedCount, 'elements updated');
+        }
+        
+        // Simple English switch function
+        function switchToEnglish() {
+            console.log('🔄 Switching to English');
+            alert('Switching to English...');
+            
+            currentLanguage = 'en';
+            
+            // Update all translatable elements
+            let updatedCount = 0;
+            document.querySelectorAll('[data-es][data-en]').forEach(element => {
+                const englishText = element.getAttribute('data-en');
+                if (englishText) {
+                    element.textContent = englishText;
+                    updatedCount++;
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = 'en';
+            
+            // Update title
+            document.title = 'AI Predictions 7 - Professional Football Predictions';
+            
+            // Show success message
+            alert(`✅ Changed to English (${updatedCount} elements updated)`);
+            
+            console.log('✅ Language changed to English:', updatedCount, 'elements updated');
         }
         
         // Test function to verify language switching
@@ -498,9 +505,6 @@
             console.log('Testing language switch...');
             console.log('Current language:', currentLanguage);
             console.log('Number of translatable elements:', document.querySelectorAll('[data-es][data-en]').length);
-            console.log('Language buttons found:', document.querySelectorAll('.language-btn').length);
-            console.log('ES button found:', document.getElementById('esBtn'));
-            console.log('EN button found:', document.getElementById('enBtn'));
         }
 
         // Load daily picks from your real API
@@ -579,39 +583,8 @@
             // Test language switching setup
             testLanguageSwitch();
             
-            // Add event listeners to language buttons
-            const esBtn = document.getElementById('esBtn');
-            const enBtn = document.getElementById('enBtn');
-            const testEsBtn = document.getElementById('testEsBtn');
-            const testEnBtn = document.getElementById('testEnBtn');
-            
-            if (esBtn) {
-                esBtn.addEventListener('click', function() {
-                    console.log('ES button clicked');
-                    changeLanguage('es');
-                });
-            }
-            
-            if (enBtn) {
-                enBtn.addEventListener('click', function() {
-                    console.log('EN button clicked');
-                    changeLanguage('en');
-                });
-            }
-            
-            if (testEsBtn) {
-                testEsBtn.addEventListener('click', function() {
-                    console.log('Test ES button clicked');
-                    changeLanguage('es');
-                });
-            }
-            
-            if (testEnBtn) {
-                testEnBtn.addEventListener('click', function() {
-                    console.log('Test EN button clicked');
-                    changeLanguage('en');
-                });
-            }
+            // Test language switching setup
+            testLanguageSwitch();
             
             // Ensure Spanish is set as default
             changeLanguage('es');
@@ -622,10 +595,10 @@
             document.addEventListener('keydown', function(event) {
                 if (event.key === '1') {
                     console.log('Keyboard shortcut: Switching to Spanish');
-                    changeLanguage('es');
+                    switchToSpanish();
                 } else if (event.key === '2') {
                     console.log('Keyboard shortcut: Switching to English');
-                    changeLanguage('en');
+                    switchToEnglish();
                 }
             });
             
