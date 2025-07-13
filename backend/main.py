@@ -249,6 +249,53 @@ def get_status():
             'error': str(e)
         }), 500
 
+@app.route('/api/payment-status', methods=['GET'])
+def payment_status():
+    """Get payment system status"""
+    try:
+        return jsonify({
+            'success': True,
+            'status': 'operational',
+            'subscription_price': '€15/month',
+            'single_pick_price': '€3.99',
+            'currency': 'EUR'
+        }), 200
+        
+    except Exception as e:
+        logger.error(f"Error in payment_status: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/check-access', methods=['POST'])
+def check_access():
+    """Check if user has access to daily picks"""
+    try:
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
+        
+        email = data.get('email')
+        
+        if not email:
+            return jsonify({'success': False, 'error': 'Email required'}), 400
+        
+        # Check subscription status
+        has_subscription = payment_processor.check_subscription_status(email)
+        
+        # Check single pick access
+        has_single_pick = payment_processor.check_single_pick_access(email)
+        
+        return jsonify({
+            'success': True,
+            'has_subscription': has_subscription,
+            'has_single_pick': has_single_pick,
+            'has_access': has_subscription or has_single_pick
+        }), 200
+        
+    except Exception as e:
+        logger.error(f"Error in check_access: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/api/train-models', methods=['POST'])
 def train_models():
     """Train AI models with historical data"""
