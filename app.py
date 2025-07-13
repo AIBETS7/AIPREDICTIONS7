@@ -82,25 +82,49 @@ def health_check():
 
 @app.route('/api/daily-picks')
 def get_daily_picks():
-    """Get today's picks from JSON file created by backend script"""
+    """Get daily picks from database with result status"""
     try:
-        # Return the actual pick that was sent to Telegram
-        return jsonify([
-            {
-                'id': 'manta_vs_catolica_2025',
-                'home_team': 'Manta FC',
-                'away_team': 'Universidad Catolica',
-                'prediction': 'Manta FC',
-                'prediction_type': 'Match Winner',
-                'confidence': 70.0,
-                'odds': 1.80,
-                'match_time': '2025-07-12 21:00',
-                'reasoning': 'Manta FC has a strong home record. This is an automated test pick.',
-                'tipster': 'AI Predictor Pro',
-                'created_at': datetime.now().isoformat(),
-                'expires_at': (datetime.now() + timedelta(hours=3)).isoformat()
-            }
-        ])
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({'error': 'Database connection failed'}), 500
+        
+        cursor = conn.cursor()
+        
+        # Get recent picks with result status
+        query = """
+        SELECT id, home_team, away_team, prediction, prediction_type, 
+               confidence, odds, match_time, reasoning, tipster, 
+               created_at, result_status, actual_result
+        FROM daily_picks 
+        ORDER BY created_at DESC 
+        LIMIT 20
+        """
+        
+        cursor.execute(query)
+        picks = []
+        
+        for row in cursor:
+            picks.append({
+                'id': row[0],
+                'home_team': row[1],
+                'away_team': row[2],
+                'prediction': row[3],
+                'prediction_type': row[4],
+                'confidence': float(row[5]) if row[5] else 0.0,
+                'odds': float(row[6]) if row[6] else 0.0,
+                'match_time': row[7].isoformat() if hasattr(row[7], 'isoformat') else str(row[7]) if row[7] else None,
+                'reasoning': row[8],
+                'tipster': row[9],
+                'created_at': row[10].isoformat() if hasattr(row[10], 'isoformat') else str(row[10]) if row[10] else None,
+                'result_status': row[11] or 'pending',
+                'actual_result': row[12]
+            })
+        
+        cursor.close()
+        conn.close()
+        
+        return jsonify(picks)
+        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

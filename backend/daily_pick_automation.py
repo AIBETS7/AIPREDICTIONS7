@@ -28,10 +28,10 @@ logger.add(
 API_KEY = "dc7adf0a857be5ca3fd75d79e82c69cb"
 SPAIN_TZ = pytz.timezone('Europe/Madrid')
 
-def fetch_tomorrow_matches():
-    """Fetch tomorrow's football matches from API-Football"""
-    tomorrow = (datetime.now(SPAIN_TZ) + timedelta(days=1)).strftime('%Y-%m-%d')
-    url = f"https://v3.football.api-sports.io/fixtures?date={tomorrow}"
+def fetch_todays_matches():
+    """Fetch today's football matches from API-Football"""
+    today = datetime.now(SPAIN_TZ).strftime('%Y-%m-%d')
+    url = f"https://v3.football.api-sports.io/fixtures?date={today}"
     headers = {"x-apisports-key": API_KEY}
     
     try:
@@ -61,7 +61,7 @@ def fetch_tomorrow_matches():
                 "fixture_id": fixture["fixture"]["id"]
             })
         
-        logger.info(f"Found {len(matches)} matches for tomorrow ({tomorrow})")
+        logger.info(f"Found {len(matches)} matches for today ({today})")
         return matches
         
     except Exception as e:
@@ -69,21 +69,55 @@ def fetch_tomorrow_matches():
         return []
 
 def select_best_match(matches):
-    """Select the best match for tomorrow's pick"""
+    """Select the best match for today's pick"""
     if not matches:
         return None
     
-    # Priority: La Liga, Premier League, Champions League, then others
-    priority_leagues = ['La Liga', 'Premier League', 'Champions League', 'Europa League']
+    # Priority: Major European leagues and well-known competitions
+    priority_leagues = [
+        'La Liga', 'Premier League', 'Champions League', 'Europa League',
+        'Serie A', 'Bundesliga', 'Ligue 1', 'Primeira Liga', 'Eredivisie',
+        'Scottish Premiership', 'Belgian Pro League', 'Austrian Bundesliga'
+    ]
     
-    # Try to find a match from priority leagues
+    # Well-known team names to avoid obscure matches
+    known_teams = [
+        'Real Madrid', 'Barcelona', 'Atletico Madrid', 'Sevilla', 'Valencia',
+        'Manchester City', 'Manchester United', 'Liverpool', 'Chelsea', 'Arsenal',
+        'Bayern Munich', 'Borussia Dortmund', 'PSG', 'Juventus', 'AC Milan',
+        'Inter Milan', 'Porto', 'Benfica', 'Ajax', 'PSV'
+    ]
+    
+    # First try: Priority leagues with known teams
     for league in priority_leagues:
         for match in matches:
             if league.lower() in match['league'].lower():
+                # Check if at least one team is well-known
+                if any(team.lower() in match['home'].lower() or team.lower() in match['away'].lower() 
+                      for team in known_teams):
+                    logger.info(f"Selected priority league match: {match['home']} vs {match['away']} ({match['league']})")
+                    return match
+    
+    # Second try: Any priority league match
+    for league in priority_leagues:
+        for match in matches:
+            if league.lower() in match['league'].lower():
+                logger.info(f"Selected priority league match: {match['home']} vs {match['away']} ({match['league']})")
                 return match
     
-    # If no priority league found, return the first match
-    return matches[0]
+    # Third try: Any match with known teams
+    for match in matches:
+        if any(team.lower() in match['home'].lower() or team.lower() in match['away'].lower() 
+              for team in known_teams):
+            logger.info(f"Selected known team match: {match['home']} vs {match['away']} ({match['league']})")
+            return match
+    
+    # Last resort: First match (but log it)
+    if matches:
+        logger.warning(f"No ideal match found, using: {matches[0]['home']} vs {matches[0]['away']} ({matches[0]['league']})")
+        return matches[0]
+    
+    return None
 
 def generate_ai_prediction(match):
     """Generate AI prediction for the match"""
@@ -133,14 +167,14 @@ def generate_ai_prediction(match):
     }
 
 def create_daily_pick():
-    """Create and send tomorrow's daily pick"""
+    """Create and send today's daily pick"""
     logger.info("Starting daily pick generation...")
     
-    # Fetch tomorrow's matches
-    matches = fetch_tomorrow_matches()
+    # Fetch today's matches
+    matches = fetch_todays_matches()
     
     if not matches:
-        logger.error("No matches found for tomorrow!")
+        logger.error("No matches found for today!")
         return None
     
     # Select best match
@@ -209,7 +243,7 @@ def send_telegram_pick(pick, match):
         return
     
     message = f"""
-🎯 **TOMORROW'S PREMIUM PICK** 🎯
+🎯 **TODAY'S PREMIUM PICK** 🎯
 
 ⚽ **{pick['home_team']} vs {pick['away_team']}**
 🏆 **{match['league']}**

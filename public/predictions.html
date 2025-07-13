@@ -4,30 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Football Predictions</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
-    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; }
-    h1 { text-align: center; color: #1a237e; }
-    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-    th, td { padding: 12px 8px; border-bottom: 1px solid #e0e0e0; text-align: left; }
-    th { background: #e3eafc; color: #1a237e; }
-    tr:last-child td { border-bottom: none; }
-    .confidence { font-weight: bold; color: #388e3c; }
-    .reasoning { font-size: 0.95em; color: #555; }
-    .no-picks { text-align: center; color: #888; margin-top: 32px; }
-    @media (max-width: 600px) {
-      .container { padding: 8px; }
-      table, thead, tbody, th, td, tr { display: block; }
-      th { display: none; }
-      td { border: none; position: relative; padding-left: 50%; margin-bottom: 12px; }
-      td:before { position: absolute; left: 8px; top: 12px; width: 45%; white-space: nowrap; font-weight: bold; color: #1a237e; }
-      td:nth-child(1):before { content: 'Match'; }
-      td:nth-child(2):before { content: 'Prediction'; }
-      td:nth-child(3):before { content: 'Confidence'; }
-      td:nth-child(4):before { content: 'Competition'; }
-      td:nth-child(5):before { content: 'Reasoning'; }
-    }
-  </style>
+      <style>
+      body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+      .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; }
+      h1 { text-align: center; color: #1a237e; }
+      table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+      th, td { padding: 12px 8px; border-bottom: 1px solid #e0e0e0; text-align: left; }
+      th { background: #e3eafc; color: #1a237e; }
+      tr:last-child td { border-bottom: none; }
+      .confidence { font-weight: bold; color: #388e3c; }
+      .reasoning { font-size: 0.95em; color: #555; }
+      .no-picks { text-align: center; color: #888; margin-top: 32px; }
+      
+      /* Result status styles */
+      .result-correct { 
+        background-color: #e8f5e8 !important; 
+        border-left: 4px solid #4caf50 !important;
+      }
+      .result-incorrect { 
+        background-color: #ffeaea !important; 
+        border-left: 4px solid #f44336 !important;
+      }
+      .result-pending { 
+        background-color: #fff3e0 !important; 
+        border-left: 4px solid #ff9800 !important;
+      }
+      .result-postponed { 
+        background-color: #f3e5f5 !important; 
+        border-left: 4px solid #9c27b0 !important;
+      }
+      
+      .result-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .result-badge.correct { background: #4caf50; color: white; }
+      .result-badge.incorrect { background: #f44336; color: white; }
+      .result-badge.pending { background: #ff9800; color: white; }
+      .result-badge.postponed { background: #9c27b0; color: white; }
+      
+      .actual-result {
+        font-weight: bold;
+        color: #333;
+        margin-left: 8px;
+      }
+      
+      @media (max-width: 600px) {
+        .container { padding: 8px; }
+        table, thead, tbody, th, td, tr { display: block; }
+        th { display: none; }
+        td { border: none; position: relative; padding-left: 50%; margin-bottom: 12px; }
+        td:before { position: absolute; left: 8px; top: 12px; width: 45%; white-space: nowrap; font-weight: bold; color: #1a237e; }
+        td:nth-child(1):before { content: 'Match'; }
+        td:nth-child(2):before { content: 'Prediction'; }
+        td:nth-child(3):before { content: 'Confidence'; }
+        td:nth-child(4):before { content: 'Competition'; }
+        td:nth-child(5):before { content: 'Result'; }
+        td:nth-child(6):before { content: 'Reasoning'; }
+      }
+    </style>
 </head>
 <body>
   <div class="container">
@@ -43,13 +82,40 @@
           container.innerHTML = '<p class="no-picks">No predictions available at the moment.</p>';
           return;
         }
-        let html = '<table><thead><tr><th>Match</th><th>Prediction</th><th>Confidence</th><th>Competition</th><th>Reasoning</th></tr></thead><tbody>';
+        let html = '<table><thead><tr><th>Match</th><th>Prediction</th><th>Confidence</th><th>Competition</th><th>Result</th><th>Reasoning</th></tr></thead><tbody>';
         data.forEach(pick => {
-          html += `<tr>
+          // Determine result class and badge
+          let resultClass = 'result-pending';
+          let resultBadge = 'pending';
+          let resultText = 'Pending';
+          let actualResult = '';
+          
+          if (pick.result_status === 'correct') {
+            resultClass = 'result-correct';
+            resultBadge = 'correct';
+            resultText = '✅ Correct';
+            if (pick.actual_result) {
+              actualResult = `<span class="actual-result">(${pick.actual_result})</span>`;
+            }
+          } else if (pick.result_status === 'incorrect') {
+            resultClass = 'result-incorrect';
+            resultBadge = 'incorrect';
+            resultText = '❌ Incorrect';
+            if (pick.actual_result) {
+              actualResult = `<span class="actual-result">(${pick.actual_result})</span>`;
+            }
+          } else if (pick.result_status === 'postponed') {
+            resultClass = 'result-postponed';
+            resultBadge = 'postponed';
+            resultText = '⏸️ Postponed';
+          }
+          
+          html += `<tr class="${resultClass}">
             <td>${pick.home_team} vs ${pick.away_team}<br><small>${pick.match_time || ''}</small></td>
             <td>${pick.prediction}</td>
             <td class="confidence">${(pick.confidence * 100).toFixed(1)}%</td>
             <td>${pick.competition || '-'}</td>
+            <td><span class="result-badge ${resultBadge}">${resultText}</span>${actualResult}</td>
             <td class="reasoning">${pick.reasoning}</td>
           </tr>`;
         });

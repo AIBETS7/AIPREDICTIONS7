@@ -41,37 +41,49 @@ SCRAPING_CONFIG = {
 
 # Data sources configuration
 DATA_SOURCES = {
+    'laliga_official': {
+        'base_url': 'https://www.laliga.com',
+        'enabled': True,
+        'priority': 1,  # Highest priority for official source
+        'update_frequency': 300,  # 5 minutes
+    },
+    'promiedos': {
+        'base_url': 'https://www.promiedos.com.ar',
+        'enabled': True,
+        'priority': 2,  # Good Spanish football coverage
+        'update_frequency': 300,  # 5 minutes
+    },
     'flashscore': {
         'base_url': 'https://www.flashscore.com',
         'api_url': 'https://api.flashscore.com',
         'enabled': True,
-        'priority': 1,
+        'priority': 3,
         'update_frequency': 300,  # 5 minutes
     },
     'sofascore': {
         'base_url': 'https://www.sofascore.com',
         'api_url': 'https://api.sofascore.com',
         'enabled': True,
-        'priority': 2,
+        'priority': 4,
         'update_frequency': 300,  # 5 minutes
     },
     'betsapi': {
         'base_url': 'https://betsapi.com',
         'api_url': 'https://api.betsapi.com',
         'enabled': True,
-        'priority': 3,
+        'priority': 5,
         'update_frequency': 600,  # 10 minutes
     },
     'whoscored': {
         'base_url': 'https://www.whoscored.com',
         'enabled': True,
-        'priority': 4,
+        'priority': 6,
         'update_frequency': 900,  # 15 minutes
     },
     'transfermarkt': {
         'base_url': 'https://www.transfermarkt.com',
         'enabled': True,
-        'priority': 5,
+        'priority': 7,
         'update_frequency': 1800,  # 30 minutes
     }
 }

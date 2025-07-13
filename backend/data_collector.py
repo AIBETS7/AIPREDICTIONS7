@@ -8,13 +8,18 @@ from config.settings import DATA_SOURCES, LA_LIGA_CONFIG, WOMENS_EURO_CONFIG, CO
 from scrapers.flashscore_scraper import FlashScoreScraper
 from scrapers.sofascore_scraper import SofaScoreScraper
 from scrapers.betsapi_scraper import BetsAPIScraper
+from scrapers.laliga_scraper import LaLigaScraper
+from scrapers.promiedos_scraper import PromiedosScraper
 from models.data_models import Match, Team, H2HRecord, OddsData, Statistics
+from data_validator import DataValidator
 
 class DataCollector:
     """Main data collection orchestrator"""
     
     def __init__(self):
         self.scrapers = {
+            'laliga_official': LaLigaScraper(),
+            'promiedos': PromiedosScraper(),
             'flashscore': FlashScoreScraper(),
             'sofascore': SofaScoreScraper(),
             'betsapi': BetsAPIScraper()
@@ -27,6 +32,7 @@ class DataCollector:
             'statistics': {}
         }
         self.last_update = {}
+        self.validator = DataValidator()
         
     def collect_all_data(self, days_back: int = 7, days_forward: int = 7) -> Dict:
         """Collect data from all sources"""
@@ -52,10 +58,24 @@ class DataCollector:
         # Merge and deduplicate data
         merged_data = self._merge_data()
         
+        # Validate and cross-check data
+        validation_result = self.validator.validate_matches(merged_data)
+        
+        # Filter matches suitable for predictions
+        suitable_matches = self.validator.filter_matches_for_predictions(validation_result['valid_matches'])
+        
+        # Update merged data with validated matches
+        merged_data['matches'] = suitable_matches
+        merged_data['validation_result'] = validation_result
+        
         # Save to files
         self._save_data(merged_data)
         
-        logger.info("Data collection completed")
+        # Log validation report
+        validation_report = self.validator.generate_validation_report(validation_result)
+        logger.info(f"Validation Report:\n{validation_report}")
+        
+        logger.info("Data collection and validation completed")
         return merged_data
     
     def _collect_from_source(self, source_name: str, date_from: datetime, date_to: datetime):

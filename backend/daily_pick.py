@@ -17,15 +17,18 @@ logger.add(
 )
 
 def main():
-    # Collect latest data
+    # Collect latest data with validation
     collector = DataCollector()
     data = collector.get_latest_data()
 
     # Generate predictions
     ai_predictor = AIPredictor()
+    
+    # Use validated matches that are suitable for predictions
     upcoming_matches = [
         match for match in data.get('matches', [])
-        if match.get('status') == 'scheduled'
+        if match.get('status') in ['scheduled', 'not_started'] and
+        match.get('validation_metadata', {}).get('confidence_score', 0) >= 0.7
     ]
     upcoming_matches = upcoming_matches[:10]
     all_predictions = []
