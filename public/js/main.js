@@ -458,25 +458,39 @@ document.head.appendChild(notificationStyles);
 // Telegram link handler
 function openTelegram(username) {
     try {
-        // Try to open Telegram app or web
-        const telegramUrl = `https://t.me/${username}`;
-        
-        // Check if we're on mobile
-        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // Try to open Telegram app first
-            window.location.href = `tg://resolve?domain=${username}`;
+        // Handle group links (starting with +)
+        if (username.startsWith('+')) {
+            const telegramUrl = `https://t.me/${username}`;
             
-            // Fallback to web after a short delay
-            setTimeout(() => {
+            // Check if we're on mobile
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                // For groups, we need to use the invite link directly
                 window.open(telegramUrl, '_blank');
-            }, 1000);
+            } else {
+                // Desktop: open in new tab
+                window.open(telegramUrl, '_blank');
+            }
         } else {
-            // Desktop: open in new tab
-            window.open(telegramUrl, '_blank');
+            // Handle user/channel links
+            const telegramUrl = `https://t.me/${username}`;
+            
+            // Check if we're on mobile
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                // Try to open Telegram app first
+                window.location.href = `tg://resolve?domain=${username}`;
+                
+                // Fallback to web after a short delay
+                setTimeout(() => {
+                    window.open(telegramUrl, '_blank');
+                }, 1000);
+            } else {
+                // Desktop: open in new tab
+                window.open(telegramUrl, '_blank');
+            }
         }
     } catch (error) {
         console.error('Error opening Telegram:', error);
         // Fallback: show message to user
-        alert('Para contactarnos por Telegram, busca @recordbet7 en la aplicación de Telegram');
+        alert('Para unirte a nuestro grupo de Telegram, usa el enlace: https://t.me/+101AkcLj0SYxOTZk');
     }
 }
