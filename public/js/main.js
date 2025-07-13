@@ -454,3 +454,29 @@ notificationStyles.textContent = `
     }
 `;
 document.head.appendChild(notificationStyles);
+
+// Telegram link handler
+function openTelegram(username) {
+    try {
+        // Try to open Telegram app or web
+        const telegramUrl = `https://t.me/${username}`;
+        
+        // Check if we're on mobile
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Try to open Telegram app first
+            window.location.href = `tg://resolve?domain=${username}`;
+            
+            // Fallback to web after a short delay
+            setTimeout(() => {
+                window.open(telegramUrl, '_blank');
+            }, 1000);
+        } else {
+            // Desktop: open in new tab
+            window.open(telegramUrl, '_blank');
+        }
+    } catch (error) {
+        console.error('Error opening Telegram:', error);
+        // Fallback: show message to user
+        alert('Para contactarnos por Telegram, busca @recordbet7 en la aplicación de Telegram');
+    }
+}
