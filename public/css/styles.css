@@ -611,99 +611,23 @@ body {
     color: #2563eb;
 }
 
-/* Tipsters Section */
+/* Tipsters Section - Empty */
 .tipsters {
     padding: 80px 0;
     background: #f9fafb;
-}
-
-.tipsters-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.tipster-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.tipster-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.tipster-avatar {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    border-radius: 50%;
+    min-height: 300px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 0 auto 1.5rem;
-}
-
-.tipster-avatar i {
-    font-size: 2rem;
-    color: white;
-}
-
-.tipster-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 0.5rem;
-}
-
-.tipster-specialty {
-    color: #6b7280;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-}
-
-.tipster-stats {
-    display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
 }
 
-.tipster-stat {
+.tipsters .section-header {
     text-align: center;
 }
 
-.stat-label {
-    font-size: 0.9rem;
+.tipsters .section-header p {
     color: #6b7280;
-    margin-bottom: 0.25rem;
-}
-
-.stat-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #2563eb;
-}
-
-.tipster-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.tag {
-    background: #f3f4f6;
-    color: #374151;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-style: italic;
 }
 
 /* Contact Section */
@@ -1338,81 +1262,17 @@ body {
     gap: 0.5rem;
 }
 
-/* Coming Soon Tipsters Section */
-.tipsters-coming-soon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-    border-radius: 20px;
-    border: 2px dashed #cbd5e1;
+/* Telegram Link Styles */
+.telegram-link {
+    color: #0088cc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.coming-soon-content {
-    text-align: center;
-    max-width: 600px;
-    padding: 3rem;
-}
-
-.coming-soon-content i {
-    font-size: 4rem;
-    color: #64748b;
-    margin-bottom: 1.5rem;
-}
-
-.coming-soon-content h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 1rem;
-}
-
-.coming-soon-content p {
-    color: #6b7280;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-}
-
-.coming-soon-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-}
-
-.coming-soon-features .feature {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #374151;
-    font-weight: 500;
-}
-
-.coming-soon-features .feature i {
-    font-size: 1.2rem;
-    color: #10b981;
-    margin: 0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .successful-pick {
-        padding: 1.5rem;
-    }
-    
-    .coming-soon-content {
-        padding: 2rem 1rem;
-    }
-    
-    .coming-soon-content i {
-        font-size: 3rem;
-    }
-    
-    .coming-soon-content h3 {
-        font-size: 1.5rem;
-    }
+.telegram-link:hover {
+    color: #006699;
+    text-decoration: underline;
 }
 
 /* Utility Classes */
