@@ -1,284 +1,188 @@
 #!/usr/bin/env python3
 """
-Daily Pick Automation
-Automatically generates and sends daily picks at 9 PM Spain time
+Daily pick automation with validation
+Ensures only one real pick per day with no fake/imaginary picks
 """
 
+import sys
 import os
-import json
-import uuid
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from datetime import datetime, timedelta
 from loguru import logger
-import requests
-import pytz
-from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
+from config.database import DATABASE_URL
+from ai_predictor import AIPredictor
+from data_collector import DataCollector
+import json
 
-# Load environment variables
-load_dotenv()
-
-# Configure logging
-logger.add(
-    "logs/daily_automation.log",
-    level="INFO",
-    format="{time} | {level} | {message}",
-    rotation="1 day",
-    retention="7 days"
-)
-
-API_KEY = "dc7adf0a857be5ca3fd75d79e82c69cb"
-SPAIN_TZ = pytz.timezone('Europe/Madrid')
-
-def fetch_todays_matches():
-    """Fetch today's football matches from API-Football"""
-    today = datetime.now(SPAIN_TZ).strftime('%Y-%m-%d')
-    url = f"https://v3.football.api-sports.io/fixtures?date={today}"
-    headers = {"x-apisports-key": API_KEY}
+def check_existing_pick_today():
+    """Check if there's already a pick for today"""
+    logger.info("Checking for existing pick today...")
     
     try:
-        response = requests.get(url, headers=headers)
-        data = response.json()
+        engine = create_engine(DATABASE_URL)
+        conn = engine.connect()
         
-        if response.status_code != 200:
-            logger.error(f"API Error: {data}")
-            return []
-            
-        matches = []
-        for fixture in data.get("response", []):
-            home = fixture["teams"]["home"]["name"]
-            away = fixture["teams"]["away"]["name"]
-            league = fixture["league"]["name"]
-            utc_time = fixture["fixture"]["date"]
-            
-            # Convert UTC to Spain time
-            match_time_utc = datetime.fromisoformat(utc_time.replace('Z', '+00:00'))
-            match_time_spain = match_time_utc.astimezone(SPAIN_TZ)
-            
-            matches.append({
-                "home": home,
-                "away": away,
-                "league": league,
-                "match_time": match_time_spain,
-                "fixture_id": fixture["fixture"]["id"]
-            })
+        today = datetime.now().date()
         
-        logger.info(f"Found {len(matches)} matches for today ({today})")
-        return matches
+        # Check if there's already a pick for today
+        result = conn.execute(text("""
+            SELECT COUNT(*) as count FROM daily_picks 
+            WHERE DATE(created_at) = :today
+        """), {"today": today})
+        
+        count = result.fetchone()['count']
+        logger.info(f"Found {count} existing picks for today")
+        
+        conn.close()
+        return count > 0
         
     except Exception as e:
-        logger.error(f"Error fetching matches: {e}")
-        return []
+        logger.error(f"Error checking existing picks: {e}")
+        return False
 
-def select_best_match(matches):
-    """Select the best match for today's pick"""
-    if not matches:
-        return None
+def validate_real_match(home_team, away_team, match_date):
+    """Validate that this is a real match, not fake/imaginary"""
+    logger.info(f"Validating match: {home_team} vs {away_team} on {match_date}")
     
-    # Priority: Major European leagues and well-known competitions
-    priority_leagues = [
-        'La Liga', 'Premier League', 'Champions League', 'Europa League',
-        'Serie A', 'Bundesliga', 'Ligue 1', 'Primeira Liga', 'Eredivisie',
-        'Scottish Premiership', 'Belgian Pro League', 'Austrian Bundesliga'
+    # List of known fake/imaginary team names to filter out
+    fake_indicators = [
+        'test', 'example', 'demo', 'fake', 'dummy', 'sample',
+        'team a', 'team b', 'home team', 'away team',
+        'team 1', 'team 2', 'team x', 'team y',
+        'home', 'away', 'local', 'visitor'
     ]
     
-    # Well-known team names to avoid obscure matches
-    known_teams = [
-        'Real Madrid', 'Barcelona', 'Atletico Madrid', 'Sevilla', 'Valencia',
-        'Manchester City', 'Manchester United', 'Liverpool', 'Chelsea', 'Arsenal',
-        'Bayern Munich', 'Borussia Dortmund', 'PSG', 'Juventus', 'AC Milan',
-        'Inter Milan', 'Porto', 'Benfica', 'Ajax', 'PSV'
-    ]
+    # Check for fake team names
+    home_lower = home_team.lower()
+    away_lower = away_team.lower()
     
-    # First try: Priority leagues with known teams
-    for league in priority_leagues:
-        for match in matches:
-            if league.lower() in match['league'].lower():
-                # Check if at least one team is well-known
-                if any(team.lower() in match['home'].lower() or team.lower() in match['away'].lower() 
-                      for team in known_teams):
-                    logger.info(f"Selected priority league match: {match['home']} vs {match['away']} ({match['league']})")
-                    return match
+    for indicator in fake_indicators:
+        if indicator in home_lower or indicator in away_lower:
+            logger.warning(f"Potential fake team detected: {home_team} vs {away_team}")
+            return False
     
-    # Second try: Any priority league match
-    for league in priority_leagues:
-        for match in matches:
-            if league.lower() in match['league'].lower():
-                logger.info(f"Selected priority league match: {match['home']} vs {match['away']} ({match['league']})")
-                return match
+    # Check if teams are too generic
+    if len(home_team.strip()) < 3 or len(away_team.strip()) < 3:
+        logger.warning(f"Team names too short: {home_team} vs {away_team}")
+        return False
     
-    # Third try: Any match with known teams
-    for match in matches:
-        if any(team.lower() in match['home'].lower() or team.lower() in match['away'].lower() 
-              for team in known_teams):
-            logger.info(f"Selected known team match: {match['home']} vs {match['away']} ({match['league']})")
-            return match
+    # Check if it's the same team
+    if home_team.lower().strip() == away_team.lower().strip():
+        logger.warning(f"Same team playing against itself: {home_team}")
+        return False
     
-    # Last resort: First match (but log it)
-    if matches:
-        logger.warning(f"No ideal match found, using: {matches[0]['home']} vs {matches[0]['away']} ({matches[0]['league']})")
-        return matches[0]
-    
-    return None
+    logger.info(f"Match validation passed: {home_team} vs {away_team}")
+    return True
 
-def generate_ai_prediction(match):
-    """Generate AI prediction for the match"""
-    # Simple AI logic - can be enhanced later
-    import random
-    
-    # Different prediction types
-    prediction_types = [
-        'Match Winner',
-        'Both Teams Score',
-        'Over/Under 2.5 Goals',
-        'Double Chance'
-    ]
-    
-    pred_type = random.choice(prediction_types)
-    
-    if pred_type == 'Match Winner':
-        prediction = match['home']  # Simple: pick home team
-        confidence = random.randint(65, 85)
-        odds = round(random.uniform(1.5, 2.5), 2)
-        reasoning = f"{match['home']} has been strong at home this season and should win this match."
-    
-    elif pred_type == 'Both Teams Score':
-        prediction = 'Yes'
-        confidence = random.randint(70, 90)
-        odds = round(random.uniform(1.6, 2.2), 2)
-        reasoning = f"Both {match['home']} and {match['away']} have been scoring regularly."
-    
-    elif pred_type == 'Over/Under 2.5 Goals':
-        prediction = 'Over 2.5'
-        confidence = random.randint(60, 80)
-        odds = round(random.uniform(1.7, 2.3), 2)
-        reasoning = f"High scoring teams with good attacking form."
-    
-    else:  # Double Chance
-        prediction = f"{match['home']} or Draw"
-        confidence = random.randint(75, 90)
-        odds = round(random.uniform(1.3, 1.8), 2)
-        reasoning = f"{match['home']} is strong at home and should avoid defeat."
-    
-    return {
-        'prediction_type': pred_type,
-        'prediction': prediction,
-        'confidence': confidence,
-        'odds': odds,
-        'reasoning': reasoning
-    }
-
-def create_daily_pick():
-    """Create and send today's daily pick"""
+def generate_daily_pick():
+    """Generate one real daily pick with validation"""
     logger.info("Starting daily pick generation...")
     
-    # Fetch today's matches
-    matches = fetch_todays_matches()
-    
-    if not matches:
-        logger.error("No matches found for today!")
+    # Check if there's already a pick for today
+    if check_existing_pick_today():
+        logger.info("Pick already exists for today. Skipping generation.")
         return None
     
-    # Select best match
-    match = select_best_match(matches)
-    if not match:
-        logger.error("Could not select a match!")
-        return None
-    
-    # Generate AI prediction
-    ai_pred = generate_ai_prediction(match)
-    
-    # Create pick object
-    pick = {
-        'id': str(uuid.uuid4()),
-        'match_id': str(match['fixture_id']),
-        'home_team': match['home'],
-        'away_team': match['away'],
-        'competition': match['league'],
-        'match_time': match['match_time'].strftime('%Y-%m-%d %H:%M'),
-        'prediction_type': ai_pred['prediction_type'],
-        'prediction': ai_pred['prediction'],
-        'confidence': ai_pred['confidence'],
-        'odds': ai_pred['odds'],
-        'reasoning': ai_pred['reasoning'],
-        'tipster': 'AI Predictor Pro',
-        'created_at': datetime.now().isoformat(),
-        'expires_at': (datetime.now() + timedelta(hours=24)).isoformat()
-    }
-    
-    # Save to JSON file for website
-    save_pick_to_website(pick)
-    
-    # Send to Telegram
-    send_telegram_pick(pick, match)
-    
-    logger.info(f"Daily pick created: {pick['home_team']} vs {pick['away_team']}")
-    return pick
-
-def save_pick_to_website(pick):
-    """Save pick to JSON file for website display"""
     try:
-        picks_data = {
-            'current_pick': pick,
-            'recent_picks': [pick],
-            'last_updated': datetime.now().isoformat()
+        # Initialize AI predictor and data collector
+        predictor = AIPredictor()
+        data_collector = DataCollector()
+        
+        # Get latest data
+        data = data_collector.get_latest_data()
+        
+        # Filter upcoming matches
+        upcoming_matches = [
+            match for match in data.get('matches', [])
+            if match.get('status') == 'scheduled'
+        ]
+        
+        if not upcoming_matches:
+            logger.error("No upcoming matches found")
+            return None
+        
+        # Filter for real matches only
+        real_matches = []
+        for match in upcoming_matches:
+            if validate_real_match(match.get('home_team'), match.get('away_team'), match.get('time')):
+                real_matches.append(match)
+        
+        if not real_matches:
+            logger.error("No real matches found")
+            return None
+        
+        # Take the first real match
+        selected_match = real_matches[0]
+        
+        logger.info(f"Selected real match: {selected_match['home_team']} vs {selected_match['away_team']}")
+        
+        # Get related data for prediction
+        team_data = data.get('teams', {})
+        h2h_data = data.get('h2h_records', {})
+        odds_data = data.get('odds', {}).get(selected_match.get('id', ''), {})
+        
+        # Make predictions
+        predictions = predictor.make_prediction(selected_match, team_data, h2h_data, odds_data)
+        
+        if not predictions:
+            logger.error("No predictions generated for selected match")
+            return None
+        
+        # Take the highest confidence prediction
+        best_prediction = max(predictions, key=lambda x: x.confidence)
+        
+        # Save to database
+        engine = create_engine(DATABASE_URL)
+        conn = engine.connect()
+        
+        conn.execute(text("""
+            INSERT INTO daily_picks (
+                home_team, away_team, prediction, prediction_type, 
+                confidence, match_date, created_at
+            ) VALUES (
+                :home_team, :away_team, :prediction, :prediction_type,
+                :confidence, :match_date, :created_at
+            )
+        """), {
+            'home_team': selected_match['home_team'],
+            'away_team': selected_match['away_team'],
+            'prediction': best_prediction.prediction,
+            'prediction_type': best_prediction.prediction_type.value,
+            'confidence': best_prediction.confidence,
+            'match_date': selected_match.get('time'),
+            'created_at': datetime.now().isoformat()
+        })
+        
+        conn.close()
+        
+        logger.info("Daily pick saved successfully")
+        
+        return {
+            'home_team': selected_match['home_team'],
+            'away_team': selected_match['away_team'],
+            'prediction': best_prediction.prediction,
+            'prediction_type': best_prediction.prediction_type.value,
+            'confidence': best_prediction.confidence,
+            'match_date': selected_match.get('time')
         }
-        
-        # Ensure the directory exists
-        os.makedirs('data/processed', exist_ok=True)
-        
-        with open('data/processed/latest_data.json', 'w') as f:
-            json.dump(picks_data, f, indent=2)
-        
-        logger.info("Pick saved to website JSON file")
-        
-    except Exception as e:
-        logger.error(f"Error saving pick to website: {e}")
-
-def send_telegram_pick(pick, match):
-    """Send pick to Telegram"""
-    telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID')
-    
-    if not telegram_token or not chat_id:
-        logger.warning("Telegram credentials not found")
-        return
-    
-    message = f"""
-🎯 **TODAY'S PREMIUM PICK** 🎯
-
-⚽ **{pick['home_team']} vs {pick['away_team']}**
-🏆 **{match['league']}**
-⏰ **{pick['match_time']}**
-
-💡 **Prediction:** {pick['prediction']}
-🎯 **Pick Type:** {pick['prediction_type']}
-📊 **Confidence:** {pick['confidence']}%
-💰 **Odds:** {pick['odds']}
-💶 **Stake:** €100
-
-📝 **AI Analysis:**
-{pick['reasoning']}
-
-🔒 **Premium Pick - Unlock with subscription**
-    """
-    
-    try:
-        response = requests.post(
-            f'https://api.telegram.org/bot{telegram_token}/sendMessage',
-            json={
-                'chat_id': chat_id,
-                'text': message,
-                'parse_mode': 'Markdown'
-            }
-        )
-        
-        if response.status_code == 200:
-            logger.info("Telegram message sent successfully")
-            print("✅ Tomorrow's pick sent to Telegram!")
-        else:
-            logger.error(f"Failed to send Telegram message: {response.text}")
             
     except Exception as e:
-        logger.error(f"Error sending Telegram message: {e}")
+        logger.error(f"Error generating daily pick: {e}")
+        return None
+
+def main():
+    """Main function to run daily pick automation"""
+    logger.info("Starting daily pick automation...")
+    
+    # Generate pick
+    pick = generate_daily_pick()
+    
+    if pick:
+        logger.info(f"Daily pick generated successfully: {pick['home_team']} vs {pick['away_team']} - {pick['prediction']}")
+    else:
+        logger.info("No daily pick generated (already exists or no valid predictions)")
 
 if __name__ == "__main__":
-    create_daily_pick() 
+    main() 

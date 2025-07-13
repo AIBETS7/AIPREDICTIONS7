@@ -53,33 +53,8 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-// Sample predictions data
-const samplePredictions = [
-    {
-        match: 'Real Madrid vs Barcelona',
-        prediction: 'Over 2.5 Goals',
-        confidence: '89%',
-        odds: '1.85',
-        tipster: 'La Liga Master AI',
-        reasoning: 'Both teams have scored in 8 of their last 10 meetings'
-    },
-    {
-        match: 'Atletico Madrid vs Sevilla',
-        prediction: 'Atletico Madrid Win',
-        confidence: '76%',
-        odds: '1.95',
-        tipster: 'Neural Network Pro',
-        reasoning: 'Atletico has won 7 of their last 8 home games'
-    },
-    {
-        match: 'Valencia vs Athletic Bilbao',
-        prediction: 'Both Teams Score',
-        confidence: '82%',
-        odds: '1.75',
-        tipster: 'Algorithm Expert',
-        reasoning: 'Both teams have scored in 6 of their last 7 matches'
-    }
-];
+// Sample predictions data - Empty array to show no example matches
+const samplePredictions = [];
 
 // Load predictions into the grid
 function loadPredictions() {
