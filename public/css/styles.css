@@ -1071,3 +1071,329 @@ body {
 .no-picks p {
     color: #94a3b8;
 }
+
+/* Paywall Styles for Daily Picks */
+.picks-paywall {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.paywall-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.paywall-header {
+    margin-bottom: 3rem;
+}
+
+.paywall-header i {
+    font-size: 3rem;
+    color: #2563eb;
+    margin-bottom: 1rem;
+}
+
+.paywall-header h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.paywall-header p {
+    font-size: 1.2rem;
+    color: #64748b;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.pricing-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.pricing-option {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.pricing-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-option.featured {
+    border: 3px solid #2563eb;
+    transform: scale(1.05);
+}
+
+.pricing-option.featured::before {
+    content: "MÁS POPULAR";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.option-header {
+    margin-bottom: 1.5rem;
+}
+
+.option-header h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.option-header .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.option-header .price span {
+    font-size: 1rem;
+    color: #64748b;
+    font-weight: 400;
+}
+
+.pricing-option ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.pricing-option ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    color: #475569;
+}
+
+.pricing-option ul li i {
+    color: #10b981;
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.subscribe-btn, .single-pick-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.subscribe-btn {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+}
+
+.subscribe-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-2px);
+}
+
+.single-pick-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.single-pick-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+}
+
+.paywall-footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 2rem;
+}
+
+.paywall-footer p {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.trust-badges span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.trust-badges i {
+    color: #10b981;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design for Paywall */
+@media (max-width: 768px) {
+    .pricing-options {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-option.featured {
+        transform: none;
+    }
+    
+    .paywall-header h3 {
+        font-size: 2rem;
+    }
+    
+    .trust-badges {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .picks-paywall {
+        padding: 2rem 1rem;
+    }
+    
+    .paywall-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .option-header .price {
+        font-size: 2rem;
+    }
+}
+
+/* Single Pick Modal Styles */
+.single-pick-info {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pick-preview {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.pick-preview h3 {
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.pick-preview ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pick-preview ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    color: #475569;
+}
+
+.pick-preview ul li i {
+    color: #10b981;
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+}
+
+#single-pick-form {
+    margin-bottom: 2rem;
+}
+
+#single-pick-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+#single-pick-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+#single-pick-form input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+#single-pick-form input[type="email"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+#single-pick-submit-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#single-pick-submit-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+}
+
+#single-pick-submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive adjustments for single pick modal */
+@media (max-width: 768px) {
+    .single-pick-info {
+        padding: 0 1rem;
+    }
+    
+    .pick-preview {
+        padding: 1rem;
+    }
+    
+    .pick-preview h3 {
+        font-size: 1.2rem;
+    }
+}

@@ -9,6 +9,8 @@ from loguru import logger
 from config.settings import LOGGING_CONFIG
 from data_collector import DataCollector
 from ai_predictor import AIPredictor
+from payment_routes import payment_bp
+from payment_processor import payment_processor
 
 # Configure logging
 logger.add(
@@ -22,9 +24,15 @@ logger.add(
 app = Flask(__name__)
 CORS(app)
 
+# Register payment blueprint
+app.register_blueprint(payment_bp)
+
 # Initialize components
 data_collector = DataCollector()
 ai_predictor = AIPredictor()
+
+# Initialize payment tables
+payment_processor.create_payment_tables()
 
 @app.route('/api/health', methods=['GET'])
 def health_check():

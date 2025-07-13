@@ -265,7 +265,58 @@
                 </button>
             </div>
             
-            <div class="picks-container" id="dailyPicksContainer">
+            <!-- Paywall for Daily Picks -->
+            <div class="picks-paywall" id="dailyPicksPaywall">
+                <div class="paywall-content">
+                    <div class="paywall-header">
+                        <i class="fas fa-lock"></i>
+                        <h3 data-es="Acceso Premium Requerido" data-en="Premium Access Required">Acceso Premium Requerido</h3>
+                        <p data-es="Desbloquea nuestros pronósticos diarios de IA con precisión del 87%" data-en="Unlock our daily AI picks with 87% accuracy">Desbloquea nuestros pronósticos diarios de IA con precisión del 87%</p>
+                    </div>
+                    
+                    <div class="pricing-options">
+                        <div class="pricing-option">
+                            <div class="option-header">
+                                <h4 data-es="Suscripción Mensual" data-en="Monthly Subscription">Suscripción Mensual</h4>
+                                <div class="price">€15<span>/mes</span></div>
+                            </div>
+                            <ul>
+                                <li><i class="fas fa-check"></i> <span data-es="Pronósticos diarios ilimitados" data-en="Unlimited daily picks">Pronósticos diarios ilimitados</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Actualizaciones en tiempo real" data-en="Real-time updates">Actualizaciones en tiempo real</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Análisis detallado de IA" data-en="Detailed AI analysis">Análisis detallado de IA</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Soporte prioritario" data-en="Priority support">Soporte prioritario</span></li>
+                            </ul>
+                            <button class="subscribe-btn" onclick="openSubscriptionModal()" data-es="Suscribirse €15/mes" data-en="Subscribe €15/month">Suscribirse €15/mes</button>
+                        </div>
+                        
+                        <div class="pricing-option featured">
+                            <div class="option-header">
+                                <h4 data-es="Pago Único" data-en="One-Time Payment">Pago Único</h4>
+                                <div class="price">€3.99<span data-es="/pronóstico" data-en="/pick">/pronóstico</span></div>
+                            </div>
+                            <ul>
+                                <li><i class="fas fa-check"></i> <span data-es="Un pronóstico premium de hoy" data-en="One premium pick for today">Un pronóstico premium de hoy</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Análisis completo de IA" data-en="Complete AI analysis">Análisis completo de IA</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Sin suscripción" data-en="No subscription">Sin suscripción</span></li>
+                                <li><i class="fas fa-check"></i> <span data-es="Acceso inmediato" data-en="Instant access">Acceso inmediato</span></li>
+                            </ul>
+                            <button class="single-pick-btn" onclick="openSinglePickModal()" data-es="Comprar Pronóstico €3.99" data-en="Buy Pick €3.99">Comprar Pronóstico €3.99</button>
+                        </div>
+                    </div>
+                    
+                    <div class="paywall-footer">
+                        <p data-es="Más de 15,000 usuarios confían en nuestras predicciones" data-en="Over 15,000 users trust our predictions">Más de 15,000 usuarios confían en nuestras predicciones</p>
+                        <div class="trust-badges">
+                            <span><i class="fas fa-shield-alt"></i> <span data-es="Pago Seguro" data-en="Secure Payment">Pago Seguro</span></span>
+                            <span><i class="fas fa-clock"></i> <span data-es="Acceso Inmediato" data-en="Instant Access">Acceso Inmediato</span></span>
+                            <span><i class="fas fa-undo"></i> <span data-es="Garantía de 30 días" data-en="30-Day Guarantee">Garantía de 30 días</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hidden container for actual picks (shown after payment) -->
+            <div class="picks-container" id="dailyPicksContainer" style="display: none;">
                 <div class="loading-spinner">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p data-es="Cargando pronósticos de hoy..." data-en="Loading today's picks...">Cargando pronósticos de hoy...</p>
@@ -496,8 +547,62 @@
         </div>
     </div>
 
+    <!-- Single Pick Modal -->
+    <div id="singlePickModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSinglePickModal()">&times;</span>
+            <h2>Comprar Pronóstico Único</h2>
+            <p>Obtén acceso a un pronóstico premium de hoy por solo €3.99</p>
+            
+            <div class="single-pick-info">
+                <div class="pick-preview">
+                    <h3>¿Qué obtienes?</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Un pronóstico premium de hoy</li>
+                        <li><i class="fas fa-check"></i> Análisis completo de IA</li>
+                        <li><i class="fas fa-check"></i> Sin suscripción recurrente</li>
+                        <li><i class="fas fa-check"></i> Acceso inmediato</li>
+                    </ul>
+                </div>
+                
+                <!-- Single Pick Payment Form -->
+                <form id="single-pick-form">
+                    <div class="form-group">
+                        <label for="single-pick-email">Email:</label>
+                        <input type="email" id="single-pick-email" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="single-pick-card-element">Información de la Tarjeta:</label>
+                        <div id="single-pick-card-element" class="card-element"></div>
+                        <div id="single-pick-card-errors" class="card-errors" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="single-pick-terms" required>
+                            <span>Acepto los <a href="#" target="_blank">Términos de Servicio</a> y <a href="#" target="_blank">Política de Privacidad</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" id="single-pick-submit-button" class="single-pick-btn">
+                        <span id="single-pick-button-text">Pagar €3.99</span>
+                        <div id="single-pick-spinner" class="spinner hidden"></div>
+                    </button>
+                </form>
+                
+                <div class="payment-info">
+                    <p><i class="fas fa-lock"></i> Pago seguro con Stripe</p>
+                    <p><i class="fas fa-credit-card"></i> Aceptamos Visa, Mastercard, American Express</p>
+                    <p><i class="fas fa-info-circle"></i> Sin suscripción recurrente - pago único</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="public/js/main.js?v=2"></script>
     <script src="public/js/stripe-payment.js"></script>
+    <script src="public/js/single-pick-payment.js"></script>
     <script>
         // Language management
         let currentLanguage = 'es';

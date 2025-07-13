@@ -53,6 +53,91 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Single Pick Modal Functions
+function openSinglePickModal() {
+    document.getElementById('singlePickModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSinglePickModal() {
+    document.getElementById('singlePickModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close single pick modal when clicking outside
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('singlePickModal');
+    if (event.target === modal) {
+        closeSinglePickModal();
+    }
+});
+
+// Close single pick modal with Escape key
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeSinglePickModal();
+    }
+});
+
+// Check if user has paid access
+function checkPaymentAccess() {
+    // Check localStorage for payment status
+    const hasSubscription = localStorage.getItem('hasSubscription');
+    const hasSinglePick = localStorage.getItem('hasSinglePick');
+    const singlePickDate = localStorage.getItem('singlePickDate');
+    
+    const today = new Date().toDateString();
+    
+    // If user has subscription, show picks
+    if (hasSubscription === 'true') {
+        showDailyPicks();
+        return;
+    }
+    
+    // If user has single pick for today, show picks
+    if (hasSinglePick === 'true' && singlePickDate === today) {
+        showDailyPicks();
+        return;
+    }
+    
+    // Otherwise show paywall
+    showPaywall();
+}
+
+// Show paywall
+function showPaywall() {
+    document.getElementById('dailyPicksPaywall').style.display = 'block';
+    document.getElementById('dailyPicksContainer').style.display = 'none';
+}
+
+// Show daily picks
+function showDailyPicks() {
+    document.getElementById('dailyPicksPaywall').style.display = 'none';
+    document.getElementById('dailyPicksContainer').style.display = 'block';
+    loadDailyPicks();
+}
+
+// Handle single pick payment success
+function handleSinglePickPaymentSuccess() {
+    localStorage.setItem('hasSinglePick', 'true');
+    localStorage.setItem('singlePickDate', new Date().toDateString());
+    closeSinglePickModal();
+    showDailyPicks();
+    
+    // Show success message
+    alert('¡Pago exitoso! Ya puedes ver tu pronóstico premium.');
+}
+
+// Handle subscription payment success
+function handleSubscriptionPaymentSuccess() {
+    localStorage.setItem('hasSubscription', 'true');
+    closeSubscriptionModal();
+    showDailyPicks();
+    
+    // Show success message
+    alert('¡Suscripción exitosa! Ya tienes acceso a todos los pronósticos.');
+}
+
 // Sample predictions data - Empty array to show no example matches
 const samplePredictions = [];
 
@@ -265,11 +350,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update time every 5 minutes
     setInterval(updateLastUpdate, 300000);
     
-    // Load daily picks
-    loadDailyPicks();
+    // Check payment access and show appropriate content
+    checkPaymentAccess();
     
-    // Auto-refresh picks every 30 minutes
-    setInterval(loadDailyPicks, 1800000);
+    // Auto-refresh picks every 30 minutes (only if user has access)
+    setInterval(() => {
+        if (localStorage.getItem('hasSubscription') === 'true' || 
+            (localStorage.getItem('hasSinglePick') === 'true' && 
+             localStorage.getItem('singlePickDate') === new Date().toDateString())) {
+            loadDailyPicks();
+        }
+    }, 1800000);
 });
 
 // Legal page functions
