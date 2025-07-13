@@ -1275,6 +1275,33 @@ body {
     text-decoration: underline;
 }
 
+/* Telegram Button Styles */
+.telegram-btn {
+    background: linear-gradient(135deg, #0088cc, #006699);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.telegram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.3);
+    background: linear-gradient(135deg, #006699, #004466);
+}
+
+.telegram-btn i {
+    font-size: 1.1rem;
+}
+
 /* Utility Classes */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
