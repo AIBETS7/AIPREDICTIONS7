@@ -130,17 +130,13 @@ class ResultChecker:
             
             elif prediction_type == 'over_under':
                 total_goals = home_score + away_score
-                if 'over' in prediction.lower():
-                    # Extract number from prediction (e.g., "over 2.5" -> 2.5)
-                    import re
-                    numbers = re.findall(r'\d+\.?\d*', prediction)
-                    if numbers:
-                        threshold = float(numbers[0])
+                import re
+                numbers = re.findall(r'\d+\.?\d*', prediction)
+                if numbers:
+                    threshold = float(numbers[0])
+                    if 'over' in prediction.lower():
                         return 'correct' if total_goals > threshold else 'incorrect'
-                elif 'under' in prediction.lower():
-                    numbers = re.findall(r'\d+\.?\d*', prediction)
-                    if numbers:
-                        threshold = float(numbers[0])
+                    elif 'under' in prediction.lower():
                         return 'correct' if total_goals < threshold else 'incorrect'
             
             return 'unknown'

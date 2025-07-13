@@ -6,6 +6,7 @@ from data_collector import DataCollector
 from ai_predictor import AIPredictor
 from sqlalchemy import create_engine, Table, Column, String, Float, DateTime, MetaData
 import requests
+import pytz
 
 # Configure logging
 logger.add(
@@ -17,20 +18,25 @@ logger.add(
 )
 
 def main():
+    # Get current date in Spain time
+    madrid_tz = pytz.timezone('Europe/Madrid')
+    now_madrid = datetime.now(madrid_tz)
+    today_str = now_madrid.strftime('%Y-%m-%d')
+
     # Collect latest data with validation
     collector = DataCollector()
     data = collector.get_latest_data()
 
-    # Generate predictions
+    # Generate predictions for real matches today that have not started
     ai_predictor = AIPredictor()
-    
-    # Use validated matches that are suitable for predictions
     upcoming_matches = [
         match for match in data.get('matches', [])
-        if match.get('status') in ['scheduled', 'not_started'] and
-        match.get('validation_metadata', {}).get('confidence_score', 0) >= 0.7
+        if match.get('status') in ['scheduled', 'not_started']
+        and match.get('time', '').startswith(today_str)
     ]
-    upcoming_matches = upcoming_matches[:10]
+    if not upcoming_matches:
+        logger.warning(f"No real matches found for today {today_str}.")
+        return
     all_predictions = []
     for match in upcoming_matches:
         team_data = data.get('teams', {})
@@ -50,18 +56,18 @@ def main():
                 'odds': pred.odds,
                 'reasoning': pred.reasoning,
                 'tipster': pred.tipster,
-                'created_at': pred.created_at.isoformat(),
+                'created_at': now_madrid.isoformat(),
                 'expires_at': pred.expires_at.isoformat()
             }
             all_predictions.append(pred_dict)
     if not all_predictions:
-        logger.warning("No predictions generated.")
+        logger.warning(f"No predictions generated for today {today_str}.")
         return
     # Select the best pick (highest confidence)
     best_pick = max(all_predictions, key=lambda x: x['confidence'])
-    logger.info(f"Best pick: {best_pick}")
+    logger.info(f"Best pick for {today_str}: {best_pick}")
 
-    # Log/store the pick in the database
+    # Store only one pick for today in the database
     engine = create_engine(DATABASE_URL)
     metadata = MetaData()
     picks_table = Table(
@@ -82,36 +88,13 @@ def main():
     )
     metadata.create_all(engine)
     with engine.connect() as conn:
-        # Upsert by id
-        conn.execute(picks_table.insert().prefix_with('OR REPLACE'), best_pick)
-    logger.info("Best pick stored in the database.")
-
-    # Send the pick to Telegram
-    bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '7582466483:AAHshXjaU0vu2nZsYd8wSY5pR1XJ6EHmZOQ')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID', '2070545442')
-    if bot_token and chat_id:
-        message = (
-            f"\U0001F3C6 Daily Football Pick!\n"
-            f"Match: {best_pick['home_team']} vs {best_pick['away_team']}\n"
-            f"Time: {best_pick['match_time']}\n"
-            f"Prediction: {best_pick['prediction_type']} - {best_pick['prediction']}\n"
-            f"Confidence: {best_pick['confidence']*100:.1f}%\n"
-            f"Odds: {best_pick['odds']}\n"
-            f"Reasoning: {best_pick['reasoning']}\n"
-            f"Tipster: {best_pick['tipster']}\n"
+        # Remove any previous pick for today
+        conn.execute(
+            picks_table.delete().where(picks_table.c.match_time.startswith(today_str))
         )
-        url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-        payload = {"chat_id": chat_id, "text": message}
-        try:
-            resp = requests.post(url, data=payload)
-            if resp.status_code == 200:
-                logger.info("Best pick sent to Telegram.")
-            else:
-                logger.error(f"Failed to send Telegram message: {resp.text}")
-        except Exception as e:
-            logger.error(f"Error sending Telegram message: {e}")
-    else:
-        logger.warning("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set. Skipping Telegram notification.")
+        # Insert the new pick
+        conn.execute(picks_table.insert(), best_pick)
+    logger.info(f"Stored new pick for {today_str} in the database.")
 
 if __name__ == "__main__":
     main() 

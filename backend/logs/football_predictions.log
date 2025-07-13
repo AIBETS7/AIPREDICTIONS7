@@ -20,3 +20,4 @@
 2025-07-12T22:10:47.634918+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
 2025-07-12T22:10:47.638633+0200 | INFO | Pick saved to website JSON file
 2025-07-12T22:10:47.841380+0200 | INFO | Telegram message sent successfully
+2025-07-13 17:23:37 | WARNING | __main__:main:38 - No real matches found for today 2025-07-13.
