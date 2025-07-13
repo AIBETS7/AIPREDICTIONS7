@@ -1,474 +1,456 @@
-// Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+// Main JavaScript for AI Predictions 7
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components
+    initializeNavigation();
+    initializeSmoothScrolling();
+    initializeAnimations();
+    initializeContactForm();
+    initializeNewsletterForm();
+    loadDailyPicks();
+    updateLastUpdateTime();
+    
+    // Update time every minute
+    setInterval(updateLastUpdateTime, 60000);
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
+// Navigation functionality
+function initializeNavigation() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    // Mobile menu toggle
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+    
+    // Active navigation highlighting
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 100;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) navLink.classList.add('active');
+            }
+        });
+    });
+}
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+function initializeSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
-
-// Subscription Modal Functions
-function openSubscriptionModal() {
-    document.getElementById('subscriptionModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
 }
 
-function closeSubscriptionModal() {
-    document.getElementById('subscriptionModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close modal when clicking outside
-window.addEventListener('click', (event) => {
-    const modal = document.getElementById('subscriptionModal');
-    if (event.target === modal) {
-        closeSubscriptionModal();
-    }
-});
-
-// Close modal with Escape key
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        closeSubscriptionModal();
-    }
-});
-
-// Single Pick Modal Functions
-function openSinglePickModal() {
-    document.getElementById('singlePickModal').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSinglePickModal() {
-    document.getElementById('singlePickModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Close single pick modal when clicking outside
-window.addEventListener('click', (event) => {
-    const modal = document.getElementById('singlePickModal');
-    if (event.target === modal) {
-        closeSinglePickModal();
-    }
-});
-
-// Close single pick modal with Escape key
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        closeSinglePickModal();
-    }
-});
-
-// Check if user has paid access
-function checkPaymentAccess() {
-    // Check localStorage for payment status
-    const hasSubscription = localStorage.getItem('hasSubscription');
-    const hasSinglePick = localStorage.getItem('hasSinglePick');
-    const singlePickDate = localStorage.getItem('singlePickDate');
-    
-    const today = new Date().toDateString();
-    
-    // If user has subscription, show picks
-    if (hasSubscription === 'true') {
-        showDailyPicks();
-        return;
-    }
-    
-    // If user has single pick for today, show picks
-    if (hasSinglePick === 'true' && singlePickDate === today) {
-        showDailyPicks();
-        return;
-    }
-    
-    // Otherwise show paywall
-    showPaywall();
-}
-
-// Show paywall
-function showPaywall() {
-    document.getElementById('dailyPicksPaywall').style.display = 'block';
-    document.getElementById('dailyPicksContainer').style.display = 'none';
-}
-
-// Show daily picks
-function showDailyPicks() {
-    document.getElementById('dailyPicksPaywall').style.display = 'none';
-    document.getElementById('dailyPicksContainer').style.display = 'block';
-    loadDailyPicks();
-}
-
-// Handle single pick payment success
-function handleSinglePickPaymentSuccess() {
-    localStorage.setItem('hasSinglePick', 'true');
-    localStorage.setItem('singlePickDate', new Date().toDateString());
-    closeSinglePickModal();
-    showDailyPicks();
-    
-    // Show success message
-    alert('¡Pago exitoso! Ya puedes ver tu pronóstico premium.');
-}
-
-// Handle subscription payment success
-function handleSubscriptionPaymentSuccess() {
-    localStorage.setItem('hasSubscription', 'true');
-    closeSubscriptionModal();
-    showDailyPicks();
-    
-    // Show success message
-    alert('¡Suscripción exitosa! Ya tienes acceso a todos los pronósticos.');
-}
-
-// Sample predictions data - Empty array to show no example matches
-const samplePredictions = [];
-
-// Load predictions into the grid
-function loadPredictions() {
-    const predictionsGrid = document.getElementById('predictionsGrid');
-    if (!predictionsGrid) return;
-
-    predictionsGrid.innerHTML = samplePredictions.map(prediction => `
-        <div class="prediction-card">
-            <div class="prediction-header">
-                <h4>${prediction.match}</h4>
-                <span class="confidence-badge">${prediction.confidence}</span>
-            </div>
-            <div class="prediction-details">
-                <div class="prediction-main">
-                    <span class="prediction-text">${prediction.prediction}</span>
-                    <span class="odds">@ ${prediction.odds}</span>
-                </div>
-                <div class="tipster-name">${prediction.tipster}</div>
-                <div class="reasoning">${prediction.reasoning}</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Update last update time
-function updateLastUpdate() {
-    const lastUpdateElement = document.getElementById('lastUpdate');
-    if (lastUpdateElement) {
-        const now = new Date();
-        const minutes = Math.floor(Math.random() * 10) + 1;
-        lastUpdateElement.textContent = `${minutes} min ago`;
+// Scroll to section function
+function scrollToSection(sectionId) {
+    const section = document.querySelector(`#${sectionId}`);
+    if (section) {
+        const offsetTop = section.offsetTop - 80;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
     }
 }
 
-// Daily Picks Functions
-async function loadDailyPicks() {
-    const container = document.getElementById('dailyPicksContainer');
-    const updateTime = document.getElementById('picksUpdateTime');
-    const picksCount = document.getElementById('picksCount');
+// Initialize animations
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
     
-    if (!container) return;
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
     
-    // Show loading state
-    container.innerHTML = `
-        <div class="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>Loading today's picks...</p>
-        </div>
-    `;
-    
-    try {
-        // Use production API URL or fallback to localhost for development
-        const apiUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:8000/api/daily-picks'
-            : 'https://myfootballpredictions.onrender.com/api/daily-picks';
-        
-        const response = await fetch(apiUrl);
-        
-        if (!response.ok) {
-            throw new Error('Failed to load picks');
-        }
-        
-        const picks = await response.json();
-        
-        // Update timestamp
-        if (updateTime) {
-            updateTime.textContent = new Date().toLocaleString();
-        }
-        
-        // Update count
-        if (picksCount) {
-            picksCount.textContent = picks.length;
-        }
-        
-        if (picks.length === 0) {
-            container.innerHTML = `
-                <div class="no-picks">
-                    <i class="fas fa-calendar-times"></i>
-                    <h3>No picks available today</h3>
-                    <p>Check back later for new predictions or try refreshing the page.</p>
-                </div>
-            `;
-            return;
-        }
-        
-        // Display picks
-        container.innerHTML = picks.map(pick => `
-            <div class="pick-card">
-                <div class="pick-header">
-                    <div class="pick-competition ${pick.competition === 'Women\'s Euro' ? 'womens-euro' : 'la-liga'}">
-                        <i class="fas ${pick.competition === 'Women\'s Euro' ? 'fa-trophy' : 'fa-futbol'}"></i>
-                        ${pick.competition}
-                    </div>
-                    <div class="pick-confidence">${pick.confidence}%</div>
-                </div>
-                
-                <div class="pick-match">${pick.home_team} vs ${pick.away_team}</div>
-                <div class="pick-time">
-                    <i class="fas fa-clock"></i>
-                    ${new Date(pick.match_time).toLocaleString()}
-                </div>
-                
-                <div class="pick-details">
-                    <div class="pick-detail">
-                        <span class="pick-detail-label">Prediction:</span>
-                        <span class="pick-detail-value">${pick.prediction}</span>
-                    </div>
-                    <div class="pick-detail">
-                        <span class="pick-detail-label">Odds:</span>
-                        <span class="pick-detail-value">@ ${pick.odds}</span>
-                    </div>
-                    <div class="pick-detail">
-                        <span class="pick-detail-label">Stake:</span>
-                        <span class="pick-detail-value">€${pick.stake}</span>
-                    </div>
-                </div>
-                
-                <div class="pick-reasoning">
-                    <h4><i class="fas fa-lightbulb"></i> AI Reasoning</h4>
-                    <p>${pick.reasoning}</p>
-                </div>
-                
-                <div class="pick-footer">
-                    <div class="pick-tipster">
-                        <i class="fas fa-robot"></i>
-                        Generated by AI Tipster
-                    </div>
-                    <div class="pick-id">#${pick.id}</div>
-                </div>
-            </div>
-        `).join('');
-        
-    } catch (error) {
-        console.error('Error loading daily picks:', error);
-        container.innerHTML = `
-            <div class="no-picks">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Error loading picks</h3>
-                <p>Unable to load today's predictions. Please try again later.</p>
-                <button class="refresh-btn" onclick="loadDailyPicks()" style="margin-top: 1rem;">
-                    <i class="fas fa-sync-alt"></i>
-                    Try Again
-                </button>
-            </div>
-        `;
-    }
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll('.stat-card, .tipster-card, .pick-card');
+    animateElements.forEach(el => observer.observe(el));
 }
 
-// Load daily picks when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Contact form submission
+// Contact form functionality
+function initializeContactForm() {
     const contactForm = document.getElementById('contactForm');
+    
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
             
-            // Simulate form submission
-            console.log('Contact form submitted:', data);
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
             
-            // Show success message
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                showNotification('¡Mensaje enviado con éxito! Te responderemos pronto.', 'success');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
         });
     }
+}
 
-    // Payment form submission
-    const paymentForm = document.getElementById('paymentForm');
-    if (paymentForm) {
-        paymentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Simulate payment processing
-            console.log('Payment form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for subscribing! You will receive a confirmation email shortly.');
-            closeSubscriptionModal();
-            this.reset();
-        });
-    }
-
-    // Newsletter form submission
+// Newsletter form functionality
+function initializeNewsletterForm() {
     const newsletterForm = document.querySelector('.newsletter-form');
+    
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = this.querySelector('input[type="email"]').value;
-            console.log('Newsletter subscription:', email);
+            const submitBtn = this.querySelector('button');
+            const originalText = submitBtn.innerHTML;
             
-            alert('Thank you for subscribing to our newsletter!');
-            this.reset();
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+            
+            // Simulate subscription (replace with actual API call)
+            setTimeout(() => {
+                showNotification('¡Te has suscrito exitosamente! Recibirás nuestras mejores predicciones.', 'success');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
         });
     }
+}
 
-    // Load initial data
-    loadPredictions();
-    updateLastUpdate();
+// Load daily picks
+function loadDailyPicks() {
+    const picksContainer = document.getElementById('picksContainer');
+    const picksCount = document.getElementById('picksCount');
     
-    // Update time every 5 minutes
-    setInterval(updateLastUpdate, 300000);
+    if (!picksContainer) return;
     
-    // Check payment access and show appropriate content
-    checkPaymentAccess();
+    // Show loading state
+    picksContainer.innerHTML = `
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Cargando pronósticos...</p>
+        </div>
+    `;
     
-    // Auto-refresh picks every 30 minutes (only if user has access)
-    setInterval(() => {
-        if (localStorage.getItem('hasSubscription') === 'true' || 
-            (localStorage.getItem('hasSinglePick') === 'true' && 
-             localStorage.getItem('singlePickDate') === new Date().toDateString())) {
-            loadDailyPicks();
-        }
-    }, 1800000);
-});
-
-// Legal page functions
-function showTerms() {
-    alert('Terms of Service\n\n1. This service provides AI-powered football predictions for entertainment purposes only.\n2. Users are responsible for their own betting decisions.\n3. We do not guarantee any specific results.\n4. Subscription fees are non-refundable.\n5. Users must be 18+ to use this service.');
-}
-
-function showPrivacy() {
-    alert('Privacy Policy\n\n1. We collect only necessary information for service provision.\n2. Your data is encrypted and securely stored.\n3. We do not share your information with third parties.\n4. You can request data deletion at any time.\n5. We use cookies to improve user experience.');
-}
-
-function showDisclaimer() {
-    alert('Disclaimer\n\nThis website provides AI-powered football predictions for informational purposes only. We do not guarantee the accuracy of predictions, and users should not rely solely on this information for betting decisions. Please gamble responsibly and within your means.');
-}
-
-function showResponsible() {
-    alert('Responsible Gambling\n\n1. Only gamble with money you can afford to lose.\n2. Set limits on time and money spent.\n3. Never chase losses.\n4. Take regular breaks.\n5. If you have a gambling problem, seek help from professional organizations.');
-}
-
-// Add some interactive animations
-document.addEventListener('DOMContentLoaded', function() {
-    // Animate stats on scroll
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    // Fetch picks from API
+    fetch('https://myfootballpredictions.onrender.com/api/daily-picks')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.picks && data.picks.length > 0) {
+                displayPicks(data.picks);
+                if (picksCount) picksCount.textContent = data.picks.length;
+            } else {
+                showNoPicks();
+                if (picksCount) picksCount.textContent = '0';
             }
+        })
+        .catch(error => {
+            console.error('Error loading picks:', error);
+            showNoPicks();
+            if (picksCount) picksCount.textContent = '0';
         });
-    }, observerOptions);
+}
 
-    // Observe all stat cards
-    document.querySelectorAll('.stat-card, .tipster-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
+// Display picks
+function displayPicks(picks) {
+    const picksContainer = document.getElementById('picksContainer');
+    
+    const picksHTML = picks.map(pick => `
+        <div class="pick-card fade-in">
+            <div class="pick-header">
+                <div class="pick-competition ${pick.competition?.toLowerCase().includes('euro') ? 'womens-euro' : 'la-liga'}">
+                    ${pick.competition || 'Liga Española'}
+                </div>
+                <div class="pick-confidence">
+                    ${Math.round(pick.confidence * 100)}% Confianza
+                </div>
+            </div>
+            
+            <div class="pick-match">
+                ${pick.home_team} vs ${pick.away_team}
+            </div>
+            
+            <div class="pick-time">
+                <i class="fas fa-clock"></i>
+                ${formatMatchTime(pick.match_time)}
+            </div>
+            
+            <div class="pick-details">
+                <div class="pick-detail">
+                    <div class="pick-detail-label">Predicción</div>
+                    <div class="pick-detail-value">${pick.prediction}</div>
+                </div>
+                <div class="pick-detail">
+                    <div class="pick-detail-label">Tipo</div>
+                    <div class="pick-detail-value">${formatPredictionType(pick.prediction_type)}</div>
+                </div>
+                <div class="pick-detail">
+                    <div class="pick-detail-label">Cuota</div>
+                    <div class="pick-detail-value">${pick.odds ? pick.odds.toFixed(2) : 'N/A'}</div>
+                </div>
+            </div>
+            
+            ${pick.reasoning ? `
+                <div class="pick-reasoning">
+                    <h4><i class="fas fa-lightbulb"></i> Análisis</h4>
+                    <p>${pick.reasoning}</p>
+                </div>
+            ` : ''}
+            
+            <div class="pick-footer">
+                <div class="pick-tipster">
+                    <i class="fas fa-user-tie"></i>
+                    ${pick.tipster || 'AI Predictions 7'}
+                </div>
+                ${pick.result_status ? `
+                    <div class="pick-result ${pick.result_status}">
+                        <i class="fas fa-${pick.result_status === 'correct' ? 'check-circle' : 'times-circle'}"></i>
+                        ${pick.result_status === 'correct' ? 'Correcto' : 'Incorrecto'}
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `).join('');
+    
+    picksContainer.innerHTML = picksHTML;
+}
+
+// Show no picks message
+function showNoPicks() {
+    const picksContainer = document.getElementById('picksContainer');
+    
+    picksContainer.innerHTML = `
+        <div class="no-picks">
+            <i class="fas fa-calendar-times"></i>
+            <h3>No hay picks disponibles</h3>
+            <p>No hay pronósticos disponibles para hoy. Vuelve más tarde o suscríbete para recibir picks premium.</p>
+            <button class="cta-btn primary" onclick="openSubscriptionModal()">
+                <i class="fas fa-crown"></i>
+                Suscribirse para Picks Premium
+            </button>
+        </div>
+    `;
+}
+
+// Format match time
+function formatMatchTime(timeString) {
+    if (!timeString) return 'Hora por confirmar';
+    
+    try {
+        const date = new Date(timeString);
+        return date.toLocaleString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (error) {
+        return timeString;
+    }
+}
+
+// Format prediction type
+function formatPredictionType(type) {
+    const types = {
+        'match_winner': 'Ganador del Partido',
+        'over_under': 'Más/Menos Goles',
+        'both_teams_score': 'Ambos Marcan',
+        'correct_score': 'Resultado Exacto',
+        'first_goalscorer': 'Primer Goleador',
+        'half_time_result': 'Resultado al Descanso',
+        'double_chance': 'Doble Oportunidad'
+    };
+    
+    return types[type] || type;
+}
+
+// Update last update time
+function updateLastUpdateTime() {
+    const lastUpdate = document.getElementById('lastUpdate');
+    const lastPicksUpdate = document.getElementById('lastPicksUpdate');
+    
+    if (lastUpdate) {
+        lastUpdate.textContent = 'hace 2 min';
+    }
+    
+    if (lastPicksUpdate) {
+        lastPicksUpdate.textContent = 'hace 5 min';
+    }
+}
+
+// Modal functions
+function openSubscriptionModal() {
+    const modal = document.getElementById('subscriptionModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeSubscriptionModal() {
+    const modal = document.getElementById('subscriptionModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function openSinglePickModal() {
+    const modal = document.getElementById('singlePickModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeSinglePickModal() {
+    const modal = document.getElementById('singlePickModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Process subscription
+function processSubscription() {
+    // This will be handled by the Stripe integration
+    console.log('Processing subscription...');
+    // For now, show a notification
+    showNotification('Redirigiendo a Stripe para completar la suscripción...', 'info');
+}
+
+// Process single pick
+function processSinglePick() {
+    openSinglePickModal();
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        z-index: 3000;
+        animation: slideInRight 0.3s ease;
+        max-width: 400px;
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Close modals when clicking outside
+window.addEventListener('click', function(event) {
+    const subscriptionModal = document.getElementById('subscriptionModal');
+    const singlePickModal = document.getElementById('singlePickModal');
+    
+    if (event.target === subscriptionModal) {
+        closeSubscriptionModal();
+    }
+    
+    if (event.target === singlePickModal) {
+        closeSinglePickModal();
+    }
 });
 
-// Add CSS for prediction cards
-const style = document.createElement('style');
-style.textContent = `
-    .prediction-card {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #2563eb;
+// Close modals with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeSubscriptionModal();
+        closeSinglePickModal();
     }
+});
 
-    .prediction-header {
+// Add notification styles
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    .notification-content {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        gap: 0.75rem;
     }
-
-    .prediction-header h4 {
-        margin: 0;
-        color: #1e293b;
-        font-size: 1rem;
-    }
-
-    .confidence-badge {
-        background: #10b981;
+    
+    .notification-content button {
+        background: none;
+        border: none;
         color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.8rem;
-        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        margin-left: auto;
     }
-
-    .prediction-main {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.5rem;
-    }
-
-    .prediction-text {
-        font-weight: 600;
-        color: #2563eb;
-    }
-
-    .odds {
-        background: #f1f5f9;
-        padding: 0.25rem 0.5rem;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        color: #64748b;
-    }
-
-    .tipster-name {
-        font-size: 0.8rem;
-        color: #64748b;
-        margin-bottom: 0.5rem;
-    }
-
-    .reasoning {
-        font-size: 0.9rem;
-        color: #475569;
-        font-style: italic;
+    
+    .notification-content i:first-child {
+        font-size: 1.2rem;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(notificationStyles);

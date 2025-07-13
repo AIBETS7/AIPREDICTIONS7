@@ -1,24 +1,26 @@
-// API Integration for AI Football Predictions
-
-class FootballAPI {
-    constructor(baseURL = 'http://localhost:5000/api') {
-        this.baseURL = baseURL;
-        this.cache = new Map();
-        this.cacheTimeout = 5 * 60 * 1000; // 5 minutes
+// API handling for AI Predictions 7
+class APIService {
+    constructor() {
+        this.baseURL = 'https://myfootballpredictions.onrender.com/api';
+        this.timeout = 10000; // 10 seconds
     }
 
-    // Generic API request method
-    async makeRequest(endpoint, options = {}) {
-        const url = `${this.baseURL}${endpoint}`;
-        
+    // Generic fetch method with error handling
+    async fetchWithTimeout(url, options = {}) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+
         try {
             const response = await fetch(url, {
+                ...options,
+                signal: controller.signal,
                 headers: {
                     'Content-Type': 'application/json',
                     ...options.headers
-                },
-                ...options
+                }
             });
+
+            clearTimeout(timeoutId);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,215 +28,351 @@ class FootballAPI {
 
             return await response.json();
         } catch (error) {
-            console.error(`API request failed for ${endpoint}:`, error);
+            clearTimeout(timeoutId);
+            
+            if (error.name === 'AbortError') {
+                throw new Error('Request timeout');
+            }
+            
             throw error;
         }
     }
 
-    // Check if data is cached and not expired
-    getCachedData(key) {
-        const cached = this.cache.get(key);
-        if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
-            return cached.data;
+    // Get daily picks
+    async getDailyPicks() {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/daily-picks`);
+            return {
+                success: true,
+                picks: data.picks || [],
+                message: 'Picks loaded successfully'
+            };
+        } catch (error) {
+            console.error('Error fetching daily picks:', error);
+            return {
+                success: false,
+                picks: [],
+                message: 'Error loading picks: ' + error.message
+            };
         }
-        return null;
     }
 
-    // Cache data with timestamp
-    setCachedData(key, data) {
-        this.cache.set(key, {
-            data: data,
-            timestamp: Date.now()
-        });
+    // Get AI statistics
+    async getAIStats() {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/ai-stats`);
+            return {
+                success: true,
+                stats: data.stats || {},
+                message: 'Stats loaded successfully'
+            };
+        } catch (error) {
+            console.error('Error fetching AI stats:', error);
+            return {
+                success: false,
+                stats: {},
+                message: 'Error loading stats: ' + error.message
+            };
+        }
     }
 
-    // Health check
-    async healthCheck() {
-        return await this.makeRequest('/health');
+    // Get predictions preview
+    async getPredictionsPreview() {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/predictions-preview`);
+            return {
+                success: true,
+                predictions: data.predictions || [],
+                message: 'Predictions loaded successfully'
+            };
+        } catch (error) {
+            console.error('Error fetching predictions preview:', error);
+            return {
+                success: false,
+                predictions: [],
+                message: 'Error loading predictions: ' + error.message
+            };
+        }
+    }
+
+    // Check payment status
+    async checkPaymentStatus() {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/payment-status`);
+            return {
+                success: true,
+                status: data.status || 'unknown',
+                message: 'Payment status checked successfully'
+            };
+        } catch (error) {
+            console.error('Error checking payment status:', error);
+            return {
+                success: false,
+                status: 'unknown',
+                message: 'Error checking payment status: ' + error.message
+            };
+        }
     }
 
     // Get system status
-    async getStatus() {
-        const cached = this.getCachedData('status');
-        if (cached) return cached;
-
-        const data = await this.makeRequest('/status');
-        this.setCachedData('status', data);
-        return data;
-    }
-
-    // Get AI predictions
-    async getPredictions() {
-        const cached = this.getCachedData('predictions');
-        if (cached) return cached;
-
-        const data = await this.makeRequest('/predictions');
-        this.setCachedData('predictions', data);
-        return data;
-    }
-
-    // Get matches
-    async getMatches() {
-        const cached = this.getCachedData('matches');
-        if (cached) return cached;
-
-        const data = await this.makeRequest('/matches');
-        this.setCachedData('matches', data);
-        return data;
-    }
-
-    // Get teams
-    async getTeams() {
-        const cached = this.getCachedData('teams');
-        if (cached) return cached;
-
-        const data = await this.makeRequest('/teams');
-        this.setCachedData('teams', data);
-        return data;
-    }
-
-    // Trigger data collection
-    async collectData(daysBack = 7, daysForward = 7) {
-        const data = await this.makeRequest('/collect-data', {
-            method: 'POST',
-            body: JSON.stringify({
-                days_back: daysBack,
-                days_forward: daysForward
-            })
-        });
-
-        // Clear cache after data collection
-        this.cache.clear();
-        return data;
-    }
-
-    // Train AI models
-    async trainModels() {
-        return await this.makeRequest('/train-models', {
-            method: 'POST'
-        });
-    }
-
-    // Format prediction for display
-    formatPrediction(prediction) {
-        return {
-            id: prediction.id,
-            match: `${prediction.home_team} vs ${prediction.away_team}`,
-            prediction: prediction.prediction,
-            confidence: (prediction.confidence * 100).toFixed(1) + '%',
-            odds: prediction.odds,
-            reasoning: prediction.reasoning,
-            tipster: prediction.tipster,
-            type: prediction.prediction_type,
-            created_at: new Date(prediction.created_at).toLocaleString()
-        };
-    }
-
-    // Get predictions grouped by match
-    async getPredictionsByMatch() {
-        const response = await this.getPredictions();
-        if (!response.success) return [];
-
-        const predictions = response.predictions;
-        const grouped = {};
-
-        predictions.forEach(pred => {
-            const matchKey = `${pred.home_team} vs ${pred.away_team}`;
-            if (!grouped[matchKey]) {
-                grouped[matchKey] = {
-                    match: matchKey,
-                    home_team: pred.home_team,
-                    away_team: pred.away_team,
-                    match_time: pred.match_time,
-                    predictions: []
-                };
-            }
-            grouped[matchKey].predictions.push(this.formatPrediction(pred));
-        });
-
-        return Object.values(grouped);
-    }
-
-    // Get top predictions by confidence
-    async getTopPredictions(limit = 10) {
-        const response = await this.getPredictions();
-        if (!response.success) return [];
-
-        return response.predictions
-            .sort((a, b) => b.confidence - a.confidence)
-            .slice(0, limit)
-            .map(pred => this.formatPrediction(pred));
-    }
-
-    // Get predictions by type
-    async getPredictionsByType(type) {
-        const response = await this.getPredictions();
-        if (!response.success) return [];
-
-        return response.predictions
-            .filter(pred => pred.prediction_type === type)
-            .sort((a, b) => b.confidence - a.confidence)
-            .map(pred => this.formatPrediction(pred));
-    }
-
-    // Get team statistics
-    async getTeamStats(teamName) {
-        const response = await this.getTeams();
-        if (!response.success) return null;
-
-        return response.teams.find(team => team.name === teamName);
-    }
-
-    // Get upcoming matches
-    async getUpcomingMatches(limit = 10) {
-        const response = await this.getMatches();
-        if (!response.success) return [];
-
-        return response.matches
-            .filter(match => match.status === 'scheduled')
-            .slice(0, limit);
-    }
-
-    // Get live matches
-    async getLiveMatches() {
-        const response = await this.getMatches();
-        if (!response.success) return [];
-
-        return response.matches.filter(match => match.status === 'live');
-    }
-
-    // Get finished matches
-    async getFinishedMatches(limit = 20) {
-        const response = await this.getMatches();
-        if (!response.success) return [];
-
-        return response.matches
-            .filter(match => match.status === 'finished')
-            .slice(0, limit);
-    }
-
-    // Clear cache
-    clearCache() {
-        this.cache.clear();
-    }
-
-    // Refresh all data
-    async refreshAllData() {
+    async getSystemStatus() {
         try {
-            await this.collectData();
-            this.clearCache();
-            return true;
+            const data = await this.fetchWithTimeout(`${this.baseURL}/status`);
+            return {
+                success: true,
+                status: data,
+                message: 'System status loaded successfully'
+            };
         } catch (error) {
-            console.error('Error refreshing data:', error);
-            return false;
+            console.error('Error fetching system status:', error);
+            return {
+                success: false,
+                status: null,
+                message: 'Error loading system status: ' + error.message
+            };
+        }
+    }
+
+    // Submit contact form
+    async submitContactForm(formData) {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/contact`, {
+                method: 'POST',
+                body: JSON.stringify(formData)
+            });
+            return {
+                success: true,
+                message: 'Message sent successfully'
+            };
+        } catch (error) {
+            console.error('Error submitting contact form:', error);
+            return {
+                success: false,
+                message: 'Error sending message: ' + error.message
+            };
+        }
+    }
+
+    // Subscribe to newsletter
+    async subscribeNewsletter(email) {
+        try {
+            const data = await this.fetchWithTimeout(`${this.baseURL}/newsletter`, {
+                method: 'POST',
+                body: JSON.stringify({ email })
+            });
+            return {
+                success: true,
+                message: 'Newsletter subscription successful'
+            };
+        } catch (error) {
+            console.error('Error subscribing to newsletter:', error);
+            return {
+                success: false,
+                message: 'Error subscribing to newsletter: ' + error.message
+            };
         }
     }
 }
 
-// Global API instance
-const footballAPI = new FootballAPI();
+// Initialize API service
+const apiService = new APIService();
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = FootballAPI;
-}
+// Export for use in other files
+window.apiService = apiService;
+
+// Utility functions for data formatting
+const DataFormatter = {
+    // Format prediction type for display
+    formatPredictionType(type) {
+        const types = {
+            'match_winner': 'Ganador del Partido',
+            'over_under': 'Más/Menos Goles',
+            'both_teams_score': 'Ambos Marcan',
+            'correct_score': 'Resultado Exacto',
+            'first_goalscorer': 'Primer Goleador',
+            'half_time_result': 'Resultado al Descanso',
+            'double_chance': 'Doble Oportunidad',
+            'draw_no_bet': 'Empate No Válido',
+            'exact_goals': 'Goles Exactos',
+            'clean_sheet': 'Portería a Cero'
+        };
+        
+        return types[type] || type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    },
+
+    // Format match time
+    formatMatchTime(timeString) {
+        if (!timeString) return 'Hora por confirmar';
+        
+        try {
+            const date = new Date(timeString);
+            const now = new Date();
+            const diffTime = date - now;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays < 0) {
+                return 'Partido finalizado';
+            } else if (diffDays === 0) {
+                return `Hoy a las ${date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
+            } else if (diffDays === 1) {
+                return `Mañana a las ${date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
+            } else {
+                return date.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    day: 'numeric',
+                    month: 'long',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+        } catch (error) {
+            return timeString;
+        }
+    },
+
+    // Format confidence percentage
+    formatConfidence(confidence) {
+        if (typeof confidence === 'number') {
+            return Math.round(confidence * 100) + '%';
+        }
+        return confidence || 'N/A';
+    },
+
+    // Format odds
+    formatOdds(odds) {
+        if (typeof odds === 'number') {
+            return odds.toFixed(2);
+        }
+        return odds || 'N/A';
+    },
+
+    // Get competition color class
+    getCompetitionClass(competition) {
+        if (!competition) return 'la-liga';
+        
+        const competitionLower = competition.toLowerCase();
+        
+        if (competitionLower.includes('euro') || competitionLower.includes('uefa')) {
+            return 'womens-euro';
+        } else if (competitionLower.includes('champions')) {
+            return 'champions-league';
+        } else if (competitionLower.includes('premier')) {
+            return 'premier-league';
+        } else if (competitionLower.includes('bundesliga')) {
+            return 'bundesliga';
+        } else if (competitionLower.includes('serie a')) {
+            return 'serie-a';
+        } else {
+            return 'la-liga';
+        }
+    },
+
+    // Get result status class
+    getResultStatusClass(status) {
+        if (!status) return '';
+        
+        switch (status.toLowerCase()) {
+            case 'correct':
+                return 'correct';
+            case 'incorrect':
+                return 'incorrect';
+            case 'pending':
+                return 'pending';
+            default:
+                return '';
+        }
+    }
+};
+
+// Export formatter
+window.DataFormatter = DataFormatter;
+
+// Error handling utilities
+const ErrorHandler = {
+    // Show user-friendly error message
+    showError(error, context = '') {
+        console.error(`Error in ${context}:`, error);
+        
+        let message = 'Ha ocurrido un error inesperado.';
+        
+        if (error.message.includes('timeout')) {
+            message = 'La solicitud ha tardado demasiado. Inténtalo de nuevo.';
+        } else if (error.message.includes('network')) {
+            message = 'Error de conexión. Verifica tu internet.';
+        } else if (error.message.includes('404')) {
+            message = 'Recurso no encontrado.';
+        } else if (error.message.includes('500')) {
+            message = 'Error del servidor. Inténtalo más tarde.';
+        }
+        
+        // Show notification
+        if (window.showNotification) {
+            window.showNotification(message, 'error');
+        } else {
+            alert(message);
+        }
+    },
+
+    // Retry function with exponential backoff
+    async retry(fn, maxRetries = 3, delay = 1000) {
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                return await fn();
+            } catch (error) {
+                if (i === maxRetries - 1) throw error;
+                
+                await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+            }
+        }
+    }
+};
+
+// Export error handler
+window.ErrorHandler = ErrorHandler;
+
+// Cache management
+const CacheManager = {
+    cache: new Map(),
+    
+    // Set cache item
+    set(key, value, ttl = 300000) { // 5 minutes default
+        this.cache.set(key, {
+            value,
+            expiry: Date.now() + ttl
+        });
+    },
+    
+    // Get cache item
+    get(key) {
+        const item = this.cache.get(key);
+        if (!item) return null;
+        
+        if (Date.now() > item.expiry) {
+            this.cache.delete(key);
+            return null;
+        }
+        
+        return item.value;
+    },
+    
+    // Clear cache
+    clear() {
+        this.cache.clear();
+    },
+    
+    // Clear expired items
+    cleanup() {
+        const now = Date.now();
+        for (const [key, item] of this.cache.entries()) {
+            if (now > item.expiry) {
+                this.cache.delete(key);
+            }
+        }
+    }
+};
+
+// Export cache manager
+window.CacheManager = CacheManager;
+
+// Clean up cache periodically
+setInterval(() => CacheManager.cleanup(), 60000); // Every minute
