@@ -46,7 +46,7 @@ football-predictions-website/
 - Specialization tags for different betting types
 
 ### Subscription System
-- €15/month subscription model
+- €19,99/month subscription model
 - Payment form with card details
 - Terms and conditions integration
 - Responsive modal design
