@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeNewsletterForm();
     loadDailyPicks();
     updateLastUpdateTime();
+    loadTipsterStats();
     
     // Update time every minute
     setInterval(updateLastUpdateTime, 60000);
@@ -493,4 +494,34 @@ function openTelegram(username) {
         // Fallback: show message to user
         alert('Para unirte a nuestro grupo de Telegram, usa el enlace: https://t.me/+101AkcLj0SYxOTZk');
     }
+}
+
+function loadTipsterStats() {
+    const statsMap = {
+        'unidades_ganadas': document.querySelector('.stat-value-unidades'),
+        'yield': document.querySelector('.stat-value-yield'),
+        'picks': document.querySelector('.stat-value-picks'),
+        'cuota_media': document.querySelector('.stat-value-cuota'),
+        'win_rate': document.querySelector('.stat-value-winrate'),
+        'stake_medio': document.querySelector('.stat-value-stake'),
+        'seguidores': document.querySelector('.stat-value-seguidores')
+    };
+    fetch('https://myfootballpredictions.onrender.com/api/tipster-stats')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.stats) {
+                for (const key in statsMap) {
+                    if (statsMap[key] && data.stats[key]) {
+                        statsMap[key].textContent = data.stats[key];
+                    }
+                }
+            }
+        })
+        .catch(() => {
+            for (const key in statsMap) {
+                if (statsMap[key]) {
+                    statsMap[key].textContent = '-';
+                }
+            }
+        });
 }
