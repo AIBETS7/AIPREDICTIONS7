@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadBetexplorerStats();
     loadApifootballFixtures();
     loadFootballdataLaliga();
+    loadWhoscoredLaliga();
     
     // Update time every minute
     setInterval(updateLastUpdateTime, 60000);
@@ -586,4 +587,11 @@ function loadFootballdataLaliga() {
         .then(res => res.json())
         .then(json => renderDataToSection('footballdata-laliga', json.data || json))
         .catch(() => renderDataToSection('footballdata-laliga', {error: 'No disponible'}));
+}
+
+function loadWhoscoredLaliga() {
+    fetch('https://myfootballpredictions.onrender.com/api/whoscored-laliga')
+        .then(res => res.json())
+        .then(json => renderDataToSection('whoscored-laliga', json.data || json))
+        .catch(() => renderDataToSection('whoscored-laliga', {error: 'No disponible'}));
 }

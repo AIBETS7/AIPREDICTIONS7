@@ -56,4 +56,9 @@ def api_apifootball_fixtures():
 @app.route('/api/footballdata-laliga')
 def api_footballdata_laliga():
     data = load_json_data('footballdata_laliga.json')
+    return jsonify({'success': bool(data), 'data': data})
+
+@app.route('/api/whoscored-laliga')
+def api_whoscored_laliga():
+    data = load_json_data('whoscored_laliga.json')
     return jsonify({'success': bool(data), 'data': data}) 
