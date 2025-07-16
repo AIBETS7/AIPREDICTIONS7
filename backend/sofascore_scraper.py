@@ -14,22 +14,34 @@ headers = {
     'Referer': 'https://www.google.com/'
 }
 
-# Proxy HTTP gratuito de ejemplo (puedes cambiarlo por uno de pago o más fiable)
-PROXY = {
-    'http': 'http://51.158.68.68:8811',
-    'https': 'http://51.158.68.68:8811',
-}
+# Pool de proxies gratuitos (puedes actualizar la lista periódicamente)
+PROXIES = [
+    {'http': 'http://51.158.68.68:8811', 'https': 'http://51.158.68.68:8811'},
+    {'http': 'http://51.91.144.39:80', 'https': 'http://51.91.144.39:80'},
+    {'http': 'http://51.38.191.164:80', 'https': 'http://51.38.191.164:80'},
+    {'http': 'http://163.172.182.164:3128', 'https': 'http://163.172.182.164:3128'},
+    {'http': 'http://51.75.147.41:3128', 'https': 'http://51.75.147.41:3128'},
+]
+
+def try_request_with_proxies(url, headers, proxies_list, timeout=10):
+    for idx, proxy in enumerate(proxies_list):
+        try:
+            print(f"Intentando con proxy {idx+1}/{len(proxies_list)}: {proxy['http']}")
+            resp = requests.get(url, headers=headers, proxies=proxy, timeout=timeout)
+            resp.raise_for_status()
+            print(f"Scraping con proxy {proxy['http']} OK")
+            return resp
+        except Exception as e:
+            print(f"Proxy {proxy['http']} falló: {e}")
+            continue
+    print("Todos los proxies fallaron. Intentando sin proxy...")
+    resp = requests.get(url, headers=headers, timeout=timeout)
+    resp.raise_for_status()
+    return resp
 
 def scrape_sofascore():
     time.sleep(1)  # Pequeño retardo para evitar bloqueos
-    try:
-        resp = requests.get(SOFA_URL, headers=headers, proxies=PROXY, timeout=10)
-        resp.raise_for_status()
-        print("Scraping con proxy OK")
-    except Exception as e:
-        print(f"Proxy falló ({e}), intentando sin proxy...")
-        resp = requests.get(SOFA_URL, headers=headers, timeout=10)
-        resp.raise_for_status()
+    resp = try_request_with_proxies(SOFA_URL, headers, PROXIES)
     soup = BeautifulSoup(resp.text, 'html.parser')
     matches = []
     for event in soup.select('a.sc-hLBbgP'):
