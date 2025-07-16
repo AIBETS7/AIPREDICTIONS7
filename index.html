@@ -500,6 +500,40 @@
                                 <i class="fas fa-star"></i>
                                 Comprar Pick Único
                             </button>
+                            <!-- PayPal Button for Single Pick -->
+                            <div id="paypal-single-pick-container" style="margin-top: 16px;"></div>
+                            <script>
+                                if (window.paypal) {
+                                    paypal.Buttons({
+                                        style: {
+                                            layout: 'vertical',
+                                            color:  'blue',
+                                            shape:  'rect',
+                                            label:  'paypal'
+                                        },
+                                        createOrder: function(data, actions) {
+                                            return actions.order.create({
+                                                purchase_units: [{
+                                                    amount: {
+                                                        value: '3.99',
+                                                        currency_code: 'EUR'
+                                                    },
+                                                    description: 'Pick Único AI Predictions 7'
+                                                }]
+                                            });
+                                        },
+                                        onApprove: function(data, actions) {
+                                            return actions.order.capture().then(function(details) {
+                                                alert('¡Pago completado por ' + details.payer.name.given_name + '!');
+                                                // Aquí puedes llamar a tu backend para enviar el pick único
+                                            });
+                                        },
+                                        onError: function(err) {
+                                            alert('Error en el pago con PayPal: ' + err);
+                                        }
+                                    }).render('#paypal-single-pick-container');
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
