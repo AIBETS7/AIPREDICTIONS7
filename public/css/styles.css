@@ -1353,3 +1353,90 @@ body {
 .slide-in-right {
     animation: slideInRight 0.6s ease;
 }
+
+/* Tipster Card Modern Styles */
+.tipster-card.modern {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,64,0,0.08);
+  padding: 32px 24px;
+  margin: 32px 0;
+  gap: 32px;
+  max-width: 600px;
+}
+
+.tipster-avatar {
+  flex-shrink: 0;
+}
+
+.tipster-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #1ecb5c;
+  box-shadow: 0 2px 12px rgba(30,203,92,0.15);
+  background: #fff;
+}
+
+.tipster-info {
+  flex: 1;
+}
+
+.tipster-title {
+  font-size: 2rem;
+  color: #1ecb5c;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.tipster-desc {
+  color: #333;
+  margin-bottom: 18px;
+}
+
+.tipster-stats-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-bottom: 18px;
+}
+
+.tipster-stats-table td {
+  padding: 8px 10px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.tipster-stats-table i {
+  color: #1ecb5c;
+  font-size: 1.3rem;
+}
+
+.stat-value {
+  font-weight: bold;
+  text-align: right;
+  color: #222;
+}
+
+.stat-value.positive {
+  color: #1ecb5c;
+}
+
+.tipster-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #fff;
+  background: #1ecb5c;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.tipster-link:hover {
+  background: #159c44;
+}
