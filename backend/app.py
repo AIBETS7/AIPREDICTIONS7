@@ -51,4 +51,9 @@ def get_tipster_stats():
 @app.route('/api/apifootball-fixtures')
 def api_apifootball_fixtures():
     data = load_json_data('apifootball_fixtures.json')
+    return jsonify({'success': bool(data), 'data': data})
+
+@app.route('/api/footballdata-laliga')
+def api_footballdata_laliga():
+    data = load_json_data('footballdata_laliga.json')
     return jsonify({'success': bool(data), 'data': data}) 

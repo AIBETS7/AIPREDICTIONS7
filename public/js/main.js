@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadSofascoreStats();
     loadBetexplorerStats();
     loadApifootballFixtures();
+    loadFootballdataLaliga();
     
     // Update time every minute
     setInterval(updateLastUpdateTime, 60000);
@@ -578,4 +579,11 @@ function loadApifootballFixtures() {
         .then(res => res.json())
         .then(json => renderDataToSection('apifootball-fixtures', json.data || json))
         .catch(() => renderDataToSection('apifootball-fixtures', {error: 'No disponible'}));
+}
+
+function loadFootballdataLaliga() {
+    fetch('https://myfootballpredictions.onrender.com/api/footballdata-laliga')
+        .then(res => res.json())
+        .then(json => renderDataToSection('footballdata-laliga', json.data || json))
+        .catch(() => renderDataToSection('footballdata-laliga', {error: 'No disponible'}));
 }
