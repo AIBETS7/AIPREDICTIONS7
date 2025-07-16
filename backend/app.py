@@ -46,4 +46,9 @@ def get_tipster_stats():
         return jsonify({'success': False, 'error': 'No stats available'}), 404
     with open(stats_path, 'r', encoding='utf-8') as f:
         stats = json.load(f)
-    return jsonify({'success': True, 'stats': stats}) 
+    return jsonify({'success': True, 'stats': stats})
+
+@app.route('/api/apifootball-fixtures')
+def api_apifootball_fixtures():
+    data = load_json_data('apifootball_fixtures.json')
+    return jsonify({'success': bool(data), 'data': data}) 

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadFlashscoreFixtures();
     loadSofascoreStats();
     loadBetexplorerStats();
+    loadApifootballFixtures();
     
     // Update time every minute
     setInterval(updateLastUpdateTime, 60000);
@@ -570,4 +571,11 @@ function loadBetexplorerStats() {
         .then(res => res.json())
         .then(json => renderDataToSection('betexplorer-stats', json.data || json))
         .catch(() => renderDataToSection('betexplorer-stats', {error: 'No disponible'}));
+}
+
+function loadApifootballFixtures() {
+    fetch('https://myfootballpredictions.onrender.com/api/apifootball-fixtures')
+        .then(res => res.json())
+        .then(json => renderDataToSection('apifootball-fixtures', json.data || json))
+        .catch(() => renderDataToSection('apifootball-fixtures', {error: 'No disponible'}));
 }
