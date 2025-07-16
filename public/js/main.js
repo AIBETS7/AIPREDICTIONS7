@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDailyPicks();
     updateLastUpdateTime();
     loadTipsterStats();
+    loadOddsRealtime();
+    loadSportmonksFixtures();
+    loadFlashscoreFixtures();
+    loadSofascoreStats();
+    loadBetexplorerStats();
     
     // Update time every minute
     setInterval(updateLastUpdateTime, 60000);
@@ -524,4 +529,45 @@ function loadTipsterStats() {
                 }
             }
         });
+}
+
+function renderDataToSection(sectionId, data) {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    el.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+}
+
+function loadOddsRealtime() {
+    fetch('https://myfootballpredictions.onrender.com/api/odds-realtime')
+        .then(res => res.json())
+        .then(json => renderDataToSection('odds-realtime', json.data || json))
+        .catch(() => renderDataToSection('odds-realtime', {error: 'No disponible'}));
+}
+
+function loadSportmonksFixtures() {
+    fetch('https://myfootballpredictions.onrender.com/api/sportmonks-fixtures')
+        .then(res => res.json())
+        .then(json => renderDataToSection('sportmonks-fixtures', json.data || json))
+        .catch(() => renderDataToSection('sportmonks-fixtures', {error: 'No disponible'}));
+}
+
+function loadFlashscoreFixtures() {
+    fetch('https://myfootballpredictions.onrender.com/api/flashscore-fixtures')
+        .then(res => res.json())
+        .then(json => renderDataToSection('flashscore-fixtures', json.data || json))
+        .catch(() => renderDataToSection('flashscore-fixtures', {error: 'No disponible'}));
+}
+
+function loadSofascoreStats() {
+    fetch('https://myfootballpredictions.onrender.com/api/sofascore-stats')
+        .then(res => res.json())
+        .then(json => renderDataToSection('sofascore-stats', json.data || json))
+        .catch(() => renderDataToSection('sofascore-stats', {error: 'No disponible'}));
+}
+
+function loadBetexplorerStats() {
+    fetch('https://myfootballpredictions.onrender.com/api/betexplorer-stats')
+        .then(res => res.json())
+        .then(json => renderDataToSection('betexplorer-stats', json.data || json))
+        .catch(() => renderDataToSection('betexplorer-stats', {error: 'No disponible'}));
 }
