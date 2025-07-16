@@ -430,7 +430,7 @@
                                 <h4>Suscripción Mensual</h4>
                                 <div class="price">
                                     <span class="currency">€</span>
-                                    <span class="amount">15</span>
+                                    <span class="amount">19,99</span>
                                     <span class="period">/mes</span>
                                 </div>
                             </div>
@@ -444,6 +444,41 @@
                                 <i class="fas fa-crown"></i>
                                 Suscribirse Ahora
                             </button>
+                            <!-- PayPal Button -->
+                            <div id="paypal-button-container" style="margin-top: 16px;"></div>
+                            <script src="https://www.paypal.com/sdk/js?client-id=AR9zfWfiS2VWDSwiD0LJjmb5sVFi8fYTs8jeaMF3mnoXN9joD8FVmLc31ivLD0OgK2sDJzGYnClpmbs8&currency=EUR"></script>
+                            <script>
+                                if (window.paypal) {
+                                    paypal.Buttons({
+                                        style: {
+                                            layout: 'vertical',
+                                            color:  'gold',
+                                            shape:  'rect',
+                                            label:  'paypal'
+                                        },
+                                        createOrder: function(data, actions) {
+                                            return actions.order.create({
+                                                purchase_units: [{
+                                                    amount: {
+                                                        value: '19.99',
+                                                        currency_code: 'EUR'
+                                                    },
+                                                    description: 'Suscripción Mensual AI Predictions 7'
+                                                }]
+                                            });
+                                        },
+                                        onApprove: function(data, actions) {
+                                            return actions.order.capture().then(function(details) {
+                                                alert('¡Pago completado por ' + details.payer.name.given_name + '!');
+                                                // Aquí puedes llamar a tu backend para registrar la suscripción
+                                            });
+                                        },
+                                        onError: function(err) {
+                                            alert('Error en el pago con PayPal: ' + err);
+                                        }
+                                    }).render('#paypal-button-container');
+                                }
+                            </script>
                         </div>
                         
                         <div class="pricing-option">
