@@ -14,10 +14,22 @@ headers = {
     'Referer': 'https://www.google.com/'
 }
 
+# Proxy HTTP gratuito de ejemplo (puedes cambiarlo por uno de pago o más fiable)
+PROXY = {
+    'http': 'http://51.158.68.68:8811',
+    'https': 'http://51.158.68.68:8811',
+}
+
 def scrape_sofascore():
     time.sleep(1)  # Pequeño retardo para evitar bloqueos
-    resp = requests.get(SOFA_URL, headers=headers)
-    resp.raise_for_status()
+    try:
+        resp = requests.get(SOFA_URL, headers=headers, proxies=PROXY, timeout=10)
+        resp.raise_for_status()
+        print("Scraping con proxy OK")
+    except Exception as e:
+        print(f"Proxy falló ({e}), intentando sin proxy...")
+        resp = requests.get(SOFA_URL, headers=headers, timeout=10)
+        resp.raise_for_status()
     soup = BeautifulSoup(resp.text, 'html.parser')
     matches = []
     for event in soup.select('a.sc-hLBbgP'):
