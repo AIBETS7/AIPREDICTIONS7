@@ -10,6 +10,8 @@ from datetime import datetime, timedelta
 from loguru import logger
 from sqlalchemy import create_engine, text
 from config.database import DATABASE_URL
+from flask import Blueprint, request, jsonify
+import requests
 
 # Configure Stripe
 stripe.api_key = os.getenv('STRIPE_SECRET_KEY', 'sk_test_your_secret_key_here')
@@ -226,3 +228,54 @@ class PaymentProcessor:
 
 # Initialize payment processor
 payment_processor = PaymentProcessor() 
+
+paypal_bp = Blueprint('paypal', __name__)
+
+PAYPAL_CLIENT_ID = "AR9zfWfiS2VWDSwiD0LJjmb5sVFi8fYTs8jeaMF3mnoXN9joD8FVmLc31ivLD0OgK2sDJzGYnClpmbs8"
+PAYPAL_SECRET = "EGnbsH_g8vZcI37HP_JD2fofXBxwaYm8DXCRjkWfGETFxrzv2dlkCTYn76AvTNcskmRHuaXUvSC3cTHF"
+PAYPAL_PLAN_ID = "P-83297886X25956314NB3XIXI"
+
+# Obtiene el access token de PayPal producción
+def get_paypal_access_token():
+    url = "https://api-m.paypal.com/v1/oauth2/token"
+    auth = (PAYPAL_CLIENT_ID, PAYPAL_SECRET)
+    headers = {
+        "Accept": "application/json",
+        "Accept-Language": "en_US",
+    }
+    data = {"grant_type": "client_credentials"}
+    response = requests.post(url, headers=headers, data=data, auth=auth)
+    response.raise_for_status()
+    return response.json()["access_token"]
+
+# Obtiene los detalles de la suscripción
+def get_subscription_details(subscription_id):
+    access_token = get_paypal_access_token()
+    url = f"https://api-m.paypal.com/v1/billing/subscriptions/{subscription_id}"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    return response.json()
+
+@paypal_bp.route('/api/paypal/subscription', methods=['POST'])
+def handle_subscription():
+    data = request.get_json()
+    subscription_id = data.get('subscriptionID')
+    if not subscription_id:
+        return jsonify({"error": "No subscriptionID provided"}), 400
+
+    try:
+        subscription = get_subscription_details(subscription_id)
+        status = subscription.get("status")
+        plan_id = subscription.get("plan_id")
+        if status == "ACTIVE" and plan_id == PAYPAL_PLAN_ID:
+            return jsonify({"success": True, "message": "Suscripción activa y válida", "subscription": subscription})
+        elif plan_id != PAYPAL_PLAN_ID:
+            return jsonify({"success": False, "message": "El plan de la suscripción no coincide.", "subscription": subscription}), 400
+        else:
+            return jsonify({"success": False, "message": f"Estado de la suscripción: {status}", "subscription": subscription}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500 
