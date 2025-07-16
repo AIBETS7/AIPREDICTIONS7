@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="public/css/styles.css?v=3">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -539,7 +538,7 @@
                 </div>
                 
                 <div class="paywall-footer">
-                    <p>Pago seguro con Stripe. Cancelación en cualquier momento.</p>
+                    <p>Pago seguro con PayPal. Cancelación en cualquier momento.</p>
                     <div class="trust-badges">
                         <span><i class="fas fa-shield-alt"></i> Pago Seguro</span>
                         <span><i class="fas fa-lock"></i> Datos Protegidos</span>
@@ -575,8 +574,7 @@
                             <input type="email" id="single-pick-email" required>
                         </div>
                         <button type="submit" id="single-pick-submit-button">
-                            <i class="fas fa-credit-card"></i>
-                            Pagar €3.99 y Recibir Pick
+                            Recibir Pick
                         </button>
                     </form>
                 </div>
@@ -587,7 +585,5 @@
     <!-- Scripts -->
     <script src="public/js/main.js"></script>
     <script src="public/js/api.js"></script>
-    <script src="public/js/stripe-payment.js"></script>
-    <script src="public/js/single-pick-payment.js"></script>
 </body>
 </html> 
