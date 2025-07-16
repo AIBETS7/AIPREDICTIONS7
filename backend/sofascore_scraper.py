@@ -2,15 +2,20 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+import time
 
 SOFA_URL = 'https://www.sofascore.com/football'
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'data', 'sofascore_stats.json')
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Referer': 'https://www.google.com/'
 }
 
 def scrape_sofascore():
+    time.sleep(1)  # Pequeño retardo para evitar bloqueos
     resp = requests.get(SOFA_URL, headers=headers)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, 'html.parser')
