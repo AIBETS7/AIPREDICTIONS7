@@ -120,3 +120,4 @@ The website uses a blue-based color scheme. To change colors, edit the CSS varia
 ## Support
 
 For technical support or questions about the website, please use the contact form on the website or refer to the documentation above.
+Integración PayPal producción: validación de suscripciones en backend y despliegue automático.
