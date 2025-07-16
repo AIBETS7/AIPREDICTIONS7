@@ -1,0 +1,4 @@
+{
+  "source": "sportmonks",
+  "error": "401 Client Error: Unauthorized for url: https://api.sportmonks.com/v3/football/fixtures?api_token=TU_API_KEY_AQUI&include=localTeam%2CvisitorTeam%2Cleague&per_page=10"
+}
