@@ -1534,12 +1534,50 @@ body {
   margin-top: 8px;
   text-align: center;
 }
+
+.ia-stats-title {
+  text-align: center;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  color: #2e7d32;
+}
+
+.modern-table th, .modern-table td {
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+}
+
+.modern-table th {
+  font-size: 1.08em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: linear-gradient(90deg, #43a047 60%, #388e3c 100%);
+  color: #fff;
+  border: none;
+}
+
+.modern-table td {
+  font-size: 1.05em;
+  color: #222;
+}
+
+.modern-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background 0.2s;
+}
+
+.modern-table tbody tr:hover {
+  background: #e8f5e9;
+}
+
 @media (max-width: 600px) {
-  .modern-table th, .modern-table td {
-    padding: 8px 6px;
-    font-size: 0.95em;
+  .ia-stats-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
   }
-  .table-responsive {
-    padding: 6px;
+  .modern-table th, .modern-table td {
+    font-size: 0.95em;
   }
 }
