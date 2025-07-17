@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contratar Bot de IA</title>
+  <link rel="stylesheet" href="public/css/styles.css">
+  <style>
+    .payment-container { max-width: 420px; margin: 48px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(67,160,71,0.10); padding: 32px; }
+    .payment-container h1 { color: #388e3c; text-align: center; margin-bottom: 24px; }
+    .bot-select-label { font-weight: 600; margin-bottom: 8px; display: block; }
+    .bot-select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #43a047; margin-bottom: 24px; font-size: 1em; }
+    .contratar-btn { width: 100%; }
+    .price-label { color: #1b5e20; font-size: 1.2em; font-weight: 700; margin-bottom: 16px; display: block; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>Contratar Bot de IA</h1>
+    <form id="bot-payment-form">
+      <label for="bot-select" class="bot-select-label">Selecciona el bot que quieres contratar:</label>
+      <select id="bot-select" class="bot-select" required>
+        <option value="ambos-marcan">Ambos Marcan</option>
+        <option value="tarjetas">Tarjetas</option>
+        <option value="corneres">Córners</option>
+        <option value="empates">Empates</option>
+      </select>
+      <span class="price-label">19,99€ / mes</span>
+      <label for="email" class="bot-select-label">Tu email:</label>
+      <input type="email" id="email" class="bot-select" placeholder="ejemplo@email.com" required />
+      <button type="submit" class="contratar-btn"><i class="fas fa-credit-card"></i> Contratar y Pagar</button>
+    </form>
+    <div id="payment-message" style="margin-top:20px;text-align:center;"></div>
+  </div>
+  <script src="https://kit.fontawesome.com/7b2b6e2c2a.js" crossorigin="anonymous"></script>
+  <script>
+    document.getElementById('bot-payment-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const bot = document.getElementById('bot-select').value;
+      const email = document.getElementById('email').value.trim();
+      const messageDiv = document.getElementById('payment-message');
+      messageDiv.textContent = '';
+      if (!email) {
+        messageDiv.textContent = 'Introduce un email válido.';
+        return;
+      }
+      // Simulación de pago (aquí deberías integrar Stripe o tu backend real)
+      messageDiv.textContent = 'Procesando pago para el bot ' + bot + '...';
+      // Aquí deberías llamar a tu backend para crear el pago con el bot seleccionado
+      setTimeout(() => {
+        messageDiv.textContent = '¡Pago realizado con éxito! Recibirás acceso al bot ' + bot + ' en tu email.';
+      }, 2000);
+    });
+  </script>
+</body>
+</html> 
