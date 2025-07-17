@@ -632,6 +632,28 @@ window.addEventListener('DOMContentLoaded', () => {
     fetchSquads();
 });
 
+// Cargar estadísticas de fut5tips dinámicamente
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/api/tipster-stats/fut5tips')
+    .then(res => res.json())
+    .then(data => {
+      if (data.success && data.stats) {
+        const s = data.stats;
+        const set = (cls, val) => {
+          const el = document.querySelector('.stat-value-' + cls);
+          if (el) el.textContent = val;
+        };
+        set('unidades', s.unidades_ganadas);
+        set('yield', s.yield);
+        set('picks', s.picks);
+        set('cuota', s.cuota_media);
+        set('winrate', s.win_rate);
+        set('stake', s.stake_medio);
+        set('seguidores', s.seguidores);
+      }
+    });
+});
+
 // Tabla interactiva de estadísticas IA (ordenable)
 document.addEventListener('DOMContentLoaded', function() {
   const table = document.getElementById('iaStatsTable');
