@@ -121,45 +121,30 @@
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
                     picks: [23, 20, 27, 25, 23, 26],
                     aciertos: [15, 11, 17, 15, 15, 17],
-                    fallos: [8, 9, 10, 10, 8, 9],
-                    cuota: [1.79, 1.86, 1.72, 1.75, 1.79, 1.66],
                     yield: [9, 6.8, 9.7, 7.2, 9, 8.7]
                 };
                 const ctx = document.getElementById('statsChart').getContext('2d');
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: 'line',
                     data: {
                         labels: statsData.labels,
                         datasets: [
                             {
                                 label: 'Picks enviados',
                                 data: statsData.picks,
-                                backgroundColor: 'rgba(67,160,71,0.7)',
                                 borderColor: 'rgba(67,160,71,1)',
-                                borderWidth: 1
+                                backgroundColor: 'rgba(67,160,71,0.15)',
+                                borderWidth: 3,
+                                fill: false,
+                                tension: 0.3,
+                                pointRadius: 4
                             },
                             {
                                 label: 'Aciertos',
                                 data: statsData.aciertos,
-                                backgroundColor: 'rgba(56,142,60,0.7)',
-                                borderColor: 'rgba(56,142,60,1)',
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Fallos',
-                                data: statsData.fallos,
-                                backgroundColor: 'rgba(244,67,54,0.5)',
-                                borderColor: 'rgba(244,67,54,1)',
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Cuota media',
-                                data: statsData.cuota,
-                                type: 'line',
-                                yAxisID: 'y2',
-                                backgroundColor: 'rgba(33,150,243,0.2)',
                                 borderColor: 'rgba(33,150,243,1)',
-                                borderWidth: 2,
+                                backgroundColor: 'rgba(33,150,243,0.15)',
+                                borderWidth: 3,
                                 fill: false,
                                 tension: 0.3,
                                 pointRadius: 4
@@ -167,33 +152,31 @@
                             {
                                 label: 'Yield (%)',
                                 data: statsData.yield,
-                                type: 'line',
-                                yAxisID: 'y2',
-                                backgroundColor: 'rgba(255,193,7,0.2)',
                                 borderColor: 'rgba(255,193,7,1)',
-                                borderWidth: 2,
+                                backgroundColor: 'rgba(255,193,7,0.15)',
+                                borderWidth: 3,
                                 fill: false,
                                 tension: 0.3,
-                                pointRadius: 4
+                                pointRadius: 4,
+                                yAxisID: 'y2'
                             }
                         ]
                     },
                     options: {
                         responsive: true,
-                        interaction: { mode: 'index', intersect: false },
                         plugins: {
                             legend: { position: 'top' },
-                            title: { display: true, text: 'Evolución mensual de picks y rendimiento (2025)' }
+                            title: { display: true, text: 'Evolución mensual de picks y yield (2025)' }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                title: { display: true, text: 'Cantidad / Picks' }
+                                title: { display: true, text: 'Cantidad' }
                             },
                             y2: {
                                 position: 'right',
                                 beginAtZero: false,
-                                title: { display: true, text: 'Cuota media / Yield (%)' },
+                                title: { display: true, text: 'Yield (%)' },
                                 grid: { drawOnChartArea: false }
                             }
                         }
