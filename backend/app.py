@@ -1,5 +1,5 @@
 from payment_processor import paypal_bp
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 import os
 import json
 from scrapers.transfermarkt_scraper import TransfermarktScraper
@@ -49,6 +49,15 @@ def get_tipster_stats():
     stats_path = os.path.join(os.path.dirname(__file__), 'data', 'tipster_stats.json')
     if not os.path.exists(stats_path):
         return jsonify({'success': False, 'error': 'No stats available'}), 404
+    with open(stats_path, 'r', encoding='utf-8') as f:
+        stats = json.load(f)
+    return jsonify({'success': True, 'stats': stats})
+
+@app.route('/api/tipster-stats/fut5tips', methods=['GET'])
+def get_fut5tips_stats():
+    stats_path = os.path.join(os.path.dirname(__file__), 'data', 'tipster_stats.json')
+    if not os.path.exists(stats_path):
+        return jsonify({'success': False, 'error': 'No stats found'}), 404
     with open(stats_path, 'r', encoding='utf-8') as f:
         stats = json.load(f)
     return jsonify({'success': True, 'stats': stats})
