@@ -222,45 +222,25 @@
         </div>
     </section>
 
-    <!-- Daily Picks Section -->
-    <section id="daily-picks" class="daily-picks">
-        <div class="container">
-            <div class="section-header">
-                <h2>Pronósticos Diarios</h2>
-                <p>Nuestros mejores picks del día, seleccionados por nuestra IA avanzada</p>
-            </div>
-            
-            <div class="picks-header">
-                <div class="picks-info">
-                    <div class="update-time">
-                        <i class="fas fa-clock"></i>
-                        <span>Última actualización: <span id="lastPicksUpdate">hace 5 min</span></span>
-                    </div>
-                    <div class="picks-count">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Picks disponibles: <span id="picksCount">0</span></span>
-                    </div>
-                </div>
-                <button class="refresh-btn" onclick="loadDailyPicks()">
-                    <i class="fas fa-sync-alt"></i>
-                    Actualizar
-                </button>
-            </div>
-
-            <div class="picks-container" id="picksContainer">
-                <div class="loading-spinner">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Cargando pronósticos...</p>
-                </div>
-            </div>
-
-            <div class="picks-footer">
-                <div class="disclaimer">
-                    <i class="fas fa-info-circle"></i>
-                    <p>Las predicciones se basan en análisis de IA y datos históricos. Los resultados no están garantizados. Juega responsablemente.</p>
-                </div>
-            </div>
+    <!-- Sustituir sección de pronósticos diarios por Bots de IA -->
+    <section id="bots-ia" class="bots-ia-section">
+      <div class="container">
+        <h2>Bots de IA por Estadística</h2>
+        <div class="bots-grid">
+          <a href="/bot-ambos-marcan.html" class="bot-card">
+            <h3>Ambos Marcan</h3>
+          </a>
+          <a href="/bot-tarjetas.html" class="bot-card">
+            <h3>Tarjetas</h3>
+          </a>
+          <a href="/bot-corneres.html" class="bot-card">
+            <h3>Córners</h3>
+          </a>
+          <a href="/bot-empates.html" class="bot-card">
+            <h3>Empates</h3>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Tipsters Section -->
@@ -332,19 +312,15 @@
         <div class="bots-grid">
           <a href="/bot-ambos-marcan.html" class="bot-card">
             <h3>Ambos Marcan</h3>
-            <p>Partidos con alta probabilidad de que ambos equipos marquen.</p>
           </a>
           <a href="/bot-tarjetas.html" class="bot-card">
             <h3>Tarjetas</h3>
-            <p>Partidos con alta probabilidad de muchas tarjetas.</p>
           </a>
           <a href="/bot-corneres.html" class="bot-card">
             <h3>Córners</h3>
-            <p>Partidos con alta probabilidad de muchos córners.</p>
           </a>
           <a href="/bot-empates.html" class="bot-card">
             <h3>Empates</h3>
-            <p>Partidos con alta probabilidad de empate.</p>
           </a>
         </div>
       </div>
