@@ -1492,73 +1492,54 @@ body {
   box-shadow: 0 4px 16px rgba(67,160,71,0.18);
 }
 
-.stats-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+/* Tabla de estadísticas IA */
+#ia-stats {
+  margin: 40px 0;
+}
+.table-responsive {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.08);
   background: #fff;
-  border-radius: 16px;
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  background: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(67,160,71,0.10);
-  margin-bottom: 0;
 }
-.stats-table th, .stats-table td {
-  padding: 14px 10px;
+.modern-table th, .modern-table td {
+  padding: 12px 16px;
   text-align: center;
-  font-size: 1.08em;
 }
-.stats-table thead th {
-  background: linear-gradient(90deg, #43a047 60%, #388e3c 100%);
+.modern-table thead {
+  background: #43a047;
   color: #fff;
-  font-weight: 700;
-  border: none;
 }
-.stats-table tbody tr {
-  transition: background 0.18s;
+.modern-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background 0.2s;
 }
-.stats-table tbody tr:hover {
+.modern-table tbody tr:hover {
   background: #e8f5e9;
 }
-.stats-table td {
-  border-bottom: 1px solid #e0e0e0;
+.stats-note {
+  font-size: 0.95em;
+  color: #666;
+  margin-top: 8px;
+  text-align: center;
 }
-.stats-table tbody tr:last-child td {
-  border-bottom: none;
-}
-.stats-table td, .stats-table th {
-  border-right: 1px solid #e0e0e0;
-}
-.stats-table td:last-child, .stats-table th:last-child {
-  border-right: none;
-}
-@media (max-width: 700px) {
-  .stats-table, .stats-table thead, .stats-table tbody, .stats-table th, .stats-table td, .stats-table tr {
-    display: block;
+@media (max-width: 600px) {
+  .modern-table th, .modern-table td {
+    padding: 8px 6px;
+    font-size: 0.95em;
   }
-  .stats-table thead {
-    display: none;
-  }
-  .stats-table tr {
-    margin-bottom: 18px;
-    border-radius: 12px;
-    box-shadow: 0 1px 6px rgba(67,160,71,0.08);
-    background: #fff;
-  }
-  .stats-table td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-    text-align: left;
-    font-size: 1em;
-  }
-  .stats-table td:before {
-    position: absolute;
-    left: 12px;
-    top: 14px;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: bold;
-    color: #43a047;
-    content: attr(data-label);
+  .table-responsive {
+    padding: 6px;
   }
 }

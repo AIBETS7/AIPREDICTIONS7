@@ -631,3 +631,45 @@ window.addEventListener('DOMContentLoaded', () => {
     fetchMarketValues();
     fetchSquads();
 });
+
+// Tabla interactiva de estadísticas IA (ordenable)
+document.addEventListener('DOMContentLoaded', function() {
+  const table = document.getElementById('iaStatsTable');
+  if (!table) return;
+  const ths = table.querySelectorAll('th');
+  let sortDir = 1;
+  let lastSorted = -1;
+
+  ths.forEach((th, idx) => {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', () => {
+      sortTableByColumn(table, idx, lastSorted === idx ? -sortDir : 1);
+      sortDir = lastSorted === idx ? -sortDir : 1;
+      lastSorted = idx;
+    });
+  });
+
+  function sortTableByColumn(table, column, dir) {
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort((a, b) => {
+      let aText = a.children[column].textContent.trim();
+      let bText = b.children[column].textContent.trim();
+      // Si es porcentaje, quitar % y convertir a número
+      if (aText.endsWith('%') && bText.endsWith('%')) {
+        aText = parseFloat(aText);
+        bText = parseFloat(bText);
+      } else if (!isNaN(aText) && !isNaN(bText)) {
+        aText = parseFloat(aText);
+        bText = parseFloat(bText);
+      }
+      if (aText < bText) return -dir;
+      if (aText > bText) return dir;
+      return 0;
+    });
+    rows.forEach(row => tbody.appendChild(row));
+  }
+
+  // Código listo para automatizar actualización mensual desde agosto
+  // function updateStatsTableWithRealData(data) { ... }
+});
