@@ -230,20 +230,20 @@
         <h2>Bots de IA por Estadística</h2>
         <div class="bots-grid">
           <div class="bot-card">
-            <a href="/bot-ambos-marcan.html"><h3>Ambos Marcan</h3></a>
-            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=ambos-marcan'">Contratar</button>
+            <h3>Ambos Marcan</h3>
+            <button class="contratar-btn" onclick="openPaymentModal('ambos-marcan')">Contratar</button>
           </div>
           <div class="bot-card">
-            <a href="/bot-tarjetas.html"><h3>Tarjetas</h3></a>
-            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=tarjetas'">Contratar</button>
+            <h3>Tarjetas</h3>
+            <button class="contratar-btn" onclick="openPaymentModal('tarjetas')">Contratar</button>
           </div>
           <div class="bot-card">
-            <a href="/bot-corneres.html"><h3>Córners</h3></a>
-            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=corneres'">Contratar</button>
+            <h3>Córners</h3>
+            <button class="contratar-btn" onclick="openPaymentModal('corneres')">Contratar</button>
           </div>
           <div class="bot-card">
-            <a href="/bot-empates.html"><h3>Empates</h3></a>
-            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=empates'">Contratar</button>
+            <h3>Empates</h3>
+            <button class="contratar-btn" onclick="openPaymentModal('empates')">Contratar</button>
           </div>
         </div>
       </div>
@@ -642,8 +642,55 @@
         </div>
     </div>
 
+    <!-- Modal de pago -->
+    <div id="payment-modal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:9999; align-items:center; justify-content:center;">
+      <div class="payment-container" style="background:#fff; border-radius:12px; max-width:420px; margin:auto; padding:32px; box-shadow:0 2px 12px rgba(67,160,71,0.10); position:relative;">
+        <button onclick="closePaymentModal()" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5em; color:#43a047; cursor:pointer;">&times;</button>
+        <h1>Contratar Bot de IA</h1>
+        <form id="bot-payment-form">
+          <label for="bot-select" class="bot-select-label">Selecciona el bot que quieres contratar:</label>
+          <select id="bot-select" class="bot-select" required>
+            <option value="ambos-marcan">Ambos Marcan</option>
+            <option value="tarjetas">Tarjetas</option>
+            <option value="corneres">Córners</option>
+            <option value="empates">Empates</option>
+          </select>
+          <span class="price-label">19,99€ / mes</span>
+          <label for="email" class="bot-select-label">Tu email:</label>
+          <input type="email" id="email" class="bot-select" placeholder="ejemplo@email.com" required />
+          <button type="submit" class="contratar-btn"><i class="fas fa-credit-card"></i> Contratar y Pagar</button>
+        </form>
+        <div id="payment-message" style="margin-top:20px;text-align:center;"></div>
+      </div>
+    </div>
+
     <!-- Scripts -->
     <script src="public/js/main.js"></script>
     <script src="public/js/api.js"></script>
+    <script>
+      function openPaymentModal(bot) {
+        document.getElementById('payment-modal').style.display = 'flex';
+        document.getElementById('bot-select').value = bot;
+        document.getElementById('payment-message').textContent = '';
+      }
+      function closePaymentModal() {
+        document.getElementById('payment-modal').style.display = 'none';
+      }
+      document.getElementById('bot-payment-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const bot = document.getElementById('bot-select').value;
+        const email = document.getElementById('email').value.trim();
+        const messageDiv = document.getElementById('payment-message');
+        messageDiv.textContent = '';
+        if (!email) {
+          messageDiv.textContent = 'Introduce un email válido.';
+          return;
+        }
+        messageDiv.textContent = 'Procesando pago para el bot ' + bot + '...';
+        setTimeout(() => {
+          messageDiv.textContent = '¡Pago realizado con éxito! Recibirás acceso al bot ' + bot + ' en tu email.';
+        }, 2000);
+      });
+    </script>
 </body>
 </html> 
