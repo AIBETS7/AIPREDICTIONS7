@@ -112,100 +112,30 @@
                 <h2>Estadísticas y Análisis de IA</h2>
                 <p>Nuestro sistema de inteligencia artificial analiza miles de datos para generar predicciones precisas</p>
             </div>
-            <div style="max-width: 700px; margin: 0 auto 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(67,160,71,0.08); padding: 24px;">
-                <canvas id="statsChart" height="220"></canvas>
+            <div style="max-width: 800px; margin: 0 auto 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(67,160,71,0.08); padding: 24px;">
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr style="background:#e8f5e9; color:#1b5e20;">
+                            <th>Mes</th>
+                            <th>Picks</th>
+                            <th>Beneficio</th>
+                            <th>Yield</th>
+                            <th>Stake medio</th>
+                            <th>Cuota media</th>
+                            <th>Win rate</th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center;">
+                        <tr><td>Julio 2025</td><td>101</td><td>+16.1 uds</td><td>+33.96%</td><td>0.47</td><td>1.91</td><td>+74%</td></tr>
+                        <tr><td>Junio 2025</td><td>92</td><td>+17.87 uds</td><td>+24.77%</td><td>0.78</td><td>1.90</td><td>+70.65%</td></tr>
+                        <tr><td>Mayo 2025</td><td>399</td><td>+62.11 uds</td><td>+31.83%</td><td>0.50</td><td>1.98</td><td>+70.96%</td></tr>
+                        <tr><td>Abril 2025</td><td>175</td><td>+9.83 uds</td><td>+21.1%</td><td>0.27</td><td>1.87</td><td>+66.86%</td></tr>
+                        <tr><td>Marzo 2025</td><td>229</td><td>+11.54 uds</td><td>+18.22%</td><td>0.28</td><td>1.93</td><td>+65.94%</td></tr>
+                        <tr><td>Febrero 2025</td><td>214</td><td>+28.41 uds</td><td>+35.42%</td><td>0.38</td><td>1.90</td><td>+73.71%</td></tr>
+                        <tr><td>Enero 2025</td><td>244</td><td>+11.03 uds</td><td>+10%</td><td>0.46</td><td>1.81</td><td>+66.94%</td></tr>
+                    </tbody>
+                </table>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                const statsData = {
-                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                    picks: [23, 20, 27, 25, 23, 26],
-                    aciertos: [15, 11, 17, 15, 15, 17],
-                    fallos: [8, 9, 10, 10, 8, 9],
-                    cuota: [1.79, 1.86, 1.72, 1.75, 1.79, 1.66],
-                    yield: [9, 6.8, 9.7, 7.2, 9, 8.7]
-                };
-                const ctx = document.getElementById('statsChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: statsData.labels,
-                        datasets: [
-                            {
-                                label: 'Picks enviados',
-                                data: statsData.picks,
-                                borderColor: 'rgba(67,160,71,1)',
-                                backgroundColor: 'rgba(67,160,71,0.15)',
-                                borderWidth: 3,
-                                fill: false,
-                                tension: 0.3,
-                                pointRadius: 4
-                            },
-                            {
-                                label: 'Aciertos',
-                                data: statsData.aciertos,
-                                borderColor: 'rgba(33,150,243,1)',
-                                backgroundColor: 'rgba(33,150,243,0.15)',
-                                borderWidth: 3,
-                                fill: false,
-                                tension: 0.3,
-                                pointRadius: 4
-                            },
-                            {
-                                label: 'Fallos',
-                                data: statsData.fallos,
-                                borderColor: 'rgba(244,67,54,1)',
-                                backgroundColor: 'rgba(244,67,54,0.15)',
-                                borderWidth: 3,
-                                fill: false,
-                                tension: 0.3,
-                                pointRadius: 4
-                            },
-                            {
-                                label: 'Cuota media',
-                                data: statsData.cuota,
-                                borderColor: 'rgba(255,193,7,1)',
-                                backgroundColor: 'rgba(255,193,7,0.15)',
-                                borderWidth: 3,
-                                fill: false,
-                                tension: 0.3,
-                                pointRadius: 4,
-                                yAxisID: 'y2'
-                            },
-                            {
-                                label: 'Yield (%)',
-                                data: statsData.yield,
-                                borderColor: 'rgba(156,39,176,1)',
-                                backgroundColor: 'rgba(156,39,176,0.15)',
-                                borderWidth: 3,
-                                fill: false,
-                                tension: 0.3,
-                                pointRadius: 4,
-                                yAxisID: 'y2'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { position: 'top' },
-                            title: { display: true, text: 'Evolución mensual de picks, aciertos, fallos, cuota media y yield (2025)' }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: { display: true, text: 'Cantidad' }
-                            },
-                            y2: {
-                                position: 'right',
-                                beginAtZero: false,
-                                title: { display: true, text: 'Cuota media / Yield (%)' },
-                                grid: { drawOnChartArea: false }
-                            }
-                        }
-                    }
-                });
-            </script>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">
