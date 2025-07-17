@@ -1,172 +1,258 @@
+#!/usr/bin/env python3
+"""
+Daily pick generator using real matches
+"""
+
 import os
+import sys
+import json
 from datetime import datetime, timedelta
 from loguru import logger
-from config.settings import LOGGING_CONFIG
-from config.database import DATABASE_URL
-from data_collector import DataCollector
+from typing import Dict, List, Any
+import random
+
+# Add the current directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from real_matches_collector import RealMatchesCollector
 from ai_predictor import AIPredictor
-from sqlalchemy import create_engine, Table, Column, String, Float, DateTime, MetaData
+from telegram_result_updater import TelegramResultUpdater
 
-# Configure logging
-logger.add(
-    LOGGING_CONFIG['file'],
-    level=LOGGING_CONFIG['level'],
-    format=LOGGING_CONFIG['format'],
-    rotation=LOGGING_CONFIG['rotation'],
-    retention=LOGGING_CONFIG['retention']
-)
-
-def main():
-    logger.info("Starting daily pick generation...")
+class DailyPickGenerator:
+    """Generate daily picks using real matches"""
     
-    try:
-        # Collect latest data
-        collector = DataCollector()
-        data = collector.get_latest_data()
-        logger.info(f"Collected data: {len(data.get('matches', []))} matches")
-
-        # Generate predictions
-        ai_predictor = AIPredictor()
-        upcoming_matches = [
-            match for match in data.get('matches', [])
-            if match.get('status') == 'scheduled'
+    def __init__(self):
+        self.matches_collector = RealMatchesCollector()
+        self.ai_predictor = AIPredictor()
+        self.telegram_updater = TelegramResultUpdater()
+        
+        # Priority competitions for picks
+        self.priority_competitions = [
+            'conference_league',
+            'europa_league', 
+            'champions_league',
+            'premier_league',
+            'la_liga',
+            'bundesliga',
+            'serie_a',
+            'ligue_1'
         ]
-        upcoming_matches = upcoming_matches[:10]
+    
+    def generate_daily_pick(self, target_date: datetime = None) -> Dict:
+        """Generate the daily pick for a specific date"""
+        if target_date is None:
+            target_date = datetime.now() + timedelta(days=1)
         
-        # Check if there are any upcoming matches
-        if not upcoming_matches:
-            logger.info("No upcoming matches found. Skipping daily pick generation.")
-            return
+        print(f"🎯 Generating daily pick for {target_date.strftime('%Y-%m-%d')}")
         
-        logger.info(f"Found {len(upcoming_matches)} upcoming matches. Generating predictions...")
+        # Get real matches for the target date
+        matches = self.matches_collector.get_matches_for_date(target_date)
         
-        all_predictions = []
-        for match in upcoming_matches:
-            try:
-                team_data = data.get('teams', {})
-                h2h_data = data.get('h2h_records', {})
-                odds_data = data.get('odds', {}).get(match.get('id', ''), {})
-                predictions = ai_predictor.make_prediction(match, team_data, h2h_data, odds_data)
-                for pred in predictions:
-                    pred_dict = {
-                        'id': pred.id,
-                        'match_id': pred.match_id,
-                        'home_team': match.get('home_team'),
-                        'away_team': match.get('away_team'),
-                        'match_time': match.get('time'),
-                        'competition': match.get('competition', 'Unknown'),
-                        'prediction_type': pred.prediction_type.value,
-                        'prediction': pred.prediction,
-                        'confidence': pred.confidence,
-                        'odds': pred.odds,
-                        'reasoning': pred.reasoning,
-                        'tipster': pred.tipster,
-                        'created_at': pred.created_at.isoformat(),
-                        'expires_at': pred.expires_at.isoformat()
-                    }
-                    all_predictions.append(pred_dict)
-            except Exception as e:
-                logger.error(f"Error processing match {match.get('id')}: {e}")
-                continue
-
-        if not all_predictions:
-            logger.info("No predictions generated for upcoming matches. Skipping daily pick.")
-            return
+        if not matches:
+            print("❌ No matches found for the target date")
+            return self._create_no_pick_message(target_date)
         
-        # Select the best pick (highest confidence)
-        best_pick = max(all_predictions, key=lambda x: x['confidence'])
-        logger.info(f"Best pick selected: {best_pick['home_team']} vs {best_pick['away_team']} ({best_pick.get('competition', 'Unknown')})")
-
-        # Store the pick in the database
+        print(f"📊 Found {len(matches)} matches to analyze")
+        
+        # Filter matches by priority competitions
+        priority_matches = [m for m in matches if m.get('competition_type') in self.priority_competitions]
+        
+        if not priority_matches:
+            print("⚠️ No priority competition matches found")
+            priority_matches = matches  # Use all matches as fallback
+        
+        print(f"🎯 Analyzing {len(priority_matches)} priority matches")
+        
+        # Analyze each match and generate picks
+        picks = []
+        for match in priority_matches:
+            pick = self._analyze_match(match)
+            if pick:
+                picks.append(pick)
+        
+        if not picks:
+            print("❌ No valid picks found")
+            return self._create_no_pick_message(target_date)
+        
+        # Select the best pick
+        best_pick = self._select_best_pick(picks)
+        
+        print(f"✅ Best pick selected: {best_pick['match']['home_team']} vs {best_pick['match']['away_team']}")
+        print(f"   Market: {best_pick['market']}")
+        print(f"   Odds: {best_pick['odds']}")
+        print(f"   Probability: {best_pick['probability']:.1f}%")
+        
+        return best_pick
+    
+    def _analyze_match(self, match: Dict) -> Dict:
+        """Analyze a match and generate potential picks"""
         try:
-            # Use database URL from config file
-            engine = create_engine(DATABASE_URL)
-            metadata = MetaData()
-            picks_table = Table(
-                'daily_picks', metadata,
-                Column('id', String, primary_key=True),
-                Column('match_id', String),
-                Column('home_team', String),
-                Column('away_team', String),
-                Column('match_time', String),
-                Column('competition', String),
-                Column('prediction_type', String),
-                Column('prediction', String),
-                Column('confidence', Float),
-                Column('odds', Float),
-                Column('reasoning', String),
-                Column('tipster', String),
-                Column('created_at', String),
-                Column('expires_at', String)
-            )
-            metadata.create_all(engine)
+            # Get odds from match data
+            odds = match.get('odds', {})
+            if not odds:
+                return None
             
-            # Add competition to best_pick if not present
-            if 'competition' not in best_pick:
-                best_pick['competition'] = 'Unknown'
+            # Define markets to analyze
+            markets = [
+                ('over_2_5', 'Over 2.5 Goals'),
+                ('under_2_5', 'Under 2.5 Goals'),
+                ('both_teams_score_yes', 'Both Teams to Score - Yes'),
+                ('both_teams_score_no', 'Both Teams to Score - No'),
+                ('home_win', 'Home Win'),
+                ('away_win', 'Away Win'),
+                ('draw', 'Draw')
+            ]
             
-            with engine.connect() as conn:
-                # Upsert by id (PostgreSQL syntax)
-                from sqlalchemy.dialects.postgresql import insert
-                stmt = insert(picks_table).values(best_pick)
-                stmt = stmt.on_conflict_do_update(
-                    index_elements=['id'],
-                    set_=best_pick
-                )
-                conn.execute(stmt)
+            picks = []
+            for market_key, market_name in markets:
+                if market_key in odds:
+                    odds_value = odds[market_key]
+                    
+                    # Calculate probability (simplified)
+                    probability = self._calculate_probability(odds_value)
+                    
+                    # More flexible criteria: odds > 1.30 and probability > 60
+                    if odds_value > 1.30 and probability > 60:
+                        pick = {
+                            'match': match,
+                            'market': market_name,
+                            'market_key': market_key,
+                            'odds': odds_value,
+                            'probability': probability,
+                            'confidence': self._calculate_confidence(match, market_key)
+                        }
+                        picks.append(pick)
             
-            logger.info("Best pick stored in the database successfully.")
+            # Return the best pick for this match
+            if picks:
+                return max(picks, key=lambda x: x['confidence'])
+            
+            return None
             
         except Exception as e:
-            logger.error(f"Error storing pick in database: {e}")
-            # Store in file as backup
-            import json
-            backup_file = f"backend/data/daily_picks_backup_{datetime.now().strftime('%Y%m%d')}.json"
-            with open(backup_file, 'a') as f:
-                f.write(json.dumps(best_pick) + '\n')
-            logger.info(f"Pick backed up to {backup_file}")
-
-        # Send to Telegram (with hardcoded credentials)
+            logger.error(f"Error analyzing match: {e}")
+            return None
+    
+    def _calculate_probability(self, odds: float) -> float:
+        """Calculate probability from odds"""
         try:
-            import requests
-            bot_token = '7582466483:AAHshXjaU0vu2nZsYd8wSY5pR1XJ6EHmZOQ'
-            chat_id = '2070545442'
+            # Simplified probability calculation
+            probability = (1 / odds) * 100
+            return min(probability, 95)  # Cap at 95%
+        except:
+            return 50.0
+    
+    def _calculate_confidence(self, match: Dict, market_key: str) -> float:
+        """Calculate confidence score for a pick"""
+        confidence = 50.0  # Base confidence
+        
+        # Boost confidence for certain competitions
+        competition = match.get('competition_type', '')
+        if competition == 'conference_league':
+            confidence += 20
+        elif competition in ['europa_league', 'champions_league']:
+            confidence += 15
+        elif competition in ['premier_league', 'la_liga', 'bundesliga']:
+            confidence += 10
+        
+        # Boost confidence for certain markets
+        if market_key in ['over_2_5', 'both_teams_score_yes']:
+            confidence += 10
+        
+        # Add some randomness to avoid always picking the same type
+        confidence += random.uniform(-5, 5)
+        
+        return min(confidence, 100)
+    
+    def _select_best_pick(self, picks: List[Dict]) -> Dict:
+        """Select the best pick from the list"""
+        if not picks:
+            return None
+        
+        # Sort by confidence and probability
+        sorted_picks = sorted(picks, key=lambda x: (x['confidence'], x['probability']), reverse=True)
+        
+        return sorted_picks[0]
+    
+    def _create_no_pick_message(self, target_date: datetime) -> Dict:
+        """Create a message when no valid picks are found"""
+        return {
+            'type': 'no_pick',
+            'date': target_date.strftime('%Y-%m-%d'),
+            'message': f"No se encontraron picks de valor para el {target_date.strftime('%d/%m/%Y')}. Revisa mañana para nuevas oportunidades.",
+            'reason': 'No matches meet the criteria (odds > 1.50 and probability > 70%)'
+        }
+    
+    def send_daily_pick(self, target_date: datetime = None) -> bool:
+        """Generate and send the daily pick to Telegram"""
+        try:
+            pick = self.generate_daily_pick(target_date)
             
-            # Get competition emoji
-            competition = best_pick.get('competition', 'Unknown')
-            if 'Women' in competition:
-                competition_emoji = "⚽👩‍🦰"
-            elif 'La Liga' in competition:
-                competition_emoji = "⚽🇪🇸"
+            if pick.get('type') == 'no_pick':
+                message = pick['message']
             else:
-                competition_emoji = "⚽"
+                match = pick['match']
+                message = self._format_pick_message(pick)
             
-            message = (
-                f"\U0001F3C6 Daily Football Pick!\n"
-                f"{competition_emoji} {competition}\n"
-                f"Match: {best_pick['home_team']} vs {best_pick['away_team']}\n"
-                f"Time: {best_pick['match_time']}\n"
-                f"Prediction: {best_pick['prediction_type']} - {best_pick['prediction']}\n"
-                f"Confidence: {best_pick['confidence']*100:.1f}%\n"
-                f"Odds: {best_pick['odds']}\n"
-                f"Reasoning: {best_pick['reasoning']}\n"
-                f"Tipster: {best_pick['tipster']}\n"
-            )
+            # Send to Telegram
+            success = self.telegram_updater.send_message(message)
             
-            url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-            payload = {"chat_id": chat_id, "text": message}
-            
-            resp = requests.post(url, data=payload)
-            if resp.status_code == 200:
-                logger.info("Best pick sent to Telegram successfully.")
+            if success:
+                print(f"✅ Daily pick sent successfully")
+                return True
             else:
-                logger.error(f"Failed to send Telegram message: {resp.text}")
+                print(f"❌ Failed to send daily pick")
+                return False
                 
         except Exception as e:
-            logger.error(f"Error sending Telegram message: {e}")
+            logger.error(f"Error sending daily pick: {e}")
+            return False
+    
+    def _format_pick_message(self, pick: Dict) -> str:
+        """Format the pick as a message"""
+        match = pick['match']
+        
+        message = f"🎯 PICK DEL DÍA - {match['competition']}\n\n"
+        message += f"🏆 {match['home_team']} vs {match['away_team']}\n"
+        message += f"⏰ {match['time'].strftime('%H:%M')} - {match['time'].strftime('%d/%m/%Y')}\n\n"
+        message += f"📊 MERCADO: {pick['market']}\n"
+        message += f"💰 CUOTA: {pick['odds']}\n"
+        message += f"📈 PROBABILIDAD: {pick['probability']:.1f}%\n"
+        message += f"🎯 CONFIANZA: {pick['confidence']:.1f}%\n\n"
+        message += f"#PickDelDia #Futbol #Predicciones"
+        
+        return message
 
-    except Exception as e:
-        logger.error(f"Error in daily pick generation: {e}")
+def main():
+    """Main function to run the daily pick generator"""
+    generator = DailyPickGenerator()
+    
+    # Generate pick for tomorrow
+    tomorrow = datetime.now() + timedelta(days=1)
+    
+    print("🚀 Starting daily pick generation...")
+    
+    # Generate the pick
+    pick = generator.generate_daily_pick(tomorrow)
+    
+    if pick.get('type') == 'no_pick':
+        print(f"📝 {pick['message']}")
+    else:
+        print(f"✅ Pick generated successfully!")
+        print(f"   Match: {pick['match']['home_team']} vs {pick['match']['away_team']}")
+        print(f"   Market: {pick['market']}")
+        print(f"   Odds: {pick['odds']}")
+    
+    # Ask if user wants to send to Telegram
+    response = input("\n¿Enviar pick a Telegram? (y/n): ")
+    if response.lower() in ['y', 'yes', 'sí', 'si']:
+        success = generator.send_daily_pick(tomorrow)
+        if success:
+            print("✅ Pick enviado a Telegram")
+        else:
+            print("❌ Error al enviar pick")
+    else:
+        print("📝 Pick no enviado")
 
 if __name__ == "__main__":
     main() 

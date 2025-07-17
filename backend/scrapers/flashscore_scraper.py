@@ -15,10 +15,15 @@ class FlashScoreScraper(BaseScraper):
         self.api_base = "https://api.flashscore.com"
         
     def scrape_matches(self, league_id: str, date_from: datetime, date_to: datetime) -> List[Dict]:
-        """Scrape matches for La Liga"""
+        """Scrape matches for La Liga and Conference League"""
         try:
             # FlashScore uses a specific URL structure for leagues
-            url = f"{self.base_url}/football/spain/la-liga/"
+            if league_id == 'ES1':  # La Liga
+                url = f"{self.base_url}/football/spain/la-liga/"
+            elif 'conference' in league_id.lower():  # Conference League
+                url = f"{self.base_url}/football/europe/uefa-conference-league/"
+            else:
+                url = f"{self.base_url}/football/"
             
             # For specific dates, we need to modify the URL
             if date_from.date() == datetime.now().date():
@@ -35,8 +40,12 @@ class FlashScoreScraper(BaseScraper):
             
             matches = []
             
-            # Find match containers
+            # Find match containers - try multiple selectors
             match_containers = soup.find_all('div', class_='event__match')
+            if not match_containers:
+                match_containers = soup.find_all('div', class_='event__match--static')
+            if not match_containers:
+                match_containers = soup.find_all('div', class_='event__match--scheduled')
             
             for container in match_containers:
                 try:

@@ -107,6 +107,19 @@ LA_LIGA_CONFIG = {
     ]
 }
 
+# Conference League configuration
+CONFERENCE_LEAGUE_CONFIG = {
+    'league_id': 'UEFA_CONFERENCE_LEAGUE',  # Conference League ID
+    'season': '2024/2025',
+    'competition': 'UEFA Conference League',
+    'match_types': ['home', 'away', 'h2h'],
+    'statistics': [
+        'goals_scored', 'goals_conceded', 'shots', 'shots_on_target',
+        'possession', 'corners', 'fouls', 'yellow_cards', 'red_cards',
+        'form', 'injuries', 'suspensions'
+    ]
+}
+
 # Women's Euro configuration
 WOMENS_EURO_CONFIG = {
     'league_id': 'WEURO',  # Women's Euro qualifiers
@@ -123,6 +136,7 @@ WOMENS_EURO_CONFIG = {
 # Combined competitions configuration
 COMPETITIONS_CONFIG = {
     'la_liga': LA_LIGA_CONFIG,
+    'conference_league': CONFERENCE_LEAGUE_CONFIG,
     'womens_euro': WOMENS_EURO_CONFIG
 }
 

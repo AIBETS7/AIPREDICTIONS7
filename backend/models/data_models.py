@@ -2,6 +2,45 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
 from enum import Enum
+from sqlalchemy import Column, String, Integer, Float, DateTime, ForeignKey, Table, MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+
+Base = declarative_base()
+
+class TransfermarktTeam(Base):
+    __tablename__ = 'transfermarkt_teams'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=False)
+    league = Column(String, nullable=False)
+    season = Column(String, nullable=False)
+    market_value = Column(String)
+    last_updated = Column(DateTime, default=datetime.utcnow)
+    players = relationship('TransfermarktPlayer', back_populates='team')
+
+class TransfermarktPlayer(Base):
+    __tablename__ = 'transfermarkt_players'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=False)
+    position = Column(String)
+    age = Column(Integer)
+    nationality = Column(String)
+    market_value = Column(String)
+    team_id = Column(Integer, ForeignKey('transfermarkt_teams.id'))
+    last_updated = Column(DateTime, default=datetime.utcnow)
+    team = relationship('TransfermarktTeam', back_populates='players')
+
+class TransfermarktTransfer(Base):
+    __tablename__ = 'transfermarkt_transfers'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_name = Column(String, nullable=False)
+    from_team = Column(String)
+    to_team = Column(String)
+    fee = Column(String)
+    transfer_type = Column(String)  # arrival/departure
+    season = Column(String)
+    league = Column(String)
+    last_updated = Column(DateTime, default=datetime.utcnow)
 
 class MatchStatus(Enum):
     SCHEDULED = "scheduled"

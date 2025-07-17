@@ -9,6 +9,26 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from config.settings import SCRAPING_CONFIG, RATE_LIMITS
 from models.data_models import DataSource
 
+USER_AGENTS = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7; rv:123.0) Gecko/20100101 Firefox/123.0',
+]
+EXTRA_HEADERS = {
+    'Referer': 'https://www.google.com/',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'DNT': '1',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1',
+    'Upgrade-Insecure-Requests': '1',
+}
+
 class BaseScraper(ABC):
     """Base class for all web scrapers"""
     
@@ -43,15 +63,19 @@ class BaseScraper(ABC):
     
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
     def _make_request(self, url: str, params: Optional[Dict] = None) -> requests.Response:
-        """Make HTTP request with retry logic"""
+        """Make HTTP request with retry logic and anti-blocking headers"""
         self._rate_limit()
-        
         start_time = time.time()
         try:
+            # Rotar User-Agent y añadir headers realistas
+            headers = SCRAPING_CONFIG['headers'].copy()
+            headers['User-Agent'] = random.choice(USER_AGENTS)
+            headers.update(EXTRA_HEADERS)
             response = self.session.get(
-                url, 
-                params=params, 
-                timeout=SCRAPING_CONFIG['timeout']
+                url,
+                params=params,
+                timeout=SCRAPING_CONFIG['timeout'],
+                headers=headers
             )
             response.raise_for_status()
             

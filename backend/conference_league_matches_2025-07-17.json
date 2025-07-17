@@ -1,0 +1,29 @@
+[
+  {
+    "id": "conf_001",
+    "home_team": "Fiorentina",
+    "away_team": "Molde",
+    "time": "2025-07-17 21:00",
+    "competition": "UEFA Conference League",
+    "status": "scheduled",
+    "source": "sample"
+  },
+  {
+    "id": "conf_002",
+    "home_team": "PAOK",
+    "away_team": "Dinamo Zagreb",
+    "time": "2025-07-17 20:00",
+    "competition": "UEFA Conference League",
+    "status": "scheduled",
+    "source": "sample"
+  },
+  {
+    "id": "conf_003",
+    "home_team": "Slovan Bratislava",
+    "away_team": "Partizan",
+    "time": "2025-07-17 19:00",
+    "competition": "UEFA Conference League",
+    "status": "scheduled",
+    "source": "sample"
+  }
+]

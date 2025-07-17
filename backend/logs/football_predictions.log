@@ -1,23 +1,316 @@
-2025-07-12T20:39:33.378393+0200 | INFO | Created test pick: Carlos Alcaraz vs Novak Djokovic
-2025-07-12T20:39:58.472135+0200 | INFO | Created test pick: Carlos Alcaraz vs Novak Djokovic
-2025-07-12T20:39:58.556584+0200 | INFO | Test pick stored in database
-2025-07-12T20:39:58.802283+0200 | INFO | ✅ Test pick sent to Telegram successfully!
-2025-07-12T20:39:58.813981+0200 | INFO | ✅ Test pick saved to website data file
-2025-07-12T20:43:27.098367+0200 | INFO | Test pick created: Real Madrid vs AC Milan
-2025-07-12T20:43:27.313673+0200 | INFO | Pick sent to Telegram successfully
-2025-07-12T20:43:27.324332+0200 | INFO | Test pick saved to website data file
-2025-07-12T20:52:44.431219+0200 | INFO | Test picks created: Germany vs Spain and France vs Netherlands
-2025-07-12T20:52:44.773658+0200 | INFO | PICK 1 sent to Telegram successfully
-2025-07-12T20:52:45.063110+0200 | INFO | PICK 2 sent to Telegram successfully
-2025-07-12T20:52:45.076032+0200 | INFO | Test picks saved to website data file
-2025-07-12T21:00:31.696495+0200 | INFO | Test pick created: Real Madrid vs AC Milan
-2025-07-12T21:00:31.697888+0200 | WARNING | Telegram credentials not found
-2025-07-12T21:04:58.023088+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
-2025-07-12T21:04:58.026101+0200 | WARNING | Telegram credentials not found
-2025-07-12T21:06:21.063127+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
-2025-07-12T21:06:21.068001+0200 | INFO | Pick saved to website JSON file
-2025-07-12T21:06:21.406586+0200 | INFO | Telegram message sent successfully
-2025-07-12T22:10:47.634918+0200 | INFO | Test pick created: Manta FC vs Universidad Catolica
-2025-07-12T22:10:47.638633+0200 | INFO | Pick saved to website JSON file
-2025-07-12T22:10:47.841380+0200 | INFO | Telegram message sent successfully
-2025-07-13 17:23:37 | WARNING | __main__:main:38 - No real matches found for today 2025-07-13.
+2025-07-16 22:47:34 | INFO | __main__:main:30 - Starting data collection process
+2025-07-16 22:47:34 | INFO | __main__:main:36 - Collecting data from all sources...
+2025-07-16 22:47:34 | INFO | data_collector:collect_all_data:41 - Starting data collection from all sources
+2025-07-16 22:47:34 | INFO | data_collector:collect_all_data:52 - Collecting data from laliga_official
+2025-07-16 22:47:35 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:47:40 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:47:46 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:47:46 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x10dca36a0 state=finished raised HTTPError>]
+2025-07-16 22:47:46 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from laliga_official
+2025-07-16 22:47:50 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:47:55 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:48:00 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:48:00 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x10dcb3280 state=finished raised HTTPError>]
+2025-07-16 22:48:00 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from laliga_official
+2025-07-16 22:48:00 | INFO | data_collector:collect_all_data:52 - Collecting data from promiedos
+2025-07-16 22:48:02 | INFO | scrapers.base_scraper:_make_request:93 - Promiedos: Successful request to https://www.promiedos.com.ar/league/laliga/bb in 0.93s
+2025-07-16 22:48:02 | INFO | scrapers.promiedos_scraper:scrape_matches:56 - Scraped 0 matches from Promiedos
+2025-07-16 22:48:02 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from promiedos
+2025-07-16 22:48:05 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:48:10 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:48:15 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:48:15 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x10dd8cfd0 state=finished raised HTTPError>]
+2025-07-16 22:48:15 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from promiedos
+2025-07-16 22:48:15 | INFO | data_collector:collect_all_data:52 - Collecting data from flashscore
+2025-07-16 22:48:16 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:21 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:27 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:27 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x10dce81f0 state=finished raised HTTPError>]
+2025-07-16 22:48:27 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from flashscore
+2025-07-16 22:48:29 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:35 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:40 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:48:40 | ERROR | scrapers.flashscore_scraper:scrape_matches:54 - Error scraping matches from FlashScore: RetryError[<Future at 0x10dce8be0 state=finished raised HTTPError>]
+2025-07-16 22:48:40 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from flashscore
+2025-07-16 22:48:40 | INFO | data_collector:collect_all_data:52 - Collecting data from sofascore
+2025-07-16 22:48:42 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:48:47 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:48:53 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:48:53 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x10dce8f70 state=finished raised HTTPError>]
+2025-07-16 22:48:53 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from sofascore
+2025-07-16 22:48:56 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:49:02 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:49:07 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:49:07 | ERROR | scrapers.sofascore_scraper:scrape_matches:54 - Error scraping matches from SofaScore: RetryError[<Future at 0x10ddbaa00 state=finished raised HTTPError>]
+2025-07-16 22:49:07 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from sofascore
+2025-07-16 22:49:07 | INFO | data_collector:collect_all_data:52 - Collecting data from betsapi
+2025-07-16 22:49:08 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=ES1&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 22:49:08 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 22:49:08 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from betsapi
+2025-07-16 22:49:08 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=WEURO&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 22:49:08 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 22:49:08 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from betsapi
+2025-07-16 22:49:08 | INFO | data_collector:collect_all_data:52 - Collecting data from whoscored
+2025-07-16 22:49:08 | ERROR | data_collector:_collect_from_source:87 - No scraper found for whoscored
+2025-07-16 22:49:08 | INFO | data_collector:collect_all_data:52 - Collecting data from transfermarkt
+2025-07-16 22:49:08 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from transfermarkt
+2025-07-16 22:49:08 | INFO | data_collector:_collect_from_source:111 - Collected 0 Women's Euro matches from transfermarkt
+2025-07-16 22:49:08 | INFO | data_validator:validate_matches:21 - Starting match validation and cross-checking
+2025-07-16 22:49:08 | INFO | data_validator:validate_matches:49 - Validation complete: 0 valid matches, 0 errors
+2025-07-16 22:49:08 | INFO | data_validator:filter_matches_for_predictions:247 - Found 0 matches suitable for predictions
+2025-07-16 22:49:08 | ERROR | __main__:main:76 - Error in data collection process: [Errno 2] No such file or directory: 'backend/data/raw/data_20250716_224908.json'
+2025-07-16 22:51:02 | INFO | __main__:main:30 - Starting data collection process
+2025-07-16 22:51:02 | INFO | __main__:main:36 - Collecting data from all sources...
+2025-07-16 22:51:02 | INFO | data_collector:collect_all_data:41 - Starting data collection from all sources
+2025-07-16 22:51:02 | INFO | data_collector:collect_all_data:52 - Collecting data from laliga_official
+2025-07-16 22:51:04 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:09 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:15 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:15 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x10cdb14c0 state=finished raised HTTPError>]
+2025-07-16 22:51:15 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from laliga_official
+2025-07-16 22:51:18 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:25 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:30 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:30 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x10ce0e160 state=finished raised HTTPError>]
+2025-07-16 22:51:30 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from laliga_official
+2025-07-16 22:51:34 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:40 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:46 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:51:46 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x10ce0ef10 state=finished raised HTTPError>]
+2025-07-16 22:51:46 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from laliga_official
+2025-07-16 22:51:46 | INFO | data_collector:collect_all_data:52 - Collecting data from promiedos
+2025-07-16 22:51:48 | INFO | scrapers.base_scraper:_make_request:93 - Promiedos: Successful request to https://www.promiedos.com.ar/league/laliga/bb in 0.90s
+2025-07-16 22:51:48 | INFO | scrapers.promiedos_scraper:scrape_matches:56 - Scraped 0 matches from Promiedos
+2025-07-16 22:51:48 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from promiedos
+2025-07-16 22:51:51 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:51:56 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:52:01 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:52:01 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x10ce0e610 state=finished raised HTTPError>]
+2025-07-16 22:52:01 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from promiedos
+2025-07-16 22:52:05 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:52:10 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:52:15 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:52:15 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x10ce9eeb0 state=finished raised HTTPError>]
+2025-07-16 22:52:15 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from promiedos
+2025-07-16 22:52:15 | INFO | data_collector:collect_all_data:52 - Collecting data from flashscore
+2025-07-16 22:52:17 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:52:23 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:52:29 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:52:29 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x10ced4760 state=finished raised HTTPError>]
+2025-07-16 22:52:29 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from flashscore
+2025-07-16 22:52:33 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:52:38 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:52:44 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:52:44 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x10ced4dc0 state=finished raised HTTPError>]
+2025-07-16 22:52:44 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from flashscore
+2025-07-16 22:52:47 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 22:52:53 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 22:52:58 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 22:52:58 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x10cec8670 state=finished raised HTTPError>]
+2025-07-16 22:52:58 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from flashscore
+2025-07-16 22:52:58 | INFO | data_collector:collect_all_data:52 - Collecting data from sofascore
+2025-07-16 22:52:59 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:53:04 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:53:09 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 22:53:09 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x10cec8c40 state=finished raised HTTPError>]
+2025-07-16 22:53:09 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from sofascore
+2025-07-16 22:53:12 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 22:53:18 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 22:53:23 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 22:53:23 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x10cec8640 state=finished raised HTTPError>]
+2025-07-16 22:53:23 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from sofascore
+2025-07-16 22:53:27 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 22:53:32 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 22:53:37 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 22:53:37 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x10ced41c0 state=finished raised HTTPError>]
+2025-07-16 22:53:37 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from sofascore
+2025-07-16 22:53:37 | INFO | data_collector:collect_all_data:52 - Collecting data from betsapi
+2025-07-16 22:53:38 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=ES1&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 22:53:38 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from betsapi
+2025-07-16 22:53:38 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=UEFA_CONFERENCE_LEAGUE&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 22:53:38 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from betsapi
+2025-07-16 22:53:38 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=WEURO&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 22:53:38 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from betsapi
+2025-07-16 22:53:38 | INFO | data_collector:collect_all_data:52 - Collecting data from whoscored
+2025-07-16 22:53:38 | ERROR | data_collector:_collect_from_source:87 - No scraper found for whoscored
+2025-07-16 22:53:38 | INFO | data_collector:collect_all_data:52 - Collecting data from transfermarkt
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from transfermarkt
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from transfermarkt
+2025-07-16 22:53:38 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from transfermarkt
+2025-07-16 22:53:38 | INFO | data_validator:validate_matches:21 - Starting match validation and cross-checking
+2025-07-16 22:53:38 | INFO | data_validator:validate_matches:49 - Validation complete: 0 valid matches, 0 errors
+2025-07-16 22:53:38 | INFO | data_validator:filter_matches_for_predictions:247 - Found 0 matches suitable for predictions
+2025-07-16 22:53:38 | ERROR | __main__:main:76 - Error in data collection process: [Errno 2] No such file or directory: 'backend/data/raw/data_20250716_225338.json'
+2025-07-16 22:58:15 | WARNING | data_collector:get_latest_data:225 - No latest data found, collecting new data
+2025-07-16 22:58:15 | INFO | data_collector:collect_all_data:41 - Starting data collection from all sources
+2025-07-16 22:58:15 | INFO | data_collector:collect_all_data:52 - Collecting data from laliga_official
+2025-07-16 22:58:17 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:23 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:27 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:27 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x124053e50 state=finished raised HTTPError>]
+2025-07-16 22:58:27 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from laliga_official
+2025-07-16 22:58:30 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:35 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:41 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:41 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x12407d130 state=finished raised HTTPError>]
+2025-07-16 22:58:41 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from laliga_official
+2025-07-16 22:58:45 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:50 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:56 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 22:58:56 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x12407d250 state=finished raised HTTPError>]
+2025-07-16 22:58:56 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from laliga_official
+2025-07-16 22:58:56 | INFO | data_collector:collect_all_data:52 - Collecting data from promiedos
+2025-07-16 22:58:59 | INFO | scrapers.base_scraper:_make_request:93 - Promiedos: Successful request to https://www.promiedos.com.ar/league/laliga/bb in 1.03s
+2025-07-16 22:58:59 | INFO | scrapers.promiedos_scraper:scrape_matches:56 - Scraped 0 matches from Promiedos
+2025-07-16 22:58:59 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from promiedos
+2025-07-16 22:59:01 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:59:06 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:59:12 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 22:59:12 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x12401d130 state=finished raised HTTPError>]
+2025-07-16 22:59:12 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from promiedos
+2025-07-16 22:59:15 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:59:19 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:59:24 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 22:59:24 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x124104a30 state=finished raised HTTPError>]
+2025-07-16 22:59:24 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from promiedos
+2025-07-16 22:59:24 | INFO | data_collector:collect_all_data:52 - Collecting data from flashscore
+2025-07-16 22:59:26 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:59:31 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:59:37 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 22:59:37 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x1241049a0 state=finished raised HTTPError>]
+2025-07-16 22:59:37 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from flashscore
+2025-07-16 22:59:40 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:59:46 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:59:52 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 22:59:52 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x124114ac0 state=finished raised HTTPError>]
+2025-07-16 22:59:52 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from flashscore
+2025-07-16 22:59:55 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:00:01 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:00:06 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:00:06 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x124114f10 state=finished raised HTTPError>]
+2025-07-16 23:00:06 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from flashscore
+2025-07-16 23:00:06 | INFO | data_collector:collect_all_data:52 - Collecting data from sofascore
+2025-07-16 23:00:09 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:00:14 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:00:19 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:00:19 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x12411f610 state=finished raised HTTPError>]
+2025-07-16 23:00:19 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from sofascore
+2025-07-16 23:00:22 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:00:28 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:00:33 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:00:33 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x124114ac0 state=finished raised HTTPError>]
+2025-07-16 23:00:33 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from sofascore
+2025-07-16 23:00:35 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:00:40 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:00:45 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:00:45 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x124114310 state=finished raised HTTPError>]
+2025-07-16 23:00:45 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from sofascore
+2025-07-16 23:00:45 | INFO | data_collector:collect_all_data:52 - Collecting data from betsapi
+2025-07-16 23:00:45 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=ES1&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:00:45 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:00:45 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from betsapi
+2025-07-16 23:00:46 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=UEFA_CONFERENCE_LEAGUE&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:00:46 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:00:46 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from betsapi
+2025-07-16 23:00:46 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=WEURO&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:00:46 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:00:46 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from betsapi
+2025-07-16 23:00:46 | INFO | data_collector:collect_all_data:52 - Collecting data from whoscored
+2025-07-16 23:00:46 | ERROR | data_collector:_collect_from_source:87 - No scraper found for whoscored
+2025-07-16 23:00:46 | INFO | data_collector:collect_all_data:52 - Collecting data from transfermarkt
+2025-07-16 23:00:46 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from transfermarkt
+2025-07-16 23:00:46 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from transfermarkt
+2025-07-16 23:00:46 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from transfermarkt
+2025-07-16 23:00:46 | INFO | data_validator:validate_matches:21 - Starting match validation and cross-checking
+2025-07-16 23:00:46 | INFO | data_validator:validate_matches:49 - Validation complete: 0 valid matches, 0 errors
+2025-07-16 23:00:46 | INFO | data_validator:filter_matches_for_predictions:247 - Found 0 matches suitable for predictions
+2025-07-16 23:01:02 | WARNING | data_collector:get_latest_data:225 - No latest data found, collecting new data
+2025-07-16 23:01:02 | INFO | data_collector:collect_all_data:41 - Starting data collection from all sources
+2025-07-16 23:01:02 | INFO | data_collector:collect_all_data:52 - Collecting data from laliga_official
+2025-07-16 23:01:05 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:11 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:17 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:17 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x119f9cfd0 state=finished raised HTTPError>]
+2025-07-16 23:01:17 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from laliga_official
+2025-07-16 23:01:20 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:25 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:31 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:31 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x119fcd1c0 state=finished raised HTTPError>]
+2025-07-16 23:01:31 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from laliga_official
+2025-07-16 23:01:35 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:41 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:46 | ERROR | scrapers.base_scraper:_make_request:99 - La Liga Official: Request failed for https://www.laliga.com/en-GB/calendar: 404 Client Error: Not Found for url: https://www.laliga.com/en-GB/calendar
+2025-07-16 23:01:46 | ERROR | scrapers.laliga_scraper:scrape_matches:44 - Error scraping La Liga matches: RetryError[<Future at 0x119fcd2e0 state=finished raised HTTPError>]
+2025-07-16 23:01:46 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from laliga_official
+2025-07-16 23:01:46 | INFO | data_collector:collect_all_data:52 - Collecting data from promiedos
+2025-07-16 23:01:49 | INFO | scrapers.base_scraper:_make_request:93 - Promiedos: Successful request to https://www.promiedos.com.ar/league/laliga/bb in 0.62s
+2025-07-16 23:01:49 | INFO | scrapers.promiedos_scraper:scrape_matches:56 - Scraped 0 matches from Promiedos
+2025-07-16 23:01:49 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from promiedos
+2025-07-16 23:01:51 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 23:01:57 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 23:02:04 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/UEFA_CONFERENCE_LEAGUE
+2025-07-16 23:02:04 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x11c0481c0 state=finished raised HTTPError>]
+2025-07-16 23:02:04 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from promiedos
+2025-07-16 23:02:06 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 23:02:12 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 23:02:18 | ERROR | scrapers.base_scraper:_make_request:99 - Promiedos: Request failed for https://www.promiedos.com.ar/league/WEURO: 404 Client Error: Not Found for url: https://www.promiedos.com.ar/league/WEURO
+2025-07-16 23:02:18 | ERROR | scrapers.promiedos_scraper:scrape_matches:59 - Error scraping Promiedos matches: RetryError[<Future at 0x11c09eb80 state=finished raised HTTPError>]
+2025-07-16 23:02:18 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from promiedos
+2025-07-16 23:02:18 | INFO | data_collector:collect_all_data:52 - Collecting data from flashscore
+2025-07-16 23:02:20 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 23:02:25 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 23:02:30 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/spain/la-liga/fixtures/2025-07-09/
+2025-07-16 23:02:30 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x11c0ac3a0 state=finished raised HTTPError>]
+2025-07-16 23:02:30 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from flashscore
+2025-07-16 23:02:33 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 23:02:39 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 23:02:43 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/europe/uefa-conference-league/fixtures/2025-07-09/
+2025-07-16 23:02:43 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x11c0acc10 state=finished raised HTTPError>]
+2025-07-16 23:02:43 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from flashscore
+2025-07-16 23:02:47 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:02:52 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:02:57 | ERROR | scrapers.base_scraper:_make_request:99 - FlashScore: Request failed for https://www.flashscore.com/football/fixtures/2025-07-09/: 404 Client Error: Not Found for url: https://www.flashscore.com/football/fixtures/2025-07-09/
+2025-07-16 23:02:57 | ERROR | scrapers.flashscore_scraper:scrape_matches:63 - Error scraping matches from FlashScore: RetryError[<Future at 0x11c0acb50 state=finished raised HTTPError>]
+2025-07-16 23:02:57 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from flashscore
+2025-07-16 23:02:57 | INFO | data_collector:collect_all_data:52 - Collecting data from sofascore
+2025-07-16 23:02:59 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:03:04 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:03:09 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/spain/la-liga/7/fixtures/2025-07-09
+2025-07-16 23:03:09 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x11c0bb760 state=finished raised HTTPError>]
+2025-07-16 23:03:09 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from sofascore
+2025-07-16 23:03:12 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:03:18 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:03:23 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/europe/uefa-conference-league/7/fixtures/2025-07-09
+2025-07-16 23:03:23 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x11c0bbfd0 state=finished raised HTTPError>]
+2025-07-16 23:03:23 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from sofascore
+2025-07-16 23:03:26 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:03:31 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:03:36 | ERROR | scrapers.base_scraper:_make_request:99 - SofaScore: Request failed for https://www.sofascore.com/tournament/football//fixtures/2025-07-09: 404 Client Error: Not Found for url: https://www.sofascore.com/tournament/football/fixtures/2025-07-09
+2025-07-16 23:03:36 | ERROR | scrapers.sofascore_scraper:scrape_matches:63 - Error scraping matches from SofaScore: RetryError[<Future at 0x11c0bb490 state=finished raised HTTPError>]
+2025-07-16 23:03:36 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from sofascore
+2025-07-16 23:03:36 | INFO | data_collector:collect_all_data:52 - Collecting data from betsapi
+2025-07-16 23:03:37 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=ES1&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:03:37 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from betsapi
+2025-07-16 23:03:37 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=UEFA_CONFERENCE_LEAGUE&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:03:37 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from betsapi
+2025-07-16 23:03:37 | ERROR | scrapers.betsapi_scraper:_make_api_request:36 - BetsAPI request failed: 401 Client Error: Unauthorized for url: https://api.betsapi.com/v1/events?sport_id=1&league_id=WEURO&date_from=2025-07-09&date_to=2025-07-23&token=your_betsapi_key_here
+2025-07-16 23:03:37 | INFO | scrapers.betsapi_scraper:scrape_matches:68 - Scraped 0 matches from BetsAPI
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from betsapi
+2025-07-16 23:03:37 | INFO | data_collector:collect_all_data:52 - Collecting data from whoscored
+2025-07-16 23:03:37 | ERROR | data_collector:_collect_from_source:87 - No scraper found for whoscored
+2025-07-16 23:03:37 | INFO | data_collector:collect_all_data:52 - Collecting data from transfermarkt
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:100 - Collected 0 La Liga matches from transfermarkt
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:111 - Collected 0 Conference League matches from transfermarkt
+2025-07-16 23:03:37 | INFO | data_collector:_collect_from_source:122 - Collected 0 Women's Euro matches from transfermarkt
+2025-07-16 23:03:37 | INFO | data_validator:validate_matches:21 - Starting match validation and cross-checking
+2025-07-16 23:03:37 | INFO | data_validator:validate_matches:49 - Validation complete: 0 valid matches, 0 errors
+2025-07-16 23:03:37 | INFO | data_validator:filter_matches_for_predictions:247 - Found 0 matches suitable for predictions
+2025-07-16 23:04:22 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-16 23:04:22 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-16 23:04:22 | WARNING | ai_predictor:make_prediction:209 - Models not trained, using default predictions
+2025-07-16 23:04:22 | INFO | __main__:send_telegram_message:69 - Mensaje enviado a Telegram correctamente.

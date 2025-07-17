@@ -4,12 +4,13 @@ import time
 from datetime import datetime, timedelta
 from typing import Dict, List, Any
 from loguru import logger
-from config.settings import DATA_SOURCES, LA_LIGA_CONFIG, WOMENS_EURO_CONFIG, COMPETITIONS_CONFIG
+from config.settings import DATA_SOURCES, LA_LIGA_CONFIG, CONFERENCE_LEAGUE_CONFIG, WOMENS_EURO_CONFIG, COMPETITIONS_CONFIG
 from scrapers.flashscore_scraper import FlashScoreScraper
 from scrapers.sofascore_scraper import SofaScoreScraper
 from scrapers.betsapi_scraper import BetsAPIScraper
 from scrapers.laliga_scraper import LaLigaScraper
 from scrapers.promiedos_scraper import PromiedosScraper
+from scrapers.transfermarkt_scraper import TransfermarktScraper
 from models.data_models import Match, Team, H2HRecord, OddsData, Statistics
 from data_validator import DataValidator
 
@@ -22,7 +23,8 @@ class DataCollector:
             'promiedos': PromiedosScraper(),
             'flashscore': FlashScoreScraper(),
             'sofascore': SofaScoreScraper(),
-            'betsapi': BetsAPIScraper()
+            'betsapi': BetsAPIScraper(),
+            'transfermarkt': TransfermarktScraper()
         }
         self.collected_data = {
             'matches': [],
@@ -98,6 +100,17 @@ class DataCollector:
             logger.info(f"Collected {len(la_liga_matches)} La Liga matches from {source_name}")
         except Exception as e:
             logger.error(f"Error collecting La Liga matches from {source_name}: {e}")
+        
+        # Collect Conference League matches
+        try:
+            conference_matches = scraper.scrape_matches(CONFERENCE_LEAGUE_CONFIG['league_id'], date_from, date_to)
+            for match in conference_matches:
+                match['competition'] = CONFERENCE_LEAGUE_CONFIG['competition']
+                match['competition_type'] = 'conference_league'
+            all_matches.extend(conference_matches)
+            logger.info(f"Collected {len(conference_matches)} Conference League matches from {source_name}")
+        except Exception as e:
+            logger.error(f"Error collecting Conference League matches from {source_name}: {e}")
         
         # Collect Women's Euro matches
         try:

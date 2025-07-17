@@ -595,3 +595,39 @@ function loadWhoscoredLaliga() {
         .then(json => renderDataToSection('whoscored-laliga', json.data || json))
         .catch(() => renderDataToSection('whoscored-laliga', {error: 'No disponible'}));
 }
+
+// --- Transfermarkt: Market Values ---
+async function fetchMarketValues(season = '2024', leagueId = 'ES1') {
+    try {
+        const res = await fetch(`/api/transfermarkt/market-values?season=${season}&league_id=${leagueId}`);
+        const data = await res.json();
+        if (data.success) {
+            console.log('Valores de mercado (Transfermarkt):', data.market_values);
+        } else {
+            console.error('Error al obtener valores de mercado:', data);
+        }
+    } catch (err) {
+        console.error('Error al llamar a /api/transfermarkt/market-values:', err);
+    }
+}
+
+// --- Transfermarkt: Squads ---
+async function fetchSquads(season = '2024', leagueId = 'ES1') {
+    try {
+        const res = await fetch(`/api/transfermarkt/squads?season=${season}&league_id=${leagueId}`);
+        const data = await res.json();
+        if (data.success) {
+            console.log('Plantillas de equipos (Transfermarkt):', data.squads);
+        } else {
+            console.error('Error al obtener plantillas:', data);
+        }
+    } catch (err) {
+        console.error('Error al llamar a /api/transfermarkt/squads:', err);
+    }
+}
+
+// Ejemplo: llamar al cargar la página (puedes mover esto a un botón o sección específica)
+window.addEventListener('DOMContentLoaded', () => {
+    fetchMarketValues();
+    fetchSquads();
+});

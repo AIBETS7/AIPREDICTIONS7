@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Empates - IA Football</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i> AI Predictions 7</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#bots-ia" class="active">Bots de IA</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="container">
+    <h1>Bot Empates</h1>
+    <p>Partidos con alta probabilidad de empate.</p>
+    <div id="bot-picks">
+      <!-- Aquí se mostrarán los picks del bot -->
+    </div>
+  </main>
+  <script>
+    fetch('/api/bot-empates')
+      .then(res => res.json())
+      .then(data => {
+        const div = document.getElementById('bot-picks');
+        if (!data || data.length === 0) {
+          div.innerHTML = '<p>No hay picks disponibles en este momento.</p>';
+          return;
+        }
+        let html = '<table><thead><tr><th>Partido</th><th>Probabilidad</th><th>Competición</th><th>Hora</th></tr></thead><tbody>';
+        data.forEach(pick => {
+          html += `<tr>
+            <td>${pick.home_team} vs ${pick.away_team}</td>
+            <td>${(pick.probability * 100).toFixed(1)}%</td>
+            <td>${pick.competition || '-'}</td>
+            <td>${pick.match_time || '-'}</td>
+          </tr>`;
+        });
+        html += '</tbody></table>';
+        div.innerHTML = html;
+      })
+      .catch(() => {
+        document.getElementById('bot-picks').innerHTML = '<p>Error cargando los picks.</p>';
+      });
+  </script>
+</body>
+</html> 
