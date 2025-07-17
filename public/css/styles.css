@@ -1473,3 +1473,21 @@ body {
   margin-bottom: 12px;
   color: #388e3c;
 }
+
+.contratar-btn {
+  margin-top: 16px;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.08);
+}
+.contratar-btn:hover {
+  background: #2e7031;
+  box-shadow: 0 4px 16px rgba(67,160,71,0.18);
+}

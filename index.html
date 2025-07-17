@@ -35,12 +35,6 @@
                 <li class="nav-item">
                     <a href="#bots-ia" class="nav-link">Bots de IA</a>
                 </li>
-                <li class="nav-item">
-                    <button class="subscribe-btn" onclick="openSubscriptionModal()">
-                        <i class="fas fa-crown"></i>
-                        Suscribirse €19,99/mes
-                    </button>
-                </li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -227,18 +221,22 @@
       <div class="container">
         <h2>Bots de IA por Estadística</h2>
         <div class="bots-grid">
-          <a href="/bot-ambos-marcan.html" class="bot-card">
-            <h3>Ambos Marcan</h3>
-          </a>
-          <a href="/bot-tarjetas.html" class="bot-card">
-            <h3>Tarjetas</h3>
-          </a>
-          <a href="/bot-corneres.html" class="bot-card">
-            <h3>Córners</h3>
-          </a>
-          <a href="/bot-empates.html" class="bot-card">
-            <h3>Empates</h3>
-          </a>
+          <div class="bot-card">
+            <a href="/bot-ambos-marcan.html"><h3>Ambos Marcan</h3></a>
+            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=ambos-marcan'">Contratar</button>
+          </div>
+          <div class="bot-card">
+            <a href="/bot-tarjetas.html"><h3>Tarjetas</h3></a>
+            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=tarjetas'">Contratar</button>
+          </div>
+          <div class="bot-card">
+            <a href="/bot-corneres.html"><h3>Córners</h3></a>
+            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=corneres'">Contratar</button>
+          </div>
+          <div class="bot-card">
+            <a href="/bot-empates.html"><h3>Empates</h3></a>
+            <button class="contratar-btn" onclick="window.location.href='/single-pick-payment.html?bot=empates'">Contratar</button>
+          </div>
         </div>
       </div>
     </section>
