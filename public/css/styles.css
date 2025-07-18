@@ -1642,12 +1642,17 @@ body {
   font-size: 1.08em;
   margin-bottom: 8px;
   background: #fff;
-  transition: border 0.2s;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
   box-shadow: 0 1px 4px rgba(67,160,71,0.06);
+}
+#bot-payment-bot:hover, #bot-payment-email:hover {
+  background: #e8f5e9;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.10);
 }
 #bot-payment-bot:focus, #bot-payment-email:focus {
   border-color: #10b981;
-  outline: none;
+  box-shadow: 0 0 0 2px #a7f3d0;
+  background: #fff;
 }
 #paypal-bot-container {
   width: 100%;
@@ -1672,10 +1677,11 @@ body {
   background: none;
   border: none;
   z-index: 2;
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
 }
 #botPaymentModal .close:hover {
   color: #ef4444;
+  transform: rotate(90deg) scale(1.2);
 }
 @media (max-width: 600px) {
   #botPaymentModal .modal-content {
@@ -1685,4 +1691,33 @@ body {
   #botPaymentModal h2 {
     font-size: 1.2rem;
   }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+#botPaymentModal .modal-content {
+  animation: modalFadeIn 0.5s cubic-bezier(0.4,0.2,0.2,1);
+}
+#bot-payment-bot, #bot-payment-email {
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+#bot-payment-bot:hover, #bot-payment-email:hover {
+  background: #e8f5e9;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.10);
+}
+#bot-payment-bot:focus, #bot-payment-email:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px #a7f3d0;
+  background: #fff;
+}
+#paypal-bot-container {
+  transition: opacity 0.4s;
+}
+#paypal-bot-container:empty {
+  opacity: 0;
+}
+#paypal-bot-container:not(:empty) {
+  opacity: 1;
 }
