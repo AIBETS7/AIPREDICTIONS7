@@ -695,3 +695,63 @@ document.addEventListener('DOMContentLoaded', function() {
   // Código listo para automatizar actualización mensual desde agosto
   // function updateStatsTableWithRealData(data) { ... }
 });
+
+// PayPal Button integration para el modal de pago de bots
+function renderPayPalButton(email, bot) {
+  const paypalContainer = document.getElementById('paypal-bot-container');
+  if (!paypalContainer) return;
+  paypalContainer.innerHTML = '';
+  if (!window.paypal) {
+    const script = document.createElement('script');
+    script.src = 'https://www.paypal.com/sdk/js?client-id=AR9zfWfiS2VWDSwiD0LJjmb5sVFi8fYTs8jeaMF3mnoXN9joD8FVmLc31ivLD0OgK2sDJzGYnClpmbs8&currency=EUR'; // Client ID real
+    script.onload = () => renderPayPalButton(email, bot);
+    document.body.appendChild(script);
+    return;
+  }
+  window.paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '19.99', currency_code: 'EUR' },
+          description: `Suscripción Bot IA: ${bot}`
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        document.getElementById('payment-message').textContent = '¡Pago realizado con éxito! Recibirás acceso al bot en tu email.';
+      });
+    },
+    onError: function(err) {
+      document.getElementById('payment-message').textContent = 'Error procesando el pago con PayPal.';
+    }
+  }).render('#paypal-bot-container');
+}
+
+// Mostrar PayPal solo si email válido
+function setupBotPaymentModal() {
+  const emailInput = document.getElementById('bot-payment-email');
+  const botSelect = document.getElementById('bot-payment-bot');
+  if (!emailInput || !botSelect) return;
+  emailInput.addEventListener('input', function() {
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(email)) {
+      renderPayPalButton(email, botSelect.value);
+    } else {
+      const paypalContainer = document.getElementById('paypal-bot-container');
+      if (paypalContainer) paypalContainer.innerHTML = '';
+    }
+  });
+  botSelect.addEventListener('change', function() {
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(email)) {
+      renderPayPalButton(email, botSelect.value);
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setupBotPaymentModal();
+});
