@@ -1605,3 +1605,84 @@ body {
     font-size: 1.1rem;
   }
 }
+
+/* Modal de pago de bots IA mejorado */
+#botPaymentModal .modal-content {
+  background: #f9fafb;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+  max-width: 420px;
+  margin: 48px auto;
+  padding: 36px 32px 32px 32px;
+  position: relative;
+  border: 1.5px solid #43a04733;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#botPaymentModal h2 {
+  color: #1b5e20;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  letter-spacing: 0.01em;
+}
+#bot-payment-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #388e3c;
+  display: block;
+  margin-top: 18px;
+}
+#bot-payment-bot, #bot-payment-email {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #43a04755;
+  font-size: 1.08em;
+  margin-bottom: 8px;
+  background: #fff;
+  transition: border 0.2s;
+  box-shadow: 0 1px 4px rgba(67,160,71,0.06);
+}
+#bot-payment-bot:focus, #bot-payment-email:focus {
+  border-color: #10b981;
+  outline: none;
+}
+#paypal-bot-container {
+  width: 100%;
+  margin: 24px 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+#payment-message {
+  margin-top: 16px;
+  color: #1b5e20;
+  font-weight: 600;
+  font-size: 1.08em;
+  text-align: center;
+}
+#botPaymentModal .close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 2rem;
+  color: #43a047;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 2;
+  transition: color 0.2s;
+}
+#botPaymentModal .close:hover {
+  color: #ef4444;
+}
+@media (max-width: 600px) {
+  #botPaymentModal .modal-content {
+    padding: 18px 6px 18px 6px;
+    max-width: 98vw;
+  }
+  #botPaymentModal h2 {
+    font-size: 1.2rem;
+  }
+}
