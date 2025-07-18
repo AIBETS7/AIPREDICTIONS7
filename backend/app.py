@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from models.data_models import TransfermarktTeam, TransfermarktPlayer, TransfermarktTransfer, Base
 from config.database import DATABASE_URL
 from sqlalchemy import create_engine
+from google_sheets_logger import log_payment
 
 app = Flask(__name__)
 
@@ -250,4 +251,17 @@ def api_bot_empates():
                     'match_time': pick.get('match_time'),
                     'probability': pick.get('confidence', 0) / 100.0
                 })
-    return jsonify(picks) 
+    return jsonify(picks)
+
+@app.route('/api/paypal-payment-success', methods=['POST'])
+def paypal_payment_success():
+    data = request.get_json()
+    email = data.get('email')
+    bot = data.get('bot')
+    if not email or not bot:
+        return jsonify({'success': False, 'error': 'Faltan datos'}), 400
+    try:
+        log_payment(email, bot)
+        return jsonify({'success': True, 'message': 'Pago registrado en Google Sheets'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500 
