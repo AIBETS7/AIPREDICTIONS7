@@ -720,6 +720,12 @@ function renderPayPalButton(email, bot) {
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
         document.getElementById('payment-message').textContent = '¡Pago realizado con éxito! Recibirás acceso al bot en tu email.';
+        // Registrar en Google Sheets
+        fetch('/api/paypal-payment-success', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, bot: bot })
+        });
       });
     },
     onError: function(err) {
