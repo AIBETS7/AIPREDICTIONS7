@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración de Bots - AI Predictions 7</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .config-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .bot-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .bot-card:hover {
+      border-color: #00ff88;
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+    }
+    
+    .bot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .bot-title {
+      color: #00ff88;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .bot-status {
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    
+    .status-active {
+      background: #00ff88;
+      color: #000;
+    }
+    
+    .status-inactive {
+      background: #ff4444;
+      color: #fff;
+    }
+    
+    .config-section {
+      margin: 15px 0;
+    }
+    
+    .config-label {
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+    
+    .config-input {
+      width: 100%;
+      padding: 10px;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    
+    .config-input:focus {
+      border-color: #00ff88;
+      outline: none;
+    }
+    
+    .config-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background: #00ff88;
+      color: #000;
+    }
+    
+    .btn-primary:hover {
+      background: #00cc6a;
+    }
+    
+    .btn-secondary {
+      background: #333;
+      color: #fff;
+    }
+    
+    .btn-secondary:hover {
+      background: #444;
+    }
+    
+    .btn-danger {
+      background: #ff4444;
+      color: #fff;
+    }
+    
+    .btn-danger:hover {
+      background: #cc3333;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .stat-item {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff88;
+    }
+    
+    .stat-label {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    
+    .global-controls {
+      background: #1a1a1a;
+      border: 2px solid #00ff88;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+    
+    .alert-success {
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid #00ff88;
+      color: #00ff88;
+    }
+    
+    .alert-error {
+      background: rgba(255, 68, 68, 0.1);
+      border: 1px solid #ff4444;
+      color: #ff4444;
+    }
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+    }
+    
+    .tab {
+      padding: 15px 25px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+      border-bottom-color: #00ff88;
+      color: #00ff88;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><i class="fas fa-futbol"></i> AI Predictions 7</a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#" class="active">Configuración Bots</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="config-container">
+    <h1 style="color: #00ff88; text-align: center; margin-bottom: 30px;">
+      🤖 Panel de Configuración de Bots
+    </h1>
+
+    <!-- Controles Globales -->
+    <div class="global-controls">
+      <h2 style="color: #00ff88; margin-bottom: 20px;">⚙️ Controles Globales</h2>
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="startAllBots()">▶️ Iniciar Todos los Bots</button>
+        <button class="btn btn-secondary" onclick="stopAllBots()">⏸️ Pausar Todos los Bots</button>
+        <button class="btn btn-danger" onclick="resetAllBots()">🔄 Reiniciar Todos los Bots</button>
+        <button class="btn btn-secondary" onclick="refreshData()">📊 Actualizar Datos</button>
+      </div>
+      <div id="global-status" class="alert" style="display: none; margin-top: 15px;"></div>
+    </div>
+
+    <!-- Pestañas -->
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('bots')">🤖 Gestión de Bots</div>
+      <div class="tab" onclick="showTab('analytics')">📊 Analíticas</div>
+      <div class="tab" onclick="showTab('settings')">⚙️ Configuración</div>
+    </div>
+
+    <!-- Contenido de Pestañas -->
+    <div id="bots-tab" class="tab-content active">
+      <!-- Bot Ambos Marcan -->
+      <div class="bot-card" data-bot="ambos-marcan">
+        <div class="bot-header">
+          <div class="bot-title">🎯 Bot Ambos Marcan</div>
+          <div class="bot-status status-active" id="status-ambos-marcan">Activo</div>
+        </div>
+        <p style="color: #ccc;">Predicciones de partidos donde ambos equipos tienen alta probabilidad de marcar (>70%)</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="picks-ambos-marcan">0</div>
+            <div class="stat-label">Picks Hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="accuracy-ambos-marcan">0%</div>
+            <div class="stat-label">Precisión</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="profit-ambos-marcan">0€</div>
+            <div class="stat-label">Beneficio</div>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <label class="config-label">Umbral de Confianza (%)</label>
+          <input type="number" class="config-input" value="70" min="50" max="95" id="confidence-ambos-marcan">
+          
+          <label class="config-label">Cuota Mínima</label>
+          <input type="number" class="config-input" value="1.5" min="1.1" max="5.0" step="0.1" id="odds-ambos-marcan">
+          
+          <label class="config-label">Competiciones</label>
+          <select class="config-input" id="competitions-ambos-marcan" multiple>
+            <option value="la_liga" selected>La Liga</option>
+            <option value="premier_league">Premier League</option>
+            <option value="bundesliga">Bundesliga</option>
+            <option value="serie_a">Serie A</option>
+            <option value="ligue_1">Ligue 1</option>
+          </select>
+        </div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" onclick="saveBot('ambos-marcan')">💾 Guardar</button>
+          <button class="btn btn-secondary" onclick="testBot('ambos-marcan')">🧪 Probar</button>
+          <button class="btn btn-secondary" onclick="viewBot('ambos-marcan')">👁️ Ver Picks</button>
+        </div>
+      </div>
+
+      <!-- Bot Córners -->
+      <div class="bot-card" data-bot="corneres">
+        <div class="bot-header">
+          <div class="bot-title">⚽ Bot Córners</div>
+          <div class="bot-status status-active" id="status-corneres">Activo</div>
+        </div>
+        <p style="color: #ccc;">Predicciones de córners con valor basadas en análisis de confianza (≥70%) y cuotas (≥1.5)</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="picks-corneres">0</div>
+            <div class="stat-label">Picks Hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="accuracy-corneres">0%</div>
+            <div class="stat-label">Precisión</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="profit-corneres">0€</div>
+            <div class="stat-label">Beneficio</div>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <label class="config-label">Umbral de Confianza (%)</label>
+          <input type="number" class="config-input" value="70" min="50" max="95" id="confidence-corneres">
+          
+          <label class="config-label">Cuota Mínima</label>
+          <input type="number" class="config-input" value="1.5" min="1.1" max="5.0" step="0.1" id="odds-corneres">
+        </div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" onclick="saveBot('corneres')">💾 Guardar</button>
+          <button class="btn btn-secondary" onclick="testBot('corneres')">🧪 Probar</button>
+          <button class="btn btn-secondary" onclick="viewBot('corneres')">👁️ Ver Picks</button>
+        </div>
+      </div>
+
+      <!-- Bot Empates -->
+      <div class="bot-card" data-bot="empates">
+        <div class="bot-header">
+          <div class="bot-title">⚖️ Bot Empates</div>
+          <div class="bot-status status-active" id="status-empates">Activo</div>
+        </div>
+        <p style="color: #ccc;">Predicciones de partidos con alta probabilidad de empate</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="picks-empates">0</div>
+            <div class="stat-label">Picks Hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="accuracy-empates">0%</div>
+            <div class="stat-label">Precisión</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="profit-empates">0€</div>
+            <div class="stat-label">Beneficio</div>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <label class="config-label">Umbral de Confianza (%)</label>
+          <input type="number" class="config-input" value="70" min="50" max="95" id="confidence-empates">
+          
+          <label class="config-label">Cuota Mínima</label>
+          <input type="number" class="config-input" value="3.0" min="2.5" max="6.0" step="0.1" id="odds-empates">
+        </div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" onclick="saveBot('empates')">💾 Guardar</button>
+          <button class="btn btn-secondary" onclick="testBot('empates')">🧪 Probar</button>
+          <button class="btn btn-secondary" onclick="viewBot('empates')">👁️ Ver Picks</button>
+        </div>
+      </div>
+
+      <!-- Bot Tarjetas -->
+      <div class="bot-card" data-bot="tarjetas">
+        <div class="bot-header">
+          <div class="bot-title">🟨 Bot Tarjetas</div>
+          <div class="bot-status status-active" id="status-tarjetas">Activo</div>
+        </div>
+        <p style="color: #ccc;">Predicciones de tarjetas con análisis del árbitro, confianza ≥70% y cuotas ≥1.5</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="picks-tarjetas">0</div>
+            <div class="stat-label">Picks Hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="accuracy-tarjetas">0%</div>
+            <div class="stat-label">Precisión</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="profit-tarjetas">0€</div>
+            <div class="stat-label">Beneficio</div>
+          </div>
+        </div>
+
+        <div class="config-section">
+          <label class="config-label">Umbral de Confianza (%)</label>
+          <input type="number" class="config-input" value="70" min="50" max="95" id="confidence-tarjetas">
+          
+          <label class="config-label">Cuota Mínima</label>
+          <input type="number" class="config-input" value="1.5" min="1.1" max="5.0" step="0.1" id="odds-tarjetas">
+          
+          <label class="config-label">Análisis de Árbitro</label>
+          <select class="config-input" id="referee-analysis">
+            <option value="enabled" selected>Habilitado</option>
+            <option value="disabled">Deshabilitado</option>
+          </select>
+        </div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" onclick="saveBot('tarjetas')">💾 Guardar</button>
+          <button class="btn btn-secondary" onclick="testBot('tarjetas')">🧪 Probar</button>
+          <button class="btn btn-secondary" onclick="viewBot('tarjetas')">👁️ Ver Picks</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña de Analíticas -->
+    <div id="analytics-tab" class="tab-content">
+      <div class="bot-card">
+        <h3 style="color: #00ff88;">📊 Analíticas Generales</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value" id="total-picks">0</div>
+            <div class="stat-label">Total Picks Hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="avg-accuracy">0%</div>
+            <div class="stat-label">Precisión Promedio</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="total-profit">0€</div>
+            <div class="stat-label">Beneficio Total</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="active-bots">4</div>
+            <div class="stat-label">Bots Activos</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+          <h4 style="color: #00ff88;">📈 Rendimiento por Bot (Últimos 30 días)</h4>
+          <div id="performance-chart" style="background: #2a2a2a; padding: 20px; border-radius: 8px; margin-top: 10px;">
+            <p style="color: #ccc; text-align: center;">Cargando gráficos de rendimiento...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestaña de Configuración -->
+    <div id="settings-tab" class="tab-content">
+      <div class="bot-card">
+        <h3 style="color: #00ff88;">⚙️ Configuración Global</h3>
+        
+        <div class="config-section">
+          <label class="config-label">Frecuencia de Actualización (minutos)</label>
+          <input type="number" class="config-input" value="30" min="5" max="120" id="update-frequency">
+          
+          <label class="config-label">Máximo de Picks por Bot por Día</label>
+          <input type="number" class="config-input" value="5" min="1" max="20" id="max-picks">
+          
+          <label class="config-label">Notificaciones Telegram</label>
+          <select class="config-input" id="telegram-notifications">
+            <option value="enabled">Habilitadas</option>
+            <option value="disabled">Deshabilitadas</option>
+          </select>
+          
+          <label class="config-label">Token Bot Telegram</label>
+          <input type="password" class="config-input" placeholder="Ingresa tu token de bot" id="telegram-token">
+          
+          <label class="config-label">Chat ID Telegram</label>
+          <input type="text" class="config-input" placeholder="Ingresa el chat ID" id="telegram-chat-id">
+        </div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" onclick="saveGlobalSettings()">💾 Guardar Configuración</button>
+          <button class="btn btn-secondary" onclick="testTelegram()">📱 Probar Telegram</button>
+        </div>
+      </div>
+
+      <div class="bot-card">
+        <h3 style="color: #00ff88;">🔧 Herramientas Avanzadas</h3>
+        
+        <div class="config-buttons">
+          <button class="btn btn-secondary" onclick="exportConfig()">📤 Exportar Configuración</button>
+          <button class="btn btn-secondary" onclick="importConfig()">📥 Importar Configuración</button>
+          <button class="btn btn-secondary" onclick="clearCache()">🗑️ Limpiar Cache</button>
+          <button class="btn btn-danger" onclick="resetToDefaults()">⚠️ Restaurar Valores por Defecto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Estado global de los bots
+    let botsConfig = {
+      'ambos-marcan': { active: true, confidence: 70, odds: 1.5 },
+      'corneres': { active: true, confidence: 70, odds: 1.5 },
+      'empates': { active: true, confidence: 70, odds: 3.0 },
+      'tarjetas': { active: true, confidence: 70, odds: 1.5 }
+    };
+
+    // Función para mostrar pestañas
+    function showTab(tabName) {
+      // Ocultar todas las pestañas
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Mostrar pestaña seleccionada
+      document.getElementById(tabName + '-tab').classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Funciones de control global
+    function startAllBots() {
+      showStatus('Iniciando todos los bots...', 'success');
+      fetch('/api/bots/start-all', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showStatus('✅ Todos los bots iniciados correctamente', 'success');
+            updateBotStatuses();
+          } else {
+            showStatus('❌ Error al iniciar los bots: ' + data.error, 'error');
+          }
+        })
+        .catch(error => {
+          showStatus('❌ Error de conexión: ' + error.message, 'error');
+        });
+    }
+
+    function stopAllBots() {
+      showStatus('Pausando todos los bots...', 'success');
+      fetch('/api/bots/stop-all', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showStatus('⏸️ Todos los bots pausados', 'success');
+            updateBotStatuses();
+          } else {
+            showStatus('❌ Error al pausar los bots: ' + data.error, 'error');
+          }
+        })
+        .catch(error => {
+          showStatus('❌ Error de conexión: ' + error.message, 'error');
+        });
+    }
+
+    function resetAllBots() {
+      if (confirm('¿Estás seguro de que quieres reiniciar todos los bots?')) {
+        showStatus('Reiniciando todos los bots...', 'success');
+        fetch('/api/bots/reset-all', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              showStatus('🔄 Todos los bots reiniciados', 'success');
+              updateBotStatuses();
+              loadBotStats();
+            } else {
+              showStatus('❌ Error al reiniciar los bots: ' + data.error, 'error');
+            }
+          })
+          .catch(error => {
+            showStatus('❌ Error de conexión: ' + error.message, 'error');
+          });
+      }
+    }
+
+    function refreshData() {
+      showStatus('Actualizando datos...', 'success');
+      fetch('/api/bots/refresh-data', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showStatus('📊 Datos actualizados correctamente', 'success');
+            loadBotStats();
+          } else {
+            showStatus('❌ Error al actualizar datos: ' + data.error, 'error');
+          }
+        })
+        .catch(error => {
+          showStatus('❌ Error de conexión: ' + error.message, 'error');
+        });
+    }
+
+    // Funciones de bot individual
+    function saveBot(botName) {
+      const config = {
+        confidence: document.getElementById('confidence-' + botName).value,
+        odds: document.getElementById('odds-' + botName).value
+      };
+
+      fetch('/api/bots/' + botName + '/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(config)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showStatus('✅ Configuración del bot ' + botName + ' guardada', 'success');
+        } else {
+          showStatus('❌ Error al guardar configuración: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        showStatus('❌ Error de conexión: ' + error.message, 'error');
+      });
+    }
+
+    function testBot(botName) {
+      showStatus('Probando bot ' + botName + '...', 'success');
+      fetch('/api/bots/' + botName + '/test', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showStatus('🧪 Test del bot ' + botName + ' completado. Picks encontrados: ' + data.picks_count, 'success');
+          } else {
+            showStatus('❌ Error en test del bot: ' + data.error, 'error');
+          }
+        })
+        .catch(error => {
+          showStatus('❌ Error de conexión: ' + error.message, 'error');
+        });
+    }
+
+    function viewBot(botName) {
+      window.open('bot-' + botName + '.html', '_blank');
+    }
+
+    // Funciones de configuración global
+    function saveGlobalSettings() {
+      const settings = {
+        update_frequency: document.getElementById('update-frequency').value,
+        max_picks: document.getElementById('max-picks').value,
+        telegram_notifications: document.getElementById('telegram-notifications').value,
+        telegram_token: document.getElementById('telegram-token').value,
+        telegram_chat_id: document.getElementById('telegram-chat-id').value
+      };
+
+      fetch('/api/bots/global-settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showStatus('✅ Configuración global guardada', 'success');
+        } else {
+          showStatus('❌ Error al guardar configuración: ' + data.error, 'error');
+        }
+      })
+      .catch(error => {
+        showStatus('❌ Error de conexión: ' + error.message, 'error');
+      });
+    }
+
+    function testTelegram() {
+      showStatus('Enviando mensaje de prueba a Telegram...', 'success');
+      fetch('/api/bots/test-telegram', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showStatus('📱 Mensaje de prueba enviado a Telegram', 'success');
+          } else {
+            showStatus('❌ Error al enviar a Telegram: ' + data.error, 'error');
+          }
+        })
+        .catch(error => {
+          showStatus('❌ Error de conexión: ' + error.message, 'error');
+        });
+    }
+
+    // Funciones de utilidad
+    function showStatus(message, type) {
+      const statusDiv = document.getElementById('global-status');
+      statusDiv.className = 'alert alert-' + type;
+      statusDiv.textContent = message;
+      statusDiv.style.display = 'block';
+      
+      setTimeout(() => {
+        statusDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    function updateBotStatuses() {
+      fetch('/api/bots/status')
+        .then(response => response.json())
+        .then(data => {
+          Object.keys(data.bots).forEach(botName => {
+            const status = data.bots[botName];
+            const statusElement = document.getElementById('status-' + botName);
+            if (statusElement) {
+              statusElement.textContent = status.active ? 'Activo' : 'Inactivo';
+              statusElement.className = 'bot-status ' + (status.active ? 'status-active' : 'status-inactive');
+            }
+          });
+        })
+        .catch(error => console.error('Error updating bot statuses:', error));
+    }
+
+    function loadBotStats() {
+      // Cargar estadísticas de cada bot
+      ['ambos-marcan', 'corneres', 'empates', 'tarjetas'].forEach(botName => {
+        fetch('/api/bot-' + botName)
+          .then(response => response.json())
+          .then(data => {
+            const picksElement = document.getElementById('picks-' + botName);
+            if (picksElement) {
+              picksElement.textContent = data.length || 0;
+            }
+          })
+          .catch(error => console.error('Error loading stats for', botName, error));
+      });
+
+      // Cargar estadísticas globales
+      fetch('/api/bots/analytics')
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById('total-picks').textContent = data.total_picks || 0;
+            document.getElementById('avg-accuracy').textContent = (data.avg_accuracy || 0) + '%';
+            document.getElementById('total-profit').textContent = (data.total_profit || 0) + '€';
+          }
+        })
+        .catch(error => console.error('Error loading analytics:', error));
+    }
+
+    // Funciones adicionales
+    function exportConfig() {
+      fetch('/api/bots/export-config')
+        .then(response => response.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'bots-config-' + new Date().toISOString().split('T')[0] + '.json';
+          a.click();
+          showStatus('📤 Configuración exportada', 'success');
+        })
+        .catch(error => {
+          showStatus('❌ Error al exportar configuración: ' + error.message, 'error');
+        });
+    }
+
+    function importConfig() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const formData = new FormData();
+          formData.append('config', file);
+          
+          fetch('/api/bots/import-config', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              showStatus('📥 Configuración importada correctamente', 'success');
+              location.reload();
+            } else {
+              showStatus('❌ Error al importar configuración: ' + data.error, 'error');
+            }
+          })
+          .catch(error => {
+            showStatus('❌ Error al importar configuración: ' + error.message, 'error');
+          });
+        }
+      };
+      input.click();
+    }
+
+    function clearCache() {
+      if (confirm('¿Estás seguro de que quieres limpiar el cache?')) {
+        fetch('/api/bots/clear-cache', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              showStatus('🗑️ Cache limpiado correctamente', 'success');
+            } else {
+              showStatus('❌ Error al limpiar cache: ' + data.error, 'error');
+            }
+          })
+          .catch(error => {
+            showStatus('❌ Error de conexión: ' + error.message, 'error');
+          });
+      }
+    }
+
+    function resetToDefaults() {
+      if (confirm('¿Estás seguro de que quieres restaurar todos los valores por defecto?')) {
+        fetch('/api/bots/reset-defaults', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              showStatus('⚠️ Configuración restaurada a valores por defecto', 'success');
+              location.reload();
+            } else {
+              showStatus('❌ Error al restaurar configuración: ' + data.error, 'error');
+            }
+          })
+          .catch(error => {
+            showStatus('❌ Error de conexión: ' + error.message, 'error');
+          });
+      }
+    }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', function() {
+      updateBotStatuses();
+      loadBotStats();
+      
+      // Actualizar estadísticas cada 30 segundos
+      setInterval(() => {
+        updateBotStatuses();
+        loadBotStats();
+      }, 30000);
+    });
+  </script>
+</body>
+</html>
