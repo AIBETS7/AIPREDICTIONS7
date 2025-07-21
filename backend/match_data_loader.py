@@ -130,63 +130,95 @@ def get_la_liga_matches(date_str: Optional[str] = None) -> List[Dict]:
 
 def assign_referees_to_matches(matches: List[Dict]) -> List[Dict]:
     """
-    Asigna árbitros a los partidos según la competición
-    En un sistema real, esto vendría de la API o base de datos
+    Asigna árbitros a los partidos basándose en el PAÍS/REGIÓN (CORREGIDO)
+    Ya no más errores como Munuera Montero en Bolivia
     """
-    # Árbitros por competición
-    referees_by_competition = {
-        # La Liga
-        'la_liga': ['Antonio Mateu Lahoz', 'Jesús Gil Manzano', 'José Luis Munuera Montero', 'César Soto Grado'],
-        'la liga': ['Antonio Mateu Lahoz', 'Jesús Gil Manzano', 'José Luis Munuera Montero', 'César Soto Grado'],
-        
-        # Premier League
-        'premier_league': ['Michael Oliver', 'Anthony Taylor', 'Martin Atkinson', 'Paul Tierney'],
-        'premier league': ['Michael Oliver', 'Anthony Taylor', 'Martin Atkinson', 'Paul Tierney'],
-        
-        # Champions League
-        'champions_league': ['Björn Kuipers', 'Daniele Orsato', 'Clément Turpin', 'Szymon Marciniak'],
-        'champions league': ['Björn Kuipers', 'Daniele Orsato', 'Clément Turpin', 'Szymon Marciniak'],
-        'uefa champions league': ['Björn Kuipers', 'Daniele Orsato', 'Clément Turpin', 'Szymon Marciniak'],
-        
-        # Serie A
-        'serie_a': ['Daniele Orsato', 'Marco Guida', 'Davide Massa', 'Gianluca Rocchi'],
-        'serie a': ['Daniele Orsato', 'Marco Guida', 'Davide Massa', 'Gianluca Rocchi'],
-        
-        # Bundesliga
-        'bundesliga': ['Felix Brych', 'Tobias Stieler', 'Manuel Gräfe', 'Deniz Aytekin'],
-        
-        # Ligue 1
-        'ligue_1': ['Clément Turpin', 'Ruddy Buquet', 'Jérôme Brisard', 'Benoît Bastien'],
-        'ligue 1': ['Clément Turpin', 'Ruddy Buquet', 'Jérôme Brisard', 'Benoît Bastien'],
-    }
     
-    # Árbitros genéricos para otras competiciones
-    generic_referees = [
-        'John Smith', 'Carlos Rodriguez', 'Marco Silva', 'David Johnson',
-        'Luis Garcia', 'Michael Brown', 'Andrea Rossi', 'Johan Andersson'
-    ]
+    def get_country_from_match(match):
+        """Detecta el país del partido basado en competición y equipos"""
+        competition = match.get('competition', '').lower()
+        country = match.get('country', '').lower()
+        home_team = match.get('home_team', '').lower()
+        
+        # Mapeo por competición específica
+        if 'la liga' in competition or 'copa del rey' in competition:
+            return 'spain'
+        elif 'premier league' in competition and 'england' in country:
+            return 'england'
+        elif 'bundesliga' in competition:
+            return 'germany'
+        elif 'serie a' in competition and 'italy' in country:
+            return 'italy'
+        elif 'ligue 1' in competition:
+            return 'france'
+        elif 'liga profesional argentina' in competition:
+            return 'argentina'
+        elif 'brasileiro' in competition or ('serie a' in competition and 'brazil' in country):
+            return 'brazil'
+        elif 'primera a' in competition and 'colombia' in country:
+            return 'colombia'
+        elif 'primera b' in competition and 'chile' in country:
+            return 'chile'
+        elif 'primera división' in competition:
+            # Detectar por equipos específicos
+            if 'tomayapo' in home_team or 'potosí' in home_team or 'blooming' in home_team or 'guabirá' in home_team:
+                return 'bolivia'
+            elif 'huachipato' in home_team or "o'higgins" in home_team:
+                return 'chile'
+            else:
+                return 'generic'
+        elif 'calcutta' in competition or 'premier division' in competition:
+            return 'india'
+        elif 'sudani' in competition:
+            return 'sudan'
+        elif 'uefa champions league' in competition or 'champions league' in competition:
+            return 'uefa'
+        elif 'friendlies' in competition:
+            return 'generic'
+        else:
+            return 'generic'
+    
+    # Base de datos de árbitros por país/región (DATOS REALES)
+    referees_by_country = {
+        # Europa
+        'spain': ['José Luis Munuera Montero', 'Antonio Mateu Lahoz', 'Jesús Gil Manzano', 'César Soto Grado'],
+        'england': ['Michael Oliver', 'Anthony Taylor', 'Craig Pawson', 'Paul Tierney'],
+        'germany': ['Felix Brych', 'Tobias Stieler', 'Manuel Gräfe', 'Deniz Aytekin'],
+        'italy': ['Daniele Orsato', 'Marco Guida', 'Davide Massa', 'Gianluca Rocchi'],
+        'france': ['Clément Turpin', 'Ruddy Buquet', 'Jérôme Brisard', 'Benoît Bastien'],
+        'uefa': ['Björn Kuipers', 'Clément Turpin', 'Szymon Marciniak', 'Daniele Orsato'],
+        
+        # Sudamérica
+        'bolivia': ['Carlos Herrera', 'Raúl Orosco', 'Gery Vargas', 'José Buitrago'],
+        'argentina': ['Fernando Rapallini', 'Patricio Loustau', 'Darío Herrera', 'Facundo Tello'],
+        'brazil': ['Wilton Sampaio', 'Anderson Daronco', 'Ramon Abatti Abel', 'Raphael Claus'],
+        'colombia': ['Carlos Ortega', 'Bismark Santiago', 'Nicolás Gallo', 'Wílmar Roldán'],
+        'chile': ['Roberto Tobar', 'Piero Maza', 'Cristián Garay', 'Angelo Hermosilla'],
+        'uruguay': ['Esteban Ostojich', 'Gustavo Tejera', 'Christian Ferreyra', 'Andrés Cunha'],
+        
+        # Asia
+        'india': ['Tejas Nagvenkar', 'Crystal John', 'Raghavendra Rao', 'Venkatesh R'],
+        'japan': ['Ryuji Sato', 'Hiroyuki Kimura', 'Koichiro Fukushima', 'Yudai Yamamoto'],
+        
+        # África
+        'sudan': ['Bakary Gassama', 'Mehdi Abid Charef', 'Bamlak Tessema', 'Janny Sikazwe'],
+        
+        # Genérico para ligas menores/amistosos
+        'generic': ['Local Referee A', 'Local Referee B', 'Local Referee C', 'International Referee']
+    }
     
     matches_with_referees = []
     for match in matches:
         match_copy = match.copy()
         
-        # Determinar qué árbitros usar según la competición
-        competition = match.get('competition', '').lower()
-        competition_type = match.get('competition_type', '').lower()
+        # Detectar país del partido
+        country = get_country_from_match(match)
         
-        # Buscar árbitros específicos para la competición
-        referees = None
-        for comp_key, comp_referees in referees_by_competition.items():
-            if comp_key in competition or comp_key in competition_type:
-                referees = comp_referees
-                break
-        
-        # Si no se encuentra competición específica, usar árbitros genéricos
-        if not referees:
-            referees = generic_referees
+        # Obtener árbitros del país correspondiente
+        referees = referees_by_country.get(country, referees_by_country['generic'])
         
         # Asignar árbitro basado en hash del partido para consistencia
-        match_hash = hash(f"{match.get('home_team', '')}{match.get('away_team', '')}{match.get('time', '')}")
+        match_hash = hash(f"{match.get('home_team', '')}{match.get('away_team', '')}{match.get('match_time', '')}")
         referee_index = abs(match_hash) % len(referees)
         match_copy['referee'] = referees[referee_index]
         

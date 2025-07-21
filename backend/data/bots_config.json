@@ -2,10 +2,10 @@
   "bots": {
     "ambos-marcan": {
       "name": "Bot Ambos Marcan",
-      "description": "Predicciones de ambos marcan con análisis completo, confianza ≥75% y cuotas ≥1.6",
+      "description": "Predicciones BTTS para combinadas, cuotas ≥1.3 y confianza ≥70%",
       "active": true,
-      "confidence_threshold": 75,
-      "min_odds": 1.6,
+      "confidence_threshold": 70,
+      "min_odds": 1.3,
       "max_odds": 4.0,
       "max_picks_per_day": 999,
       "prediction_types": [
