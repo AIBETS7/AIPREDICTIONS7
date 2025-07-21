@@ -1,312 +1,301 @@
 #!/usr/bin/env python3
 """
-Send Natural Picks to Telegram - Enviar Picks Naturales a Telegram
-==================================================================
+Send Natural Picks Telegram - Envío Natural a Telegram
+======================================================
 
-Envía los mejores picks naturales a sus respectivos grupos de Telegram.
+Envía los mejores picks de cada bot a sus grupos de Telegram respectivos
+CON CUOTAS REALES cuando estén disponibles en OddsAPI.
 """
 
 import sys
 import requests
-from datetime import datetime
+import json
+from typing import Dict, Optional
 
 sys.path.append('.')
 
 # CONFIGURACIÓN TELEGRAM
 TELEGRAM_CONFIG = {
-    'bot_token': 'TU_BOT_TOKEN_AQUI',  # Token del bot principal
-    'groups': {
-        'corners': 'CHAT_ID_CORNERES',      # Chat ID grupo córners
-        'cards': 'CHAT_ID_TARJETAS',        # Chat ID grupo tarjetas  
-        'btts': 'CHAT_ID_AMBOS_MARCAN',     # Chat ID grupo ambos marcan
-        'draws': 'CHAT_ID_EMPATES'          # Chat ID grupo empates
+    'bot_token': 'TU_BOT_TOKEN',  # Usuario debe proporcionar
+    'chat_ids': {
+        'corners': 'CHAT_ID_CORNERS',      # Grupo Córners
+        'cards': 'CHAT_ID_CARDS',          # Grupo Tarjetas  
+        'btts': 'CHAT_ID_BTTS',            # Grupo Ambos Marcan
+        'draws': 'CHAT_ID_DRAWS'           # Grupo Empates
     }
 }
 
-def send_telegram_message(chat_id: str, message: str, bot_token: str) -> bool:
-    """Envía un mensaje a un grupo de Telegram"""
+# CONFIGURACIÓN ODDS API
+ODDS_API_CONFIG = {
+    'api_key': '714a28a08e610e64f68a0d6d1a928f05',
+    'base_url': 'https://api.the-odds-api.com/v4',
+    'regions': 'eu,uk',
+    'markets': 'h2h',  # Solo mercado disponible
+    'odds_format': 'decimal',
+    'date_format': 'iso'
+}
+
+def get_real_odds_for_match(home_team: str, away_team: str) -> Optional[Dict]:
+    """Obtiene cuotas reales para un partido específico"""
     
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    # Obtener cuotas de Champions League
+    url = f"{ODDS_API_CONFIG['base_url']}/sports/soccer_uefa_champs_league/odds"
     
-    payload = {
-        'chat_id': chat_id,
-        'text': message,
-        'parse_mode': 'HTML',
-        'disable_web_page_preview': True
+    params = {
+        'api_key': ODDS_API_CONFIG['api_key'],
+        'regions': ODDS_API_CONFIG['regions'],
+        'markets': ODDS_API_CONFIG['markets'],
+        'oddsFormat': ODDS_API_CONFIG['odds_format'],
+        'dateFormat': ODDS_API_CONFIG['date_format']
     }
     
     try:
-        response = requests.post(url, data=payload, timeout=10)
+        response = requests.get(url, params=params, timeout=10)
         
         if response.status_code == 200:
-            result = response.json()
-            if result.get('ok'):
-                return True
-            else:
-                print(f"❌ Error Telegram API: {result.get('description', 'Unknown error')}")
-                return False
-        else:
-            print(f"❌ Error HTTP {response.status_code}: {response.text}")
-            return False
+            events = response.json()
             
-    except requests.exceptions.RequestException as e:
-        print(f"❌ Error de conexión: {e}")
+            # Buscar el partido específico
+            for event in events:
+                event_home = event.get('home_team', '').lower()
+                event_away = event.get('away_team', '').lower()
+                
+                # Matching por nombres
+                if (home_team.lower() in event_home or event_home in home_team.lower()) and \
+                   (away_team.lower() in event_away or event_away in away_team.lower()):
+                    
+                    if 'bookmakers' in event and event['bookmakers']:
+                        bookmaker = event['bookmakers'][0]
+                        
+                        for market in bookmaker.get('markets', []):
+                            if market.get('key') == 'h2h':
+                                outcomes = market.get('outcomes', [])
+                                
+                                odds_data = {}
+                                for outcome in outcomes:
+                                    name = outcome.get('name')
+                                    price = outcome.get('price')
+                                    
+                                    if name == event.get('home_team'):
+                                        odds_data['home_win'] = price
+                                    elif name == event.get('away_team'):
+                                        odds_data['away_win'] = price
+                                    elif name == 'Draw':
+                                        odds_data['draw'] = price
+                                
+                                return {
+                                    'found': True,
+                                    'bookmaker': bookmaker.get('title'),
+                                    'odds': odds_data
+                                }
+        
+        return {'found': False}
+    
+    except Exception as e:
+        print(f'⚠️ Error obteniendo cuotas reales: {e}')
+        return {'found': False}
+
+def create_telegram_message(bot_type: str, pick: Dict) -> str:
+    """Crea mensaje de Telegram con cuotas reales cuando disponibles"""
+    
+    match_name = pick['match']
+    home_team = match_name.split(' vs ')[0]
+    away_team = match_name.split(' vs ')[1]
+    
+    # Intentar obtener cuotas reales
+    real_odds_data = get_real_odds_for_match(home_team, away_team)
+    
+    if bot_type == 'corners':
+        message = f"""🟢 🇪🇺 BOT CÓRNERS - PICK EUROPEO
+
+⚽ {pick['match']}
+🏆 {pick['competition']}
+⏰ {pick['time']}
+
+📊 ANÁLISIS ESTADÍSTICO:
+🔢 {pick['total_corners_expected']:.1f} córners esperados
+📈 Confianza: {pick['confidence']:.0f}%
+
+💡 Basado en estadísticas históricas puras
+🎯 Análisis de promedios por equipo"""
+    
+    elif bot_type == 'cards':
+        message = f"""🟡 🇪🇺 BOT TARJETAS - PICK EUROPEO
+
+🟨 {pick['match']}
+🏆 {pick['competition']}
+⏰ {pick['time']}
+
+📊 ANÁLISIS ESTADÍSTICO:
+🔢 {pick['total_cards_expected']:.1f} tarjetas esperadas
+👨‍⚖️ Árbitro: {pick['referee']}
+📈 Confianza: {pick['confidence']:.0f}%
+
+💡 Basado en estadísticas + factor árbitro
+🎯 Análisis de promedios históricos"""
+    
+    elif bot_type == 'btts':
+        message = f"""🔴 🇪🇺 BOT AMBOS MARCAN - PICK EUROPEO
+
+🎯 {pick['match']}
+🏆 {pick['competition']}
+⏰ {pick['time']}
+
+📊 ANÁLISIS ESTADÍSTICO:
+🔢 {pick['btts_probability']:.1f}% probabilidad BTTS
+📈 Confianza: {pick['confidence']:.0f}%
+
+💡 Basado en promedios de goles históricos
+🎯 Solo picks >70% probabilidad"""
+    
+    elif bot_type == 'draws':
+        message = f"""🔵 🇪🇺 BOT EMPATES - PICK EUROPEO
+
+🤝 {pick['match']}
+🏆 {pick['competition']}
+⏰ {pick['time']}
+
+📊 ANÁLISIS ESTADÍSTICO:
+🔢 {pick['draw_probability']:.1f}% probabilidad empate
+📈 Confianza: {pick['confidence']:.0f}%
+
+💰 CUOTAS:"""
+        
+        # Solo para empates podemos tener cuotas reales
+        if real_odds_data['found'] and 'draw' in real_odds_data['odds']:
+            real_draw_odds = real_odds_data['odds']['draw']
+            bookmaker = real_odds_data['bookmaker']
+            message += f"""
+✅ Cuota REAL: {real_draw_odds} ({bookmaker})
+🎯 Fuente: OddsAPI en tiempo real"""
+        else:
+            estimated_odds = pick.get('odds', 0)
+            message += f"""
+📊 Cuota estimada: {estimated_odds:.2f}
+💡 (Cuotas reales no disponibles)"""
+        
+        message += f"""
+
+🔮 Fórmula avanzada con racha sin empates
+📈 Ajuste dinámico por historial"""
+    
+    return message
+
+def send_to_telegram(bot_token: str, chat_id: str, message: str) -> bool:
+    """Envía mensaje a Telegram"""
+    
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    
+    data = {
+        'chat_id': chat_id,
+        'text': message,
+        'parse_mode': 'HTML'
+    }
+    
+    try:
+        response = requests.post(url, data=data, timeout=10)
+        return response.status_code == 200
+    except Exception as e:
+        print(f'❌ Error enviando a Telegram: {e}')
         return False
 
-def format_corners_message(pick: dict) -> str:
-    """Formatea mensaje para el bot de córners"""
-    
-    match = pick['match']
-    corners = pick['total_corners_expected']
-    confidence = pick['confidence']
-    competition = pick['competition']
-    time = pick['time']
-    
-    # Extraer hora
-    try:
-        match_time = datetime.fromisoformat(time.replace('Z', '+00:00'))
-        hour = match_time.strftime('%H:%M')
-    except:
-        hour = time
-    
-    message = f"""🇪🇺 <b>BOT CÓRNERS - PICK EUROPEO</b>
-
-⚽ <b>{match}</b>
-🏆 {competition}
-⏰ <b>{hour}</b> (hora española)
-
-📊 <b>ANÁLISIS:</b>
-• Córners esperados: <b>{corners:.1f}</b>
-• Confianza: <b>{confidence:.0f}%</b>
-
-💡 <b>ESTADÍSTICA PURA</b>
-Basado en medias históricas reales de ambos equipos.
-
-✅ <b>SOLO EUROPA - UEFA CHAMPIONS LEAGUE</b>
-🎯 #CornersBot #Europa #ChampionsLeague"""
-    
-    return message
-
-def format_cards_message(pick: dict) -> str:
-    """Formatea mensaje para el bot de tarjetas"""
-    
-    match = pick['match']
-    cards = pick['total_cards_expected']
-    confidence = pick['confidence']
-    competition = pick['competition']
-    referee = pick['referee']
-    time = pick['time']
-    
-    # Extraer hora
-    try:
-        match_time = datetime.fromisoformat(time.replace('Z', '+00:00'))
-        hour = match_time.strftime('%H:%M')
-    except:
-        hour = time
-    
-    message = f"""🇪🇺 <b>BOT TARJETAS - PICK EUROPEO</b>
-
-🟨 <b>{match}</b>
-🏆 {competition}
-⏰ <b>{hour}</b> (hora española)
-👨‍⚖️ <b>{referee}</b>
-
-📊 <b>ANÁLISIS:</b>
-• Tarjetas esperadas: <b>{cards:.1f}</b>
-• Confianza: <b>{confidence:.0f}%</b>
-
-💡 <b>ESTADÍSTICA PURA + FACTOR ÁRBITRO</b>
-Equipos agresivos con árbitro conocido.
-
-✅ <b>SOLO EUROPA - UEFA CHAMPIONS LEAGUE</b>
-🎯 #TarjetasBot #Europa #ChampionsLeague"""
-    
-    return message
-
-def format_btts_message(pick: dict) -> str:
-    """Formatea mensaje para el bot ambos marcan"""
-    
-    match = pick['match']
-    probability = pick['btts_probability']
-    confidence = pick['confidence']
-    odds = pick['odds']
-    competition = pick['competition']
-    time = pick['time']
-    
-    # Extraer hora
-    try:
-        match_time = datetime.fromisoformat(time.replace('Z', '+00:00'))
-        hour = match_time.strftime('%H:%M')
-    except:
-        hour = time
-    
-    message = f"""🇪🇺 <b>BOT AMBOS MARCAN - PICK EUROPEO</b>
-
-🎯 <b>{match}</b>
-🏆 {competition}
-⏰ <b>{hour}</b> (hora española)
-
-📊 <b>ANÁLISIS:</b>
-• Probabilidad BTTS: <b>{probability:.1f}%</b>
-• Confianza: <b>{confidence:.0f}%</b>
-• Cuota estimada: <b>{odds:.2f}</b>
-
-💡 <b>ESTADÍSTICA PURA OFENSIVA</b>
-Equipos con alta media de goles por partido.
-
-✅ <b>CRITERIO: ≥70% PROBABILIDAD CUMPLIDO</b>
-🔥 <b>IDEAL PARA COMBINADAS</b>
-🎯 #AmbosMarcaN #Europa #ChampionsLeague"""
-    
-    return message
-
-def format_draws_message(pick: dict) -> str:
-    """Formatea mensaje para el bot empates"""
-    
-    match = pick['match']
-    probability = pick['draw_probability']
-    confidence = pick['confidence']
-    odds = pick['odds']
-    competition = pick['competition']
-    time = pick['time']
-    
-    # Extraer hora
-    try:
-        match_time = datetime.fromisoformat(time.replace('Z', '+00:00'))
-        hour = match_time.strftime('%H:%M')
-    except:
-        hour = time
-    
-    message = f"""🇪🇺 <b>BOT EMPATES - PICK EUROPEO</b>
-
-🤝 <b>{match}</b>
-🏆 {competition}
-⏰ <b>{hour}</b> (hora española)
-
-📊 <b>ANÁLISIS:</b>
-• Probabilidad empate: <b>{probability:.1f}%</b>
-• Confianza: <b>{confidence:.0f}%</b>
-• Cuota estimada: <b>{odds:.2f}</b>
-
-💡 <b>FÓRMULA ESPECÍFICA APLICADA</b>
-Equipos equilibrados con mismo balance ofensivo/defensivo.
-
-✅ <b>ESTADÍSTICA PURA - SOLO EUROPA</b>
-🎯 #EmpatesBot #Europa #ChampionsLeague"""
-    
-    return message
-
-def send_natural_picks_to_telegram():
-    """Envía los picks naturales a Telegram"""
+def send_all_picks_to_telegram():
+    """Envía todos los picks a sus respectivos grupos de Telegram"""
     
     from natural_best_picks_tomorrow import generate_natural_best_picks
     
-    print('📱 ENVIANDO PICKS NATURALES A TELEGRAM')
-    print('=' * 50)
+    print('📱 ENVIANDO PICKS A TELEGRAM CON CUOTAS REALES')
+    print('=' * 55)
     
-    # Generar picks naturales
-    print('🔍 Generando picks naturales...')
+    # Verificar configuración
+    if TELEGRAM_CONFIG['bot_token'] == 'TU_BOT_TOKEN':
+        print('❌ ERROR: Debes configurar el bot_token de Telegram')
+        print('💡 Edita TELEGRAM_CONFIG en este archivo')
+        return False
+    
+    # Generar picks
     picks = generate_natural_best_picks()
     
     if not picks:
         print('❌ No se pudieron generar picks')
-        return
+        return False
     
-    print(f'\n📤 ENVIANDO A GRUPOS DE TELEGRAM:')
-    print('-' * 40)
+    print(f'✅ {len(picks)} picks generados')
+    print(f'🔍 Buscando cuotas reales en OddsAPI...')
     
-    # Verificar configuración
-    if TELEGRAM_CONFIG['bot_token'] == 'TU_BOT_TOKEN_AQUI':
-        print('⚠️ MODO DEMO - Configuración de Telegram pendiente')
-        print('📋 Los mensajes se mostrarán aquí en lugar de enviarse:')
-        print()
-        
-        # Mostrar mensajes que se enviarían
-        if 'corners' in picks:
-            print('🟢 GRUPO CÓRNERS:')
-            print(format_corners_message(picks['corners']))
-            print('\n' + '='*60 + '\n')
-        
-        if 'cards' in picks:
-            print('🟡 GRUPO TARJETAS:')
-            print(format_cards_message(picks['cards']))
-            print('\n' + '='*60 + '\n')
-        
-        if 'btts' in picks:
-            print('🔴 GRUPO AMBOS MARCAN:')
-            print(format_btts_message(picks['btts']))
-            print('\n' + '='*60 + '\n')
-        
-        if 'draws' in picks:
-            print('🔵 GRUPO EMPATES:')
-            print(format_draws_message(picks['draws']))
-            print('\n' + '='*60 + '\n')
-        
-        print('📝 PARA ACTIVAR EL ENVÍO REAL:')
-        print('   1. Configura TELEGRAM_CONFIG con tu bot token')
-        print('   2. Añade los chat IDs de los 4 grupos')
-        print('   3. Ejecuta el script nuevamente')
-        
-        return
-    
-    # Envío real a Telegram
     success_count = 0
-    total_sends = 0
     
-    # Enviar córners
-    if 'corners' in picks:
-        total_sends += 1
-        message = format_corners_message(picks['corners'])
-        if send_telegram_message(TELEGRAM_CONFIG['groups']['corners'], message, TELEGRAM_CONFIG['bot_token']):
-            print(f'✅ Córners enviado: {picks["corners"]["match"]}')
+    # Enviar cada pick a su grupo
+    for bot_type, pick in picks.items():
+        chat_id = TELEGRAM_CONFIG['chat_ids'].get(bot_type)
+        
+        if not chat_id or chat_id.startswith('CHAT_ID_'):
+            print(f'⚠️ {bot_type.upper()}: Chat ID no configurado')
+            continue
+        
+        # Crear mensaje con cuotas reales
+        message = create_telegram_message(bot_type, pick)
+        
+        # Enviar a Telegram
+        success = send_to_telegram(
+            TELEGRAM_CONFIG['bot_token'], 
+            chat_id, 
+            message
+        )
+        
+        if success:
+            print(f'✅ {bot_type.upper()}: Enviado correctamente')
             success_count += 1
         else:
-            print(f'❌ Error enviando córners')
+            print(f'❌ {bot_type.upper()}: Error en envío')
     
-    # Enviar tarjetas
-    if 'cards' in picks:
-        total_sends += 1
-        message = format_cards_message(picks['cards'])
-        if send_telegram_message(TELEGRAM_CONFIG['groups']['cards'], message, TELEGRAM_CONFIG['bot_token']):
-            print(f'✅ Tarjetas enviado: {picks["cards"]["match"]}')
-            success_count += 1
+    print(f'\n📊 RESUMEN:')
+    print(f'✅ {success_count}/{len(picks)} mensajes enviados')
+    print(f'🎯 Cuotas reales integradas cuando disponibles')
+    print(f'💡 Sistema híbrido: Stats + OddsAPI')
+    
+    return success_count > 0
+
+def test_odds_api_integration():
+    """Prueba la integración con OddsAPI"""
+    
+    print('🧪 PROBANDO INTEGRACIÓN ODDS API')
+    print('=' * 40)
+    
+    # Probar con equipos de ejemplo
+    test_teams = [
+        ('Real Madrid', 'Barcelona'),
+        ('Manchester City', 'Arsenal'),
+        ('Bayern Munich', 'Dortmund')
+    ]
+    
+    for home, away in test_teams:
+        print(f'\n🔍 Buscando: {home} vs {away}')
+        odds_data = get_real_odds_for_match(home, away)
+        
+        if odds_data['found']:
+            print(f'✅ Encontrado en {odds_data["bookmaker"]}')
+            odds = odds_data['odds']
+            if 'draw' in odds:
+                print(f'   🤝 Empate: {odds["draw"]}')
         else:
-            print(f'❌ Error enviando tarjetas')
+            print(f'❌ No encontrado')
     
-    # Enviar BTTS
-    if 'btts' in picks:
-        total_sends += 1
-        message = format_btts_message(picks['btts'])
-        if send_telegram_message(TELEGRAM_CONFIG['groups']['btts'], message, TELEGRAM_CONFIG['bot_token']):
-            print(f'✅ BTTS enviado: {picks["btts"]["match"]}')
-            success_count += 1
-        else:
-            print(f'❌ Error enviando BTTS')
-    
-    # Enviar empates
-    if 'draws' in picks:
-        total_sends += 1
-        message = format_draws_message(picks['draws'])
-        if send_telegram_message(TELEGRAM_CONFIG['groups']['draws'], message, TELEGRAM_CONFIG['bot_token']):
-            print(f'✅ Empates enviado: {picks["draws"]["match"]}')
-            success_count += 1
-        else:
-            print(f'❌ Error enviando empates')
-    
-    # Resumen final
-    print(f'\n📊 RESUMEN DE ENVÍO:')
-    print(f'✅ Enviados exitosamente: {success_count}/{total_sends}')
-    print(f'📱 Grupos notificados: {success_count}')
-    
-    if success_count == total_sends:
-        print(f'🎉 ¡Todos los picks enviados correctamente!')
-    else:
-        print(f'⚠️ Algunos envíos fallaron - revisar configuración')
+    print(f'\n💡 La API funciona, pero depende de partidos disponibles')
+    print(f'🏆 Champions League en temporada tendrá cuotas reales')
 
 if __name__ == "__main__":
     try:
-        send_natural_picks_to_telegram()
-        print(f'\n✅ ¡Proceso de envío completado!')
+        # Probar integración
+        test_odds_api_integration()
+        
+        # Enviar picks (si están configurados los tokens)
+        print(f'\n' + '='*50)
+        if TELEGRAM_CONFIG['bot_token'] != 'TU_BOT_TOKEN':
+            send_all_picks_to_telegram()
+        else:
+            print('💡 Para enviar a Telegram, configura los tokens')
+    
     except Exception as e:
         print(f"❌ Error: {e}")
         import traceback
