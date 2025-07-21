@@ -93,18 +93,18 @@ Base: 60%
 {
   "confidence_threshold": 70,    // Confianza mínima para apostar
   "min_corners": 9,             // Mínimo de córners para apostar
-  "min_odds": 1.6,              // Cuota mínima aceptable
-  "max_picks_per_day": 4        // Máximo picks por día
+  "min_odds": 1.5,              // Cuota mínima aceptable
+  "max_picks_per_day": 999      // Sin límite - TODOS los que tengan valor
 }
 ```
 
 ### **Criterios de Selección:**
 
 Un partido se selecciona para apostar si:
-1. **Predicción total** ≥ `min_corners`
-2. **Confianza** ≥ `confidence_threshold`
-3. **Cuota estimada** ≥ `min_odds`
-4. No se ha alcanzado el `max_picks_per_day`
+1. **Predicción total** ≥ `min_corners` (9 córners)
+2. **Confianza** ≥ `confidence_threshold` (70%)
+3. **Cuota estimada** ≥ `min_odds` (1.5)
+4. **SIN LÍMITE DIARIO** - Se envían TODOS los picks que cumplan criterios
 
 ## 📊 Ejemplo de Salida del Bot
 

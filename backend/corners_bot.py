@@ -70,8 +70,8 @@ class CornersBot:
             return {
                 'confidence_threshold': 70,
                 'min_corners': 9,
-                'min_odds': 1.6,
-                'max_picks_per_day': 4
+                'min_odds': 1.5,
+                'max_picks_per_day': 999
             }
     
     def load_teams_data(self):
@@ -281,12 +281,18 @@ class CornersBot:
         ]
         
         # Añadir recomendación específica
-        if total_corners >= self.config.get('min_corners', 9):
+        estimated_odds = self.estimate_odds(total_corners)
+        min_odds = self.config.get('min_odds', 1.5)
+        
+        if total_corners >= self.config.get('min_corners', 9) and estimated_odds >= min_odds:
             analysis_parts.append(f"✅ OVER {self.config.get('min_corners', 9)}.5 córners - Predicción favorable")
+            analysis_parts.append(f"💰 Cuota estimada: {estimated_odds} (mín: {min_odds})")
             if total_corners >= 12:
                 analysis_parts.append("🔥 Partido con alta expectativa de córners")
-        else:
-            analysis_parts.append(f"❌ UNDER {self.config.get('min_corners', 9)}.5 córners - No cumple criterios")
+        elif total_corners < self.config.get('min_corners', 9):
+            analysis_parts.append(f"❌ UNDER {self.config.get('min_corners', 9)}.5 córners - No cumple criterios de córners")
+        elif estimated_odds < min_odds:
+            analysis_parts.append(f"❌ Cuota demasiado baja: {estimated_odds} < {min_odds} - No cumple criterios de valor")
         
         return "\n".join(analysis_parts)
     
@@ -294,19 +300,20 @@ class CornersBot:
         """Determina si se debe apostar basado en la configuración"""
         min_corners = self.config.get('min_corners', 9)
         min_confidence = self.config.get('confidence_threshold', 70)
+        min_odds = self.config.get('min_odds', 1.5)
+        
+        # Estimar cuota para esta predicción
+        estimated_odds = self.estimate_odds(prediction.predicted_total_corners)
         
         return (prediction.predicted_total_corners >= min_corners and 
-                prediction.confidence >= min_confidence)
+                prediction.confidence >= min_confidence and
+                estimated_odds >= min_odds)
     
     def get_picks_for_matches(self, matches: List[Dict]) -> List[Dict]:
-        """Genera picks para una lista de partidos"""
+        """Genera picks para una lista de partidos - TODOS los que tengan valor"""
         picks = []
-        max_picks = self.config.get('max_picks_per_day', 4)
         
         for match in matches:
-            if len(picks) >= max_picks:
-                break
-                
             home_team = match.get('home_team', '')
             away_team = match.get('away_team', '')
             
@@ -315,6 +322,7 @@ class CornersBot:
             
             prediction = self.analyze_match_corners(home_team, away_team)
             
+            # Enviar TODOS los picks que cumplan los criterios mínimos
             if self.should_bet(prediction):
                 pick = {
                     'home_team': home_team,
@@ -331,6 +339,7 @@ class CornersBot:
                 }
                 picks.append(pick)
         
+        # Ordenar por confianza (mayor a menor) pero enviar TODOS
         return sorted(picks, key=lambda x: x['confidence'], reverse=True)
     
     def estimate_odds(self, predicted_corners: float) -> float:

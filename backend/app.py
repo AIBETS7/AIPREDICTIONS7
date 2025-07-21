@@ -257,6 +257,30 @@ def api_bot_corneres():
                 'away_team': 'Real Betis',
                 'match_time': '2025-01-22 21:00',
                 'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Sevilla',
+                'away_team': 'Real Madrid',
+                'match_time': '2025-01-22 19:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Valencia',
+                'away_team': 'Atletico Madrid',
+                'match_time': '2025-01-22 17:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Real Betis',
+                'away_team': 'Barcelona',
+                'match_time': '2025-01-22 15:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Real Madrid',
+                'away_team': 'Atletico Madrid',
+                'match_time': '2025-01-22 22:00',
+                'competition': 'La Liga'
             }
         ]
         
