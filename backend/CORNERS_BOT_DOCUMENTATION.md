@@ -92,7 +92,6 @@ Base: 60%
 ```json
 {
   "confidence_threshold": 70,    // Confianza mínima para apostar
-  "min_corners": 9,             // Mínimo de córners para apostar
   "min_odds": 1.5,              // Cuota mínima aceptable
   "max_picks_per_day": 999      // Sin límite - TODOS los que tengan valor
 }
@@ -101,10 +100,10 @@ Base: 60%
 ### **Criterios de Selección:**
 
 Un partido se selecciona para apostar si:
-1. **Predicción total** ≥ `min_corners` (9 córners)
-2. **Confianza** ≥ `confidence_threshold` (70%)
-3. **Cuota estimada** ≥ `min_odds` (1.5)
-4. **SIN LÍMITE DIARIO** - Se envían TODOS los picks que cumplan criterios
+1. **Confianza** ≥ `confidence_threshold` (70%)
+2. **Cuota estimada** ≥ `min_odds` (1.5)
+3. **SIN LÍMITE DIARIO** - Se envían TODOS los picks que cumplan criterios
+4. **SIN FILTRO DE CÓRNERS** - Cualquier predicción con valor se considera
 
 ## 📊 Ejemplo de Salida del Bot
 
