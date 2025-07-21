@@ -240,6 +240,10 @@ def get_matches_for_bots(competitions: List[str] = None, with_referees: bool = T
         print("⚠️ No se encontraron partidos reales, usando datos de ejemplo")
         return get_example_matches()
     
+    # FILTRO PERMANENTE: Eliminar países/ligas excluidos (RUSIA, etc.)
+    from country_filter import filter_matches
+    all_matches = filter_matches(all_matches)
+    
     # Filtrar por competiciones (si se especificaron)
     if competitions:
         filtered_matches = filter_matches_by_competition(all_matches, competitions)
@@ -249,7 +253,7 @@ def get_matches_for_bots(competitions: List[str] = None, with_referees: bool = T
     else:
         # Usar todos los partidos disponibles
         filtered_matches = all_matches
-        print(f"🌍 Usando TODAS las competiciones disponibles")
+        print(f"🌍 Usando TODAS las competiciones disponibles (sin países excluidos)")
     
     # Asignar árbitros si se solicita
     if with_referees:
