@@ -1,437 +1,5 @@
 [
   {
-    "id": "api_sports_1348363",
-    "home_team": "San Luis",
-    "away_team": "Rangers de Talca",
-    "home_score": 1,
-    "away_score": 2,
-    "status": "match finished",
-    "time": "2025-07-21T00:00:00+00:00",
-    "competition": "Primera B",
-    "competition_type": "other",
-    "country": "Chile",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T00:00:00+00:00",
-    "venue": "Estadio Bicentenario Lucio Fariña",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1374088",
-    "home_team": "Independiente",
-    "away_team": "Talleres Cordoba",
-    "home_score": 1,
-    "away_score": 2,
-    "status": "match finished",
-    "time": "2025-07-21T00:00:00+00:00",
-    "competition": "Liga Profesional Argentina",
-    "competition_type": "other",
-    "country": "Argentina",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T00:00:00+00:00",
-    "venue": "Estadio Libertadores de América",
-    "referee": "Ariel Penel, Argentina"
-  },
-  {
-    "id": "api_sports_1410150",
-    "home_team": "Minneapolis City",
-    "away_team": "Sueno",
-    "home_score": 2,
-    "away_score": 0,
-    "status": "match finished",
-    "time": "2025-07-21T00:00:00+00:00",
-    "competition": "USL League Two",
-    "competition_type": "other",
-    "country": "USA",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T00:00:00+00:00",
-    "venue": null,
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1403884",
-    "home_team": "Oriental",
-    "away_team": "Cerrito",
-    "home_score": 1,
-    "away_score": 1,
-    "status": "match finished",
-    "time": "2025-07-21T00:30:00+00:00",
-    "competition": "Segunda División",
-    "competition_type": "other",
-    "country": "Uruguay",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T00:30:00+00:00",
-    "venue": "Parque Palermo",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1410002",
-    "home_team": "Millonarios",
-    "away_team": "Deportivo Pasto",
-    "home_score": null,
-    "away_score": null,
-    "status": "match postponed",
-    "time": "2025-07-21T00:30:00+00:00",
-    "competition": "Primera A",
-    "competition_type": "other",
-    "country": "Colombia",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T00:30:00+00:00",
-    "venue": null,
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1378968",
-    "home_team": "Club America",
-    "away_team": "Toluca",
-    "home_score": 1,
-    "away_score": 3,
-    "status": "match finished",
-    "time": "2025-07-21T01:15:00+00:00",
-    "competition": "Campeón de Campeones",
-    "competition_type": "other",
-    "country": "Mexico",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T01:15:00+00:00",
-    "venue": "Estadio Azteca",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1345534",
-    "home_team": "Real Monarchs",
-    "away_team": "Austin II",
-    "home_score": 1,
-    "away_score": 1,
-    "status": "match finished",
-    "time": "2025-07-21T01:30:00+00:00",
-    "competition": "MLS Next Pro",
-    "competition_type": "other",
-    "country": "USA",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T01:30:00+00:00",
-    "venue": "Zions Bank Stadium",
-    "referee": "Yannick Rothfuss"
-  },
-  {
-    "id": "api_sports_1345533",
-    "home_team": "Colorado Rapids II",
-    "away_team": "Tacoma Defiance",
-    "home_score": 6,
-    "away_score": 4,
-    "status": "match finished",
-    "time": "2025-07-21T02:00:00+00:00",
-    "competition": "MLS Next Pro",
-    "competition_type": "other",
-    "country": "USA",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T02:00:00+00:00",
-    "venue": "Metropolitan State University of Denver Stadium",
-    "referee": "Patricia McCracken"
-  },
-  {
-    "id": "api_sports_1345535",
-    "home_team": "LA Galaxy II",
-    "away_team": "Los Angeles II",
-    "home_score": 3,
-    "away_score": 3,
-    "status": "match finished",
-    "time": "2025-07-21T02:00:00+00:00",
-    "competition": "MLS Next Pro",
-    "competition_type": "other",
-    "country": "USA",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T02:00:00+00:00",
-    "venue": "William Rolland Stadium",
-    "referee": "William Hale"
-  },
-  {
-    "id": "api_sports_1410151",
-    "home_team": "Ventura County Fusion",
-    "away_team": "Tucson",
-    "home_score": 2,
-    "away_score": 0,
-    "status": "match finished",
-    "time": "2025-07-21T02:00:00+00:00",
-    "competition": "USL League Two",
-    "competition_type": "other",
-    "country": "USA",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T02:00:00+00:00",
-    "venue": null,
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1324191",
-    "home_team": "Avispa Fukuoka",
-    "away_team": "Kyoto Sanga",
-    "home_score": 2,
-    "away_score": 2,
-    "status": "match finished",
-    "time": "2025-07-21T09:00:00+00:00",
-    "competition": "J1 League",
-    "competition_type": "other",
-    "country": "Japan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T09:00:00+00:00",
-    "venue": "Best Denki Stadium",
-    "referee": "Atsushi Uemura, Japan"
-  },
-  {
-    "id": "api_sports_1351709",
-    "home_team": "Biwako Shiga",
-    "away_team": "Grulla Morioka",
-    "home_score": 1,
-    "away_score": 3,
-    "status": "match finished",
-    "time": "2025-07-21T09:00:00+00:00",
-    "competition": "Japan Football League",
-    "competition_type": "other",
-    "country": "Japan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T09:00:00+00:00",
-    "venue": "Hikone General Sports Park Athletic Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1325097",
-    "home_team": "FC Gifu",
-    "away_team": "Nara Club",
-    "home_score": 1,
-    "away_score": 1,
-    "status": "match finished",
-    "time": "2025-07-21T10:00:00+00:00",
-    "competition": "J3 League",
-    "competition_type": "other",
-    "country": "Japan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T10:00:00+00:00",
-    "venue": "Nagaragawa Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1325100",
-    "home_team": "Tegevajaro Miyazaki",
-    "away_team": "Kitakyushu",
-    "home_score": 1,
-    "away_score": 3,
-    "status": "match finished",
-    "time": "2025-07-21T10:00:00+00:00",
-    "competition": "J3 League",
-    "competition_type": "other",
-    "country": "Japan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T10:00:00+00:00",
-    "venue": "Ichigo Miyazaki Shintomi Soccer Field",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1325101",
-    "home_team": "Kagoshima United",
-    "away_team": "Osaka",
-    "home_score": 2,
-    "away_score": 1,
-    "status": "match finished",
-    "time": "2025-07-21T10:00:00+00:00",
-    "competition": "J3 League",
-    "competition_type": "other",
-    "country": "Japan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T10:00:00+00:00",
-    "venue": "Shiranami Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1357914",
-    "home_team": "Seoul",
-    "away_team": "Incheon Red Angels",
-    "home_score": 2,
-    "away_score": 1,
-    "status": "match finished",
-    "time": "2025-07-21T10:00:00+00:00",
-    "competition": "WK-League",
-    "competition_type": "other",
-    "country": "South-Korea",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T10:00:00+00:00",
-    "venue": "Sangam Auxiliary Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1390558",
-    "home_team": "V-varen Nagasaki",
-    "away_team": "Real Sociedad",
-    "home_score": 1,
-    "away_score": 0,
-    "status": "match finished",
-    "time": "2025-07-21T10:00:00+00:00",
-    "competition": "Friendlies Clubs",
-    "competition_type": "other",
-    "country": "World",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T10:00:00+00:00",
-    "venue": "PEACE STADIUM Connected by SoftBank",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1358144",
-    "home_team": "Shenzhen Juniors",
-    "away_team": "Shanghai Jiading",
-    "home_score": 1,
-    "away_score": 2,
-    "status": "match finished",
-    "time": "2025-07-21T11:30:00+00:00",
-    "competition": "League One",
-    "competition_type": "other",
-    "country": "China",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T11:30:00+00:00",
-    "venue": "Baoan Sports Centre Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1329744",
-    "home_team": "Stabæk II",
-    "away_team": "Fredrikstad II",
-    "home_score": 1,
-    "away_score": 1,
-    "status": "second half",
-    "time": "2025-07-21T12:00:00+00:00",
-    "competition": "3. Division - Girone 6",
-    "competition_type": "other",
-    "country": "Norway",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T12:00:00+00:00",
-    "venue": "Nadderud Stadion",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1410082",
-    "home_team": "Kenya",
-    "away_team": "Uganda",
-    "home_score": null,
-    "away_score": null,
-    "status": "match cancelled",
-    "time": "2025-07-21T12:00:00+00:00",
-    "competition": "Friendlies",
-    "competition_type": "other",
-    "country": "World",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T12:00:00+00:00",
-    "venue": "Black Rhino Academy Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1377396",
-    "home_team": "Indonesia U23",
-    "away_team": "Malaysia U23",
-    "home_score": 0,
-    "away_score": 0,
-    "status": "halftime",
-    "time": "2025-07-21T13:00:00+00:00",
-    "competition": "AFF U23 Championship",
-    "competition_type": "other",
-    "country": "World",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T13:00:00+00:00",
-    "venue": "Gelora Bung Karno Stadium",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1377397",
-    "home_team": "Philippines U23",
-    "away_team": "Brunei U23",
-    "home_score": 1,
-    "away_score": 0,
-    "status": "second half",
-    "time": "2025-07-21T13:00:00+00:00",
-    "competition": "AFF U23 Championship",
-    "competition_type": "other",
-    "country": "World",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T13:00:00+00:00",
-    "venue": "Stadion Patriot",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1375527",
-    "home_team": "Hay Al Wadi",
-    "away_team": "Alamal Atbara",
-    "home_score": null,
-    "away_score": null,
-    "status": "not started",
-    "time": "2025-07-21T13:45:00+00:00",
-    "competition": "Sudani Premier League",
-    "competition_type": "premier_league",
-    "country": "Sudan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T13:45:00+00:00",
-    "venue": "Stade Al-Merghani Kassala",
-    "referee": "Unknown"
-  },
-  {
-    "id": "api_sports_1375528",
-    "home_team": "Al-Mergheni",
-    "away_team": "Al Merreikh El Obeid",
-    "home_score": null,
-    "away_score": null,
-    "status": "not started",
-    "time": "2025-07-21T13:45:00+00:00",
-    "competition": "Sudani Premier League",
-    "competition_type": "premier_league",
-    "country": "Sudan",
-    "season": 2025,
-    "source": "api_sports_v3",
-    "is_real": true,
-    "match_time": "2025-07-21T13:45:00+00:00",
-    "venue": "Stade Al-Amal Atbara",
-    "referee": "Unknown"
-  },
-  {
     "id": "api_sports_1400277",
     "home_team": "FC Orenburg",
     "away_team": "CSKA Moscow",
@@ -447,7 +15,8 @@
     "is_real": true,
     "match_time": "2025-07-21T14:30:00+00:00",
     "venue": "Stadion Gazovik",
-    "referee": "Egor Egorov, Russia"
+    "referee": "Egor Egorov, Russia",
+    "spain_time": "16:30 21/07/2025"
   },
   {
     "id": "api_sports_1329376",
@@ -465,7 +34,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:00:00+00:00",
     "venue": "Intility Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 21/07/2025"
   },
   {
     "id": "api_sports_1342761",
@@ -483,7 +53,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:00:00+00:00",
     "venue": "Wiklöf Holding Arena",
-    "referee": "Joona Kontinen, Brazil"
+    "referee": "Joona Kontinen, Brazil",
+    "spain_time": "17:00 21/07/2025"
   },
   {
     "id": "api_sports_1350436",
@@ -501,7 +72,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:00:00+00:00",
     "venue": "Tukuma pilsētas stadions",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 21/07/2025"
   },
   {
     "id": "api_sports_1383669",
@@ -519,7 +91,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:00:00+00:00",
     "venue": "Raudondvario stadionas",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 21/07/2025"
   },
   {
     "id": "api_sports_1411376",
@@ -537,7 +110,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:00:00+00:00",
     "venue": "TBC",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 21/07/2025"
   },
   {
     "id": "api_sports_1354778",
@@ -555,7 +129,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:30:00+00:00",
     "venue": "Myyrmäen jalkapallostadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:30 21/07/2025"
   },
   {
     "id": "api_sports_1354867",
@@ -573,7 +148,8 @@
     "is_real": true,
     "match_time": "2025-07-21T15:30:00+00:00",
     "venue": "Briotech Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:30 21/07/2025"
   },
   {
     "id": "api_sports_1356648",
@@ -591,7 +167,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": "Männiku staadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1385736",
@@ -609,7 +186,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": "Marneulis Stadioni",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1385769",
@@ -627,7 +205,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": "Clinceni - Arena 1",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1388007",
@@ -645,7 +224,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": "Stadion Lokomotiv",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1402770",
@@ -663,7 +243,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": "Městský fotbalový stadion Srbská",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1403556",
@@ -681,7 +262,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1403557",
@@ -699,7 +281,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1411379",
@@ -717,7 +300,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 21/07/2025"
   },
   {
     "id": "api_sports_1381453",
@@ -735,7 +319,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:30:00+00:00",
     "venue": "S. Dariaus ir S. Girėno stadionas",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 21/07/2025"
   },
   {
     "id": "api_sports_1400398",
@@ -753,7 +338,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:30:00+00:00",
     "venue": "Sapsan Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 21/07/2025"
   },
   {
     "id": "api_sports_1403558",
@@ -771,7 +357,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 21/07/2025"
   },
   {
     "id": "api_sports_1408979",
@@ -789,7 +376,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:30:00+00:00",
     "venue": "Rasenplatz BSA Heinrich-Wieland-Straße",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 21/07/2025"
   },
   {
     "id": "api_sports_1375529",
@@ -807,7 +395,8 @@
     "is_real": true,
     "match_time": "2025-07-21T16:45:00+00:00",
     "venue": "Stade Al-Amal Atbara",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:45 21/07/2025"
   },
   {
     "id": "api_sports_1329559",
@@ -825,7 +414,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Djervbanen",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1329561",
@@ -843,7 +433,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Madla Handelslag Stadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1329563",
@@ -861,7 +452,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Torvastad Idrettssenter",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1329741",
@@ -879,7 +471,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Frogner Stadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1331391",
@@ -897,7 +490,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Estadio Ofelia Rosenzuaig",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1341820",
@@ -915,7 +509,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Landskrona Idrottsplats",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1341823",
@@ -933,7 +528,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Bravida Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1342070",
@@ -951,7 +547,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "PlatinumCars Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1355827",
@@ -969,7 +566,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Tabasalu Staadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1381523",
@@ -987,7 +585,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "Stadion Miejski w Niepolomicach",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1410003",
@@ -1005,7 +604,8 @@
     "is_real": true,
     "match_time": "2025-07-21T17:00:00+00:00",
     "venue": "King Abdullah International Stadium (?Amman",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 21/07/2025"
   },
   {
     "id": "api_sports_1384895",
@@ -1023,7 +623,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:00:00+00:00",
     "venue": "Sportski Centar Fudbalskog saveza Srbije",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 21/07/2025"
   },
   {
     "id": "api_sports_1397488",
@@ -1041,7 +642,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:00:00+00:00",
     "venue": "Estadio Enrique Soler",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 21/07/2025"
   },
   {
     "id": "api_sports_1400295",
@@ -1059,7 +661,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 21/07/2025"
   },
   {
     "id": "api_sports_1403555",
@@ -1077,7 +680,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 21/07/2025"
   },
   {
     "id": "api_sports_1388011",
@@ -1095,7 +699,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:15:00+00:00",
     "venue": "Stadion Spartak",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:15 21/07/2025"
   },
   {
     "id": "api_sports_1362978",
@@ -1113,7 +718,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": "Estadio Nueva España",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1385569",
@@ -1131,7 +737,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": "Estadio de los Inmigrantes",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1385571",
@@ -1149,7 +756,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": "Estadio Beto Larrosa",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1385768",
@@ -1167,7 +775,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": "Stadionul Arcul de Triumf",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1403559",
@@ -1185,7 +794,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1405690",
@@ -1203,7 +813,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 21/07/2025"
   },
   {
     "id": "api_sports_1403560",
@@ -1221,7 +832,8 @@
     "is_real": true,
     "match_time": "2025-07-21T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 21/07/2025"
   },
   {
     "id": "api_sports_1403561",
@@ -1239,7 +851,8 @@
     "is_real": true,
     "match_time": "2025-07-21T19:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "21:00 21/07/2025"
   },
   {
     "id": "api_sports_1405691",
@@ -1257,7 +870,8 @@
     "is_real": true,
     "match_time": "2025-07-21T20:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "22:45 21/07/2025"
   },
   {
     "id": "api_sports_1327503",
@@ -1275,7 +889,8 @@
     "is_real": true,
     "match_time": "2025-07-21T21:00:00+00:00",
     "venue": "Estadio Banco Guayaquil",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:00 21/07/2025"
   },
   {
     "id": "api_sports_1397487",
@@ -1293,7 +908,8 @@
     "is_real": true,
     "match_time": "2025-07-21T21:00:00+00:00",
     "venue": "Estadio Villa Alegre",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:00 21/07/2025"
   },
   {
     "id": "api_sports_1400307",
@@ -1311,7 +927,8 @@
     "is_real": true,
     "match_time": "2025-07-21T21:00:00+00:00",
     "venue": "Estadio Metropolitano de Techo",
-    "referee": "Brayan Dario Liévano Arteaga"
+    "referee": "Brayan Dario Liévano Arteaga",
+    "spain_time": "23:00 21/07/2025"
   },
   {
     "id": "api_sports_1392249",
@@ -1329,7 +946,8 @@
     "is_real": true,
     "match_time": "2025-07-21T21:30:00+00:00",
     "venue": "Estadio Ricardo Gregor",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:30 21/07/2025"
   },
   {
     "id": "api_sports_1374082",
@@ -1347,7 +965,8 @@
     "is_real": true,
     "match_time": "2025-07-21T22:00:00+00:00",
     "venue": "Estadio Jorge Luis Hirschi",
-    "referee": "Fernando Echenique"
+    "referee": "Fernando Echenique",
+    "spain_time": "00:00 22/07/2025"
   },
   {
     "id": "api_sports_1390559",
@@ -1365,7 +984,8 @@
     "is_real": true,
     "match_time": "2025-07-21T22:00:00+00:00",
     "venue": "TBC",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:00 22/07/2025"
   },
   {
     "id": "api_sports_1357693",
@@ -1383,7 +1003,8 @@
     "is_real": true,
     "match_time": "2025-07-21T22:30:00+00:00",
     "venue": "Estádio Eládio de Barros Carvalho",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:30 22/07/2025"
   },
   {
     "id": "api_sports_1357697",
@@ -1401,7 +1022,8 @@
     "is_real": true,
     "match_time": "2025-07-21T22:30:00+00:00",
     "venue": "Estádio Municipal Jonas Duarte",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:30 22/07/2025"
   },
   {
     "id": "api_sports_1339133",
@@ -1419,7 +1041,8 @@
     "is_real": true,
     "match_time": "2025-07-21T23:00:00+00:00",
     "venue": "Estadio CAP",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "01:00 22/07/2025"
   },
   {
     "id": "api_sports_1378287",
@@ -1437,7 +1060,8 @@
     "is_real": true,
     "match_time": "2025-07-21T23:00:00+00:00",
     "venue": "Estadio Gilberto Parada",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "01:00 22/07/2025"
   },
   {
     "id": "api_sports_1400308",
@@ -1455,7 +1079,8 @@
     "is_real": true,
     "match_time": "2025-07-21T23:05:00+00:00",
     "venue": "Estadio de La Independencia",
-    "referee": "Luis Eduardo Torres Bohórquez"
+    "referee": "Luis Eduardo Torres Bohórquez",
+    "spain_time": "01:05 22/07/2025"
   },
   {
     "id": "api_sports_1327502",
@@ -1473,7 +1098,8 @@
     "is_real": true,
     "match_time": "2025-07-22T00:00:00+00:00",
     "venue": "Estadio Banco Guayaquil",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "02:00 22/07/2025"
   },
   {
     "id": "api_sports_1338463",
@@ -1491,7 +1117,8 @@
     "is_real": true,
     "match_time": "2025-07-22T00:00:00+00:00",
     "venue": "Estadio Alejandro Serrano Aguilar Banco del Austro",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "02:00 22/07/2025"
   },
   {
     "id": "api_sports_1374078",
@@ -1509,7 +1136,8 @@
     "is_real": true,
     "match_time": "2025-07-22T00:15:00+00:00",
     "venue": "Estadio Norberto Tito Tomaghello",
-    "referee": "Pablo Dóvalo"
+    "referee": "Pablo Dóvalo",
+    "spain_time": "02:15 22/07/2025"
   },
   {
     "id": "api_sports_1374085",
@@ -1527,7 +1155,8 @@
     "is_real": true,
     "match_time": "2025-07-22T00:15:00+00:00",
     "venue": "Estadio Ingeniero Hilario Sánchez",
-    "referee": "Darío Herrera"
+    "referee": "Darío Herrera",
+    "spain_time": "02:15 22/07/2025"
   },
   {
     "id": "api_sports_1348364",
@@ -1545,7 +1174,8 @@
     "is_real": true,
     "match_time": "2025-07-22T00:30:00+00:00",
     "venue": "Estadio Bicentenario Lucio Fariña",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "02:30 22/07/2025"
   },
   {
     "id": "api_sports_1396993",
@@ -1563,7 +1193,8 @@
     "is_real": true,
     "match_time": "2025-07-22T01:00:00+00:00",
     "venue": "Estadio Alfonso Lastras Ramírez",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "03:00 22/07/2025"
   },
   {
     "id": "api_sports_1400309",
@@ -1581,7 +1212,8 @@
     "is_real": true,
     "match_time": "2025-07-22T01:10:00+00:00",
     "venue": "Estadio Deportivo Cali",
-    "referee": "Harold Fontecha Zamudio"
+    "referee": "Harold Fontecha Zamudio",
+    "spain_time": "03:10 22/07/2025"
   },
   {
     "id": "api_sports_1405351",
@@ -1599,7 +1231,8 @@
     "is_real": true,
     "match_time": "2025-07-22T01:30:00+00:00",
     "venue": "Estadio Los Andes",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "03:30 22/07/2025"
   },
   {
     "id": "api_sports_1410143",
@@ -1617,7 +1250,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:00 22/07/2025"
   },
   {
     "id": "api_sports_1411380",
@@ -1635,7 +1269,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:00 22/07/2025"
   },
   {
     "id": "api_sports_1383639",
@@ -1653,7 +1288,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1387659",
@@ -1671,7 +1307,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1387660",
@@ -1689,7 +1326,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1387661",
@@ -1707,7 +1345,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1387662",
@@ -1725,7 +1364,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1387663",
@@ -1743,7 +1383,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1396769",
@@ -1761,7 +1402,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1396772",
@@ -1779,7 +1421,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": "Green Gully Reserve",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1397428",
@@ -1797,7 +1440,8 @@
     "is_real": true,
     "match_time": "2025-07-22T09:30:00+00:00",
     "venue": "Larrakia Park",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "11:30 22/07/2025"
   },
   {
     "id": "api_sports_1340833",
@@ -1815,7 +1459,8 @@
     "is_real": true,
     "match_time": "2025-07-22T10:30:00+00:00",
     "venue": "Steelyard",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "12:30 22/07/2025"
   },
   {
     "id": "api_sports_1340834",
@@ -1833,7 +1478,8 @@
     "is_real": true,
     "match_time": "2025-07-22T10:30:00+00:00",
     "venue": "Gwangju World Cup Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "12:30 22/07/2025"
   },
   {
     "id": "api_sports_1340835",
@@ -1851,7 +1497,8 @@
     "is_real": true,
     "match_time": "2025-07-22T10:30:00+00:00",
     "venue": "Anyang Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "12:30 22/07/2025"
   },
   {
     "id": "api_sports_1383827",
@@ -1869,7 +1516,8 @@
     "is_real": true,
     "match_time": "2025-07-22T11:00:00+00:00",
     "venue": "Qingdao West Coast University City Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "13:00 22/07/2025"
   },
   {
     "id": "api_sports_1411381",
@@ -1887,7 +1535,8 @@
     "is_real": true,
     "match_time": "2025-07-22T11:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "13:00 22/07/2025"
   },
   {
     "id": "api_sports_1411382",
@@ -1905,7 +1554,8 @@
     "is_real": true,
     "match_time": "2025-07-22T11:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "13:00 22/07/2025"
   },
   {
     "id": "api_sports_1383771",
@@ -1923,7 +1573,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:00:00+00:00",
     "venue": "Yuxi Plateau Sports Center Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:00 22/07/2025"
   },
   {
     "id": "api_sports_1411383",
@@ -1941,7 +1592,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:00 22/07/2025"
   },
   {
     "id": "api_sports_1411385",
@@ -1959,7 +1611,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:00 22/07/2025"
   },
   {
     "id": "api_sports_1411386",
@@ -1977,7 +1630,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:00 22/07/2025"
   },
   {
     "id": "api_sports_1411387",
@@ -1995,7 +1649,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:00 22/07/2025"
   },
   {
     "id": "api_sports_1411391",
@@ -2013,7 +1668,8 @@
     "is_real": true,
     "match_time": "2025-07-22T12:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "14:30 22/07/2025"
   },
   {
     "id": "api_sports_1377398",
@@ -2031,7 +1687,8 @@
     "is_real": true,
     "match_time": "2025-07-22T13:00:00+00:00",
     "venue": "Gelora Bung Karno Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "15:00 22/07/2025"
   },
   {
     "id": "api_sports_1377399",
@@ -2049,7 +1706,8 @@
     "is_real": true,
     "match_time": "2025-07-22T13:00:00+00:00",
     "venue": "Stadion Patriot",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "15:00 22/07/2025"
   },
   {
     "id": "api_sports_1411392",
@@ -2067,7 +1725,8 @@
     "is_real": true,
     "match_time": "2025-07-22T13:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "15:30 22/07/2025"
   },
   {
     "id": "api_sports_1376246",
@@ -2085,7 +1744,8 @@
     "is_real": true,
     "match_time": "2025-07-22T14:00:00+00:00",
     "venue": "Stade des Martyrs de la Pentecôte",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "16:00 22/07/2025"
   },
   {
     "id": "api_sports_1411388",
@@ -2103,7 +1763,8 @@
     "is_real": true,
     "match_time": "2025-07-22T14:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "16:30 22/07/2025"
   },
   {
     "id": "api_sports_1383670",
@@ -2121,7 +1782,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:00:00+00:00",
     "venue": "Panevėžio futbolo akademijos stadionas",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 22/07/2025"
   },
   {
     "id": "api_sports_1402864",
@@ -2139,7 +1801,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:00:00+00:00",
     "venue": "TBC",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 22/07/2025"
   },
   {
     "id": "api_sports_1405443",
@@ -2157,7 +1820,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:00:00+00:00",
     "venue": "Väre Areena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 22/07/2025"
   },
   {
     "id": "api_sports_1411377",
@@ -2175,7 +1839,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:00:00+00:00",
     "venue": "Vonresort Hotel Futbol Sahası",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 22/07/2025"
   },
   {
     "id": "api_sports_1411393",
@@ -2193,7 +1858,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:00 22/07/2025"
   },
   {
     "id": "api_sports_1411394",
@@ -2211,7 +1877,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:30 22/07/2025"
   },
   {
     "id": "api_sports_1411395",
@@ -2229,7 +1896,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:30 22/07/2025"
   },
   {
     "id": "api_sports_1411396",
@@ -2247,7 +1915,8 @@
     "is_real": true,
     "match_time": "2025-07-22T15:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "17:30 22/07/2025"
   },
   {
     "id": "api_sports_1342466",
@@ -2265,7 +1934,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "B&G-banen",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1354868",
@@ -2283,7 +1953,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Jätkäsaari Tekonurmi",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1376765",
@@ -2301,7 +1972,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Keila staadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1383671",
@@ -2319,7 +1991,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Kretingos dirbtinės dangos aikštė",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1383672",
@@ -2337,7 +2010,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Šiaulių Gytarių stadionas",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1383673",
@@ -2355,7 +2029,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "SM Tauras Stadionas",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1385730",
@@ -2373,7 +2048,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Marneulis Stadioni",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1405445",
@@ -2391,7 +2067,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Europa Point Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1405446",
@@ -2409,7 +2086,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Kotaik Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1410153",
@@ -2427,7 +2105,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": "Stade Larbi Zaouli",
-    "referee": "Shamirah Nabadda"
+    "referee": "Shamirah Nabadda",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411389",
@@ -2445,7 +2124,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411397",
@@ -2463,7 +2143,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411398",
@@ -2481,7 +2162,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411399",
@@ -2499,7 +2181,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411400",
@@ -2517,7 +2200,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1411401",
@@ -2535,7 +2219,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:00 22/07/2025"
   },
   {
     "id": "api_sports_1390560",
@@ -2553,7 +2238,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:30:00+00:00",
     "venue": "De Geusselt",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 22/07/2025"
   },
   {
     "id": "api_sports_1408980",
@@ -2571,7 +2257,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:30:00+00:00",
     "venue": "Sportanlage Reuthinger Weg",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 22/07/2025"
   },
   {
     "id": "api_sports_1409440",
@@ -2589,7 +2276,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:30:00+00:00",
     "venue": "Dr.-Eugen-Stocke-Stadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 22/07/2025"
   },
   {
     "id": "api_sports_1409441",
@@ -2607,7 +2295,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:30:00+00:00",
     "venue": "Projekt 29 Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 22/07/2025"
   },
   {
     "id": "api_sports_1411402",
@@ -2625,7 +2314,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:30 22/07/2025"
   },
   {
     "id": "api_sports_1375530",
@@ -2643,7 +2333,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:45:00+00:00",
     "venue": "Barber Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:45 22/07/2025"
   },
   {
     "id": "api_sports_1390780",
@@ -2661,7 +2352,8 @@
     "is_real": true,
     "match_time": "2025-07-22T16:45:00+00:00",
     "venue": "Yud-Alef Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "18:45 22/07/2025"
   },
   {
     "id": "api_sports_1329379",
@@ -2679,7 +2371,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Alvøen kunstgress",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1383450",
@@ -2697,7 +2390,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Doosan Aréna",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1383451",
@@ -2715,7 +2409,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Alphamega Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1390779",
@@ -2733,7 +2428,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "HaMoshava Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1405447",
@@ -2751,7 +2447,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "LNK Sporta Parks",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1405448",
@@ -2769,7 +2466,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Parken",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1405449",
@@ -2787,7 +2485,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "MFA Centenary Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1409442",
@@ -2805,7 +2504,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Sportanlage TSV Kornburg",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1409443",
@@ -2823,7 +2523,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": "Sportanlage Neudrossenfeld Platz 1",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1411403",
@@ -2841,7 +2542,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1411404",
@@ -2859,7 +2561,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1411405",
@@ -2877,7 +2580,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1411406",
@@ -2895,7 +2599,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:00 22/07/2025"
   },
   {
     "id": "api_sports_1408981",
@@ -2913,7 +2618,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:30:00+00:00",
     "venue": "Sportanlage Schwaig Platz 1",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:30 22/07/2025"
   },
   {
     "id": "api_sports_1373820",
@@ -2931,7 +2637,8 @@
     "is_real": true,
     "match_time": "2025-07-22T17:45:00+00:00",
     "venue": "Estádio da Gávea",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "19:45 22/07/2025"
   },
   {
     "id": "api_sports_1353758",
@@ -2949,7 +2656,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1353759",
@@ -2967,7 +2675,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1353763",
@@ -2985,7 +2694,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1373814",
@@ -3003,7 +2713,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "CT do Red Bull Bragantino",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1373815",
@@ -3021,7 +2732,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "Estádio Olímpico Nilton Santos",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1373818",
@@ -3039,7 +2751,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "Estádio Morada dos Quero-Queros",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1373819",
@@ -3057,7 +2770,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "CT do Caju- Centro de Treinamentos Alfredo Gottardi",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1373822",
@@ -3075,7 +2789,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "Centro de Treinamento Ribamar Bezerra",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1390561",
@@ -3093,7 +2808,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "Kuflink Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1390562",
@@ -3111,7 +2827,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "The Croud Meadow",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1405450",
@@ -3129,7 +2846,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": "Toše Proeski Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411407",
@@ -3147,7 +2865,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411408",
@@ -3165,7 +2884,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411409",
@@ -3183,7 +2903,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411410",
@@ -3201,7 +2922,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411411",
@@ -3219,7 +2941,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411412",
@@ -3237,7 +2960,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411413",
@@ -3255,7 +2979,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411414",
@@ -3273,7 +2998,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1411415",
@@ -3291,7 +3017,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:00 22/07/2025"
   },
   {
     "id": "api_sports_1405451",
@@ -3309,7 +3036,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:15:00+00:00",
     "venue": "Štadión Tehelné pole",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:15 22/07/2025"
   },
   {
     "id": "api_sports_1411416",
@@ -3327,7 +3055,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:15:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:15 22/07/2025"
   },
   {
     "id": "api_sports_1362977",
@@ -3345,7 +3074,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "Estadio Rodolfo Vicente Capocasa",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1362983",
@@ -3363,7 +3093,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "Estadio José María Moraños",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1390563",
@@ -3381,7 +3112,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "Mazuma Mobile Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1390564",
@@ -3399,7 +3131,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "York Road Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1405452",
@@ -3417,7 +3150,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "Enea Stadion",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1405692",
@@ -3435,7 +3169,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1410004",
@@ -3453,7 +3188,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": "Stadiumi Zahir Pajaziti",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411417",
@@ -3471,7 +3207,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411418",
@@ -3489,7 +3226,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411419",
@@ -3507,7 +3245,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411420",
@@ -3525,7 +3264,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411421",
@@ -3543,7 +3283,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411422",
@@ -3561,7 +3302,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411423",
@@ -3579,7 +3321,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411424",
@@ -3597,7 +3340,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411425",
@@ -3615,7 +3359,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411426",
@@ -3633,7 +3378,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411427",
@@ -3651,7 +3397,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411428",
@@ -3669,7 +3416,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411429",
@@ -3687,7 +3435,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411430",
@@ -3705,7 +3454,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411431",
@@ -3723,7 +3473,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411432",
@@ -3741,7 +3492,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411433",
@@ -3759,7 +3511,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411434",
@@ -3777,7 +3530,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1411435",
@@ -3795,7 +3549,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:30:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:30 22/07/2025"
   },
   {
     "id": "api_sports_1377281",
@@ -3813,7 +3568,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "The Carnegie Fuels Stadium at Glebe Park",
-    "referee": "Cameron Stirling"
+    "referee": "Cameron Stirling",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377282",
@@ -3831,7 +3587,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Falkirk Stadium",
-    "referee": "Nick Walsh"
+    "referee": "Nick Walsh",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377283",
@@ -3849,7 +3606,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Wyre Stadium at Firhill",
-    "referee": "George Calder"
+    "referee": "George Calder",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377284",
@@ -3867,7 +3625,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Global Energy Stadium",
-    "referee": "Sean Murdoch"
+    "referee": "Sean Murdoch",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377285",
@@ -3885,7 +3644,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Ferguson Park",
-    "referee": "Peter Stuart"
+    "referee": "Peter Stuart",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377287",
@@ -3903,7 +3663,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Gayfield Park",
-    "referee": "Alastair Grieve"
+    "referee": "Alastair Grieve",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377288",
@@ -3921,7 +3682,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Somerset Park",
-    "referee": "Lloyd Wilson"
+    "referee": "Lloyd Wilson",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377289",
@@ -3939,7 +3701,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "KDM Group East End Park",
-    "referee": "Daniel Graves"
+    "referee": "Daniel Graves",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377290",
@@ -3957,7 +3720,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "The Ross Commercial Finance K Park Stadium",
-    "referee": "Jamie McCunnie"
+    "referee": "Jamie McCunnie",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377291",
@@ -3975,7 +3739,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "McDiarmid Park",
-    "referee": "Greg Soutar"
+    "referee": "Greg Soutar",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377292",
@@ -3993,7 +3758,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "New Douglas Park",
-    "referee": "Jordan Curran"
+    "referee": "Jordan Curran",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377293",
@@ -4011,7 +3777,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Fir Park",
-    "referee": "Ryan Lee"
+    "referee": "Ryan Lee",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377294",
@@ -4029,7 +3796,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "MGM Timber Bayview Stadium",
-    "referee": "Lewis Hogarth"
+    "referee": "Lewis Hogarth",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1377295",
@@ -4047,7 +3815,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "New Central Park",
-    "referee": "David Dickinson"
+    "referee": "David Dickinson",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1383452",
@@ -4065,7 +3834,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Ibrox Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1390565",
@@ -4083,7 +3853,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Neuven Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1390566",
@@ -4101,7 +3872,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "The Hive Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1390567",
@@ -4119,7 +3891,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Queen Elizabeth II Stadium",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1390568",
@@ -4137,7 +3910,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Alwyns Lane Football Ground",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1405453",
@@ -4155,7 +3929,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": "Stadion HNK Rijeka",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411384",
@@ -4173,7 +3948,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411390",
@@ -4191,7 +3967,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411436",
@@ -4209,7 +3986,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411437",
@@ -4227,7 +4005,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411438",
@@ -4245,7 +4024,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411439",
@@ -4263,7 +4043,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411440",
@@ -4281,7 +4062,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411441",
@@ -4299,7 +4081,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411442",
@@ -4317,7 +4100,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411443",
@@ -4335,7 +4119,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411444",
@@ -4353,7 +4138,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411445",
@@ -4371,7 +4157,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411446",
@@ -4389,7 +4176,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411447",
@@ -4407,7 +4195,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411448",
@@ -4425,7 +4214,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411449",
@@ -4443,7 +4233,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411450",
@@ -4461,7 +4252,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411451",
@@ -4479,7 +4271,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411452",
@@ -4497,7 +4290,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411453",
@@ -4515,7 +4309,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411454",
@@ -4533,7 +4328,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411455",
@@ -4551,7 +4347,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411456",
@@ -4569,7 +4366,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411457",
@@ -4587,7 +4385,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411458",
@@ -4605,7 +4404,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411459",
@@ -4623,7 +4423,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411460",
@@ -4641,7 +4442,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411461",
@@ -4659,7 +4461,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411462",
@@ -4677,7 +4480,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411463",
@@ -4695,7 +4499,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411464",
@@ -4713,7 +4518,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411465",
@@ -4731,7 +4537,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411466",
@@ -4749,7 +4556,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411467",
@@ -4767,7 +4575,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411468",
@@ -4785,7 +4594,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411469",
@@ -4803,7 +4613,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411470",
@@ -4821,7 +4632,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411471",
@@ -4839,7 +4651,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411472",
@@ -4857,7 +4670,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411473",
@@ -4875,7 +4689,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411474",
@@ -4893,7 +4708,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411475",
@@ -4911,7 +4727,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411476",
@@ -4929,7 +4746,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411477",
@@ -4947,7 +4765,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411478",
@@ -4965,7 +4784,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411479",
@@ -4983,7 +4803,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1411480",
@@ -5001,7 +4822,8 @@
     "is_real": true,
     "match_time": "2025-07-22T18:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "20:45 22/07/2025"
   },
   {
     "id": "api_sports_1373816",
@@ -5019,7 +4841,8 @@
     "is_real": true,
     "match_time": "2025-07-22T19:00:00+00:00",
     "venue": "CT Manoel Dresch",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "21:00 22/07/2025"
   },
   {
     "id": "api_sports_1410000",
@@ -5037,7 +4860,8 @@
     "is_real": true,
     "match_time": "2025-07-22T19:00:00+00:00",
     "venue": "Stade de Genève",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "21:00 22/07/2025"
   },
   {
     "id": "api_sports_1410154",
@@ -5055,7 +4879,8 @@
     "is_real": true,
     "match_time": "2025-07-22T19:00:00+00:00",
     "venue": null,
-    "referee": "Suavis Iratunga"
+    "referee": "Suavis Iratunga",
+    "spain_time": "21:00 22/07/2025"
   },
   {
     "id": "api_sports_1392364",
@@ -5073,7 +4898,8 @@
     "is_real": true,
     "match_time": "2025-07-22T20:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "22:00 22/07/2025"
   },
   {
     "id": "api_sports_1392365",
@@ -5091,7 +4917,8 @@
     "is_real": true,
     "match_time": "2025-07-22T20:00:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "22:00 22/07/2025"
   },
   {
     "id": "api_sports_1354689",
@@ -5109,7 +4936,8 @@
     "is_real": true,
     "match_time": "2025-07-22T20:30:00+00:00",
     "venue": "Estadio Folke Anderson",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "22:30 22/07/2025"
   },
   {
     "id": "api_sports_1405693",
@@ -5127,7 +4955,8 @@
     "is_real": true,
     "match_time": "2025-07-22T20:45:00+00:00",
     "venue": null,
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "22:45 22/07/2025"
   },
   {
     "id": "api_sports_1327505",
@@ -5145,7 +4974,8 @@
     "is_real": true,
     "match_time": "2025-07-22T21:00:00+00:00",
     "venue": "Estadio Cooprogreso Gonzalo Pozo Ripalda",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:00 22/07/2025"
   },
   {
     "id": "api_sports_1392366",
@@ -5163,7 +4993,8 @@
     "is_real": true,
     "match_time": "2025-07-22T21:00:00+00:00",
     "venue": "Estadio Armando Maestre Pavajeau",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:00 22/07/2025"
   },
   {
     "id": "api_sports_1410138",
@@ -5181,7 +5012,8 @@
     "is_real": true,
     "match_time": "2025-07-22T21:00:00+00:00",
     "venue": "Estadio Municipal San Rafael del Sur",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "23:00 22/07/2025"
   },
   {
     "id": "api_sports_1353435",
@@ -5199,7 +5031,8 @@
     "is_real": true,
     "match_time": "2025-07-22T22:00:00+00:00",
     "venue": "Estádio Germano Krüger",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:00 23/07/2025"
   },
   {
     "id": "api_sports_1377232",
@@ -5217,7 +5050,8 @@
     "is_real": true,
     "match_time": "2025-07-22T22:00:00+00:00",
     "venue": "Estadio Campeón del Siglo",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:00 23/07/2025"
   },
   {
     "id": "api_sports_1390569",
@@ -5235,7 +5069,8 @@
     "is_real": true,
     "match_time": "2025-07-22T22:00:00+00:00",
     "venue": "Sportpark De Gagelrijzen",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:00 23/07/2025"
   },
   {
     "id": "api_sports_1405649",
@@ -5253,7 +5088,8 @@
     "is_real": true,
     "match_time": "2025-07-22T22:00:00+00:00",
     "venue": "Estádio Engenheiro Alencar Araripe",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "00:00 23/07/2025"
   },
   {
     "id": "api_sports_1353430",
@@ -5271,7 +5107,8 @@
     "is_real": true,
     "match_time": "2025-07-22T23:00:00+00:00",
     "venue": "Ligga Arena",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "01:00 23/07/2025"
   },
   {
     "id": "api_sports_1378288",
@@ -5289,7 +5126,8 @@
     "is_real": true,
     "match_time": "2025-07-22T23:00:00+00:00",
     "venue": "Estadio IV Centenario",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "01:00 23/07/2025"
   },
   {
     "id": "api_sports_1392367",
@@ -5307,6 +5145,7 @@
     "is_real": true,
     "match_time": "2025-07-22T23:10:00+00:00",
     "venue": "Estadio Nemesio Camacho El Campín",
-    "referee": "Unknown"
+    "referee": "Unknown",
+    "spain_time": "01:10 23/07/2025"
   }
 ]
