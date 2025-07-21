@@ -23,6 +23,7 @@ def load_real_matches(date_str: Optional[str] = None) -> List[Dict]:
             if (filename.startswith('real_') and filename.endswith('.json') and 'matches' in filename) or \
                (filename.startswith('live_') and filename.endswith('.json') and 'matches' in filename) or \
                (filename.startswith('demo_') and filename.endswith('.json') and 'matches' in filename) or \
+               (filename.startswith('api_sports_') and filename.endswith('.json') and 'matches' in filename) or \
                (filename.startswith('champions_league_') and filename.endswith('.json')) or \
                (filename.endswith('_matches.json')) or \
                (filename.endswith('matches.json')):
