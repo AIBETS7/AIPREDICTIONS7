@@ -23,22 +23,22 @@ TELEGRAM_CONFIG = {
     'bot_token': '7582466483:AAHshXjaU0vu2nZsYd8wSY5pR1XJ6EHmZOQ',
     'channels': {
         'tarjetas': {
-            'chat_id': 'CHAT_ID_TARJETAS',  # Reemplazar con el chat ID real
+            'chat_id': '2070545442',  # ACTUALIZAR: Chat ID del grupo de Bot Tarjetas
             'name': '🟨 Bot Tarjetas',
             'emoji': '🟨'
         },
         'corneres': {
-            'chat_id': 'CHAT_ID_CORNERES',  # Reemplazar con el chat ID real
+            'chat_id': '2070545442',  # ACTUALIZAR: Chat ID del grupo de Bot Córners
             'name': '⚽ Bot Córners',
             'emoji': '⚽'
         },
         'empates': {
-            'chat_id': 'CHAT_ID_EMPATES',  # Reemplazar con el chat ID real
+            'chat_id': '2070545442',  # ACTUALIZAR: Chat ID del grupo de Bot Empates
             'name': '🤝 Bot Empates',
             'emoji': '🤝'
         },
         'ambos_marcan': {
-            'chat_id': 'CHAT_ID_AMBOS_MARCAN',  # Reemplazar con el chat ID real
+            'chat_id': '2070545442',  # ACTUALIZAR: Chat ID del grupo de Bot Ambos Marcan
             'name': '🎯 Bot Ambos Marcan',
             'emoji': '🎯'
         }
