@@ -216,51 +216,9 @@ def api_bot_tarjetas():
         # Crear instancia del bot
         cards_bot = CardsBot()
         
-        # Obtener partidos de ejemplo con árbitros (en un sistema real vendrían de tu base de datos)
-        sample_matches = [
-            {
-                'home_team': 'Real Madrid',
-                'away_team': 'Barcelona',
-                'referee': 'Antonio Mateu Lahoz',
-                'match_time': '2025-01-22 20:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Atletico Madrid',
-                'away_team': 'Sevilla',
-                'referee': 'Mario Melero López',
-                'match_time': '2025-01-22 18:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Real Betis',
-                'away_team': 'Valencia',
-                'referee': 'Pablo González Fuertes',
-                'match_time': '2025-01-22 16:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Barcelona',
-                'away_team': 'Atletico Madrid',
-                'referee': 'César Soto Grado',
-                'match_time': '2025-01-22 21:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Sevilla',
-                'away_team': 'Real Madrid',
-                'referee': 'Jesús Gil Manzano',
-                'match_time': '2025-01-22 19:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Valencia',
-                'away_team': 'Real Betis',
-                'referee': 'Javier Alberola Rojas',
-                'match_time': '2025-01-22 17:00',
-                'competition': 'La Liga'
-            }
-        ]
+        # Cargar partidos reales desde los archivos JSON
+        from match_data_loader import get_matches_for_bots
+        sample_matches = get_matches_for_bots(['La Liga'], with_referees=True)
         
         # Generar picks usando el bot sofisticado
         picks = cards_bot.get_picks_for_matches(sample_matches)
@@ -311,57 +269,9 @@ def api_bot_corneres():
         # Crear instancia del bot
         corners_bot = CornersBot()
         
-        # Obtener partidos de ejemplo (en un sistema real vendrían de tu base de datos)
-        sample_matches = [
-            {
-                'home_team': 'Real Madrid',
-                'away_team': 'Barcelona',
-                'match_time': '2025-01-22 20:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Atletico Madrid',
-                'away_team': 'Sevilla',
-                'match_time': '2025-01-22 18:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Real Betis',
-                'away_team': 'Valencia',
-                'match_time': '2025-01-22 16:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Barcelona',
-                'away_team': 'Real Betis',
-                'match_time': '2025-01-22 21:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Sevilla',
-                'away_team': 'Real Madrid',
-                'match_time': '2025-01-22 19:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Valencia',
-                'away_team': 'Atletico Madrid',
-                'match_time': '2025-01-22 17:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Real Betis',
-                'away_team': 'Barcelona',
-                'match_time': '2025-01-22 15:00',
-                'competition': 'La Liga'
-            },
-            {
-                'home_team': 'Real Madrid',
-                'away_team': 'Atletico Madrid',
-                'match_time': '2025-01-22 22:00',
-                'competition': 'La Liga'
-            }
-        ]
+        # Cargar partidos reales desde los archivos JSON
+        from match_data_loader import get_matches_for_bots
+        sample_matches = get_matches_for_bots(['La Liga'], with_referees=False)
         
         # Generar picks usando el bot sofisticado
         picks = corners_bot.get_picks_for_matches(sample_matches)
