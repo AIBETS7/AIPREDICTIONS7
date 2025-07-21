@@ -216,9 +216,9 @@ def api_bot_tarjetas():
         # Crear instancia del bot
         cards_bot = CardsBot()
         
-        # Cargar partidos reales desde los archivos JSON
+        # Cargar partidos reales desde los archivos JSON - TODAS las competiciones
         from match_data_loader import get_matches_for_bots
-        sample_matches = get_matches_for_bots(['La Liga'], with_referees=True)
+        sample_matches = get_matches_for_bots(competitions=None, with_referees=True)
         
         # Generar picks usando el bot sofisticado
         picks = cards_bot.get_picks_for_matches(sample_matches)
@@ -269,9 +269,9 @@ def api_bot_corneres():
         # Crear instancia del bot
         corners_bot = CornersBot()
         
-        # Cargar partidos reales desde los archivos JSON
+        # Cargar partidos reales desde los archivos JSON - TODAS las competiciones
         from match_data_loader import get_matches_for_bots
-        sample_matches = get_matches_for_bots(['La Liga'], with_referees=False)
+        sample_matches = get_matches_for_bots(competitions=None, with_referees=False)
         
         # Generar picks usando el bot sofisticado
         picks = corners_bot.get_picks_for_matches(sample_matches)
