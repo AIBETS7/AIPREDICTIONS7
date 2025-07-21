@@ -191,19 +191,37 @@ def get_transfermarkt_db_transfers():
 
 @app.route('/api/bot-ambos-marcan')
 def api_bot_ambos_marcan():
-    data = load_json_data('processed/latest_data.json')
-    picks = []
-    if data:
-        for pick in data.get('recent_picks', []):
-            if pick.get('prediction_type', '').lower() in ['both teams score', 'both_teams_score'] and pick.get('confidence', 0) >= 70:
-                picks.append({
-                    'home_team': pick.get('home_team'),
-                    'away_team': pick.get('away_team'),
-                    'competition': pick.get('competition'),
-                    'match_time': pick.get('match_time'),
-                    'probability': pick.get('confidence', 0) / 100.0
-                })
-    return jsonify(picks)
+    try:
+        import sys
+        sys.path.append(os.path.dirname(__file__))
+        from both_teams_score_bot import BothTeamsScoreBot
+        from match_data_loader import get_matches_for_bots
+
+        btts_bot = BothTeamsScoreBot()
+        
+        # Cargar partidos reales desde los archivos JSON - TODAS las competiciones
+        sample_matches = get_matches_for_bots(competitions=None, with_referees=False)
+        
+        picks = btts_bot.get_picks_for_matches(sample_matches)
+        
+        formatted_picks = []
+        for pick in picks:
+            formatted_picks.append({
+                'home_team': pick['home_team'],
+                'away_team': pick['away_team'],
+                'competition': pick['competition'],
+                'match_time': pick['match_time'],
+                'probability': pick['confidence'] / 100.0,
+                'btts_probability': pick['btts_probability'],
+                'odds': pick['odds'],
+                'analysis': pick['reasoning'],
+                'factors': pick['factors']
+            })
+        
+        return jsonify(formatted_picks)
+    except Exception as e:
+        print(f"Error en bot de ambos marcan: {e}")
+        return jsonify([])
 
 @app.route('/api/bot-tarjetas')
 def api_bot_tarjetas():
@@ -311,19 +329,37 @@ def api_bot_corneres():
 
 @app.route('/api/bot-empates')
 def api_bot_empates():
-    data = load_json_data('processed/latest_data.json')
-    picks = []
-    if data:
-        for pick in data.get('recent_picks', []):
-            if pick.get('prediction_type', '').lower() in ['draw', 'empate'] and pick.get('confidence', 0) >= 70:
-                picks.append({
-                    'home_team': pick.get('home_team'),
-                    'away_team': pick.get('away_team'),
-                    'competition': pick.get('competition'),
-                    'match_time': pick.get('match_time'),
-                    'probability': pick.get('confidence', 0) / 100.0
-                })
-    return jsonify(picks)
+    try:
+        import sys
+        sys.path.append(os.path.dirname(__file__))
+        from draws_bot import DrawsBot
+        from match_data_loader import get_matches_for_bots
+
+        draws_bot = DrawsBot()
+        
+        # Cargar partidos reales desde los archivos JSON - TODAS las competiciones
+        sample_matches = get_matches_for_bots(competitions=None, with_referees=False)
+        
+        picks = draws_bot.get_picks_for_matches(sample_matches)
+        
+        formatted_picks = []
+        for pick in picks:
+            formatted_picks.append({
+                'home_team': pick['home_team'],
+                'away_team': pick['away_team'],
+                'competition': pick['competition'],
+                'match_time': pick['match_time'],
+                'probability': pick['confidence'] / 100.0,
+                'draw_probability': pick['draw_probability'],
+                'odds': pick['odds'],
+                'analysis': pick['reasoning'],
+                'factors': pick['factors']
+            })
+        
+        return jsonify(formatted_picks)
+    except Exception as e:
+        print(f"Error en bot de empates: {e}")
+        return jsonify([])
 
 @app.route('/api/paypal-payment-success', methods=['POST'])
 def paypal_payment_success():
