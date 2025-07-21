@@ -23,29 +23,161 @@
       <!-- Aquí se mostrarán los picks del bot -->
     </div>
   </main>
+  <style>
+    .pick-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .pick-card:hover {
+      border-color: #00ff88;
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+    }
+    
+    .pick-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .match-title {
+      color: #00ff88;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    
+    .confidence-badge {
+      background: #00ff88;
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    
+    .prediction-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+    
+    .detail-item {
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    .detail-value {
+      color: #00ff88;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .detail-label {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    
+    .analysis-section {
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    
+    .analysis-text {
+      color: #fff;
+      white-space: pre-line;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .no-picks {
+      text-align: center;
+      color: #ccc;
+      padding: 40px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+  </style>
+  
   <script>
     fetch('/api/bot-corneres')
       .then(res => res.json())
       .then(data => {
         const div = document.getElementById('bot-picks');
         if (!data || data.length === 0) {
-          div.innerHTML = '<p>No hay picks disponibles en este momento.</p>';
+          div.innerHTML = `
+            <div class="no-picks">
+              <h3>⚽ No hay picks de córners disponibles</h3>
+              <p>El bot está analizando partidos. Vuelve más tarde para ver nuevas predicciones.</p>
+            </div>
+          `;
           return;
         }
-        let html = '<table><thead><tr><th>Partido</th><th>Probabilidad</th><th>Competición</th><th>Hora</th></tr></thead><tbody>';
-        data.forEach(pick => {
-          html += `<tr>
-            <td>${pick.home_team} vs ${pick.away_team}</td>
-            <td>${(pick.probability * 100).toFixed(1)}%</td>
-            <td>${pick.competition || '-'}</td>
-            <td>${pick.match_time || '-'}</td>
-          </tr>`;
+        
+        let html = '';
+        data.forEach((pick, index) => {
+          const confidence = (pick.probability * 100).toFixed(1);
+          const predictedTotal = pick.predicted_total || 'N/A';
+          const odds = pick.odds || 'N/A';
+          
+          html += `
+            <div class="pick-card">
+              <div class="pick-header">
+                <div class="match-title">
+                  🏟️ ${pick.home_team} vs ${pick.away_team}
+                </div>
+                <div class="confidence-badge">${confidence}% confianza</div>
+              </div>
+              
+              <div class="prediction-details">
+                <div class="detail-item">
+                  <div class="detail-value">${predictedTotal}</div>
+                  <div class="detail-label">Córners Predichos</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-value">${odds}</div>
+                  <div class="detail-label">Cuota Estimada</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-value">${pick.competition || 'N/A'}</div>
+                  <div class="detail-label">Competición</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-value">${pick.match_time || 'N/A'}</div>
+                  <div class="detail-label">Hora del Partido</div>
+                </div>
+              </div>
+              
+              ${pick.analysis ? `
+                <div class="analysis-section">
+                  <h4 style="color: #00ff88; margin-bottom: 10px;">📊 Análisis Detallado</h4>
+                  <div class="analysis-text">${pick.analysis}</div>
+                </div>
+              ` : ''}
+            </div>
+          `;
         });
-        html += '</tbody></table>';
+        
         div.innerHTML = html;
       })
-      .catch(() => {
-        document.getElementById('bot-picks').innerHTML = '<p>Error cargando los picks.</p>';
+      .catch((error) => {
+        console.error('Error:', error);
+        document.getElementById('bot-picks').innerHTML = `
+          <div class="no-picks">
+            <h3>❌ Error cargando los picks</h3>
+            <p>Hubo un problema al cargar las predicciones. Intenta recargar la página.</p>
+          </div>
+        `;
       });
   </script>
 </body>

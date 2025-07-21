@@ -223,19 +223,78 @@ def api_bot_tarjetas():
 
 @app.route('/api/bot-corneres')
 def api_bot_corneres():
-    data = load_json_data('processed/latest_data.json')
-    picks = []
-    if data:
-        for pick in data.get('recent_picks', []):
-            if pick.get('prediction_type', '').lower() in ['corners', 'corneres'] and pick.get('confidence', 0) >= 70:
-                picks.append({
-                    'home_team': pick.get('home_team'),
-                    'away_team': pick.get('away_team'),
-                    'competition': pick.get('competition'),
-                    'match_time': pick.get('match_time'),
-                    'probability': pick.get('confidence', 0) / 100.0
-                })
-    return jsonify(picks)
+    try:
+        # Importar el bot de córners
+        import sys
+        sys.path.append(os.path.dirname(__file__))
+        from corners_bot import CornersBot
+        
+        # Crear instancia del bot
+        corners_bot = CornersBot()
+        
+        # Obtener partidos de ejemplo (en un sistema real vendrían de tu base de datos)
+        sample_matches = [
+            {
+                'home_team': 'Real Madrid',
+                'away_team': 'Barcelona',
+                'match_time': '2025-01-22 20:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Atletico Madrid',
+                'away_team': 'Sevilla',
+                'match_time': '2025-01-22 18:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Real Betis',
+                'away_team': 'Valencia',
+                'match_time': '2025-01-22 16:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Barcelona',
+                'away_team': 'Real Betis',
+                'match_time': '2025-01-22 21:00',
+                'competition': 'La Liga'
+            }
+        ]
+        
+        # Generar picks usando el bot sofisticado
+        picks = corners_bot.get_picks_for_matches(sample_matches)
+        
+        # Formatear para la API
+        formatted_picks = []
+        for pick in picks:
+            formatted_picks.append({
+                'home_team': pick['home_team'],
+                'away_team': pick['away_team'],
+                'competition': pick['competition'],
+                'match_time': pick['match_time'],
+                'probability': pick['confidence'] / 100.0,
+                'predicted_total': pick['predicted_total'],
+                'odds': pick['odds'],
+                'analysis': pick['reasoning']
+            })
+        
+        return jsonify(formatted_picks)
+        
+    except Exception as e:
+        # Fallback a datos estáticos si hay error
+        print(f"Error en bot de córners: {e}")
+        data = load_json_data('processed/latest_data.json')
+        picks = []
+        if data:
+            for pick in data.get('recent_picks', []):
+                if pick.get('prediction_type', '').lower() in ['corners', 'corneres'] and pick.get('confidence', 0) >= 70:
+                    picks.append({
+                        'home_team': pick.get('home_team'),
+                        'away_team': pick.get('away_team'),
+                        'competition': pick.get('competition'),
+                        'match_time': pick.get('match_time'),
+                        'probability': pick.get('confidence', 0) / 100.0
+                    })
+        return jsonify(picks)
 
 @app.route('/api/bot-empates')
 def api_bot_empates():
