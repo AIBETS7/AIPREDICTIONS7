@@ -207,19 +207,98 @@ def api_bot_ambos_marcan():
 
 @app.route('/api/bot-tarjetas')
 def api_bot_tarjetas():
-    data = load_json_data('processed/latest_data.json')
-    picks = []
-    if data:
-        for pick in data.get('recent_picks', []):
-            if pick.get('prediction_type', '').lower() in ['cards', 'tarjetas', 'yellow cards', 'red cards'] and pick.get('confidence', 0) >= 70:
-                picks.append({
-                    'home_team': pick.get('home_team'),
-                    'away_team': pick.get('away_team'),
-                    'competition': pick.get('competition'),
-                    'match_time': pick.get('match_time'),
-                    'probability': pick.get('confidence', 0) / 100.0
-                })
-    return jsonify(picks)
+    try:
+        # Importar el bot de tarjetas
+        import sys
+        sys.path.append(os.path.dirname(__file__))
+        from cards_bot import CardsBot
+        
+        # Crear instancia del bot
+        cards_bot = CardsBot()
+        
+        # Obtener partidos de ejemplo con árbitros (en un sistema real vendrían de tu base de datos)
+        sample_matches = [
+            {
+                'home_team': 'Real Madrid',
+                'away_team': 'Barcelona',
+                'referee': 'Antonio Mateu Lahoz',
+                'match_time': '2025-01-22 20:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Atletico Madrid',
+                'away_team': 'Sevilla',
+                'referee': 'Mario Melero López',
+                'match_time': '2025-01-22 18:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Real Betis',
+                'away_team': 'Valencia',
+                'referee': 'Pablo González Fuertes',
+                'match_time': '2025-01-22 16:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Barcelona',
+                'away_team': 'Atletico Madrid',
+                'referee': 'César Soto Grado',
+                'match_time': '2025-01-22 21:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Sevilla',
+                'away_team': 'Real Madrid',
+                'referee': 'Jesús Gil Manzano',
+                'match_time': '2025-01-22 19:00',
+                'competition': 'La Liga'
+            },
+            {
+                'home_team': 'Valencia',
+                'away_team': 'Real Betis',
+                'referee': 'Javier Alberola Rojas',
+                'match_time': '2025-01-22 17:00',
+                'competition': 'La Liga'
+            }
+        ]
+        
+        # Generar picks usando el bot sofisticado
+        picks = cards_bot.get_picks_for_matches(sample_matches)
+        
+        # Formatear para la API
+        formatted_picks = []
+        for pick in picks:
+            formatted_picks.append({
+                'home_team': pick['home_team'],
+                'away_team': pick['away_team'],
+                'referee': pick['referee'],
+                'competition': pick['competition'],
+                'match_time': pick['match_time'],
+                'probability': pick['confidence'] / 100.0,
+                'predicted_total': pick['predicted_total'],
+                'odds': pick['odds'],
+                'analysis': pick['reasoning'],
+                'referee_factor': pick['referee_factor']
+            })
+        
+        return jsonify(formatted_picks)
+        
+    except Exception as e:
+        # Fallback a datos estáticos si hay error
+        print(f"Error en bot de tarjetas: {e}")
+        data = load_json_data('processed/latest_data.json')
+        picks = []
+        if data:
+            for pick in data.get('recent_picks', []):
+                if pick.get('prediction_type', '').lower() in ['cards', 'tarjetas', 'yellow cards', 'red cards'] and pick.get('confidence', 0) >= 70:
+                    picks.append({
+                        'home_team': pick.get('home_team'),
+                        'away_team': pick.get('away_team'),
+                        'competition': pick.get('competition'),
+                        'match_time': pick.get('match_time'),
+                        'probability': pick.get('confidence', 0) / 100.0
+                    })
+        return jsonify(picks)
 
 @app.route('/api/bot-corneres')
 def api_bot_corneres():

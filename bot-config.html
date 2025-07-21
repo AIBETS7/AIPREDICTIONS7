@@ -368,7 +368,7 @@
           <div class="bot-title">🟨 Bot Tarjetas</div>
           <div class="bot-status status-active" id="status-tarjetas">Activo</div>
         </div>
-        <p style="color: #ccc;">Predicciones de partidos con alta probabilidad de muchas tarjetas</p>
+        <p style="color: #ccc;">Predicciones de tarjetas con análisis del árbitro, confianza ≥70% y cuotas ≥1.5</p>
         
         <div class="stats-grid">
           <div class="stat-item">
@@ -389,11 +389,14 @@
           <label class="config-label">Umbral de Confianza (%)</label>
           <input type="number" class="config-input" value="70" min="50" max="95" id="confidence-tarjetas">
           
-          <label class="config-label">Mínimo de Tarjetas</label>
-          <input type="number" class="config-input" value="4" min="2" max="8" id="min-cards">
-          
           <label class="config-label">Cuota Mínima</label>
-          <input type="number" class="config-input" value="1.7" min="1.1" max="5.0" step="0.1" id="odds-tarjetas">
+          <input type="number" class="config-input" value="1.5" min="1.1" max="5.0" step="0.1" id="odds-tarjetas">
+          
+          <label class="config-label">Análisis de Árbitro</label>
+          <select class="config-input" id="referee-analysis">
+            <option value="enabled" selected>Habilitado</option>
+            <option value="disabled">Deshabilitado</option>
+          </select>
         </div>
 
         <div class="config-buttons">
@@ -486,7 +489,7 @@
       'ambos-marcan': { active: true, confidence: 70, odds: 1.5 },
       'corneres': { active: true, confidence: 70, odds: 1.5 },
       'empates': { active: true, confidence: 70, odds: 3.0 },
-      'tarjetas': { active: true, confidence: 70, odds: 1.7 }
+      'tarjetas': { active: true, confidence: 70, odds: 1.5 }
     };
 
     // Función para mostrar pestañas
