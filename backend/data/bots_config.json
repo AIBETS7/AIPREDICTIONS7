@@ -55,9 +55,9 @@
     },
     "empates": {
       "name": "Bot Empates",
-      "description": "Predicciones de empates con análisis de enfrentamientos, forma, racha y climatología",
+      "description": "Predicciones de empates con fórmula estadística: P_ajustada = P_media × (1 + α × n_sin_empate/N)",
       "active": true,
-      "confidence_threshold": 80,
+      "confidence_threshold": 65,
       "min_odds": 2.5,
       "max_odds": 6.0,
       "max_picks_per_day": 999,
