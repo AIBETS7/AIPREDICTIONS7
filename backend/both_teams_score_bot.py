@@ -519,9 +519,11 @@ class BothTeamsScoreBot:
         min_confidence = self.config.get('confidence_threshold', 70)
         min_odds = self.config.get('min_odds', 1.5)
         max_odds = self.config.get('max_odds', 4.0)
+        min_btts_probability = 70.0  # NUEVA REGLA: Probabilidad BTTS mínima del 70%
         
         return (prediction.confidence >= min_confidence and 
-                min_odds <= prediction.estimated_odds <= max_odds)
+                min_odds <= prediction.estimated_odds <= max_odds and
+                prediction.btts_probability >= min_btts_probability)
     
     def get_picks_for_matches(self, matches: List[Dict]) -> List[Dict]:
         """Genera picks para una lista de partidos - TODOS los que tengan valor"""
