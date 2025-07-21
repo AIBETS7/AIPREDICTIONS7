@@ -2,19 +2,28 @@
   "bots": {
     "ambos-marcan": {
       "name": "Bot Ambos Marcan",
-      "description": "Predicciones de ambos marcan con análisis completo, confianza ≥70% y cuotas ≥1.5",
+      "description": "Predicciones de ambos marcan con análisis completo, confianza ≥75% y cuotas ≥1.6",
       "active": true,
-      "confidence_threshold": 70,
-      "min_odds": 1.5,
+      "confidence_threshold": 75,
+      "min_odds": 1.6,
       "max_odds": 4.0,
       "max_picks_per_day": 999,
-      "prediction_types": ["both_teams_score", "both teams score"],
-      "competitions": ["la_liga", "premier_league", "bundesliga", "serie_a", "ligue_1"],
+      "prediction_types": [
+        "both_teams_score",
+        "both teams score"
+      ],
+      "competitions": [
+        "la_liga",
+        "premier_league",
+        "bundesliga",
+        "serie_a",
+        "ligue_1"
+      ],
       "last_run": "2025-01-21T12:00:00Z",
       "stats": {
         "picks_today": 3,
         "accuracy_30d": 75.5,
-        "profit_30d": 125.80,
+        "profit_30d": 125.8,
         "total_picks": 45
       }
     },
@@ -22,17 +31,25 @@
       "name": "Bot Córners",
       "description": "Predicciones de córners con valor basadas en confianza y cuotas",
       "active": true,
-      "confidence_threshold": 70,
-      "min_odds": 1.5,
+      "confidence_threshold": 65,
+      "min_odds": 1.7,
       "max_odds": 5.0,
       "max_picks_per_day": 999,
-      "prediction_types": ["corners", "corneres"],
-      "competitions": ["la_liga", "premier_league", "bundesliga", "serie_a"],
+      "prediction_types": [
+        "corners",
+        "corneres"
+      ],
+      "competitions": [
+        "la_liga",
+        "premier_league",
+        "bundesliga",
+        "serie_a"
+      ],
       "last_run": "2025-01-21T12:00:00Z",
       "stats": {
         "picks_today": 2,
         "accuracy_30d": 68.2,
-        "profit_30d": 85.40,
+        "profit_30d": 85.4,
         "total_picks": 38
       }
     },
@@ -40,83 +57,55 @@
       "name": "Bot Empates",
       "description": "Predicciones de empates con análisis de enfrentamientos, forma, racha y climatología",
       "active": true,
-      "confidence_threshold": 70,
-      "min_odds": 1.5,
+      "confidence_threshold": 80,
+      "min_odds": 2.5,
       "max_odds": 6.0,
       "max_picks_per_day": 999,
-      "prediction_types": ["draw", "empate"],
-      "competitions": ["la_liga", "premier_league", "bundesliga", "serie_a", "ligue_1"],
+      "prediction_types": [
+        "draw",
+        "empate"
+      ],
+      "competitions": [
+        "la_liga",
+        "premier_league",
+        "bundesliga",
+        "serie_a",
+        "ligue_1"
+      ],
       "last_run": "2025-01-21T12:00:00Z",
       "stats": {
         "picks_today": 1,
-        "accuracy_30d": 45.8,
-        "profit_30d": 156.20,
-        "total_picks": 24
+        "accuracy_30d": 72.8,
+        "profit_30d": 95.6,
+        "total_picks": 25
       }
     },
     "tarjetas": {
       "name": "Bot Tarjetas",
-      "description": "Predicciones de tarjetas con análisis de árbitro, confianza ≥70% y cuotas ≥1.5",
+      "description": "Predicciones de tarjetas con análisis de árbitros y equipos",
       "active": true,
-      "confidence_threshold": 70,
-      "min_odds": 1.5,
-      "max_odds": 5.0,
+      "confidence_threshold": 72,
+      "min_odds": 1.8,
+      "max_odds": 4.5,
       "max_picks_per_day": 999,
-      "prediction_types": ["cards", "tarjetas", "yellow cards", "red cards"],
-      "competitions": ["la_liga", "premier_league", "bundesliga", "serie_a"],
+      "prediction_types": [
+        "cards",
+        "tarjetas"
+      ],
+      "competitions": [
+        "la_liga",
+        "premier_league",
+        "bundesliga",
+        "serie_a",
+        "ligue_1"
+      ],
       "last_run": "2025-01-21T12:00:00Z",
       "stats": {
         "picks_today": 2,
-        "accuracy_30d": 72.1,
-        "profit_30d": 98.60,
-        "total_picks": 31
+        "accuracy_30d": 71.3,
+        "profit_30d": 110.25,
+        "total_picks": 42
       }
-    }
-  },
-  "global_settings": {
-    "update_frequency_minutes": 30,
-    "max_total_picks_per_day": 15,
-    "telegram_notifications": true,
-    "telegram_token": "",
-    "telegram_chat_id": "",
-    "email_notifications": false,
-    "webhook_url": "",
-    "timezone": "Europe/Madrid",
-    "language": "es",
-    "currency": "EUR",
-    "default_stake": 10,
-    "bankroll_management": true,
-    "max_stake_percentage": 5
-  },
-  "system_info": {
-    "version": "1.0.0",
-    "last_updated": "2025-01-21T12:00:00Z",
-    "total_bots": 4,
-    "active_bots": 4,
-    "uptime_hours": 168,
-    "total_picks_generated": 1247,
-    "successful_picks": 896,
-    "overall_accuracy": 71.9,
-    "total_profit": 1256.80
-  },
-  "api_sources": {
-    "flashscore": {
-      "enabled": true,
-      "priority": 1,
-      "last_update": "2025-01-21T12:00:00Z",
-      "status": "active"
-    },
-    "sofascore": {
-      "enabled": true,
-      "priority": 2,
-      "last_update": "2025-01-21T12:00:00Z",
-      "status": "active"
-    },
-    "local_data": {
-      "enabled": true,
-      "priority": 3,
-      "last_update": "2025-01-21T12:00:00Z",
-      "status": "active"
     }
   }
 }

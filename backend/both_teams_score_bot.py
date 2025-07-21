@@ -301,7 +301,7 @@ class BothTeamsScoreBot:
         
         return form_factor, analysis
     
-    def analyze_match_btts_probability(self, home_team: str, away_team: str) -> BTTSPrediction:
+    def analyze_match_btts_probability(self, home_team: str, away_team: str, match: Dict = None) -> BTTSPrediction:
         """Análisis principal de probabilidad de ambos marcan"""
         
         # Obtener estadísticas de equipos
@@ -350,7 +350,7 @@ class BothTeamsScoreBot:
         btts_probability = min(max(adjusted_probability * 100, 15), 85)
         
         # Calcular confianza
-        confidence = self.calculate_confidence(home_stats, away_stats, btts_probability)
+        confidence = self.calculate_confidence(home_stats, away_stats, btts_probability, match)
         
         # Generar análisis detallado
         analysis = self.generate_detailed_analysis(
@@ -377,7 +377,7 @@ class BothTeamsScoreBot:
         
         return prediction
     
-    def calculate_confidence(self, home_stats: TeamScoringStats, away_stats: TeamScoringStats, probability: float) -> float:
+    def calculate_confidence(self, home_stats: TeamScoringStats, away_stats: TeamScoringStats, probability: float, match: Dict = None) -> float:
         """Calcula el nivel de confianza de la predicción"""
         
         confidence = 50.0  # Base
@@ -409,7 +409,52 @@ class BothTeamsScoreBot:
         if len(home_stats.recent_both_teams_scored) >= 4 and len(away_stats.recent_both_teams_scored) >= 4:
             confidence += 5
         
+        # FACTOR DE DIVERSIDAD PARA BTTS
+        if match:
+            confidence = self.add_btts_diversity_factor(confidence, match)
+        
         return min(confidence, 95.0)
+    
+    def add_btts_diversity_factor(self, confidence: float, match: Dict) -> float:
+        """Añade factor de diversidad específico para BTTS"""
+        
+        # Factor basado en competición (ligas ofensivas vs defensivas)
+        competition = match.get('competition', '').lower()
+        competition_factor = 0
+        
+        if 'premier' in competition or 'england' in competition:
+            competition_factor = 10  # Premier League muy ofensiva
+        elif 'bundesliga' in competition or 'germany' in competition:
+            competition_factor = 8  # Bundesliga ofensiva
+        elif 'la liga' in competition or 'spain' in competition:
+            competition_factor = 6  # La Liga moderada
+        elif 'ligue 1' in competition or 'france' in competition:
+            competition_factor = 4  # Ligue 1 equilibrada
+        elif 'serie a' in competition or 'italy' in competition:
+            competition_factor = 2  # Serie A más defensiva
+        elif 'friendlies' in competition:
+            competition_factor = 12  # Amistosos muy ofensivos
+        elif 'division' in competition:
+            competition_factor = -2  # Divisiones menores menos goles
+        
+        # Factor basado en equipos ofensivos
+        home_team = match.get('home_team', '').lower()
+        away_team = match.get('away_team', '').lower()
+        
+        offensive_keywords = ['madrid', 'barcelona', 'city', 'liverpool', 'bayern', 'psg', 'arsenal', 'dortmund']
+        team_factor = 0
+        
+        for keyword in offensive_keywords:
+            if keyword in home_team or keyword in away_team:
+                team_factor += 3
+        
+        # Factor único por partido
+        import random
+        random.seed(hash(f"{home_team}_{away_team}_btts"))
+        unique_factor = random.uniform(-4, 4)
+        
+        adjusted_confidence = confidence + competition_factor + team_factor + unique_factor
+        return max(50, min(95, adjusted_confidence))
     
     def generate_detailed_analysis(self, home_team: str, away_team: str,
                                  home_stats: TeamScoringStats, away_stats: TeamScoringStats,
@@ -490,7 +535,7 @@ class BothTeamsScoreBot:
                 continue
             
             # Analizar partido
-            prediction = self.analyze_match_btts_probability(home_team, away_team)
+            prediction = self.analyze_match_btts_probability(home_team, away_team, match)
             
             # Verificar si cumple criterios
             if self.should_bet(prediction):

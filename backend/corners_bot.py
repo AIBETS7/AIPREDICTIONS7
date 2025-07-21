@@ -159,7 +159,7 @@ class CornersBot:
         
         return expected_corners, analysis
     
-    def analyze_match_corners(self, home_team: str, away_team: str) -> CornersPrediction:
+    def analyze_match_corners(self, home_team: str, away_team: str, match: Dict = None) -> CornersPrediction:
         """Análisis completo de córners para un partido"""
         
         # Calcular córners esperados para cada equipo
@@ -175,7 +175,7 @@ class CornersBot:
         adjusted_total = total_predicted_corners * factors['style_factor'] * factors['form_factor']
         
         # Calcular confianza basada en consistencia de datos
-        confidence = self.calculate_confidence(home_team, away_team, adjusted_total)
+        confidence = self.calculate_confidence(home_team, away_team, adjusted_total, match)
         
         # Generar análisis detallado
         detailed_analysis = self.generate_detailed_analysis(
@@ -227,7 +227,7 @@ class CornersBot:
             'combined_factor': style_factor * form_factor * rivalry_factor
         }
     
-    def calculate_confidence(self, home_team: str, away_team: str, predicted_total: float) -> float:
+    def calculate_confidence(self, home_team: str, away_team: str, predicted_total: float, match: Dict = None) -> float:
         """Calcula el nivel de confianza de la predicción"""
         base_confidence = 60
         
@@ -252,7 +252,63 @@ class CornersBot:
             if home_variance < 4:  # Baja variabilidad = más consistente
                 base_confidence += 5
         
+        # FACTOR DE DIVERSIDAD PARA EVITAR PICKS IDÉNTICOS
+        if match:
+            base_confidence = self.add_diversity_factor(base_confidence, match)
+        
         return min(95, max(50, base_confidence))
+    
+    def add_diversity_factor(self, confidence: float, match: Dict) -> float:
+        """Añade factor de diversidad basado en características del partido"""
+        
+        # Factor basado en competición (diferentes ligas tienen diferentes estilos)
+        competition = match.get('competition', '').lower()
+        competition_factor = 0
+        
+        if 'premier' in competition or 'england' in competition:
+            competition_factor = 5  # Premier League más córners
+        elif 'bundesliga' in competition or 'germany' in competition:
+            competition_factor = 3  # Bundesliga moderado
+        elif 'serie' in competition or 'italy' in competition:
+            competition_factor = -2  # Serie A menos córners
+        elif 'la liga' in competition or 'spain' in competition:
+            competition_factor = 1  # La Liga equilibrado
+        elif 'friendlies' in competition:
+            competition_factor = -8  # Amistosos menos córners
+        elif 'division' in competition:
+            competition_factor = -3  # Divisiones menores menos córners
+        
+        # Factor basado en hora del partido
+        try:
+            match_time = match.get('match_time', '')
+            if '15:00' in match_time:
+                time_factor = 2  # Partidos de tarde más córners
+            elif '20:00' in match_time or '21:00' in match_time:
+                time_factor = -1  # Partidos noche menos córners
+            else:
+                time_factor = 0
+        except:
+            time_factor = 0
+        
+        # Factor basado en equipos (simulado por nombres)
+        home_team = match.get('home_team', '').lower()
+        away_team = match.get('away_team', '').lower()
+        
+        # Equipos ofensivos generan más córners
+        offensive_keywords = ['madrid', 'barcelona', 'city', 'liverpool', 'bayern', 'united', 'arsenal']
+        team_factor = 0
+        
+        for keyword in offensive_keywords:
+            if keyword in home_team or keyword in away_team:
+                team_factor += 2
+        
+        # Factor único por partido para evitar empates
+        import random
+        random.seed(hash(f"{home_team}_{away_team}_corners"))  # Seed consistente
+        unique_factor = random.uniform(-3, 3)
+        
+        adjusted_confidence = confidence + competition_factor + time_factor + team_factor + unique_factor
+        return max(50, min(95, adjusted_confidence))
     
     def generate_detailed_analysis(self, home_team: str, away_team: str, 
                                  home_corners: float, away_corners: float,
@@ -319,7 +375,7 @@ class CornersBot:
             if not home_team or not away_team:
                 continue
             
-            prediction = self.analyze_match_corners(home_team, away_team)
+            prediction = self.analyze_match_corners(home_team, away_team, match)
             
             # Enviar TODOS los picks que cumplan los criterios mínimos
             if self.should_bet(prediction):

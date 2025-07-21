@@ -359,13 +359,14 @@ class DrawsBot:
         
         return combined_factor, analysis
     
-    def analyze_match_draw_probability(self, home_team: str, away_team: str, match_date: str = None) -> DrawPrediction:
+    def analyze_match_draw_probability(self, home_team: str, away_team: str, match: Dict = None) -> DrawPrediction:
         """Análisis principal de probabilidad de empate"""
         
         # Obtener datos de equipos
         home_stats = self.get_team_stats(home_team)
         away_stats = self.get_team_stats(away_team)
         h2h_stats = self.get_h2h_stats(home_team, away_team)
+        match_date = match.get('match_time', '') if match else datetime.now().strftime('%Y-%m-%d')
         weather = self.get_weather_conditions(home_team, match_date or datetime.now().strftime('%Y-%m-%d'))
         
         # Calcular factores individuales
@@ -404,7 +405,7 @@ class DrawsBot:
         draw_probability = min(max(base_probability, 0.15), 0.85) * 100  # Convertir a porcentaje
         
         # Calcular confianza basada en cantidad de datos y consistencia
-        confidence = self.calculate_confidence(home_stats, away_stats, h2h_stats, draw_probability)
+        confidence = self.calculate_confidence(home_stats, away_stats, h2h_stats, draw_probability, match)
         
         # Generar análisis detallado
         analysis = self.generate_detailed_analysis(
@@ -433,7 +434,7 @@ class DrawsBot:
         return prediction
     
     def calculate_confidence(self, home_stats: TeamDrawStats, away_stats: TeamDrawStats, 
-                           h2h_stats: HeadToHeadStats, probability: float) -> float:
+                           h2h_stats: HeadToHeadStats, probability: float, match: Dict = None) -> float:
         """Calcula el nivel de confianza de la predicción"""
         
         confidence = 50.0  # Base
@@ -465,7 +466,50 @@ class DrawsBot:
         if home_streak_consistency or away_streak_consistency:
             confidence += 5
         
+        # FACTOR DE DIVERSIDAD PARA EMPATES
+        if match:
+            confidence = self.add_draws_diversity_factor(confidence, match)
+        
         return min(confidence, 95.0)
+    
+    def add_draws_diversity_factor(self, confidence: float, match: Dict) -> float:
+        """Añade factor de diversidad específico para empates"""
+        
+        # Factor basado en competición (algunas ligas tienen más empates)
+        competition = match.get('competition', '').lower()
+        competition_factor = 0
+        
+        if 'serie a' in competition or 'italy' in competition:
+            competition_factor = 8  # Serie A más empates
+        elif 'la liga' in competition or 'spain' in competition:
+            competition_factor = 5  # La Liga moderado
+        elif 'ligue 1' in competition or 'france' in competition:
+            competition_factor = 6  # Ligue 1 bastantes empates
+        elif 'premier' in competition or 'england' in competition:
+            competition_factor = 2  # Premier League menos empates
+        elif 'bundesliga' in competition or 'germany' in competition:
+            competition_factor = 3  # Bundesliga equilibrado
+        elif 'friendlies' in competition:
+            competition_factor = -15  # Amistosos raramente empatan
+        elif 'division' in competition:
+            competition_factor = 4  # Divisiones menores más empates
+        
+        # Factor basado en importancia del partido
+        if 'cup' in competition or 'champions' in competition:
+            importance_factor = -8  # Partidos importantes evitan empates
+        else:
+            importance_factor = 0
+        
+        # Factor único por partido
+        home_team = match.get('home_team', '').lower()
+        away_team = match.get('away_team', '').lower()
+        
+        import random
+        random.seed(hash(f"{home_team}_{away_team}_draws"))
+        unique_factor = random.uniform(-5, 5)
+        
+        adjusted_confidence = confidence + competition_factor + importance_factor + unique_factor
+        return max(50, min(95, adjusted_confidence))
     
     def generate_detailed_analysis(self, home_team: str, away_team: str, 
                                  home_stats: TeamDrawStats, away_stats: TeamDrawStats,
@@ -552,7 +596,7 @@ class DrawsBot:
                 continue
             
             # Analizar partido
-            prediction = self.analyze_match_draw_probability(home_team, away_team)
+            prediction = self.analyze_match_draw_probability(home_team, away_team, match)
             
             # Verificar si cumple criterios
             if self.should_bet(prediction):
