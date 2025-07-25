@@ -1,524 +1,293 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Predictions 7 - Predicciones Profesionales de Fútbol</title>
-    <link rel="stylesheet" href="public/css/styles.css?v=3">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-futbol"></i>
-                <span>AI Predictions 7</span>
+{% extends "base.html" %}
+
+{% block title %}AI Football Predictions - Advanced La Liga Analytics{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-white mb-4">
+                    Predicciones de Fútbol con IA
+                </h1>
+                <p class="lead text-white-75 mb-4">
+                    Algoritmos avanzados de machine learning analyze thousands of data points to deliver 
+                    the most accurate La Liga predictions. Join our exclusive community of winning bettors.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ url_for('subscribe') }}" class="btn btn-warning btn-lg fw-bold">
+                        <i class="fas fa-crown me-2"></i>Obtener Acceso Premium
+                    </a>
+                    <a href="#ai-stats" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-chart-line me-2"></i>Ver Estadísticas
+                    </a>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#ai-stats" class="nav-link">Estadísticas IA</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#bots-ia" class="nav-link">Bots de IA</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contacto</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="col-lg-6">
+                <div class="ai-visualization">
+                    <div class="prediction-card">
+                        <div class="match-info">
+                            <span class="badge bg-success mb-2">Live Prediction</span>
+                            <h4>Real Madrid vs Barcelona</h4>
+                            <p class="mb-2"><i class="fas fa-clock me-1"></i>Today 21:00</p>
+                            <div class="prediction-result">
+                                <span class="prediction-type">Ambos Equipos Marcan</span>
+                                <span class="confidence">AI Confidence: 87%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero" style="background: url('public/images/hero-futbol.jpg') center center/cover no-repeat; position: relative;">
-        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(20,40,20,0.45);z-index:1;"></div>
-        <div class="hero-container" style="position:relative;z-index:2;">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-robot"></i>
-                    <span>Powered by AI</span>
-                </div>
-                <h1>Predicciones de Fútbol con IA</h1>
-                <p>Obtén las predicciones de fútbol más confiables usando inteligencia artificial avanzada. Análisis experto para cada tipo de liga de fútbol profesional.</p>
-                <div class="hero-description" style="margin: 32px 0; background: #e8f5e9; border-radius: 12px; padding: 24px; color: #1b5e20; font-size: 1.15em; box-shadow: 0 2px 8px rgba(67,160,71,0.08);">
-                    <strong>¿Cómo funciona?</strong><br>
-                    Nuestro bot analiza estadísticamente todos los partidos de la semana y selecciona los mejores picks con mayor valor y probabilidad. <br><br>
-                    <strong>Recibe cada viernes a las 12:00 AM</strong> una selección exclusiva de los mejores picks directamente en tu email, listos para apostar.<br><br>
-                    <strong>Beneficios:</strong>
-                    <ul style="text-align:left; max-width: 500px; margin: 0 auto; color: #1b5e20;">
-                        <li>✔️ No tienes que estar pendiente del móvil todos los días.</li>
-                        <li>✔️ Apuestas fáciles y rápidas, seleccionadas por IA.</li>
-                        <li>✔️ Solo los picks con mayor valor estadístico y probabilidad.</li>
-                    </ul>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">87%</span>
-                        <span class="stat-label">Tasa de Precisión</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">€2.3M</span>
-                        <span class="stat-label">Ganancias Generadas</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">19,99K+</span>
-                        <span class="stat-label">Suscriptores Felices</span>
-                    </div>
-                </div>
-                <div class="hero-buttons">
-                    <button class="cta-btn primary" onclick="scrollToSection('bots')">
-                        Empieza a ganar ya
-                    </button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="ai-visualization">
-                    <div class="data-points">
-                        <div class="point"></div>
-                        <div class="point"></div>
-                        <div class="point"></div>
-                        <div class="point"></div>
-                        <div class="point"></div>
-                    </div>
-                    <div class="ai-core">
+<!-- AI Statistics Section -->
+<section id="ai-stats" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Panel de Rendimiento IA</h2>
+            <p class="lead text-muted">Estadísticas de machine learning en tiempo real y rendimiento de modelos</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-brain"></i>
                     </div>
+                    <h3 class="stat-number">{{ ai_stats.models_accuracy }}%</h3>
+                    <p class="stat-label">Precisión de Modelos</p>
+                    <small class="text-muted">{{ '{:,}'.format(ai_stats.data_points) }} puntos de datos analizados</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="stat-number">{{ ai_stats.win_rate }}%</h3>
+                    <p class="stat-label">Tasa de Acierto</p>
+                    <small class="text-muted">{{ ai_stats.roi }}% average Retorno de Inversión</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="stat-number">{{ ai_stats.updates_per_hour }}</h3>
+                    <p class="stat-label">Actualizaciones/Hora</p>
+                    <small class="text-muted">Última actualización: {{ ai_stats.last_update }}</small>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- AI Statistics Section -->
-    <section id="ai-stats" class="section ai-stats-homogeneo">
-        <h2 class="ia-stats-title">Estadísticas de la IA</h2>
-        <div class="table-responsive">
-            <table id="iaStatsTable" class="modern-table">
-                <thead>
-                    <tr>
-                        <th>Mes</th>
-                        <th>Picks</th>
-                        <th>Win Rate</th>
-                        <th>Yield</th>
-                        <th>% Éxito</th>
-                        <th>Aciertos</th>
-                        <th>Fallos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Enero</td><td>12</td><td>65%</td><td>+11.1%</td><td>75%</td><td>9</td><td>3</td></tr>
-                    <tr><td>Febrero</td><td>18</td><td>62%</td><td>+7.2%</td><td>72%</td><td>13</td><td>5</td></tr>
-                    <tr><td>Marzo</td><td>22</td><td>68%</td><td>+14.3%</td><td>77%</td><td>17</td><td>5</td></tr>
-                    <tr><td>Abril</td><td>15</td><td>60%</td><td>+9.7%</td><td>73%</td><td>11</td><td>4</td></tr>
-                    <tr><td>Mayo</td><td>28</td><td>70%</td><td>+18.2%</td><td>75%</td><td>21</td><td>7</td></tr>
-                    <tr><td>Junio</td><td>16</td><td>72%</td><td>+15.8%</td><td>75%</td><td>12</td><td>4</td></tr>
-                </tbody>
-            </table>
+<!-- Betting Bots Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Bots IA Especializados en Apuestas</h2>
+            <p class="lead text-muted">Cada bot está entrenado para mercados específicos con algoritmos únicos</p>
         </div>
-    </section>
-
-    <!-- Sustituir sección de pronósticos diarios por Bots de IA -->
-    <section id="bots-ia" class="bots-ia-section">
-      <div class="container">
-        <h2>Bots de IA por Estadística</h2>
-        <div class="bots-grid">
-          <div class="bot-card">
-            <h3>Ambos Marcan</h3>
-            <button class="contratar-btn" onclick="openPaymentModal('ambos-marcan')">Contratar</button>
-          </div>
-          <div class="bot-card">
-            <h3>Tarjetas</h3>
-            <button class="contratar-btn" onclick="openPaymentModal('tarjetas')">Contratar</button>
-          </div>
-          <div class="bot-card">
-            <h3>Córners</h3>
-            <button class="contratar-btn" onclick="openPaymentModal('corneres')">Contratar</button>
-          </div>
-          <div class="bot-card">
-            <h3>Empates</h3>
-            <button class="contratar-btn" onclick="openPaymentModal('empates')">Contratar</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Contacto</h2>
-                <p>¿Tienes preguntas? Estamos aquí para ayudarte</p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Información de Contacto</h3>
-                    <p>Estamos disponibles 24/7 para responder tus consultas sobre nuestras predicciones.</p>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+        
+        <div class="row g-4">
+            {% for bot in bots %}
+            <div class="col-lg-6">
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">
+                            {% if bot.bot_type == 'corners' %}
+                                <i class="fas fa-flag"></i>
+                            {% elif bot.bot_type == 'cards' %}
+                                <i class="fas fa-square text-warning"></i>
+                            {% elif bot.bot_type == 'both_score' %}
+                                <i class="fas fa-futbol"></i>
+                            {% elif bot.bot_type == 'draws' %}
+                                <i class="fas fa-balance-scale"></i>
+                            {% endif %}
+                        </div>
                         <div>
-                            <h4>Email</h4>
-                            <a href="mailto:aipredictions7@gmail.com" class="contact-email">aipredictions7@gmail.com</a>
+                            <h4 class="bot-name">{{ bot.name }}</h4>
+                            <span class="bot-specialty">{{ bot.bot_type.replace('_', ' ').title() }} Specialist</span>
                         </div>
                     </div>
                     
-                    <div class="contact-item">
-                        <i class="fab fa-telegram"></i>
-                        <div>
-                            <h4>Telegram</h4>
-                            <p><a href="https://t.me/+101AkcLj0SYxOTZk" target="_blank" class="telegram-link" onclick="openTelegram('+101AkcLj0SYxOTZk')">Grupo de Telegram</a></p>
-                            <button class="telegram-btn" onclick="openTelegram('+101AkcLj0SYxOTZk')">
-                                <i class="fab fa-telegram"></i>
-                                Unirse al Grupo
-                            </button>
+                    <p class="bot-description">{{ bot.description }}</p>
+                    
+                    <div class="bot-stats">
+                        <div class="stat">
+                            <span class="stat-value">{{ "%.1f"|format(bot.win_rate) }}%</span>
+                            <span class="stat-label">Tasa de Acierto</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">{{ bot.total_predictions }}</span>
+                            <span class="stat-label">Predicciones</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">{{ "%.1f"|format(bot.roi) }}%</span>
+                            <span class="stat-label">Retorno de Inversión</span>
                         </div>
                     </div>
                     
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Horario de Atención</h4>
-                            <p>24/7 - Soporte en tiempo real</p>
-                        </div>
-                    </div>
+                    <a href="{{ url_for('bot_detail', bot_type=bot.bot_type) }}" class="btn btn-primary w-100">
+                        Ver Predicciones de {{ bot.name }}
+                    </a>
                 </div>
-                
-                <div class="contact-form">
-                    <h3>Envíanos un Mensaje</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensaje</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            Enviar Mensaje
-                        </button>
-                    </form>
-                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Recent Predictions -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="calendar-title mb-4">
+                <h2 class="display-3 fw-bold" style="background: linear-gradient(135deg, #2563eb 0%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    <i class="fas fa-trophy me-2" style="color: #fbbf24;"></i>
+                    PREDICCIONES DE HOY
+                </h2>
+                <h3 class="text-primary fw-bold">Ligas Top de Europa</h3>
+            </div>
+            <div class="league-badges mb-3">
+                <span class="league-badge"><i class="fas fa-futbol me-1"></i>La Liga</span>
+                <span class="league-badge"><i class="fas fa-futbol me-1"></i>Premier League</span>
+                <span class="league-badge"><i class="fas fa-futbol me-1"></i>Serie A</span>
+                <span class="league-badge"><i class="fas fa-futbol me-1"></i>Bundesliga</span>
+                <span class="league-badge"><i class="fas fa-futbol me-1"></i>Ligue 1</span>
+            </div>
+            <div class="mt-3">
+                <span class="badge bg-success fs-5 px-4 py-2 shadow">
+                    <i class="fas fa-chart-line me-2 animate-pulse"></i>
+                    Actualizaciones en Tiempo Real
+                </span>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AI Predictions 7</h3>
-                    <p>Predicciones de fútbol profesionales impulsadas por inteligencia artificial avanzada.</p>
-                    <div class="social-links">
-                        <a href="https://t.me/+101AkcLj0SYxOTZk" target="_blank" onclick="openTelegram('+101AkcLj0SYxOTZk')"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Servicios</h3>
-                    <ul>
-                        <li><a href="#daily-picks">Pronósticos Diarios</a></li>
-                        <li><a href="#ai-stats">Análisis de IA</a></li>
-                        <li><a href="#tipsters">Expertos Tipsters</a></li>
-                        <li><a href="#contact">Soporte 24/7</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Términos de Servicio</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
-                        <li><a href="#">Responsabilidad</a></li>
-                        <li><a href="#">Cookies</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Newsletter</h3>
-                    <p>Suscríbete para recibir las mejores predicciones directamente en tu email.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Tu email" required>
-                        <button type="submit">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 AI Predictions 7. Todos los derechos reservados.</p>
-                <div class="disclaimer">
-                    <p>Juego responsable. Las predicciones no garantizan resultados. Solo para mayores de 18 años.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Subscription Modal -->
-    <div id="subscriptionModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSubscriptionModal()">&times;</span>
-            <div class="subscription-content">
-                <h2>Suscríbete a AI Predictions 7</h2>
-                <p class="subscription-description">Accede a predicciones premium diarias y maximiza tus ganancias</p>
-                
-                <div class="subscription-features">
-                    <div class="feature">
-                        <i class="fas fa-check"></i>
-                        <span>Predicciones diarias exclusivas</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-check"></i>
-                        <span>Análisis detallado de cada pick</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-check"></i>
-                        <span>Notificaciones en tiempo real</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-check"></i>
-                        <span>Soporte 24/7</span>
-                    </div>
-                </div>
-                
-                <div class="payment-section">
-                    <h3>Selecciona tu Plan</h3>
-                    <div class="pricing-options">
-                        <div class="pricing-option featured">
-                            <div class="option-header">
-                                <h4>Suscripción Mensual</h4>
-                                <div class="price">
-                                    <span class="currency">€</span>
-                                    <span class="amount">19,99</span>
-                                    <span class="period">/mes</span>
-                                </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                {% if recent_predictions %}
+                    {% for prediction in recent_predictions %}
+                    <div class="prediction-item">
+                        <div class="match-header">
+                            <div>
+                                <h5 class="match-teams">{{ prediction.home_team }} vs {{ prediction.away_team }}</h5>
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>{{ prediction.match_date.strftime('%d %b %Y %H:%M') }} | 
+                                    <i class="fas fa-trophy me-1"></i>{{ prediction.league }}
+                                </small>
                             </div>
-                            <ul>
-                                <li><i class="fas fa-check"></i> Acceso completo a todas las predicciones</li>
-                                <li><i class="fas fa-check"></i> Análisis detallado de cada pick</li>
-                                <li><i class="fas fa-check"></i> Notificaciones en tiempo real</li>
-                                <li><i class="fas fa-check"></i> Soporte prioritario</li>
-                            </ul>
-                            <button class="subscribe-btn" onclick="processSubscription()">
-                                <i class="fas fa-crown"></i>
-                                Suscribirse Ahora
-                            </button>
-                            <!-- PayPal Button -->
-                            <div id="paypal-button-container" style="margin-top: 16px;"></div>
-                            <script src="https://www.paypal.com/sdk/js?client-id=AR9zfWfiS2VWDSwiD0LJjmb5sVFi8fYTs8jeaMF3mnoXN9joD8FVmLc31ivLD0OgK2sDJzGYnClpmbs8&currency=EUR"></script>
-                            <script>
-                                if (window.paypal) {
-                                    paypal.Buttons({
-                                        style: {
-                                            layout: 'vertical',
-                                            color:  'gold',
-                                            shape:  'rect',
-                                            label:  'paypal'
-                                        },
-                                        createOrder: function(data, actions) {
-                                            return actions.order.create({
-                                                purchase_units: [{
-                                                    amount: {
-                                                        value: '19.99',
-                                                        currency_code: 'EUR'
-                                                    },
-                                                    description: 'Suscripción Mensual AI Predictions 7'
-                                                }]
-                                            });
-                                        },
-                                        onApprove: function(data, actions) {
-                                            return actions.order.capture().then(function(details) {
-                                                alert('¡Pago completado por ' + details.payer.name.given_name + '!');
-                                                // Aquí puedes llamar a tu backend para registrar la suscripción
-                                            });
-                                        },
-                                        onError: function(err) {
-                                            alert('Error en el pago con PayPal: ' + err);
-                                        }
-                                    }).render('#paypal-button-container');
-                                }
-                            </script>
+                            <span class="bot-badge">{{ prediction.bot.name }}</span>
                         </div>
                         
-                        <div class="pricing-option">
-                            <div class="option-header">
-                                <h4>Pick Único</h4>
-                                <div class="price">
-                                    <span class="currency">€</span>
-                                    <span class="amount">3.99</span>
-                                    <span class="period">/pick</span>
-                                </div>
+                        <div class="prediction-details">
+                            <div class="prediction-main">
+                                <span class="prediction-type">{{ prediction.prediction_value }}</span>
+                                <span class="odds">{{ prediction.odds }}</span>
                             </div>
-                            <ul>
-                                <li><i class="fas fa-check"></i> Un pick premium del día</li>
-                                <li><i class="fas fa-check"></i> Análisis completo</li>
-                                <li><i class="fas fa-check"></i> Sin suscripción</li>
-                                <li><i class="fas fa-check"></i> Acceso inmediato</li>
-                            </ul>
-                            <button class="single-pick-btn" onclick="processSinglePick()">
-                                <i class="fas fa-star"></i>
-                                Comprar Pick Único
-                            </button>
-                            <!-- PayPal Button for Single Pick -->
-                            <div id="paypal-single-pick-container" style="margin-top: 16px;"></div>
-                            <script>
-                                if (window.paypal) {
-                                    paypal.Buttons({
-                                        style: {
-                                            layout: 'vertical',
-                                            color:  'blue',
-                                            shape:  'rect',
-                                            label:  'paypal'
-                                        },
-                                        createOrder: function(data, actions) {
-                                            return actions.order.create({
-                                                purchase_units: [{
-                                                    amount: {
-                                                        value: '3.99',
-                                                        currency_code: 'EUR'
-                                                    },
-                                                    description: 'Pick Único AI Predictions 7'
-                                                }]
-                                            });
-                                        },
-                                        onApprove: function(data, actions) {
-                                            return actions.order.capture().then(function(details) {
-                                                alert('¡Pago completado por ' + details.payer.name.given_name + '!');
-                                                // Aquí puedes llamar a tu backend para enviar el pick único
-                                            });
-                                        },
-                                        onError: function(err) {
-                                            alert('Error en el pago con PayPal: ' + err);
-                                        }
-                                    }).render('#paypal-single-pick-container');
-                                }
-                            </script>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: {{ prediction.confidence }}%"></div>
+                                <span class="confidence-text">{{ prediction.confidence }}% Confidence</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="paywall-footer">
-                    <p>Pago seguro con PayPal. Cancelación en cualquier momento.</p>
-                    <div class="trust-badges">
-                        <span><i class="fas fa-shield-alt"></i> Pago Seguro</span>
-                        <span><i class="fas fa-lock"></i> Datos Protegidos</span>
-                        <span><i class="fas fa-undo"></i> Garantía de Devolución</span>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-clock fa-3x text-muted mb-3"></i>
+                        <h4>No hay predicciones disponibles</h4>
+                        <p class="text-muted">Nuestros bots IA están analizando los próximos partidos. ¡Vuelve pronto!</p>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Single Pick Modal -->
-    <div id="singlePickModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSinglePickModal()">&times;</span>
-            <div class="single-pick-content">
-                <h2>Pick Único - €3.99</h2>
-                <p>Obtén acceso a nuestro mejor pick del día con análisis completo</p>
-                
-                <div class="single-pick-info">
-                    <div class="pick-preview">
-                        <h3>¿Qué incluye?</h3>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Un pick premium seleccionado por IA</li>
-                            <li><i class="fas fa-check"></i> Análisis detallado del partido</li>
-                            <li><i class="fas fa-check"></i> Estadísticas completas</li>
-                            <li><i class="fas fa-check"></i> Razón de la predicción</li>
-                        </ul>
-                    </div>
-                    
-                    <form id="single-pick-form">
-                        <div class="form-group">
-                            <label for="single-pick-email">Email para recibir el pick:</label>
-                            <input type="email" id="single-pick-email" required>
-                        </div>
-                        <button type="submit" id="single-pick-submit-button">
-                            Recibir Pick
-                        </button>
-                    </form>
-                </div>
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold text-white mb-4">
+                    ¿Listo para Ganar con IA?
+                </h2>
+                <p class="lead text-white-75 mb-4">
+                    Únete a miles de apostadores exitosos que confían en nuestras predicciones IA. 
+                    Obtén acceso instantáneo a todos nuestros bots especializados.
+                </p>
+                <a href="{{ url_for('subscribe') }}" class="btn btn-warning btn-lg fw-bold">
+                    <i class="fas fa-crown me-2"></i>Empieza a Ganar Hoy - 19,99€/mes
+                </a>
+                <p class="mt-3 text-white-50">
+                    <small><i class="fas fa-shield-alt me-1"></i>Garantía de devolución de 30 días | Cancela cuando quieras</small>
+                </p>
             </div>
         </div>
     </div>
+</section>
+{% endblock %}
 
-    <!-- Modal de pago de bots IA adaptado para PayPal -->
-    <div id="botPaymentModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeBotPaymentModal()">&times;</span>
-        <h2>Contratar Bot de IA</h2>
-        <form id="bot-payment-form" onsubmit="return false;">
-          <label for="bot-payment-bot">Selecciona el bot:</label>
-          <select id="bot-payment-bot" required>
-            <option value="ambos-marcan">Ambos Marcan</option>
-            <option value="tarjetas">Tarjetas</option>
-            <option value="corneres">Córners</option>
-            <option value="empates">Empates</option>
-          </select>
-          <label for="bot-payment-email">Tu email:</label>
-          <input type="email" id="bot-payment-email" placeholder="ejemplo@email.com" required />
-          <div id="paypal-bot-container" style="margin: 24px 0;"></div>
-          <div id="payment-message" style="margin-top: 12px; color: #388e3c; text-align: center;"></div>
-        </form>
-      </div>
-    </div>
+{% block extra_scripts %}
+<script>
+// Animate stats on scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-    <!-- Calendario de Partidos de Hoy en Europa -->
-    <section id="calendario-europa" class="section">
-      <h2 class="ia-stats-title">Calendario de Partidos de Hoy en Europa</h2>
-      <div style="max-width: 1000px; margin: 0 auto;">
-        <!-- LIVESCORE WIDGET SOCCERSAPI.COM -->
-        <div id="ls-widget" data-w="w_default" data-height="1200" data-url="https://ls.soccersapi.com/?w=w_default" class="livescore-widget"></div>
-        <script type="text/javascript" src="https://ls.soccersapi.com/widget/res/w_custom/widget.js"></script>
-        <!-- LIVESCORE WIDGET SOCCERSAPI.COM -->
-      </div>
-    </section>
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
 
-    <!-- Scripts -->
-    <script src="public/js/main.js"></script>
-    <script src="public/js/api.js"></script>
-    <script>
-      function openPaymentModal(bot) {
-        document.getElementById('botPaymentModal').style.display = 'flex';
-        document.getElementById('bot-payment-bot').value = bot;
-        document.getElementById('payment-message').textContent = '';
-      }
-      function closeBotPaymentModal() {
-        document.getElementById('botPaymentModal').style.display = 'none';
-      }
-      document.getElementById('bot-payment-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const bot = document.getElementById('bot-payment-bot').value;
-        const email = document.getElementById('bot-payment-email').value.trim();
-        const messageDiv = document.getElementById('payment-message');
-        messageDiv.textContent = '';
-        if (!email) {
-          messageDiv.textContent = 'Introduce un email válido.';
-          return;
-        }
-        messageDiv.textContent = 'Procesando pago para el bot ' + bot + '...';
-        setTimeout(() => {
-          messageDiv.textContent = '¡Pago realizado con éxito! Recibirás acceso al bot ' + bot + ' en tu email.';
-        }, 2000);
-      });
-    </script>
-</body>
-</html> 
+    document.querySelectorAll('.stat-card, .bot-card').forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
+
+<!-- Floating Action Button for Mobile -->
+<a href="{{ url_for('quick_predict') }}" class="fab-mobile d-md-none">
+    <i class="fas fa-bolt"></i>
+</a>
+
+<style>
+.fab-mobile {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.fab-mobile:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    color: white;
+}
+
+.fab-mobile i {
+    font-size: 1.5rem;
+}
+</style>
+{% endblock %}
