@@ -1,6 +1,14 @@
 from payment_processor import paypal_bp
 from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, send_from_directory
+from flask_cors import CORS
+from bots.engine import BotEngine
+from datetime import datetime
 import os
+
+app = Flask(__name__, static_folder='../public', static_url_path='/')
+CORS(app)   # Permite peticiones desde otros dominios (Netlify, etc.)
+
 import json
 from scrapers.transfermarkt_scraper import TransfermarktScraper
 from sqlalchemy.orm import sessionmaker
